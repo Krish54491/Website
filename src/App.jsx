@@ -117,11 +117,8 @@ const tools = [
     description:
       "Convert between different numberical bases(e.g binary, decimal, hexadecimal).",
     path: "/baseconverter",
-    thumbnail: () =>
-      import(
-        /*"./assets/tools/thumbnails/BaseConverter.png"*/ "./assets/tools/thumbnails/Placeholder Image.png"
-      ),
-    video: "", //"./assets/tools/videos/baseconverter.mp4",
+    thumbnail: () => import("./assets/tools/thumbnails/BaseConverter.png"),
+    video: () => import("./assets/tools/videos/baseconverter.mp4"),
     mobile: true,
   },
 ];
