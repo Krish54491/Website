@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export function VideoRater() {
@@ -7,6 +7,8 @@ export function VideoRater() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [transcriptUrl, setTranscriptUrl] = useState(null);
+  const [jobId, setJobId] = useState(null);
+  const [queuePosition, setQueuePosition] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ export function VideoRater() {
     setLoading(true);
     setResult(null);
     setTranscriptUrl(null);
+    setQueuePosition(null);
 
     const formData = new FormData();
     formData.append("video", file);
@@ -32,19 +35,46 @@ export function VideoRater() {
         },
       );
 
-      setResult(response.data.result);
-      setTranscriptUrl(
-        "https://video-rating-ai-production.up.railway.app/api_transcript",
-      );
+      setJobId(response.data.job_id);
+      setQueuePosition(response.data.queue_position);
     } catch (err) {
       console.error(err);
       setError(
         "An error occurred while processing the video. Please try again.",
       );
-    } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!jobId) return;
+
+    const poll = setInterval(async () => {
+      try {
+        const res = await axios.get(
+          `https://video-rating-ai-production.up.railway.app/api/status/${jobId}`,
+        );
+        if (res.data.status === "done") {
+          setResult(res.data.result);
+          setTranscriptUrl(
+            "https://video-rating-ai-production.up.railway.app/api_transcript",
+          );
+          setJobId(null);
+          setLoading(false);
+        } else if (res.data.status === "error") {
+          setError(res.data.error);
+          setJobId(null);
+          setLoading(false);
+        } else {
+          setQueuePosition(res.data.queue_position);
+        }
+      } catch {
+        // keep polling on transient network errors
+      }
+    }, 2000);
+
+    return () => clearInterval(poll);
+  }, [jobId]);
 
   return (
     <div style={{ maxWidth: 500, margin: "auto", padding: 20 }}>
@@ -75,7 +105,11 @@ export function VideoRater() {
             disabled={loading}
             className="bg-cyan-500 dark:bg-blue-800 p-2 my-1 rounded-md hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
           >
-            {loading ? "Uploading..." : "Submit"}
+            {loading
+              ? queuePosition
+                ? `Processing... (position ${queuePosition})`
+                : "Uploading..."
+              : "Submit"}
           </button>
         </div>
       </form>
