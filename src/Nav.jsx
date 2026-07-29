@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // Config for my External links
 const krish_resume = "Krish_Bharal - Resume.pdf";
-const chipmunk = "https://chipmunk.krish544.com";
+const chipmunk = "https://krish54491.github.io/Krish54491-chipmunk/";
 const pianowizards = "https://pianowizards.krish544.com";
 // Config for games and tools - easily modifiable
 const GAMES = [
