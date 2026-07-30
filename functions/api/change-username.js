@@ -12,16 +12,17 @@ export async function onRequest({ request }) {
   }
   const body = await request.json();
   const { newUsername } = body;
-  console.log("Requested new username:", newUsername);
   const { filteredUsername, filtered } = filterUsername(newUsername);
-  console.log(
-    "Filtered username:",
-    filteredUsername,
-    "Was filtered:",
-    filtered,
-  );
   const db = getDb();
-  const user = await getUserFromCookie(request);
+  let user = "";
+  try {
+    user = await getUserFromCookie(request);
+  } catch (e) {
+    return Response.json(
+      { success: false, message: e.message },
+      { status: 500 },
+    );
+  }
   if (!user || !newUsername) {
     return Response.json(
       { success: false, message: "Missing required fields" },
@@ -42,7 +43,7 @@ export async function onRequest({ request }) {
   } catch (error) {
     return Response.json(
       { success: false, message: error.message },
-      { status: 500, headers: { loggedIn: "false" } },
+      { status: 500 },
     );
   }
   return Response.json(

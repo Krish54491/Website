@@ -41,7 +41,7 @@ export default function Comments() {
       webAuthnLogin()
         .then(async (credentialId) => {
           try {
-            await fetch(API_ROUTES.LOGIN, {
+            await fetch(API_ROUTES.PASSKEY_LOGIN, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -181,6 +181,11 @@ export default function Comments() {
         setCommentsFetch(!commentsFetch);
       } else {
         alert("Failed to update username: " + data.message);
+        console.log(data);
+        if (data.message === "Invalid auth cookie") {
+          localStorage.setItem("loggedIn", "false");
+          setLoggedIn(false);
+        }
       }
     } catch (error) {
       localStorage.setItem("loggedIn", "false");

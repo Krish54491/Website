@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import { getDb } from "../../db/drizzle";
 import { usersTable } from "../../db/schema";
+import { createAuthCookie } from "../utils/cookie";
 
 export async function onRequest({ request }) {
   if (request.method !== "POST") {
@@ -9,6 +10,8 @@ export async function onRequest({ request }) {
       { status: 405 },
     );
   }
+
+  // based on request.type of login will login in different ways:
 
   const body = await request.json();
   const { deviceId } = body;
@@ -48,13 +51,13 @@ export async function onRequest({ request }) {
       );
     }
   }
-
+  const cookie = createAuthCookie(userId);
   return Response.json(
     { success: true, message: "Login successful" },
     {
       status: 200,
       headers: {
-        "Set-Cookie": `krish-auth=${userId}; HttpOnly; Path=/;`, // may hash it in the future
+        "Set-Cookie": `krish-auth=${cookie}; HttpOnly; Secure; Path=/;`, // may hash it in the future
       },
     },
   );

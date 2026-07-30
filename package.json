@@ -49,5 +49,15 @@
     "typescript": "^6.0.3",
     "vite": "^7.3.0",
     "wrangler": "^4.54.0"
+  },
+  "allowScripts": {
+    "esbuild@0.18.20": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.1": true,
+    "tsparticles@3.9.1": true,
+    "react-tsparticles@2.12.2": true,
+    "tsparticles-engine@2.12.0": true,
+    "@tsparticles/engine@3.9.1": true,
+    "workerd@1.20260722.1": true
   }
 }
