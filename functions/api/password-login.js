@@ -11,7 +11,7 @@ For Backend:
 - Create and manage user accounts
 - Handle login requests and authentication
 - Store user data securely (passwords, preferences, etc.) Hash it one way
-- 2 way hash session management(already have a session management system but it needs to be more secure)
+- DONE - 2 way hash session management(already have a session management system but it needs to be more secure)
 */
 export async function onRequest({ request }) {
   if (request.method !== "POST") {
