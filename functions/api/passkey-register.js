@@ -27,18 +27,36 @@ export async function onRequest({ request }) {
     .from(usersTable)
     .where(eq(usersTable.device_id, deviceId))
     .limit(1);
-
-  let userId = userResults[0]?.id;
-
-  if (!userResults[0]) {
+  if (userResults[0]) {
     return Response.json(
-      { success: false, message: "No account found" },
+      {
+        success: false,
+        message: "Already registered",
+      },
       { status: 400 },
+    );
+  }
+  let userId;
+  try {
+    userId = (
+      await db
+        .insert(usersTable)
+        .values({
+          device_id: deviceId,
+        })
+        .returning({
+          id: usersTable.id,
+        })
+    )[0].id;
+  } catch (error) {
+    return Response.json(
+      { success: false, message: error.message },
+      { status: 500 },
     );
   }
   const cookie = createAuthCookie(userId);
   return Response.json(
-    { success: true, message: "Login successful" },
+    { success: true, message: "Account Created" },
     {
       status: 200,
       headers: {

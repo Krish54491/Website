@@ -1,5 +1,8 @@
 import { usersTable } from "../../db/schema";
-
+import { createAuthCookie } from "../utils/cookie";
+import { eq } from "drizzle-orm";
+import { getDb } from "../../db/drizzle";
+import bcrypt from "bcryptjs";
 /* this project will actually need the same user on multiple platforms so I need to implement a login system.
 WebAuthn is kinda finicky and if a user changes devices or microsoft accounts they'll lose access
 Things I need in general:
@@ -8,9 +11,9 @@ Things I need in general:
 - Account Management Page (change username, delete account, etc.)
 - Terms and Conditions Page (for legal reasons)
 For Backend:
-- Create and manage user accounts
-- Handle login requests and authentication
-- Store user data securely (passwords, preferences, etc.) Hash it one way
+- DONE - Create and manage user accounts
+- DONE - Handle login requests and authentication
+- DONE - Store user data securely (passwords, preferences, etc.) Hash it one way
 - DONE - 2 way hash session management(already have a session management system but it needs to be more secure)
 */
 export async function onRequest({ request }) {
@@ -42,9 +45,8 @@ export async function onRequest({ request }) {
   const userResults = await db
     .select()
     .from(usersTable)
-    .where(and(eq(usersTable.email, email), eq(usersTable.password, password)))
+    .where(eq(usersTable.email, email))
     .limit(1);
-
   let userId = userResults[0]?.id; // userId is not the same as password or username, its a my website specific id, so nothing valuable
   if (!userId) {
     return Response.json(
@@ -52,13 +54,22 @@ export async function onRequest({ request }) {
       { status: 400 },
     );
   }
+  // password should only be null in database if email is also null
 
+  if (!(await bcrypt.compare(password, userResults[0]?.password))) {
+    return Response.json(
+      { success: false, message: "Incorrect Email or Password" },
+      { status: 400 },
+    );
+  }
+
+  const cookie = createAuthCookie(userId);
   return Response.json(
     { success: true, message: "Login successful" },
     {
       status: 200,
       headers: {
-        "Set-Cookie": `krish-auth=${userId}; HttpOnly; Path=/;`, // may hash it in the future
+        "Set-Cookie": `krish-auth=${cookie}; HttpOnly; Secure; Path=/;`, // may hash it in the future
       },
     },
   );
