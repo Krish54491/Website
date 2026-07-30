@@ -18,14 +18,11 @@ export const UltimateTicTacToe = () => {
   let status;
   if (winner && winner != "-") {
     status = "Winner: " + winner;
-
-    //console.log("won")
   } else if (finalSquares.every((val) => val !== 0 && val !== undefined)) {
     status = "It's a Tie!";
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
-  //console.log(finalSquares)
   function calculateWinner(squares) {
     if (squares === Array(9).fill(0)) {
       return null;
@@ -111,7 +108,6 @@ export const UltimateTicTacToe = () => {
         setPlayingBoard(10); // Any board allowed if next is won/full
       }
     };
-    //console.log((active +" "+ playingBoard))
     return (
       <div
         className={`grid grid-cols-3 grid-rows-3 gap-1 ${active ? "animate-pulse" : ""}`}

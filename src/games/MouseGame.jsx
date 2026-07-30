@@ -33,7 +33,6 @@ export const MouseGame = () => {
       setSpeed(5);
       setPrevPosition({ x: 0, y: 0 });
       setProjectiles([]); // reset projectiles
-      //console.log("Game Started");
     }
   };
   const endGame = (cheat) => {
@@ -45,7 +44,6 @@ export const MouseGame = () => {
       setHighScore(timeSurvived);
       localStorage.setItem("mouseGameHighScore", timeSurvived.toString());
     }
-    //console.log("Game Ended");
   };
   const resetHighScore = () => {
     setHighScore(0);
@@ -68,7 +66,6 @@ export const MouseGame = () => {
 
   useEffect(() => {
     if (!gameStarted) return;
-    //console.log(difficulty + " added projectiles")
 
     setProjectiles((prev) => {
       const newProjectiles = [...prev];
@@ -116,7 +113,6 @@ export const MouseGame = () => {
     //    setCheck(false);
     //}
     if (minutes > prevMinute && time != highScore) {
-      //console.log("minute change");
       setDifficulty(1);
       const newProjectiles = [];
       newProjectiles.push({
@@ -137,8 +133,6 @@ export const MouseGame = () => {
         endGame(true);
       }
     } else if (Math.floor(time / 10) > prevTime && time != highScore) {
-      //console.log("seconds change");
-
       setDifficulty(difficulty + 1);
       setPrevTime(Math.floor(time / 10));
       setPrevPosition({ x: position.x, y: position.y });

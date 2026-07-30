@@ -39,7 +39,6 @@ export function getAuthCookie(request) {
   const cookies = parse(request.headers.get("Cookie") || "");
 
   const authCookie = cookies["krish-auth"];
-  //console.log("Auth Cookie:", authCookie);
   if (!authCookie) {
     throw new Error("No auth cookie found");
   }

@@ -89,7 +89,6 @@ async function addComment(page, user, content) {
   }
   const filteredContent = filterComment(content);
   try {
-    //console.log("Adding comment for user:", user);
     await getDb().insert(commentsTable).values({
       page: page,
       user_id: user.id,
@@ -204,7 +203,6 @@ async function getTotalComments(page) {
       .select({ count: count() })
       .from(commentsTable)
       .where(eq(commentsTable.page, page));
-    //console.log("Total comments for page", page, ":", totalComments[0].count); // Debugging log
     return Response.json(
       { success: true, totalComments: totalComments[0].count },
       { status: 200 },

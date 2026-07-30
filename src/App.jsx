@@ -138,7 +138,6 @@ function App() {
         0,
       ),
     );
-    //console.log("Pokedex Completion Loaded");
     setPokeCheck(false);
   }
   if (pokedexCompletion[0] === 0) {
@@ -166,7 +165,6 @@ function App() {
     if (pokeCheck) {
       setPokedexCompletion(Array(total + 1).fill(0));
       pokedexCompletion[0] = 1;
-      //console.log("No Previous Pokedex Completion Found");
       setPokeCheck(false);
     }
     if (randomId === 0) {
@@ -195,11 +193,9 @@ function App() {
       setPic(shinySpriteUrl);
       console.log("Shiny!");
       pokedexCompletion[randomId] = 2;
-      //console.log(shinySpriteUrl);
     } else {
       const spriteUrl = pokemon.sprites.front_default;
       setPic(spriteUrl);
-      //console.log(spriteUrl);
     }
     localStorage.setItem(
       "pokedexCompletion",
@@ -212,13 +208,6 @@ function App() {
         0,
       ),
     );
-    //console.log(pokedexCompletion[0]);
-    //if (pic === "Ampharos.png") {
-    //  setPic("Krish544 Icon.png");
-    //} else {
-    //  setPic("Ampharos.png");
-    //  console.log("Worse than jolteon!");
-    //}
   };
   return (
     <>

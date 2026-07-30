@@ -11,9 +11,6 @@ const PokemonImage = memo(
     const [imgUrl, setImgUrl] = useState(null);
 
     useEffect(() => {
-      //console.log(
-      //  `Fetching image for ${pokemonName} with ID ${pokemonId} and status ${pokemonComplete}`,
-      //);
       let isMounted = true;
       getPokemonPic(pokemonId, item).then((url) => {
         if (isMounted) setImgUrl(url);
@@ -22,9 +19,7 @@ const PokemonImage = memo(
         isMounted = false;
       };
     }, [pokemonId, pokemonName, pokemonComplete, item, getPokemonPic]);
-    //console.log(
-    //  `Rendering ${pokemonName} with ID ${pokemonId} and status ${pokemonComplete}`,
-    //);
+
     if (!imgUrl) return <div></div>;
     return (
       <a
@@ -64,10 +59,8 @@ export const Pokedex = () => {
         0,
       ),
     );
-    //console.log("Pokedex Completion Loaded");
     setPokemonNames(new Array(pokedexCompletion.length).fill(""));
     setPokeCheck(false);
-    //console.log(pokedexCompletion);
   }
 
   const getPokemonPic = useCallback(
@@ -79,8 +72,6 @@ export const Pokedex = () => {
         newNames[id] = pokemonData.name;
         return newNames;
       });
-      //console.log(pokemonData.name);
-      //console.log(pokemonNames);
       setPokemonFound(
         pokedexCompletion.reduce(
           (quantity, val) => (val === 1 || val === 2 ? quantity + 1 : quantity),
@@ -96,7 +87,6 @@ export const Pokedex = () => {
     },
     [pokedexCompletion],
   );
-  //console.log(pokemonFound, pokedexCompletion);
 
   return (
     <>

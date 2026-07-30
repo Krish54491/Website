@@ -116,7 +116,6 @@ export const SidewaysSam = () => {
     setHighscore(parseInt(localStorage.getItem("SamHighScore")));
     setCheck(false);
   }
-  //console.log(samSpeed);
   const startGame = () => {
     setGameStarted(true);
     setX(0);
@@ -208,7 +207,6 @@ export const SidewaysSam = () => {
         p.y > 0 &&
         p.y <= y &&
         p.y > y - height - adjustment - (sizeAdjustment ? 10 : 0); // bottom of rock to top of sam (size adjustment for when sam is small)
-      //console.log(isColliding);
       const armCollision =
         p.x >= x - width / 2 - 5 && // left side of rock to left side of sam's arm
         p.x <= x + width / 2 + 5 &&
@@ -220,7 +218,6 @@ export const SidewaysSam = () => {
       if (isColliding) {
         endGame();
       } else if (armCollision && !armhit) {
-        //console.log("hit arm");
         setPrevSamSpeed(samSpeed);
         setSamSpeed(samSpeed * 0.8); // slow sam down if hit arm
         setArmHit(true);
@@ -228,13 +225,11 @@ export const SidewaysSam = () => {
     };
     const interval = setInterval(() => {
       // increase difficulty every 10 seconds
-      //setPeriod(period => Math.max(10, period - 5)); // cap period at 10ms
       setRockSpeed((rockSpeed) => Math.min(rockSpeed + 1, 100)); // cap rock speed at 100
       setRockAmount((rockAmount) => Math.min(rockAmount + 1, 10)); // cap rock amount at 10
       setSamSpeed(Math.min(prevSamSpeed + rockSpeed / 2, 10)); // cap sam speed at 10
       setPrevSamSpeed(Math.min(prevSamSpeed + rockSpeed / 2, 10));
       setArmHit(false); // reset arm hit
-      //console.log("Increased difficulty: period =", period, "rockSpeed =", rockSpeed);
     }, 10000);
 
     const moveInterval = setInterval(() => {
@@ -351,7 +346,6 @@ export const SidewaysSam = () => {
     };
   }, [gameStarted]);
   useEffect(() => {
-    //console.log(mouseDown);
     let leftInterval, rightInterval;
     if (mouseDown.left) {
       leftInterval = setInterval(() => {

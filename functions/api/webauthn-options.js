@@ -20,7 +20,6 @@ export async function onRequest({ request }) {
     if (rpID === "127.0.0.1") {
       rpID = "localhost";
     }
-    console.log("RP ID for WebAuthn:", rpID);
     if (action === "auth-options") {
       const options = await generateAuthenticationOptions({
         rpID: rpID,

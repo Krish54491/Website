@@ -167,14 +167,12 @@ export function BaseConverter() {
       .split("")
       .map((digit) => (digit === "0" ? "1" : "0"))
       .join("");
-    console.log(result);
     for (let i = num.length - 1; i >= 0; i--) {
       if (num[i] !== "0" && num[i] !== "1") {
         return "Invalid input";
       }
       if (result[i] === "0") {
         result = result.substring(0, i) + "1" + result.substring(i + 1);
-        console.log("stopping point:", result);
         break;
       } else {
         result = result.substring(0, i) + "0" + result.substring(i + 1);

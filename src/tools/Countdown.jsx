@@ -48,7 +48,6 @@ export const Countdown = () => {
     const val = e.currentTarget.value;
     if (!val.includes(":")) return;
     const arr = val.split(":").map((v) => Math.min(59, parseInt(v)));
-    //console.log(val, arr);
     if (!arr[0] && arr[0] !== 0) {
       arr[0] = 0;
     }

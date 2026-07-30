@@ -32,7 +32,6 @@ export default function Comments() {
     setAmountOfComments(5);
     setPrevPage(page);
   }
-  //console.log("Current page for comments:", page);
   if (page === "") {
     page = "home";
   }
@@ -48,8 +47,6 @@ export default function Comments() {
               },
               body: JSON.stringify({ deviceId: credentialId }),
             });
-            //const data = await response.json();
-            //console.log("Login response:", data);
             localStorage.setItem("loggedIn", "true");
             setLoggedIn(true);
           } catch (error) {
@@ -89,7 +86,6 @@ export default function Comments() {
         );
         const data = await response.json();
         if (data.success) {
-          //console.log("Total comments fetched:", data.totalComments); // Debugging log
           setTotalComments(data.totalComments);
         }
       } catch (error) {
@@ -164,7 +160,6 @@ export default function Comments() {
 
   async function handleChangeUsername(event) {
     event.preventDefault();
-    //console.log("newUsername value:", newUsername);
     try {
       const response = await fetch(`${API_ROUTES.CHANGE_USERNAME}`, {
         method: "POST",
@@ -181,7 +176,6 @@ export default function Comments() {
         setCommentsFetch(!commentsFetch);
       } else {
         alert("Failed to update username: " + data.message);
-        console.log(data);
         if (data.message === "Invalid auth cookie") {
           localStorage.setItem("loggedIn", "false");
           setLoggedIn(false);
@@ -193,9 +187,6 @@ export default function Comments() {
       alert("An error occurred while updating the username.");
     }
   }
-  //console.log("Total comments:", totalComments);
-  //console.log("Amount of comments to show:", amountOfComments);
-  //console.log("Comments currently shown:", comments.length);
   return (
     <div className="max-w-2xl mx-auto p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-8">
       <div className="flex justify-between items-center mb-4">
