@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import { getDb } from "../../db/drizzle.js";
 import { commentsTable, usersTable } from "../../db/schema.js";
 import { getUserFromCookie } from "../utils/cookie.js";
@@ -9,10 +8,7 @@ import { filterComment } from "../utils/filter.js";
  * @param {Request} request
  * @returns
  */
-export async function onRequest({ request, env }) {
-  const supabaseUrl = env.SUPABASE_URL;
-  const supabaseKey = env.SUPABASE_KEY;
-  const supabase = createClient(supabaseUrl, supabaseKey);
+export async function onRequest({ request }) {
 
   // request should always have action parameter: add, list, delete and a page parameter to identify the page
   // for add action, it should have username and content parameters
@@ -63,7 +59,7 @@ export async function onRequest({ request, env }) {
           { status: 400 },
         );
       }
-      return await deleteComment(page, user, commentId, supabase);
+      return await deleteComment(page, user, commentId);
     } else if (action === "total") {
       // test function curl "http://127.0.0.1:8788/api/Comment?action=total&page=testpage"
       return await getTotalComments(page);

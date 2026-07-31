@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { API_ROUTES } from "./utils/apiRoutes";
 import ReactModal from "react-modal";
-import { webAuthnLogin } from "./utils/webAuth.js";
 
 // this will a while so I'll start by writing what it should do first
 // This component is not in pages because it will be used in almost every page
@@ -26,7 +25,13 @@ export default function Comments() {
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("loggedIn") === "true",
   );
+
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setLoggedIn(localStorage.getItem("loggedIn") === "true");
+  }, [location.pathname]);
   let page = location.pathname.substring(1);
   if (page !== prevPage) {
     setAmountOfComments(5);
@@ -35,31 +40,7 @@ export default function Comments() {
   if (page === "") {
     page = "home";
   }
-  async function loginUser() {
-    if (!loggedIn) {
-      webAuthnLogin()
-        .then(async (credentialId) => {
-          try {
-            await fetch(API_ROUTES.PASSKEY_LOGIN, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ deviceId: credentialId }),
-            });
-            localStorage.setItem("loggedIn", "true");
-            setLoggedIn(true);
-          } catch (error) {
-            console.error("Login fetch error:", error);
-            localStorage.setItem("loggedIn", "false");
-          }
-        })
-        .catch((error) => {
-          console.error("WebAuthn login failed:", error);
-          localStorage.setItem("loggedIn", "false");
-        });
-    }
-  }
+
   useEffect(() => {
     async function fetchComments() {
       try {
@@ -196,14 +177,14 @@ export default function Comments() {
 
         {loggedIn ? (
           <button
-            onClick={() => setIsUsernameModalOpen(true)}
+            onClick={() => navigate("/account")}
             className="bg-cyan-500 py-2 px-4 rounded-md shadow-lg hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black"
           >
-            Change Username
+            Account
           </button>
         ) : (
           <button
-            onClick={loginUser}
+            onClick={() => navigate("/login")}
             className="bg-cyan-500 py-2 px-4 rounded-md shadow-lg hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black"
           >
             Login

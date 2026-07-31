@@ -15,7 +15,7 @@ export async function onRequest({ request }) {
 
   let user;
   try {
-    user = getUserFromCookie(request);
+    user = await getUserFromCookie(request);
   } catch (e) {
     return Response.json(
       { success: false, message: e.message },

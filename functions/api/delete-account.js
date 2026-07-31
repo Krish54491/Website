@@ -29,48 +29,41 @@ export async function onRequest({ request }) {
   }
 
   const body = await request.json();
-  const { deviceId, password } = body;
+  const { password, deviceId } = body;
 
-  if (!deviceId) {
+  if (user.password && !password) {
     return Response.json(
-      { success: false, message: "Missing deviceId" },
+      { success: false, message: "Password required to delete account" },
       { status: 400 },
     );
   }
-  if (!password) {
+  if (user.device_id && !deviceId) {
     return Response.json(
-      { success: false, message: "Missing password" },
+      { success: false, message: "Passkey required to delete account" },
       { status: 400 },
     );
+  }
+
+  if (user.password) {
+    if (!(await bcrypt.compare(password, user.password))) {
+      return Response.json(
+        { success: false, message: "Incorrect password" },
+        { status: 400 },
+      );
+    }
+  }
+  if (user.device_id) {
+    if (deviceId !== user.device_id) {
+      return Response.json(
+        { success: false, message: "Passkey does not match account" },
+        { status: 403 },
+      );
+    }
   }
 
   const db = getDb();
-
-  if (!(await bcrypt.compare(password, user.password))) {
-    return Response.json(
-      { success: false, message: "Incorrect password" },
-      { status: 400 },
-    );
-  }
-
-  const existing = await db
-    .select()
-    .from(usersTable)
-    .where(eq(usersTable.device_id, deviceId))
-    .limit(1);
-
-  if (existing[0] && existing[0].id !== user.id) {
-    return Response.json(
-      { success: false, message: "Passkey already registered to another account" },
-      { status: 409 },
-    );
-  }
-
   try {
-    await db
-      .update(usersTable)
-      .set({ device_id: deviceId })
-      .where(eq(usersTable.id, user.id));
+    await db.delete(usersTable).where(eq(usersTable.id, user.id));
   } catch (e) {
     return Response.json(
       { success: false, message: e.message },
@@ -79,7 +72,12 @@ export async function onRequest({ request }) {
   }
 
   return Response.json(
-    { success: true, message: "Passkey added successfully" },
-    { status: 200 },
+    { success: true, message: "Account deleted" },
+    {
+      status: 200,
+      headers: {
+        "Set-Cookie": "krish-auth=; HttpOnly; Secure; Path=/; Max-Age=0",
+      },
+    },
   );
 }

@@ -1,7 +1,6 @@
 import { usersTable } from "../../db/schema";
 import { eq } from "drizzle-orm";
 import { getDb } from "../../db/drizzle";
-import bcrypt from "bcryptjs";
 import { getUserFromCookie } from "../utils/cookie";
 
 export async function onRequest({ request }) {
@@ -11,6 +10,7 @@ export async function onRequest({ request }) {
       { status: 405 },
     );
   }
+
   let user;
   try {
     user = await getUserFromCookie(request);
@@ -22,42 +22,46 @@ export async function onRequest({ request }) {
   }
   if (!user) {
     return Response.json(
-      { success: false, message: "Not Logged in" },
+      { success: false, message: "Not logged in" },
       { status: 400 },
     );
   }
+
   const body = await request.json();
-  const { password, newPassword } = body;
+  const { deviceId } = body;
+
+  if (!deviceId) {
+    return Response.json(
+      { success: false, message: "Missing deviceId" },
+      { status: 400 },
+    );
+  }
+  if (deviceId === user.device_id) {
+    return Response.json(
+      { success: false, message: "New passkey is the same as current" },
+      { status: 400 },
+    );
+  }
+
   const db = getDb();
-  if (!newPassword) {
+
+  const existing = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.device_id, deviceId))
+    .limit(1);
+
+  if (existing[0] && existing[0].id !== user.id) {
     return Response.json(
-      { success: false, message: "Missing new password" },
-      { status: 400 },
+      { success: false, message: "Passkey already registered to another account" },
+      { status: 409 },
     );
   }
-  if (newPassword.length < 8) {
-    return Response.json(
-      { success: false, message: "Password must be at least 8 characters" },
-      { status: 400 },
-    );
-  }
-  if (!password) {
-    return Response.json(
-      { success: false, message: "Missing password" },
-      { status: 400 },
-    );
-  }
-  if (!(await bcrypt.compare(password, user.password))) {
-    return Response.json(
-      { success: false, message: "Incorrect password" },
-      { status: 400 },
-    );
-  }
-  const hash = await bcrypt.hash(newPassword, 10);
+
   try {
     await db
       .update(usersTable)
-      .set({ password: hash })
+      .set({ device_id: deviceId })
       .where(eq(usersTable.id, user.id));
   } catch (e) {
     return Response.json(
@@ -65,8 +69,9 @@ export async function onRequest({ request }) {
       { status: 500 },
     );
   }
+
   return Response.json(
-    { success: true, message: "Password changed successfully" },
+    { success: true, message: "Passkey changed successfully" },
     { status: 200 },
   );
 }

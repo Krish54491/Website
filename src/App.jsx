@@ -17,6 +17,10 @@ import { BaseConverter } from "./tools/BetterBaseConverter.tsx";
 import Cards from "./components/Cards.tsx";
 import Ampharos from "./assets/Ampharos.png";
 import Comments from "./Comments.jsx";
+import Login from "./Login.jsx";
+import Register from "./Register.jsx";
+import Tos from "./Tos.jsx";
+import Account from "./Account.jsx";
 
 function PokemonImage({ pokemonId, getPokemonPic }) {
   const [imgUrl, setImgUrl] = useState(null);
@@ -268,6 +272,10 @@ function App() {
           element={<Cards items={tools} listName="Tools" />}
         />
         <Route path="/baseconverter" element={<BaseConverter />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/tos" element={<Tos />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
       <Comments />
       <Routes>

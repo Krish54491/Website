@@ -12,7 +12,6 @@ export async function onRequest({ request }) {
   }
   const body = await request.json();
   const { newUsername } = body;
-  const { filteredUsername, filtered } = filterUsername(newUsername);
   const db = getDb();
   let user = "";
   try {
@@ -29,6 +28,7 @@ export async function onRequest({ request }) {
       { status: 400 },
     );
   }
+  const { filteredUsername, filtered } = filterUsername(newUsername);
   if (newUsername.toLowerCase() === "krish544") {
     return Response.json(
       { success: false, message: "Yeah no, that's mine" },
