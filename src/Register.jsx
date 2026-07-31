@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { API_ROUTES } from "./utils/apiRoutes.js";
+import { webAuthnLogin } from "./utils/webAuth.js";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -29,12 +30,42 @@ export default function Register() {
       });
       const data = await res.json();
       if (data.success) {
-        navigate("/login");
+        localStorage.setItem("loggedIn", "true");
+        navigate("/");
       } else {
         setError(data.message);
       }
     } catch {
       setError("Registration failed");
+    }
+    setLoading(false);
+  }
+
+  async function handlePasskeyRegister() {
+    setError("");
+
+    if (!agreed) {
+      setError("You must agree to the Terms of Service");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const credentialId = await webAuthnLogin();
+      const res = await fetch(API_ROUTES.PASSKEY_REGISTER, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deviceId: credentialId, username }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        localStorage.setItem("loggedIn", "true");
+        navigate("/");
+      } else {
+        setError(data.message);
+      }
+    } catch {
+      setError("Passkey registration failed");
     }
     setLoading(false);
   }
@@ -45,9 +76,7 @@ export default function Register() {
         Create Account
       </h2>
 
-      {error && (
-        <p className="text-red-500 dark:text-red-400 mb-4">{error}</p>
-      )}
+      {error && <p className="text-red-500 dark:text-red-400 mb-4">{error}</p>}
 
       <form onSubmit={handleRegister} className="space-y-4">
         <input
@@ -100,7 +129,23 @@ export default function Register() {
         </button>
       </form>
 
-      <p className="text-center text-gray-700 dark:text-gray-300 mt-6">
+      <div className="flex items-center my-6">
+        <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+        <span className="px-4 text-gray-500 dark:text-gray-400 text-sm">
+          or
+        </span>
+        <div className="flex-1 border-t border-gray-300 dark:border-gray-700"></div>
+      </div>
+
+      <button
+        onClick={handlePasskeyRegister}
+        disabled={loading}
+        className="w-full bg-cyan-500 py-2 px-4 rounded-md shadow-lg hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black disabled:opacity-50 mb-6"
+      >
+        Register with Passkey
+      </button>
+
+      <p className="text-center text-gray-700 dark:text-gray-300">
         Already have an account?{" "}
         <Link
           to="/login"

@@ -12,7 +12,7 @@ export async function onRequest({ request }) {
   }
 
   const body = await request.json();
-  const { deviceId } = body;
+  const { deviceId, username } = body;
   const db = getDb();
 
   if (!deviceId) {
@@ -43,6 +43,7 @@ export async function onRequest({ request }) {
         .insert(usersTable)
         .values({
           device_id: deviceId,
+          username: username || "Anon",
         })
         .returning({
           id: usersTable.id,
