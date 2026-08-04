@@ -42,7 +42,7 @@ export async function onRequest({ request }) {
     {
       status: 200,
       headers: {
-        "Set-Cookie": `krish-auth=${cookie}; HttpOnly; Secure; Path=/;`, // may hash it in the future
+        "Set-Cookie": `krish-auth=${cookie}; HttpOnly; Secure; SameSite=Lax; Path=/;`,
       },
     },
   );

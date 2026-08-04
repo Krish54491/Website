@@ -75,7 +75,7 @@ export async function onRequest({ request }) {
     {
       status: 201,
       headers: {
-        "Set-Cookie": `krish-auth=${cookie}; HttpOnly; Secure; Path=/;`,
+        "Set-Cookie": `krish-auth=${cookie}; HttpOnly; Secure; SameSite=Lax; Path=/;`,
       },
     },
   );
