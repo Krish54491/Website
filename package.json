@@ -12,7 +12,7 @@
     "build": "vite build",
     "lint": "oxlint .",
     "preview": "npm run build && npm run dev:cf",
-    "db:generate-migration": "drizzle-kit generate",
+    "db:generate-migrations": "drizzle-kit generate",
     "db:apply-migrations": "drizzle-kit migrate"
   },
   "dependencies": {

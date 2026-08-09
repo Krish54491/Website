@@ -1,15 +1,17 @@
 import { getDb } from "../../db/drizzle.js";
 import { commentsTable, usersTable } from "../../db/schema.js";
 import { getUserFromCookie } from "../utils/cookie.js";
-import { eq, and, count } from "drizzle-orm";
+import { eq, and, count, sql } from "drizzle-orm";
 import { filterComment } from "../utils/filter.js";
+
+const COMMENT_COOLDOWN_MS = 2000; // 2 seconds in milliseconds
+const MAX_DUPLICATE_COMMENTS = 10;
 /**
  *
  * @param {Request} request
  * @returns
  */
 export async function onRequest({ request }) {
-
   // request should always have action parameter: add, list, delete and a page parameter to identify the page
   // for add action, it should have username and content parameters
   // for delete action, it should have comment id parameter or username and content to identify the comment to delete
@@ -83,9 +85,67 @@ async function addComment(page, user, content) {
       { status: 400 },
     );
   }
+
+  const db = getDb();
+  try {
+    // Atomic rate limit: 2-second cooldown between comments
+    // This UPDATE + RETURNING is atomic - only one concurrent request can win
+    const cooldownCheck = await db
+      .update(usersTable)
+      .set({ last_comment_at: new Date() })
+      .where(
+        and(
+          eq(usersTable.id, user.id),
+          sql`(${usersTable.last_comment_at} IS NULL OR EXTRACT(EPOCH FROM (NOW() - ${usersTable.last_comment_at})) * 1000 > ${COMMENT_COOLDOWN_MS})`,
+        ),
+      )
+      .returning({ id: usersTable.id });
+
+    if (cooldownCheck.length === 0) {
+      return Response.json(
+        {
+          success: false,
+          message: "Please wait before posting another comment",
+        },
+        { status: 429 },
+      );
+    }
+
+    // Rate limit: max duplicate comments
+    const duplicateCount = await db
+      .select({ count: count() })
+      .from(commentsTable)
+      .where(
+        and(
+          eq(commentsTable.user_id, user.id),
+          eq(commentsTable.content, content),
+        ),
+      );
+
+    if (duplicateCount[0].count >= MAX_DUPLICATE_COMMENTS) {
+      await db
+        .update(usersTable)
+        .set({ banned: true })
+        .where(eq(usersTable.id, user.id));
+      return Response.json(
+        {
+          success: false,
+          message:
+            "You've posted the same comment too many times, you are now BANNED",
+        },
+        { status: 429 },
+      );
+    }
+  } catch (error) {
+    return Response.json(
+      { success: false, message: error.message },
+      { status: 500 },
+    );
+  }
+
   const filteredContent = filterComment(content);
   try {
-    await getDb().insert(commentsTable).values({
+    await db.insert(commentsTable).values({
       page: page,
       user_id: user.id,
       content: filteredContent,
@@ -96,19 +156,7 @@ async function addComment(page, user, content) {
       { status: 500 },
     );
   }
-  // const { data, error } = await supabase.from("comments").insert([
-  //   {
-  //     page: page,
-  //     username: username,
-  //     content: content,
-  //   },
-  // ]);
-  // if (error) {
-  //   return Response.json(
-  //     { success: false, message: error.message },
-  //     { status: 500 }
-  //   );
-  // }
+
   return Response.json(
     { success: true, message: "Comment added successfully" },
     { status: 200 },
@@ -136,19 +184,6 @@ async function listComments(page, amount) {
       { status: 500 },
     );
   }
-  // const { data, error } = await supabase
-  //   .from("comments")
-  //   .select("*")
-  //   .eq("page", page)
-  //   .order("created_at", { ascending: false })
-  //   .limit(amount); // limit to 100 comments for now
-  // if (error) {
-  //   return Response.json(
-  //     { success: false, message: error.message },
-  //     { status: 500 }
-  //   );)
-  // }
-  // return Response.json({ success: true, comments: data }, { status: 200 });
 }
 async function deleteComment(page, user, id) {
   // delete comment by id or other identifier

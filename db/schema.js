@@ -1,5 +1,11 @@
-import { boolean } from "drizzle-orm/gel-core";
-import { pgTable, timestamp, text, uuid, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  timestamp,
+  text,
+  uuid,
+  integer,
+  boolean,
+} from "drizzle-orm/pg-core";
 
 export const usersTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -9,6 +15,10 @@ export const usersTable = pgTable("users", {
   email: text("email").unique(),
   password: text("password"),
   banned: boolean("banned").notNull().default(false),
+  last_update: timestamp("last_update")
+    .defaultNow()
+    .$onUpdate(() => new Date()),
+  last_comment_at: timestamp("last_comment_at"),
 }).enableRLS();
 // device_id, email and password can be null when the user only uses one type
 // may have to make device_id(passkeys) an array to support multiple devices being added

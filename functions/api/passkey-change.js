@@ -3,6 +3,8 @@ import { eq } from "drizzle-orm";
 import { getDb } from "../../db/drizzle";
 import { getUserFromCookie } from "../utils/cookie";
 
+const COOLDOWN_MS = 60000; // 60 seconds
+
 export async function onRequest({ request }) {
   if (request.method !== "POST") {
     return Response.json(
@@ -25,6 +27,17 @@ export async function onRequest({ request }) {
       { success: false, message: "Not logged in" },
       { status: 400 },
     );
+  }
+
+  // Rate limit: 60-second cooldown
+  if (user.last_update) {
+    const timeSinceLastUpdate = Date.now() - new Date(user.last_update).getTime();
+    if (timeSinceLastUpdate < COOLDOWN_MS) {
+      return Response.json(
+        { success: false, message: "Please wait before changing passkey again" },
+        { status: 429 },
+      );
+    }
   }
 
   const body = await request.json();

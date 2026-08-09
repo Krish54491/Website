@@ -3,6 +3,9 @@ import { getDb } from "../../db/drizzle.js";
 import { usersTable } from "../../db/schema.js";
 import { getUserFromCookie } from "../utils/cookie.js";
 import { filterUsername } from "../utils/filter.js";
+
+const COOLDOWN_MS = 60000; // 60 seconds
+
 export async function onRequest({ request }) {
   if (request.method !== "POST") {
     return Response.json(
@@ -28,6 +31,18 @@ export async function onRequest({ request }) {
       { status: 400 },
     );
   }
+
+  // Rate limit: 60-second cooldown
+  if (user.last_update) {
+    const timeSinceLastUpdate = Date.now() - new Date(user.last_update).getTime();
+    if (timeSinceLastUpdate < COOLDOWN_MS) {
+      return Response.json(
+        { success: false, message: "Please wait before changing username again" },
+        { status: 429 },
+      );
+    }
+  }
+
   const { filteredUsername, filtered } = filterUsername(newUsername);
   if (newUsername.toLowerCase() === "krish544") {
     return Response.json(
