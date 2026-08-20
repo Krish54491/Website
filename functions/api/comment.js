@@ -3,9 +3,11 @@ import { commentsTable, usersTable } from "../../db/schema.js";
 import { getUserFromCookie } from "../utils/cookie.js";
 import { eq, and, count, sql } from "drizzle-orm";
 import { filterComment } from "../utils/filter.js";
+import {
+  COMMENT_COOLDOWN_MS,
+  MAX_DUPLICATE_COMMENTS,
+} from "../utils/constants.js";
 
-const COMMENT_COOLDOWN_MS = 2000; // 2 seconds in milliseconds
-const MAX_DUPLICATE_COMMENTS = 10;
 /**
  *
  * @param {Request} request

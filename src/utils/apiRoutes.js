@@ -4,6 +4,7 @@ export const API_ROUTES = {
   PASSKEY_LOGIN: `${BASE_API_URL}/api/passkey-login`,
   PASSKEY_REGISTER: `${BASE_API_URL}/api/passkey-register`,
   PASSKEY_CHANGE: `${BASE_API_URL}/api/passkey-change`,
+  PASSKEY_DELETE: `${BASE_API_URL}/api/passkey-delete`,
   PASSKEY_ADD_PASSWORD: `${BASE_API_URL}/api/passkey-add-password`,
   PASSWORD_LOGIN: `${BASE_API_URL}/api/password-login`,
   PASSWORD_REGISTER: `${BASE_API_URL}/api/password-register`,

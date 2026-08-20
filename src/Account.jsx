@@ -208,6 +208,28 @@ export default function Account() {
     localStorage.setItem("loggedIn", "false");
     navigate("/");
   }
+  async function handleDeletePasskey() {
+    setLoading(true);
+    setError("");
+    try {
+      const deviceId = await webAuthnLogin();
+      const res = await fetch(API_ROUTES.PASSKEY_DELETE, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deviceId }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setModal(null);
+        fetchUser();
+      } else {
+        setError(data.message);
+      }
+    } catch {
+      setError("Passkey registration failed");
+    }
+    setLoading(false);
+  }
 
   if (!user) {
     return (
@@ -275,6 +297,14 @@ export default function Account() {
             className="block w-full bg-cyan-500 py-2 px-4 rounded-md shadow-lg hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black text-center"
           >
             Add Passkey
+          </button>
+        )}
+        {user.hasPasskey && (
+          <button
+            onClick={() => openModal("deletePasskey")}
+            className="block w-full bg-red-500 py-2 px-4 rounded-md shadow-lg hover:bg-red-600 dark:bg-red-700 dark:hover:bg-red-600 hover:text-white text-center"
+          >
+            Delete Passkey
           </button>
         )}
 
@@ -416,6 +446,43 @@ export default function Account() {
               className="bg-cyan-500 py-2 px-4 rounded-md hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black disabled:opacity-50"
             >
               {loading ? "Registering..." : "Register New Passkey"}
+            </button>
+          </div>
+        </div>
+      </ReactModal>
+
+      {/* Delete Passkey Modal */}
+      <ReactModal
+        isOpen={modal === "deletePasskey"}
+        onRequestClose={() => setModal(null)}
+        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+          <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+            Delete Passkey
+          </h3>
+          {error && (
+            <p className="text-red-500 dark:text-red-400 mb-4">{error}</p>
+          )}
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            Click below to delete your current passkey. Your browser will prompt
+            you to use your security key or biometric.
+          </p>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={() => setModal(null)}
+              className="mr-2 bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-md hover:bg-gray-400 dark:hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleDeletePasskey}
+              disabled={loading}
+              className="bg-cyan-500 py-2 px-4 rounded-md hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black disabled:opacity-50"
+            >
+              {loading ? "Deleting..." : "Delete Passkey"}
             </button>
           </div>
         </div>
