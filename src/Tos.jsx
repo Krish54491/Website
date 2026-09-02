@@ -6,9 +6,7 @@ export default function Tos() {
       </h2>
 
       <div className="space-y-4 text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
-        <p>
-          Last updated: {new Date().toLocaleDateString()}
-        </p>
+        <p>Last updated: 9/2/2026</p>
 
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           1. Acceptance of Terms
@@ -41,8 +39,8 @@ export default function Tos() {
         </h3>
         <p>
           You may delete your account at any time from the account settings
-          page. Deleting your account will permanently remove all associated data,
-          including your comments.
+          page. Deleting your account will permanently remove all associated
+          data, including your comments.
         </p>
 
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
