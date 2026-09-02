@@ -1,25 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-// Config for my External links
-const krish_resume = "Krish_Bharal - Resume.pdf";
-const chipmunk = "https://krish54491.github.io/Krish54491-chipmunk/";
-const pianowizards = "https://pianowizards.krish544.com";
-// Config for games and tools - easily modifiable
-const GAMES = [
-  { label: "Tic-Tac-Toe", path: "/tictactoe" },
-  { label: "Mouse Game", path: "/mouse" },
-  { label: "Sideways Sam", path: "/sidewayssam" },
-  { label: "Ultimate Tic-Tac-Toe", path: "/ultimatetictactoe" },
-];
-
-const TOOLS = [
-  { label: "Countdown", path: "/countdown" },
-  { label: "To-Do", path: "/todo" },
-  { label: "Video Translator", path: "/videotranslator" },
-  { label: "Video Rater", path: "/videorater" },
-  { label: "Base Converter", path: "/baseconverter" },
-];
+import {
+  GAMESNAV,
+  TOOLSNAV,
+  krish_resume,
+  chipmunk,
+  pianowizards,
+} from "./utils/constants.ts";
 
 export const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -134,7 +121,7 @@ export const Nav = () => {
             </Link>
             {gamesOpen && (
               <div className="absolute left-0 mt-0 w-48 bg-cyan-400 dark:bg-blue-900 rounded-md py-2 shadow-lg z-20">
-                {GAMES.map((game) => (
+                {GAMESNAV.map((game) => (
                   <Link key={game.path} to={game.path}>
                     <button className="block w-full text-left px-4 py-2 hover:bg-cyan-600 dark:hover:bg-blue-800 hover:text-white dark:hover:text-black">
                       {game.label}
@@ -173,7 +160,7 @@ export const Nav = () => {
             </Link>
             {toolsOpen && (
               <div className="absolute left-0 mt-0 w-48 bg-cyan-400 dark:bg-blue-900 rounded-md shadow-lg py-2 z-20">
-                {TOOLS.map((tool) => (
+                {TOOLSNAV.map((tool) => (
                   <Link key={tool.path} to={tool.path}>
                     <button className="block w-full text-left px-4 py-2 hover:bg-cyan-600 dark:hover:bg-blue-800 hover:text-white dark:hover:text-black">
                       {tool.label}
