@@ -22,7 +22,7 @@ import Register from "./Register.jsx";
 import Tos from "./Tos.jsx";
 import Account from "./Account.jsx";
 import { games, tools } from "./utils/constants.ts";
-
+import FrontPage from "./testing.jsx";
 function PokemonImage({ pokemonId, getPokemonPic }) {
   const [imgUrl, setImgUrl] = useState(null);
   useEffect(() => {
@@ -177,6 +177,7 @@ function App() {
         <Route path="/pokedex" element={<Pokedex />} />
         <Route path="/videotranslator" element={<VideoTranslator />} />
         <Route path="/videorater" element={<VideoRater />} />
+        <Route path="/testing" element={<FrontPage />} />
         <Route
           path="/games"
           element={<Cards items={games} listName="Games" />}
