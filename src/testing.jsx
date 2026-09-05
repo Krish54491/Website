@@ -4,6 +4,7 @@ import { useState } from "react";
 import jolteon from "./assets/frontpage/Background-Jolteon.png";
 import mechanoid from "./assets/frontpage/Background-Mechanoid.png";
 import gamecube from "./assets/frontpage/Background-Gamecube.png";
+import background from "./assets/frontpage/Background.png";
 // this file is for testing purposes only, it is not part of the main application
 
 // FrontPage is designed to be the main page for desktop users
@@ -42,9 +43,9 @@ export default function FrontPage() {
     <>
       <div className="relative aspect-[1649/927] w-full">
         <img
-          src="src/assets/frontpage/Background.png"
+          src={background}
           alt="Background"
-          className="absolute inset-0 h-full w-full"
+          className="absolute inset-0 h-full w-full object-cover"
         />
 
         <HomeObject
