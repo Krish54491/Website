@@ -2,6 +2,9 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    colors: {
+      jolteonYellow: "#fcd877",
+    },
     extend: {
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",

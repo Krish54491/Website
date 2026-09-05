@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import jolteon from "./assets/frontpage/Background-Jolteon.png";
 import mechanoid from "./assets/frontpage/Background-Mechanoid.png";
@@ -16,6 +16,8 @@ import background from "./assets/frontpage/Background.png";
 export default function FrontPage() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [checkLoggedIn, setCheckLoggedIn] = useState(false);
+  const [scale, setScale] = useState(1.5);
+
   if (localStorage.getItem("loggedIn") === "true" && checkLoggedIn === false) {
     setLoggedIn(true);
     setCheckLoggedIn(true);
@@ -38,47 +40,76 @@ export default function FrontPage() {
       </Link>
     );
   };
+  useEffect(() => {
+    const updateScale = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
+      // 1920x1080 = 1
+      // Larger screens gradually zoom in
+      const widthScale = width / 1600;
+      const heightScale = height / 900;
+
+      const newScale = Math.min(Math.max(widthScale, heightScale), 1.5);
+
+      setScale(newScale);
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
   return (
     <>
-      <div className="relative aspect-[1649/927] w-full">
-        <img
-          src={background}
-          alt="Background"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+      <main className="fixed inset-0 overflow-hidden bg-jolteonYellow">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="relative aspect-[1649/927] w-[100vw] max-w-none transition-transform duration-300 ease-in-out"
+            style={{ transform: `scale(${scale})` }}
+          >
+            <img
+              src={background}
+              alt="Background"
+              className="absolute inset-0 h-full w-full"
+            />
 
-        <HomeObject
-          image={jolteon}
-          label="About Me"
-          link="/about-me"
-          position="    
-        left-[43.3%]
-        top-[53%]
-        w-[7.6%]
-        h-auto
-      "
-        />
-        <HomeObject
-          image={mechanoid}
-          label="Account/Login"
-          link="/account"
-          position="left-[18.3%]
-        top-[32.1%]
-        w-[17.6%]
-        h-auto"
-          special={`${!loggedIn ? "animate-redGlow" : ""}`}
-        />
-        <HomeObject
-          image={gamecube}
-          label="Games"
-          link="/games"
-          position="left-[61.1%]
-        top-[37.7%]
-        w-[6.5%]
-        h-auto"
-        />
-      </div>
+            <HomeObject
+              image={jolteon}
+              label="About Me"
+              link="/about-me"
+              position="
+              left-[43.3%]
+              top-[53%]
+              w-[7.6%]
+            "
+            />
+
+            <HomeObject
+              image={mechanoid}
+              label="Account/Login"
+              link="/account"
+              position="
+              left-[18.3%]
+              top-[32.1%]
+              w-[17.6%]
+            "
+              special={`${!loggedIn ? "animate-redGlow" : ""}`}
+            />
+
+            <HomeObject
+              image={gamecube}
+              label="Games"
+              link="/games"
+              position="
+              left-[61.1%]
+              top-[37.7%]
+              w-[6.5%]
+            "
+            />
+          </div>
+        </div>
+      </main>
     </>
   );
 }
