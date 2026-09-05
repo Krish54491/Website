@@ -129,7 +129,10 @@ function App() {
   };
   return (
     <>
-      <Nav />
+      <Routes>
+        <Route path="/testing" element={<></>} />
+        <Route path="/*" element={<Nav />} />
+      </Routes>
       <Routes>
         <Route
           path="/"
