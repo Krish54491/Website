@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
+import jolteon from "./assets/frontpage/Background-Jolteon.png";
+import mechanoid from "./assets/frontpage/Background-Mechanoid.png";
+import gamecube from "./assets/frontpage/Background-Gamecube.png";
 // this file is for testing purposes only, it is not part of the main application
 
 // FrontPage is designed to be the main page for desktop users
@@ -44,7 +48,7 @@ export default function FrontPage() {
         />
 
         <HomeObject
-          image="src/assets/frontpage/Background-Jolteon.png"
+          image={jolteon}
           label="About Me"
           link="/about-me"
           position="    
@@ -55,7 +59,7 @@ export default function FrontPage() {
       "
         />
         <HomeObject
-          image="src/assets/frontpage/Background-Mechanoid.png"
+          image={mechanoid}
           label="Account/Login"
           link="/account"
           position="left-[18.3%]
@@ -65,7 +69,7 @@ export default function FrontPage() {
           special={`${!loggedIn ? "animate-redGlow" : ""}`}
         />
         <HomeObject
-          image="src/assets/frontpage/Background-Gamecube.png"
+          image={gamecube}
           label="Games"
           link="/games"
           position="left-[61.1%]
