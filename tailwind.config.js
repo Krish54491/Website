@@ -2,10 +2,14 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    colors: {
-      jolteonYellow: "#fcd877",
-    },
     extend: {
+      colors: {
+        jolteonYellow: "#fcd877",
+      },
+      dropShadow: {
+        whiteGlow: "0px 0px 5px rgba(255, 255, 255, 0.9)",
+        redGlow: "0px 0px 25px rgba(255, 0, 0, 0.9)",
+      },
       animation: {
         wiggle: "wiggle 1s ease-in-out infinite",
         scale: "scale 1s linear infinite",

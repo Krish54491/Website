@@ -35,7 +35,7 @@ export default function FrontPage() {
         <img
           src={image}
           alt={label}
-          className={`absolute hover:animate-yellowGlow ${position} ${special ? special : ""}`}
+          className={`absolute hover:animate-yellowGlow drop-shadow-whiteGlow ${position} ${special ? special : ""}`}
         />
       </Link>
     );
@@ -64,6 +64,11 @@ export default function FrontPage() {
     <>
       <main className="fixed inset-0 overflow-hidden bg-jolteonYellow">
         <div className="absolute inset-0 flex items-center justify-center">
+          <img
+            src={background}
+            className="absolute inset-0 h-full w-full object-cover scale-110 blur-2xl"
+            aria-hidden="true"
+          />
           <div
             className="relative aspect-[1649/927] w-[100vw] max-w-none transition-transform duration-300 ease-in-out"
             style={{ transform: `scale(${scale})` }}
