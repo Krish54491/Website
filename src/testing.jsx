@@ -1,20 +1,39 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+// this file is for testing purposes only, it is not part of the main application
 
-// function HomeObject(image, label, link, position) {}
-
-/* jolteon -> About me page
-for md and below 
-
-
-for laptops: lg:left-[42.5%] lg:top-[25.4%] lg:scale-[0.80]
-*/
-/* jolteon -> About me page
-for md and below 
-
-
-for laptops: lg:left-[42.5%] lg:top-[25.4%] lg:scale-[0.80]
-*/
+// FrontPage is designed to be the main page for desktop users
+// It is not responsive and will not work well on mobile devices, mobile will use current Nav setup
+// tablets will use the current Nav setup as well, but will have a different layout than mobile, having the current desktop view Nav
+// -- still have to add transitions for the parts on click to zoom and show the label for the section, and then on click again to go to the page
+// -- get 2 more images for tools and hackathons(might just put other projects)
+// -- still have to add ways to get back to this main page from the other pages, which will be unique per page(e.g. for games, it will be a gamecube power button, for tools, an undo button(pending), for account, a robot wire or pulley , etc.)
 export default function FrontPage() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [checkLoggedIn, setCheckLoggedIn] = useState(false);
+  if (localStorage.getItem("loggedIn") === "true" && checkLoggedIn === false) {
+    setLoggedIn(true);
+    setCheckLoggedIn(true);
+  } else if (
+    localStorage.getItem("loggedIn") !== "true" &&
+    checkLoggedIn === false
+  ) {
+    setLoggedIn(false);
+    setCheckLoggedIn(true);
+  }
+
+  const HomeObject = ({ image, label, link, position, special }) => {
+    return (
+      <Link to={link}>
+        <img
+          src={image}
+          alt={label}
+          className={`absolute hover:animate-yellowGlow ${position} ${special ? special : ""}`}
+        />
+      </Link>
+    );
+  };
+
   return (
     <>
       <div className="relative aspect-[1649/927] w-full">
@@ -24,48 +43,36 @@ export default function FrontPage() {
           className="absolute inset-0 h-full w-full"
         />
 
-        <Link to="/about-me">
-          <img
-            src="src/assets/frontpage/Background-Jolteon.png"
-            alt="Jolteon"
-            className="
-            absolute
+        <HomeObject
+          image="src/assets/frontpage/Background-Jolteon.png"
+          label="About Me"
+          link="/about-me"
+          position="    
         left-[43.3%]
         top-[53%]
         w-[7.6%]
         h-auto
       "
-          />
-        </Link>
-
-        <Link to="/account">
-          <img
-            src="src/assets/frontpage/Background-Mechanoid.png"
-            alt="Mechanoid"
-            className="
-        
-            absolute
-        left-[18.3%]
+        />
+        <HomeObject
+          image="src/assets/frontpage/Background-Mechanoid.png"
+          label="Account/Login"
+          link="/account"
+          position="left-[18.3%]
         top-[32.1%]
         w-[17.6%]
-        h-auto
-      "
-          />
-        </Link>
-
-        <Link to="/games">
-          <img
-            src="src/assets/frontpage/Background-Gamecube.png"
-            alt="Gamecube"
-            className="
-        absolute
-        left-[61.1%]
+        h-auto"
+          special={`${!loggedIn ? "animate-redGlow" : ""}`}
+        />
+        <HomeObject
+          image="src/assets/frontpage/Background-Gamecube.png"
+          label="Games"
+          link="/games"
+          position="left-[61.1%]
         top-[37.7%]
         w-[6.5%]
-        h-auto
-      "
-          />
-        </Link>
+        h-auto"
+        />
       </div>
     </>
   );
