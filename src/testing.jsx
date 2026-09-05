@@ -45,9 +45,9 @@ export default function FrontPage() {
             className="
         
             absolute
-        left-[16%]
-        top-[23.5%]
-        w-auto
+        left-[18.3%]
+        top-[32.1%]
+        w-[17.6%]
         h-auto
       "
           />
@@ -59,9 +59,9 @@ export default function FrontPage() {
             alt="Gamecube"
             className="
         absolute
-        left-[60.4%]
-        top-[35.9%]
-        w-auto
+        left-[61.1%]
+        top-[37.7%]
+        w-[6.5%]
         h-auto
       "
           />
