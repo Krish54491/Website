@@ -1,121 +1,11 @@
 import { useState } from "react";
-const map: Map<number, string> = new Map([
-  [0, "0"],
-  [1, "1"],
-  [2, "2"],
-  [3, "3"],
-  [4, "4"],
-  [5, "5"],
-  [6, "6"],
-  [7, "7"],
-  [8, "8"],
-  [9, "9"],
-  [10, "A"],
-  [11, "B"],
-  [12, "C"],
-  [13, "D"],
-  [14, "E"],
-  [15, "F"],
-  [16, "G"],
-  [17, "H"],
-  [18, "I"],
-  [19, "J"],
-  [20, "K"],
-  [21, "L"],
-  [22, "M"],
-  [23, "N"],
-  [24, "O"],
-  [25, "P"],
-  [26, "Q"],
-  [27, "R"],
-  [28, "S"],
-  [29, "T"],
-  [30, "U"],
-  [31, "V"],
-  [32, "W"],
-  [33, "X"],
-  [34, "Y"],
-  [35, "Z"],
-  [36, "a"],
-  [37, "b"],
-  [38, "c"],
-  [39, "d"],
-  [40, "e"],
-  [41, "f"],
-  [42, "g"],
-  [43, "h"],
-  [44, "i"],
-  [45, "j"],
-  [46, "k"],
-  [47, "l"],
-  [48, "m"],
-  [49, "n"],
-  [50, "o"],
-  [51, "p"],
-  [52, "q"],
-  [53, "r"],
-  [54, "s"],
-  [55, "t"],
-  [56, "u"],
-  [57, "v"],
-  [58, "w"],
-  [59, "x"],
-  [60, "y"],
-  [61, "z"],
-  [62, "Α"],
-  [63, "Β"],
-  [64, "Γ"],
-  [65, "Δ"],
-  [66, "Ε"],
-  [67, "Ζ"],
-  [68, "Η"],
-  [69, "Θ"],
-  [70, "Ι"],
-  [71, "Κ"],
-  [72, "Λ"],
-  [73, "Μ"],
-  [74, "Ν"],
-  [75, "Ξ"],
-  [76, "Ο"],
-  [77, "Π"],
-  [78, "Ρ"],
-  [79, "Σ"],
-  [80, "Τ"],
-  [81, "Υ"],
-  [82, "Φ"],
-  [83, "Χ"],
-  [84, "Ψ"],
-  [85, "Ω"],
-  [86, "α"],
-  [87, "β"],
-  [88, "γ"],
-  [89, "δ"],
-  [90, "ε"],
-  [91, "ζ"],
-  [92, "η"],
-  [93, "θ"],
-  [94, "ι"],
-  [95, "κ"],
-  [96, "λ"],
-  [97, "μ"],
-  [98, "ν"],
-  [99, "ξ"],
-  [100, "ο"],
-  [101, "π"],
-  [102, "ρ"],
-  [103, "ς"],
-  [104, "τ"],
-  [105, "υ"],
-  [106, "φ"],
-  [107, "χ"],
-  [108, "ψ"],
-  [109, "ω"],
-]);
-const reverseMap: Map<string, number> = new Map(
-  [...map.entries()].map(([key, value]) => [value, key]),
-);
-const spacing = 5;
-const baseOptions = Array.from({ length: 109 }, (_, i) => i + 2);
+import {
+  map,
+  reverseMap,
+  dropdownSpacing,
+  baseOptions,
+} from "../utils/constants";
+
 export function BaseConverter() {
   const [baseInput, setBaseInput] = useState<string[]>(["10", "2"]);
   const [numInput, setNumInput] = useState<string>("");
@@ -256,7 +146,7 @@ export function BaseConverter() {
                 {n}
               </option>
             ))}
-            {Array.from({ length: spacing }, (_, i) => (
+            {Array.from({ length: dropdownSpacing }, (_, i) => (
               <option key={`pad-${i}`} value="" disabled>
                 &nbsp;
               </option>
@@ -297,7 +187,7 @@ export function BaseConverter() {
                 {n}
               </option>
             ))}
-            {Array.from({ length: spacing }, (_, i) => (
+            {Array.from({ length: dropdownSpacing }, (_, i) => (
               <option key={`pad-${i}`} value="" disabled>
                 &nbsp;
               </option>
