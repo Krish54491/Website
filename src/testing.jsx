@@ -47,8 +47,8 @@ export default function FrontPage() {
 
       // 1920x1080 = 1
       // Larger screens gradually zoom in
-      const widthScale = width / 1600;
-      const heightScale = height / 900;
+      const widthScale = width / 1920; //1600;
+      const heightScale = height / 1080; // 900;
 
       const newScale = Math.min(Math.max(widthScale, heightScale), 1.5);
 
