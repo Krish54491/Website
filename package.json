@@ -13,7 +13,8 @@
     "lint": "oxlint .",
     "preview": "npm run build && npm run dev:cf",
     "db:generate-migrations": "drizzle-kit generate",
-    "db:apply-migrations": "drizzle-kit migrate"
+    "db:apply-migrations": "drizzle-kit migrate",
+    "test-backend": ""
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.51.4",
