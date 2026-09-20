@@ -21,9 +21,7 @@ export async function webAuthnLogin() {
 
       const assertion = await startAuthentication({ optionsJSON: options });
       credentialId = assertion.id;
-      //console.log("Authenticated existing user");
     } catch (authError) {
-      // If auth fails, try registration for new user
       console.log("Registering new user with WebAuthn", authError);
 
       const optionsRes = await fetch("/api/webauthn-options", {

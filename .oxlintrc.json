@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "error"
+  },
+  "options": {
+    "typeCheck": true,
+    "typeAware": true
+  },
+  "env": {
+    "builtin": true
+  },
+  "ignorePatterns": ["dist", ".wrangler", "node_modules", "drizzle"],
+  "overrides": [
+    {
+      "files": ["**/*.{js,jsx,ts,tsx}"],
+      "rules": {
+        "no-shadow": "off"
+      },
+      "env": {
+        "es2020": true,
+        "commonjs": true
+      },
+      "plugins": ["react", "import"]
+    }
+  ]
+}

@@ -3,6 +3,9 @@ import { getDb } from "../../db/drizzle.js";
 import { usersTable } from "../../db/schema.js";
 import { getUserFromCookie } from "../utils/cookie.js";
 import { filterUsername } from "../utils/filter.js";
+
+import { COOLDOWN_MS } from "../utils/constants.js";
+
 export async function onRequest({ request }) {
   if (request.method !== "POST") {
     return Response.json(
@@ -12,22 +15,39 @@ export async function onRequest({ request }) {
   }
   const body = await request.json();
   const { newUsername } = body;
-  console.log("Requested new username:", newUsername);
-  const { filteredUsername, filtered } = filterUsername(newUsername);
-  console.log(
-    "Filtered username:",
-    filteredUsername,
-    "Was filtered:",
-    filtered,
-  );
   const db = getDb();
-  const user = await getUserFromCookie(request);
+  let user = "";
+  try {
+    user = await getUserFromCookie(request);
+  } catch (e) {
+    return Response.json(
+      { success: false, message: e.message },
+      { status: 500 },
+    );
+  }
   if (!user || !newUsername) {
     return Response.json(
       { success: false, message: "Missing required fields" },
       { status: 400 },
     );
   }
+
+  // Rate limit: 60-second cooldown
+  if (user.last_update) {
+    const timeSinceLastUpdate =
+      Date.now() - new Date(user.last_update).getTime();
+    if (timeSinceLastUpdate < COOLDOWN_MS) {
+      return Response.json(
+        {
+          success: false,
+          message: "Please wait before changing username again",
+        },
+        { status: 429 },
+      );
+    }
+  }
+
+  const { filteredUsername, filtered } = filterUsername(newUsername);
   if (newUsername.toLowerCase() === "krish544") {
     return Response.json(
       { success: false, message: "Yeah no, that's mine" },

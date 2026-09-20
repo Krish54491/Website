@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  GAMESNAV,
+  TOOLSNAV,
+  krish_resume,
+  chipmunk,
+  pianowizards,
+} from "./utils/constants.ts";
 
 export const Nav = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [gamesOpen, setGamesOpen] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
+
   return (
     <>
       <nav onMouseLeave={() => setMenuOpen(false)}>
         <button
-          className={`${menuOpen ? "" : "md:hidden"} text-white focus:outline-none`}
+          className={` md:hidden text-white focus:outline-none`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -38,46 +48,20 @@ export const Nav = () => {
               Home
             </Link>
           </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-            <Link
-              to="/tictactoe"
-              className={`${menuOpen ? "block w-full" : ""}`}
-            >
-              Tic-Tac-Toe
+          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 px-4 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+            <Link to="/games" className={`${menuOpen ? "block w-full" : ""}`}>
+              Games
             </Link>
           </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-            <Link
-              to="/countdown"
-              className={`${menuOpen ? "block w-full" : ""}`}
-            >
-              Countdown
+          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 px-4 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+            <Link to="/tools" className={`${menuOpen ? "block w-full" : ""}`}>
+              Tools
             </Link>
           </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-            <Link to="/todo" className={`${menuOpen ? "block w-full" : ""}`}>
-              To-Do
-            </Link>
-          </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-            <Link
-              to="/sidewayssam"
-              className={`${menuOpen ? "block w-full" : ""}`}
-            >
-              Sideways Sam
-            </Link>
-          </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-            <Link
-              to="/videotranslator"
-              className={`${menuOpen ? "block w-full" : ""}`}
-            >
-              Video Translator
-            </Link>
-          </button>
+
           <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
             <a
-              href="https://krish54491.github.io/Krish54491-chipmunk/"
+              href={chipmunk}
               className={`${menuOpen ? "block w-full" : ""}`}
               target="_blank"
             >
@@ -86,7 +70,7 @@ export const Nav = () => {
           </button>
           <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
             <a
-              href="/Krish_Bharal___Resume.pdf"
+              href={`/${krish_resume}`}
               className={`${menuOpen ? "block w-full" : ""}`}
               rel="noopener noreferrer"
               target="_blank"
@@ -97,7 +81,7 @@ export const Nav = () => {
         </div>
 
         <div
-          className={`flex-row justify-center hidden md:flex ${menuOpen ? "flex flex-col" : "hidden space-x-2"} p-2 space-y-2 md:space-y-0 absolute md:static bg-cyan-500 dark:bg-blue-800 left-0 w-full md:w-auto  md:top-auto z-10 md:items-center`}
+          className={`flex-row justify-center hidden md:flex ${menuOpen ? "flex flex-col md:flex-row" : "hidden"} space-x-2 p-2 space-y-2 md:space-y-0 absolute md:static bg-cyan-500 dark:bg-blue-800 left-0 w-fit md:w-full  md:top-auto z-10 md:items-center`}
         >
           <Link to="/">
             <button
@@ -108,52 +92,97 @@ export const Nav = () => {
               Home
             </button>
           </Link>
-          <Link to="/tictactoe">
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-              Tic-Tac-Toe
-            </button>
-          </Link>
-          <Link to="/countdown">
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-              Countdown
-            </button>
-          </Link>
-          <Link to="/todo">
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-              To-Do
-            </button>
-          </Link>
-          <Link to="/mouse">
-            <button
-              className={`${menuOpen ? "hidden" : "hidden md:flex bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"}`}
-            >
-              Mouse Game
-            </button>
-          </Link>
-          <Link to="/sidewayssam">
-            <button
-              className={`${menuOpen ? "hidden" : "hidden md:flex bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"}`}
-            >
-              Sideways Sam
-            </button>
-          </Link>
-          <Link to="/videotranslator">
-            <button
-              className={`${menuOpen ? "hidden" : "hidden md:flex bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"}`}
-            >
-              Video Translator
-            </button>
-          </Link>
-          <a
-            href="https://krish54491.github.io/Krish54491-chipmunk/"
-            target="_blank"
+
+          {/* Games Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setGamesOpen(true)}
+            onMouseLeave={() => setGamesOpen(false)}
           >
+            <Link to="/games">
+              <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700 flex items-center gap-1">
+                Games
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    gamesOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </button>
+            </Link>
+            {gamesOpen && (
+              <div className="absolute left-0 mt-0 w-48 bg-cyan-400 dark:bg-blue-900 rounded-md py-2 shadow-lg z-20">
+                {GAMESNAV.map((game) => (
+                  <Link key={game.path} to={game.path}>
+                    <button className="block w-full text-left px-4 py-2 hover:bg-cyan-600 dark:hover:bg-blue-800 hover:text-white dark:hover:text-black">
+                      {game.label}
+                    </button>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Tools Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setToolsOpen(true)}
+            onMouseLeave={() => setToolsOpen(false)}
+          >
+            <Link to="/tools">
+              <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700 flex items-center gap-1">
+                Tools
+                <svg
+                  className={`w-4 h-4 transition-transform ${
+                    toolsOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </button>
+            </Link>
+            {toolsOpen && (
+              <div className="absolute left-0 mt-0 w-48 bg-cyan-400 dark:bg-blue-900 rounded-md shadow-lg py-2 z-20">
+                {TOOLSNAV.map((tool) => (
+                  <Link key={tool.path} to={tool.path}>
+                    <button className="block w-full text-left px-4 py-2 hover:bg-cyan-600 dark:hover:bg-blue-800 hover:text-white dark:hover:text-black">
+                      {tool.label}
+                    </button>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <a href={chipmunk} target="_blank">
             <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
               Chipmunk
             </button>
           </a>
+          <a href={pianowizards} target="_blank">
+            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+              Piano Wizards
+            </button>
+          </a>
           <a
-            href="/Krish_Bharal___Resume.pdf"
+            href={`/${krish_resume}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -162,51 +191,6 @@ export const Nav = () => {
             </button>
           </a>
         </div>
-
-        {/*<ul className="flex justify-center  ">
-          <li>
-            <button className="bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md m-1">
-              <Link to="/">Home</Link>
-            </button>
-          </li>
-          <li>
-            <button className="bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md m-1">
-              <Link to="/tictactoe">Tic-Tac-Toe</Link>
-            </button>
-          </li>
-          <li>
-            <button className="bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md m-1">
-              <Link to="/countdown">Countdown</Link>
-            </button>
-          </li>
-          <li>
-            <button className="bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md m-1">
-              <Link to="/todo">To-Do</Link>
-            </button>
-          </li>
-          <li>
-            <a
-              href="https://krish54491.github.io/Krish54491-chipmunk/"
-              className=""
-              target="_blank"
-            >
-            <button className="bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md m-1">
-              Chipmunk
-            </button>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://drive.google.com/file/d/1Fzdb4QaAYYBDV-JkGhtMtlGTjvjRJB-e/view?usp=sharing"
-              className=""
-              target="_blank"
-            >
-              <button className="bg-cyan-500 dark:bg-indigo-800 rounded-md p-2 m-1">
-                My Resume
-              </button>
-            </a>
-          </li>
-        </ul>*/}
       </nav>
     </>
   );

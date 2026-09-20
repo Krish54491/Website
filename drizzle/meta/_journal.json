@@ -29,6 +29,34 @@
       "when": 1768351219690,
       "tag": "0003_productive_quicksilver",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1772596119539,
+      "tag": "0004_small_proteus",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1785445112511,
+      "tag": "0005_colossal_mole_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1786242903495,
+      "tag": "0006_puzzling_gauntlet",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1786246452716,
+      "tag": "0007_sharp_doorman",
+      "breakpoints": true
     }
   ]
 }
