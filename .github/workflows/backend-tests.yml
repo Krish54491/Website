@@ -1,4 +1,4 @@
-name: Backend Tests
+name: All Tests
 
 on:
   push:
@@ -24,4 +24,4 @@ jobs:
       - name: Run Linter
         run: npm run lint
       - name: Run Tests
-        run: npm run test-backend
+        run: npm run test
