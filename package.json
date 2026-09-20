@@ -14,7 +14,9 @@
     "preview": "npm run build && npm run dev:cf",
     "db:generate-migrations": "drizzle-kit generate",
     "db:apply-migrations": "drizzle-kit migrate",
-    "test-backend": ""
+    "test-backend": "echo 'No backend tests yet'",
+    "test-frontend": "echo 'No frontend tests yet'",
+    "test": "npm run test-backend && npm run test-frontend"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^1.51.4",
