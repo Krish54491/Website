@@ -84,21 +84,21 @@ export default function Register() {
           placeholder="Username (optional)"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
         />
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
         />
         <input
           type="password"
           placeholder="Password (min 8 characters)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+          className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
         />
 
         <label className="flex items-center space-x-2 text-gray-700 dark:text-gray-300">
@@ -106,7 +106,7 @@ export default function Register() {
             type="checkbox"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="rounded"
+            className="rounded-sm"
           />
           <span>
             I agree to the{" "}

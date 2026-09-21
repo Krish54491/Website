@@ -343,7 +343,7 @@ export default function Account() {
               value={newUsername}
               onChange={(e) => setNewUsername(e.target.value)}
               placeholder="New username"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100 mb-4"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100 mb-4"
             />
             <div className="flex justify-end">
               <button
@@ -385,14 +385,14 @@ export default function Account() {
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               placeholder="Current password"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
             />
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="New password (min 8 characters)"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
             />
             <div className="flex justify-end">
               <button
@@ -512,14 +512,14 @@ export default function Account() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
             />
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password (min 8 characters)"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
             />
             <div className="flex justify-end">
               <button
@@ -563,7 +563,7 @@ export default function Account() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Current password"
-              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
             />
             <div className="flex justify-end">
               <button
@@ -612,7 +612,7 @@ export default function Account() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password to confirm"
-                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
+                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit text-gray-900 dark:text-gray-100"
               />
             ) : (
               <p className="text-gray-700 dark:text-gray-300">

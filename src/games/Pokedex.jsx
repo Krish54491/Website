@@ -100,7 +100,7 @@ export const Pokedex = () => {
         <select
           value={sorting}
           onChange={(e) => setSorting(e.target.value)}
-          className="m-2 p-2 bg-neutral-200 text-slate-900 dark:bg-slate-900 dark:text-neutral-200 border rounded"
+          className="m-2 p-2 bg-neutral-200 text-slate-900 dark:bg-slate-900 dark:text-neutral-200 border rounded-sm"
         >
           <option value="all">All</option>
           <option value="found">Found</option>

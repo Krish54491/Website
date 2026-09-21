@@ -244,7 +244,7 @@ export function BaseConverter() {
                     onClick={() => {
                       navigator.clipboard.writeText(result);
                     }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded fill-black dark:fill-white hover:fill-blue-500 dark:hover:fill-blue-600 transition-colors"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-black dark:fill-white hover:fill-blue-500 dark:hover:fill-blue-600 transition-colors"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -281,7 +281,7 @@ export function BaseConverter() {
                             twosComplement(numInput),
                           );
                         }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded fill-black dark:fill-white hover:fill-blue-500 dark:hover:fill-blue-600 transition-colors"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-black dark:fill-white hover:fill-blue-500 dark:hover:fill-blue-600 transition-colors"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -317,7 +317,7 @@ export function BaseConverter() {
                         onClick={() => {
                           navigator.clipboard.writeText(twosComplement(result));
                         }}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded fill-black dark:fill-white hover:fill-blue-500 dark:hover:fill-blue-600 transition-colors"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-black dark:fill-white hover:fill-blue-500 dark:hover:fill-blue-600 transition-colors"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

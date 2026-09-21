@@ -17,7 +17,7 @@ export const Nav = () => {
     <>
       <nav onMouseLeave={() => setMenuOpen(false)}>
         <button
-          className={` md:hidden text-white focus:outline-none`}
+          className={` md:hidden text-white focus:outline-hidden`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >

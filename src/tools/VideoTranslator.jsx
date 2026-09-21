@@ -104,7 +104,7 @@ export function VideoTranslator() {
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="m-2 p-2 bg-neutral-200 text-slate-900 dark:bg-slate-900 dark:text-neutral-200 border rounded"
+                className="m-2 p-2 bg-neutral-200 text-slate-900 dark:bg-slate-900 dark:text-neutral-200 border rounded-sm"
               >
                 <option value="English">English</option>
                 <option value="Catalan">Catalan</option>

@@ -70,7 +70,7 @@ export default function FrontPage() {
             aria-hidden="true"
           />
           <div
-            className="relative aspect-[1649/927] w-[100vw] max-w-none transition-transform duration-300 ease-in-out"
+            className="relative aspect-1649/927 w-screen max-w-none transition-transform duration-300 ease-in-out"
             style={{ transform: `scale(${scale})` }}
           >
             <img

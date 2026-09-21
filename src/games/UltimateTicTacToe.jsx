@@ -63,7 +63,7 @@ export const UltimateTicTacToe = () => {
   const Square = ({ value, onSquareClick, active }) => {
     return (
       <button
-        className={`border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-8 text-2xl md:text-4xl rounded-md md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] text-center ${
+        className={`border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-8 text-2xl md:text-4xl rounded-md md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
           value === 0 && active ? "hover:animate-scale" : ""
         }`}
         onClick={onSquareClick}
@@ -136,7 +136,7 @@ export const UltimateTicTacToe = () => {
                 {calculateWinner(squares[i]) ? (
                   <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
                     <button
-                      className="col-span-3 row-span-3 border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-[12.5rem] md:h-[12.5rem] lg:w-[16rem] lg:h-[15.5rem]"
+                      className="col-span-3 row-span-3 border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
                       style={{ minHeight: 0, minWidth: 0 }}
                     >
                       {calculateWinner(squares[i])}
@@ -147,7 +147,7 @@ export const UltimateTicTacToe = () => {
                   ) ? (
                   <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
                     <button
-                      className="col-span-3 row-span-3 border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-[12.5rem] md:h-[12.5rem] lg:w-[16rem] lg:h-[15.5rem]"
+                      className="col-span-3 row-span-3 border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
                       style={{ minHeight: 0, minWidth: 0 }}
                     >
                       -

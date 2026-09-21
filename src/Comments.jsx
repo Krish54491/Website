@@ -164,7 +164,7 @@ export default function Comments() {
             placeholder="Write a comment..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit"
+            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit"
           />
         </div>
         <button
@@ -178,7 +178,7 @@ export default function Comments() {
         {comments.map((comment) => (
           <li
             key={comment.id}
-            className="p-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-sm relative"
+            className="p-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-xs relative"
           >
             <p className="text-sm text-gray-500 dark:text-gray-400">
               <strong className="text-gray-900 dark:text-gray-100">
