@@ -1,0 +1,50 @@
+name: Test and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26.8.1
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Linter
+        run: npm run lint
+      - name: Run Tests
+        run: npm run test
+
+  deploy:
+    name: Deploy to Cloudflare
+    runs-on: ubuntu-latest
+
+    # HARD dependency on the test job
+    needs: tests
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26.8.1
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Deploy
+        run: npm run deploy-cf
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
