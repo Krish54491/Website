@@ -5,79 +5,143 @@
 
   /* Colors are divided by section and have the prefix 'light' or 'dark' for the mode */
   /* They will also use the shadcn way of doing colors unless specificity is required */
-  /* Naming Scheme is [page]-[light/dark]-[component]: */
+  /* Naming Scheme is --color-[page]-[light/dark]-[component]: 
+    --font-[page]-[light/dark]-[component]
+  */
   /* Games */
   /* Orange GameCube colors for dark mode (orange and white )*/
-
+  --color-games-light-background: oklch(0.99 0.01 56.32);
+  --color-games-light-foreground: oklch(0.34 0.01 2.77);
+  --color-games-light-card: oklch(1 0 0);
+  --color-games-light-card-foreground: oklch(0.34 0.01 2.77);
+  --color-games-light-popover: oklch(1 0 0);
+  --color-games-light-popover-foreground: oklch(0.34 0.01 2.77);
+  --color-games-light-primary: oklch(0.72 0.11 57.12);
+  --color-games-light-primary-foreground: oklch(1 0 0);
+  --color-games-light-secondary: oklch(0.96 0.02 28.9);
+  --color-games-light-secondary-foreground: oklch(0.56 0.13 32.74);
+  --color-games-light-muted: oklch(0.97 0.02 39.4);
+  --color-games-light-muted-foreground: oklch(0.49 0.05 26.45);
+  --color-games-light-accent: oklch(0.8 0.09 64.26);
+  --color-games-light-accent-foreground: oklch(0.34 0.01 2.77);
+  --color-games-light-destructive: oklch(0.61 0.21 22.24);
+  --color-games-light-border: oklch(0.93 0.04 38.69);
+  --color-games-light-input: oklch(0.93 0.04 38.69);
+  --color-games-light-ring: oklch(0.74 0.16 34.71);
+  --color-games-light-chart-1: oklch(0.74 0.16 34.71);
+  --color-games-light-chart-2: oklch(0.83 0.11 58);
+  --color-games-light-chart-3: oklch(0.88 0.08 54.93);
+  --color-games-light-chart-4: oklch(0.82 0.11 40.89);
+  --color-games-light-chart-5: oklch(0.64 0.13 32.07);
+  --color-games-light-sidebar: oklch(0.97 0.02 39.4);
+  --color-games-light-sidebar-foreground: oklch(0.34 0.01 2.77);
+  --color-games-light-sidebar-primary: oklch(0.74 0.16 34.71);
+  --color-games-light-sidebar-primary-foreground: oklch(1 0 0);
+  --color-games-light-sidebar-accent: oklch(0.83 0.11 58);
+  --color-games-light-sidebar-accent-foreground: oklch(0.34 0.01 2.77);
+  --color-games-light-sidebar-border: oklch(0.93 0.04 38.69);
+  --color-games-light-sidebar-ring: oklch(0.74 0.16 34.71);
   /* Purple GameCube colors for dark mode (purple and black) */
-
+  --color-games-dark-background: oklch(0.15 0.02 269.18);
+  --color-games-dark-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-card: oklch(0.2 0.02 266.02);
+  --color-games-dark-card-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-popover: oklch(0.2 0.02 266.02);
+  --color-games-dark-popover-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-primary: oklch(0.54 0.14 286.21);
+  --color-games-dark-primary-foreground: oklch(0.15 0.02 269.18);
+  --color-games-dark-secondary: oklch(0.3 0.03 271.05);
+  --color-games-dark-secondary-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-muted: oklch(0.3 0.03 271.05);
+  --color-games-dark-muted-foreground: oklch(0.6 0.03 269.46);
+  --color-games-dark-accent: oklch(0.3 0.03 271.05);
+  --color-games-dark-accent-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-destructive: oklch(0.64 0.25 19.69);
+  --color-games-dark-border: oklch(0.95 0.01 238.46 / 15%);
+  --color-games-dark-input: oklch(0.95 0.01 238.46 / 20%);
+  --color-games-dark-ring: oklch(0.57 0.13 286.94);
+  --color-games-dark-chart-1: oklch(0.67 0.17 153.85);
+  --color-games-dark-chart-2: oklch(0.6 0.1 269.83);
+  --color-games-dark-chart-3: oklch(0.72 0.12 201.79);
+  --color-games-dark-chart-4: oklch(0.8 0.1 100.65);
+  --color-games-dark-chart-5: oklch(0.6 0.15 300.14);
+  --color-games-dark-sidebar: oklch(0.2 0.02 266.02);
+  --color-games-dark-sidebar-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-sidebar-primary: oklch(0.67 0.17 153.85);
+  --color-games-dark-sidebar-primary-foreground: oklch(0.15 0.02 269.18);
+  --color-games-dark-sidebar-accent: oklch(0.3 0.03 271.05);
+  --color-games-dark-sidebar-accent-foreground: oklch(0.95 0.01 238.46);
+  --color-games-dark-sidebar-border: oklch(0.95 0.01 238.46 / 15%);
+  --color-games-dark-sidebar-ring: oklch(0.67 0.17 153.85);
   /* Tools */
   /* Use Modern Minimal */
   /* Light mode */
-  --tools-light-background: oklch(1 0 0);
-  --tools-light-foreground: oklch(0.32 0 0);
-  --tools-light-card: oklch(1 0 0);
-  --tools-light-card-foreground: oklch(0.32 0 0);
-  --tools-light-popover: oklch(1 0 0);
-  --tools-light-popover-foreground: oklch(0.32 0 0);
-  --tools-light-primary: oklch(0.62 0.19 259.76);
-  --tools-light-primary-foreground: oklch(1 0 0);
-  --tools-light-secondary: oklch(0.97 0 0);
-  --tools-light-secondary-foreground: oklch(0.45 0.03 257.68);
-  --tools-light-muted: oklch(0.98 0 0);
-  --tools-light-muted-foreground: oklch(0.55 0.02 264.41);
-  --tools-light-accent: oklch(0.95 0.03 233.56);
-  --tools-light-accent-foreground: oklch(0.38 0.14 265.59);
-  --tools-light-destructive: oklch(0.64 0.21 25.39);
-  --tools-light-border: oklch(0.93 0.01 261.82);
-  --tools-light-input: oklch(0.93 0.01 261.82);
-  --tools-light-ring: oklch(0.62 0.19 259.76);
-  --tools-light-chart-1: oklch(0.62 0.19 259.76);
-  --tools-light-chart-2: oklch(0.55 0.22 262.96);
-  --tools-light-chart-3: oklch(0.49 0.22 264.43);
-  --tools-light-chart-4: oklch(0.42 0.18 265.55);
-  --tools-light-chart-5: oklch(0.38 0.14 265.59);
-  --tools-light-sidebar: oklch(0.98 0 0);
-  --tools-light-sidebar-foreground: oklch(0.14 0 0);
-  --tools-light-sidebar-primary: oklch(0.2 0 0);
-  --tools-light-sidebar-primary-foreground: oklch(0.98 0 0);
-  --tools-light-sidebar-accent: oklch(0.97 0 0);
-  --tools-light-sidebar-accent-foreground: oklch(0.2 0 0);
-  --tools-light-sidebar-border: oklch(0.92 0 0);
-  --tools-light-sidebar-ring: oklch(0.71 0 0);
+  --color-tools-light-background: oklch(1 0 0);
+  --color-tools-light-foreground: oklch(0.32 0 0);
+  --color-tools-light-card: oklch(1 0 0);
+  --color-tools-light-card-foreground: oklch(0.32 0 0);
+  --color-tools-light-popover: oklch(1 0 0);
+  --color-tools-light-popover-foreground: oklch(0.32 0 0);
+  --color-tools-light-primary: oklch(0.62 0.19 259.76);
+  --color-tools-light-primary-foreground: oklch(1 0 0);
+  --color-tools-light-secondary: oklch(0.97 0 0);
+  --color-tools-light-secondary-foreground: oklch(0.45 0.03 257.68);
+  --color-tools-light-muted: oklch(0.98 0 0);
+  --color-tools-light-muted-foreground: oklch(0.55 0.02 264.41);
+  --color-tools-light-accent: oklch(0.95 0.03 233.56);
+  --color-tools-light-accent-foreground: oklch(0.38 0.14 265.59);
+  --color-tools-light-destructive: oklch(0.64 0.21 25.39);
+  --color-tools-light-border: oklch(0.93 0.01 261.82);
+  --color-tools-light-input: oklch(0.93 0.01 261.82);
+  --color-tools-light-ring: oklch(0.62 0.19 259.76);
+  --color-tools-light-chart-1: oklch(0.62 0.19 259.76);
+  --color-tools-light-chart-2: oklch(0.55 0.22 262.96);
+  --color-tools-light-chart-3: oklch(0.49 0.22 264.43);
+  --color-tools-light-chart-4: oklch(0.42 0.18 265.55);
+  --color-tools-light-chart-5: oklch(0.38 0.14 265.59);
+  --color-tools-light-sidebar: oklch(0.98 0 0);
+  --color-tools-light-sidebar-foreground: oklch(0.14 0 0);
+  --color-tools-light-sidebar-primary: oklch(0.2 0 0);
+  --color-tools-light-sidebar-primary-foreground: oklch(0.98 0 0);
+  --color-tools-light-sidebar-accent: oklch(0.97 0 0);
+  --color-tools-light-sidebar-accent-foreground: oklch(0.2 0 0);
+  --color-tools-light-sidebar-border: oklch(0.92 0 0);
+  --color-tools-light-sidebar-ring: oklch(0.71 0 0);
   /* Dark mode */
-  --tools-dark-background: oklch(0.2 0 0);
-  --tools-dark-foreground: oklch(0.92 0 0);
-  --tools-dark-card: oklch(0.27 0 0);
-  --tools-dark-card-foreground: oklch(0.92 0 0);
-  --tools-dark-popover: oklch(0.27 0 0);
-  --tools-dark-popover-foreground: oklch(0.92 0 0);
-  --tools-dark-primary: oklch(0.62 0.19 259.76);
-  --tools-dark-primary-foreground: oklch(1 0 0);
-  --tools-dark-secondary: oklch(0.27 0 0);
-  --tools-dark-secondary-foreground: oklch(0.92 0 0);
-  --tools-dark-muted: oklch(0.27 0 0);
-  --tools-dark-muted-foreground: oklch(0.72 0 0);
-  --tools-dark-accent: oklch(0.38 0.14 265.59);
-  --tools-dark-accent-foreground: oklch(0.88 0.06 254.63);
-  --tools-dark-destructive: oklch(0.64 0.21 25.39);
-  --tools-dark-border: oklch(0.37 0 0);
-  --tools-dark-input: oklch(0.37 0 0);
-  --tools-dark-ring: oklch(0.62 0.19 259.76);
-  --tools-dark-chart-1: oklch(0.71 0.14 254.69);
-  --tools-dark-chart-2: oklch(0.62 0.19 259.76);
-  --tools-dark-chart-3: oklch(0.55 0.22 262.96);
-  --tools-dark-chart-4: oklch(0.49 0.22 264.43);
-  --tools-dark-chart-5: oklch(0.42 0.18 265.55);
-  --tools-dark-sidebar: oklch(0.21 0.01 285.93);
-  --tools-dark-sidebar-foreground: oklch(0.99 0 0);
-  --tools-dark-sidebar-primary: oklch(0.49 0.24 264.4);
-  --tools-dark-sidebar-primary-foreground: oklch(0.99 0 0);
-  --tools-dark-sidebar-accent: oklch(0.27 0.01 286.1);
-  --tools-dark-sidebar-accent-foreground: oklch(0.99 0 0);
-  --tools-dark-sidebar-border: oklch(1 0 0 / 10%);
-  --tools-dark-sidebar-ring: oklch(0.55 0.02 285.93);
+  --color-tools-dark-background: oklch(0.2 0 0);
+  --color-tools-dark-foreground: oklch(0.92 0 0);
+  --color-tools-dark-card: oklch(0.27 0 0);
+  --color-tools-dark-card-foreground: oklch(0.92 0 0);
+  --color-tools-dark-popover: oklch(0.27 0 0);
+  --color-tools-dark-popover-foreground: oklch(0.92 0 0);
+  --color-tools-dark-primary: oklch(0.62 0.19 259.76);
+  --color-tools-dark-primary-foreground: oklch(1 0 0);
+  --color-tools-dark-secondary: oklch(0.27 0 0);
+  --color-tools-dark-secondary-foreground: oklch(0.92 0 0);
+  --color-tools-dark-muted: oklch(0.27 0 0);
+  --color-tools-dark-muted-foreground: oklch(0.72 0 0);
+  --color-tools-dark-accent: oklch(0.38 0.14 265.59);
+  --color-tools-dark-accent-foreground: oklch(0.88 0.06 254.63);
+  --color-tools-dark-destructive: oklch(0.64 0.21 25.39);
+  --color-tools-dark-border: oklch(0.37 0 0);
+  --color-tools-dark-input: oklch(0.37 0 0);
+  --color-tools-dark-ring: oklch(0.62 0.19 259.76);
+  --color-tools-dark-chart-1: oklch(0.71 0.14 254.69);
+  --color-tools-dark-chart-2: oklch(0.62 0.19 259.76);
+  --color-tools-dark-chart-3: oklch(0.55 0.22 262.96);
+  --color-tools-dark-chart-4: oklch(0.49 0.22 264.43);
+  --color-tools-dark-chart-5: oklch(0.42 0.18 265.55);
+  --color-tools-dark-sidebar: oklch(0.21 0.01 285.93);
+  --color-tools-dark-sidebar-foreground: oklch(0.99 0 0);
+  --color-tools-dark-sidebar-primary: oklch(0.49 0.24 264.4);
+  --color-tools-dark-sidebar-primary-foreground: oklch(0.99 0 0);
+  --color-tools-dark-sidebar-accent: oklch(0.27 0.01 286.1);
+  --color-tools-dark-sidebar-accent-foreground: oklch(0.99 0 0);
+  --color-tools-dark-sidebar-border: oklch(1 0 0 / 10%);
+  --color-tools-dark-sidebar-ring: oklch(0.55 0.02 285.93);
+
   /* About Me / Blog */
+  /* This should be more jolteon and stuff I like theme */
 
   /* Other Projects(Projects either made with a team or for another person) */
 
