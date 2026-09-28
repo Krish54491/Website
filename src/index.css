@@ -41,6 +41,8 @@
   --color-games-light-sidebar-accent-foreground: oklch(0.34 0.01 2.77);
   --color-games-light-sidebar-border: oklch(0.93 0.04 38.69);
   --color-games-light-sidebar-ring: oklch(0.74 0.16 34.71);
+  /* need to add shadow lugia colors for decal */
+
   /* Purple GameCube colors for dark mode (purple and black) */
   --color-games-dark-background: oklch(0.15 0.02 269.18);
   --color-games-dark-foreground: oklch(0.95 0.01 238.46);
@@ -73,6 +75,8 @@
   --color-games-dark-sidebar-accent-foreground: oklch(0.95 0.01 238.46);
   --color-games-dark-sidebar-border: oklch(0.95 0.01 238.46 / 15%);
   --color-games-dark-sidebar-ring: oklch(0.67 0.17 153.85);
+  /* need to add normal lugia colors for decal */
+
   /* Tools */
   /* Use Modern Minimal */
   /* Light mode */
@@ -144,10 +148,13 @@
   /* This should be more jolteon and stuff I like theme */
 
   /* Other Projects(Projects either made with a team or for another person) */
+  /* undecided */
 
+  /* Custom effects */
   --drop-shadow-whiteGlow: 0px 0px 5px rgba(255, 255, 255, 0.9);
   --drop-shadow-redGlow: 0px 0px 25px rgba(255, 0, 0, 0.9);
 
+  /* Custom animations */
   --animate-wiggle: wiggle 1s ease-in-out infinite;
   --animate-scale: scale 1s linear infinite;
   --animate-smallspin: smallspin 1s linear infinite;
@@ -221,6 +228,10 @@
   }
 }
 
+/* have to remove this when I redo Nav 
+
+DUE FOR REMOVAL!
+*/
 html {
   scrollbar-gutter: stable;
   overflow-x: hidden;
