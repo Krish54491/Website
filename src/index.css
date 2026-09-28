@@ -1,7 +1,85 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
   --color-jolteonYellow: #fcd877;
+
+  /* Colors are divided by section and have the prefix 'light' or 'dark' for the mode */
+  /* They will also use the shadcn way of doing colors unless specificity is required */
+  /* Naming Scheme is [page]-[light/dark]-[component]: */
+  /* Games */
+  /* Orange GameCube colors for dark mode (orange and white )*/
+
+  /* Purple GameCube colors for dark mode (purple and black) */
+
+  /* Tools */
+  /* Use Modern Minimal */
+  /* Light mode */
+  --tools-light-background: oklch(1 0 0);
+  --tools-light-foreground: oklch(0.32 0 0);
+  --tools-light-card: oklch(1 0 0);
+  --tools-light-card-foreground: oklch(0.32 0 0);
+  --tools-light-popover: oklch(1 0 0);
+  --tools-light-popover-foreground: oklch(0.32 0 0);
+  --tools-light-primary: oklch(0.62 0.19 259.76);
+  --tools-light-primary-foreground: oklch(1 0 0);
+  --tools-light-secondary: oklch(0.97 0 0);
+  --tools-light-secondary-foreground: oklch(0.45 0.03 257.68);
+  --tools-light-muted: oklch(0.98 0 0);
+  --tools-light-muted-foreground: oklch(0.55 0.02 264.41);
+  --tools-light-accent: oklch(0.95 0.03 233.56);
+  --tools-light-accent-foreground: oklch(0.38 0.14 265.59);
+  --tools-light-destructive: oklch(0.64 0.21 25.39);
+  --tools-light-border: oklch(0.93 0.01 261.82);
+  --tools-light-input: oklch(0.93 0.01 261.82);
+  --tools-light-ring: oklch(0.62 0.19 259.76);
+  --tools-light-chart-1: oklch(0.62 0.19 259.76);
+  --tools-light-chart-2: oklch(0.55 0.22 262.96);
+  --tools-light-chart-3: oklch(0.49 0.22 264.43);
+  --tools-light-chart-4: oklch(0.42 0.18 265.55);
+  --tools-light-chart-5: oklch(0.38 0.14 265.59);
+  --tools-light-sidebar: oklch(0.98 0 0);
+  --tools-light-sidebar-foreground: oklch(0.14 0 0);
+  --tools-light-sidebar-primary: oklch(0.2 0 0);
+  --tools-light-sidebar-primary-foreground: oklch(0.98 0 0);
+  --tools-light-sidebar-accent: oklch(0.97 0 0);
+  --tools-light-sidebar-accent-foreground: oklch(0.2 0 0);
+  --tools-light-sidebar-border: oklch(0.92 0 0);
+  --tools-light-sidebar-ring: oklch(0.71 0 0);
+  /* Dark mode */
+  --tools-dark-background: oklch(0.2 0 0);
+  --tools-dark-foreground: oklch(0.92 0 0);
+  --tools-dark-card: oklch(0.27 0 0);
+  --tools-dark-card-foreground: oklch(0.92 0 0);
+  --tools-dark-popover: oklch(0.27 0 0);
+  --tools-dark-popover-foreground: oklch(0.92 0 0);
+  --tools-dark-primary: oklch(0.62 0.19 259.76);
+  --tools-dark-primary-foreground: oklch(1 0 0);
+  --tools-dark-secondary: oklch(0.27 0 0);
+  --tools-dark-secondary-foreground: oklch(0.92 0 0);
+  --tools-dark-muted: oklch(0.27 0 0);
+  --tools-dark-muted-foreground: oklch(0.72 0 0);
+  --tools-dark-accent: oklch(0.38 0.14 265.59);
+  --tools-dark-accent-foreground: oklch(0.88 0.06 254.63);
+  --tools-dark-destructive: oklch(0.64 0.21 25.39);
+  --tools-dark-border: oklch(0.37 0 0);
+  --tools-dark-input: oklch(0.37 0 0);
+  --tools-dark-ring: oklch(0.62 0.19 259.76);
+  --tools-dark-chart-1: oklch(0.71 0.14 254.69);
+  --tools-dark-chart-2: oklch(0.62 0.19 259.76);
+  --tools-dark-chart-3: oklch(0.55 0.22 262.96);
+  --tools-dark-chart-4: oklch(0.49 0.22 264.43);
+  --tools-dark-chart-5: oklch(0.42 0.18 265.55);
+  --tools-dark-sidebar: oklch(0.21 0.01 285.93);
+  --tools-dark-sidebar-foreground: oklch(0.99 0 0);
+  --tools-dark-sidebar-primary: oklch(0.49 0.24 264.4);
+  --tools-dark-sidebar-primary-foreground: oklch(0.99 0 0);
+  --tools-dark-sidebar-accent: oklch(0.27 0.01 286.1);
+  --tools-dark-sidebar-accent-foreground: oklch(0.99 0 0);
+  --tools-dark-sidebar-border: oklch(1 0 0 / 10%);
+  --tools-dark-sidebar-ring: oklch(0.55 0.02 285.93);
+  /* About Me / Blog */
+
+  /* Other Projects(Projects either made with a team or for another person) */
 
   --drop-shadow-whiteGlow: 0px 0px 5px rgba(255, 255, 255, 0.9);
   --drop-shadow-redGlow: 0px 0px 25px rgba(255, 0, 0, 0.9);
