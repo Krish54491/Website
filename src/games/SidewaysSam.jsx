@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
-
+import realRock from "../assets/Rock.png";
 const Sam = ({ x, y, w, h }) => {
   // Sam's character model
   const headSize = w * 0.5;
@@ -67,7 +67,7 @@ const Rock = ({ x, y, w, h, secret }) => {
         }}
       />
       <img
-        src="/Rock.png"
+        src={realRock}
         alt="rock"
         className={`${!secret ? "hidden" : "mx-auto shadow-md"}`}
         style={{
