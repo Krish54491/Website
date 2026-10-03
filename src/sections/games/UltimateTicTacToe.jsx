@@ -63,7 +63,7 @@ export const UltimateTicTacToe = () => {
   const Square = ({ value, onSquareClick, active }) => {
     return (
       <button
-        className={`border-2  border-border  p-2 lg:p-8 text-2xl md:text-4xl rounded-md md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
+        className={`border-2  border-input  p-2 lg:p-8 text-2xl md:text-4xl rounded-md md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
           value === 0 && active ? "hover:animate-scale" : ""
         }`}
         onClick={onSquareClick}
@@ -137,7 +137,7 @@ export const UltimateTicTacToe = () => {
                   {calculateWinner(squares[i]) ? (
                     <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
                       <button
-                        className="col-span-3 row-span-3 border-2  border-border  p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
+                        className="col-span-3 row-span-3 border-2 border-input p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
                         style={{ minHeight: 0, minWidth: 0 }}
                       >
                         {calculateWinner(squares[i])}
@@ -148,7 +148,7 @@ export const UltimateTicTacToe = () => {
                     ) ? (
                     <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
                       <button
-                        className="col-span-3 row-span-3 border-2  border-border  p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
+                        className="col-span-3 row-span-3 border-2 border-input p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
                         style={{ minHeight: 0, minWidth: 0 }}
                       >
                         -
@@ -171,7 +171,7 @@ export const UltimateTicTacToe = () => {
                 </div>
               ))}
           </div>
-          <ol className="flex items-start justify-center flex-col m-3 ">
+          <ol className="flex items-start justify-center flex-col m-3">
             {status}
             <button
               className={`bg-primary  text-primary-foreground   p-2 rounded-md my-1 ${
@@ -184,7 +184,7 @@ export const UltimateTicTacToe = () => {
               Restart
             </button>
             <Link to="/tictactoe" className="flex items-center justify-center">
-              <button className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  ">
+              <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent">
                 Normal Tic-Tac-Toe
               </button>
             </Link>

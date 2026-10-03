@@ -105,7 +105,7 @@ export function VideoTranslator() {
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="m-2 p-2 bg-muted  text-foreground    border rounded-sm"
+                  className="m-2 p-2 bg-muted text-foreground border rounded-sm"
                 >
                   <option value="English">English</option>
                   <option value="Catalan">Catalan</option>
@@ -183,13 +183,13 @@ export function VideoTranslator() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
             >
               {loading ? "Uploading..." : "Submit"}
             </button>
           </form>
 
-          {error && <p style={{ color: "red" }}>{error}</p>}
+          {error && <p className="text-destructive">{error}</p>}
 
           {result && (
             <div>
@@ -201,7 +201,7 @@ export function VideoTranslator() {
               </p>
 
               <a
-                className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+                className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
                 disabled={audioLoading || !audioUrl}
                 href={audioUrl}
                 download="translated_audio.mp3"
@@ -279,13 +279,13 @@ export function VideoTranslator() {
 //           </label>
 //         </div>
 //         <div className="flex flex-row items-center justify-center">
-//             <button type="submit" disabled={loading}  className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  ">
+//             <button type="submit" disabled={loading}  className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent">
 //               {loading ? "Uploading..." : "Submit"}
 //             </button>
 //         </div>
 //       </form>
 
-//       {error && <p style={{ color: "red" }}>{error}</p>}
+//       {error && <p className="text-destructive">{error}</p>}
 
 //       {result && (
 //         <div className="flex flex-row items-center justify-center">
@@ -295,7 +295,7 @@ export function VideoTranslator() {
 //             />
 //           {transcriptUrl && (
 //             <a href={transcriptUrl} download
-//             className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+//             className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
 //             >
 //               Download Transcript
 //             </a>

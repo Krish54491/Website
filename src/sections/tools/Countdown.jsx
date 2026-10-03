@@ -99,21 +99,21 @@ export const Countdown = () => {
           <div className="flex flex-row m-2">
             {timerActive ? (
               <button
-                className="p-2 bg-destructive   rounded-md m-2"
+                className="p-2 bg-destructive rounded-md m-2 text-destructive-foreground"
                 onClick={() => setTimerActive(false)}
               >
                 Stop
               </button>
             ) : (
               <button
-                className="p-2 bg-primary  text-primary-foreground   rounded-md m-2"
+                className="p-2 bg-primary text-primary-foreground rounded-md m-2"
                 onClick={() => startTimer()}
               >
                 Start
               </button>
             )}
             <button
-              className="p-2 bg-secondary  text-secondary-foreground   rounded-md m-2"
+              className="p-2 bg-secondary text-secondary-foreground rounded-md m-2"
               onClick={() => reset()}
             >
               Reset

@@ -80,16 +80,16 @@ export const ToDoList = () => {
             type="text"
             value={itemName}
             onChange={textFollow}
-            className="bg-inherit m-2 rounded-md border-2 text-3xl w-full md:w-1/2 border-border   border-spacing-2"
+            className="bg-inherit m-2 rounded-md border-2 text-3xl w-full md:w-1/2 border-input border-spacing-2"
           ></input>
           <button
-            className="text-2xl bg-primary  text-primary-foreground   rounded-md p-2"
+            className="text-2xl bg-primary text-primary-foreground rounded-md p-2"
             onClick={addToArray}
           >
             Submit
           </button>
           <div className="flex flex-col m-2">
-            <h3 className="flex justify-center text-3xl lg:text-4xl bg-primary  text-primary-foreground   rounded-md mt-4 mb-2">
+            <h3 className="flex justify-center text-3xl lg:text-4xl bg-muted text-foreground rounded-md mt-4 mb-2">
               To-Do:
             </h3>
             {items.map((item, index) => (
@@ -99,7 +99,7 @@ export const ToDoList = () => {
                 onComplete={() => handleComplete(index)}
               />
             ))}
-            <h3 className="flex justify-center text-3xl lg:text-4xl p-1 bg-primary  text-primary-foreground   rounded-md mt-4 mb-2">
+            <h3 className="flex justify-center text-3xl lg:text-4xl p-1 bg-muted text-foreground rounded-md mt-4 mb-2">
               Completed:
             </h3>
             {completed.map((item, index) => (

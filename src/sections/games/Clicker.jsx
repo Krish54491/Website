@@ -88,19 +88,19 @@ export const Clicker = () => {
         </div>
         <div className="flex flex-row items-end justify-center">
           <button
-            className="bg-primary  text-primary-foreground   p-2 rounded-md m-1 hover:text-accent-foreground   hover:bg-accent  "
+            className="bg-primary text-primary-foreground p-2 rounded-md m-1 hover:text-accent-foreground hover:bg-accent"
             onClick={increaseGrandma}
           >
             Grandma(clicks for you every 5 seconds): {grandmas}
           </button>
           <button
-            className="bg-primary  text-primary-foreground   p-2 rounded-md m-1 hover:text-accent-foreground   hover:bg-accent  "
+            className="bg-primary text-primary-foreground p-2 rounded-md m-1 hover:text-accent-foreground hover:bg-accent"
             onClick={increaseClickMult}
           >
             Click Multiplier: {clickMult}
           </button>
         </div>
-        <div className="flex flex-col items-center justify-center text-destructive ">
+        <div className="flex flex-col items-center justify-center text-destructive">
           {grandBroke ? <p>Can&apos;t afford a Grandma</p> : ""}
           {multBroke ? <p>Can&apos;t afford a Multiplier</p> : ""}
         </div>

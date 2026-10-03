@@ -104,7 +104,7 @@ export function VideoRater() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
             >
               {loading
                 ? queuePosition
@@ -115,7 +115,7 @@ export function VideoRater() {
           </div>
         </form>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="text-destructive">{error}</p>}
 
         {result && (
           <div className="flex flex-col items-center justify-center">
@@ -127,7 +127,7 @@ export function VideoRater() {
               <a
                 href={transcriptUrl}
                 download
-                className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+                className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
               >
                 Download Transcript
               </a>

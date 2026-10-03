@@ -136,21 +136,21 @@ export default function Comments() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4 bg-card  text-card-foreground   rounded-lg shadow-md mt-8">
+    <div className="max-w-2xl mx-auto p-4 bg-card text-card-foreground rounded-lg shadow-md mt-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-foreground  ">Comments</h2>
+        <h2 className="text-2xl font-bold text-foreground">Comments</h2>
 
         {loggedIn ? (
           <button
             onClick={() => navigate("/account")}
-            className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground  "
+            className="bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground"
           >
             Account
           </button>
         ) : (
           <button
             onClick={() => navigate("/login")}
-            className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground  "
+            className="bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground"
           >
             Login
           </button>
@@ -162,12 +162,12 @@ export default function Comments() {
             placeholder="Write a comment..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit"
+            className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   "
+          className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground"
         >
           Add Comment
         </button>
@@ -176,26 +176,26 @@ export default function Comments() {
         {comments.map((comment) => (
           <li
             key={comment.id}
-            className="p-4 bg-muted   rounded-md shadow-xs relative"
+            className="p-4 bg-muted rounded-md shadow-xs relative"
           >
-            <p className="text-sm text-muted-foreground  ">
-              <strong className="text-foreground  ">{comment.username}</strong>{" "}
-              - {new Date(comment.created_at).toLocaleString()}
+            <p className="text-sm text-muted-foreground">
+              <strong className="text-foreground">{comment.username}</strong> -{" "}
+              {new Date(comment.created_at).toLocaleString()}
             </p>
-            <p className="text-foreground  ">{comment.content}</p>
+            <p className="text-foreground">{comment.content}</p>
             <button
               onClick={() =>
                 setMenuOpen((prev) => (prev === comment.id ? null : comment.id))
               }
-              className="absolute top-2 right-2 text-muted-foreground  hover:text-accent-foreground  "
+              className="absolute top-2 right-2 text-muted-foreground hover:text-foreground"
             >
               &#x22EE;
             </button>
             {menuOpen === comment.id && (
-              <div className="absolute top-8 right-2 bg-card  text-card-foreground   border border-border   rounded-md shadow-lg">
+              <div className="absolute top-8 right-2 bg-card text-card-foreground border border-border rounded-md shadow-lg">
                 <button
                   onClick={() => handleDeleteComment(comment.id)}
-                  className="block px-4 py-2 text-sm text-destructive  hover:bg-muted   w-full text-left"
+                  className="block px-4 py-2 text-sm text-destructive hover:bg-muted w-full text-left"
                 >
                   Delete
                 </button>
@@ -210,7 +210,7 @@ export default function Comments() {
         amountOfComments < totalComments && (
           <button
             onClick={() => setAmountOfComments((prev) => prev + 5)}
-            className="w-full bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted   mt-4"
+            className="w-full bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted mt-4"
           >
             Load More
           </button>

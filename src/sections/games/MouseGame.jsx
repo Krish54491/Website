@@ -170,7 +170,7 @@ export const MouseGame = () => {
                 : "Click Start to begin!"}
           </p>
           <div
-            className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-border  lg relative` : ""}`}
+            className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-input  lg relative` : ""}`}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => endGame(false)}
           >
@@ -191,7 +191,7 @@ export const MouseGame = () => {
                     top: p.y,
                     width: 30,
                     height: 30,
-                    background: "red",
+                    background: "var(--destructive)",
                     borderRadius: "50%",
                   }}
                 />

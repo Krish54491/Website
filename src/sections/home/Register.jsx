@@ -72,12 +72,12 @@ export default function Register() {
 
   return (
     <section className="section-page">
-      <div className="max-w-2xl mx-auto p-4 bg-card  text-card-foreground   rounded-lg shadow-md mt-8">
-        <h2 className="text-2xl font-bold text-foreground   mb-4">
+      <div className="max-w-2xl mx-auto p-4 bg-card text-card-foreground rounded-lg shadow-md mt-8">
+        <h2 className="text-2xl font-bold text-foreground mb-4">
           Create Account
         </h2>
 
-        {error && <p className="text-destructive   mb-4">{error}</p>}
+        {error && <p className="text-destructive mb-4">{error}</p>}
 
         <form onSubmit={handleRegister} className="space-y-4">
           <input
@@ -85,24 +85,24 @@ export default function Register() {
             placeholder="Username (optional)"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+            className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
           />
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+            className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
           />
           <input
             type="password"
             placeholder="Password (min 8 characters)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+            className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
           />
 
-          <label className="flex items-center space-x-2 text-muted-foreground  ">
+          <label className="flex items-center space-x-2 text-muted-foreground">
             <input
               type="checkbox"
               checked={agreed}
@@ -113,7 +113,7 @@ export default function Register() {
               I agree to the{" "}
               <Link
                 to="/tos"
-                className="text-foreground   hover:underline"
+                className="text-foreground hover:underline"
                 target="_blank"
               >
                 Terms of Service
@@ -124,29 +124,29 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+            className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
           >
             Create Account
           </button>
         </form>
 
         <div className="flex items-center my-6">
-          <div className="flex-1 border-t border-border  "></div>
-          <span className="px-4 text-muted-foreground   text-sm">or</span>
-          <div className="flex-1 border-t border-border  "></div>
+          <div className="flex-1 border-t border-border"></div>
+          <span className="px-4 text-muted-foreground text-sm">or</span>
+          <div className="flex-1 border-t border-border"></div>
         </div>
 
         <button
           onClick={handlePasskeyRegister}
           disabled={loading}
-          className="w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50 mb-6"
+          className="w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground disabled:opacity-50 mb-6"
         >
           Register with Passkey
         </button>
 
-        <p className="text-center text-muted-foreground  ">
+        <p className="text-center text-muted-foreground">
           Already have an account?{" "}
-          <Link to="/login" className="text-foreground   hover:underline">
+          <Link to="/login" className="text-foreground hover:underline">
             Login
           </Link>
         </p>

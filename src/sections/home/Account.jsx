@@ -233,32 +233,32 @@ export default function Account() {
 
   if (!user) {
     return (
-      <div className="max-w-2xl mx-auto p-4 bg-card  text-card-foreground   rounded-lg shadow-md mt-8">
-        <p className="text-muted-foreground  ">Loading...</p>
+      <div className="max-w-2xl mx-auto p-4 bg-card text-card-foreground rounded-lg shadow-md mt-8">
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
 
   return (
     <section className="section-page">
-      <div className="max-w-2xl mx-auto p-4 bg-card  text-card-foreground   rounded-lg shadow-md mt-8">
-        <h2 className="text-2xl font-bold text-foreground   mb-4">Account</h2>
-        <p className="text-muted-foreground   mb-2">
+      <div className="max-w-2xl mx-auto p-4 bg-card text-card-foreground rounded-lg shadow-md mt-8">
+        <h2 className="text-2xl font-bold text-foreground mb-4">Account</h2>
+        <p className="text-muted-foreground mb-2">
           Username: <strong>{user.username}</strong>
         </p>
-        <p className="text-muted-foreground   mb-6">
+        <p className="text-muted-foreground mb-6">
           Auth methods:{" "}
           {[user.hasPassword && "Password", user.hasPasskey && "Passkey"]
             .filter(Boolean)
             .join(", ") || "None"}
         </p>
 
-        {error && <p className="text-destructive   mb-4">{error}</p>}
+        {error && <p className="text-destructive mb-4">{error}</p>}
 
         <div className="space-y-3">
           <button
             onClick={() => openModal("changeUsername")}
-            className="block w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   text-center"
+            className="block w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground text-center"
           >
             Change Username
           </button>
@@ -266,7 +266,7 @@ export default function Account() {
           {user.hasPassword && (
             <button
               onClick={() => openModal("changePassword")}
-              className="block w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   text-center"
+              className="block w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground text-center"
             >
               Change Password
             </button>
@@ -275,7 +275,7 @@ export default function Account() {
           {user.hasPasskey && (
             <button
               onClick={() => openModal("changePasskey")}
-              className="block w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   text-center"
+              className="block w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground text-center"
             >
               Change Passkey
             </button>
@@ -284,7 +284,7 @@ export default function Account() {
           {user.hasPasskey && !user.hasPassword && (
             <button
               onClick={() => openModal("addPassword")}
-              className="block w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   text-center"
+              className="block w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground text-center"
             >
               Add Password
             </button>
@@ -293,7 +293,7 @@ export default function Account() {
           {user.hasPassword && !user.hasPasskey && (
             <button
               onClick={() => openModal("addPasskey")}
-              className="block w-full bg-primary  text-primary-foreground  py-2 px-4 rounded-md shadow-lg hover:bg-accent    hover:text-accent-foreground   text-center"
+              className="block w-full bg-primary text-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground text-center"
             >
               Add Passkey
             </button>
@@ -301,7 +301,7 @@ export default function Account() {
           {user.hasPasskey && (
             <button
               onClick={() => openModal("deletePasskey")}
-              className="block w-full bg-destructive  py-2 px-4 rounded-md shadow-lg hover:bg-destructive    hover:text-accent-foreground  text-center"
+              className="block w-full bg-destructive py-2 px-4 rounded-md shadow-lg hover:bg-destructive hover:text-destructive-foreground text-center text-destructive-foreground"
             >
               Delete Passkey
             </button>
@@ -309,14 +309,14 @@ export default function Account() {
 
           <button
             onClick={() => openModal("deleteAccount")}
-            className="block w-full bg-destructive  py-2 px-4 rounded-md shadow-lg hover:bg-destructive    hover:text-accent-foreground  text-center"
+            className="block w-full bg-destructive py-2 px-4 rounded-md shadow-lg hover:bg-destructive hover:text-destructive-foreground text-center text-destructive-foreground"
           >
             Delete Account
           </button>
 
           <button
             onClick={handleLogout}
-            className="block w-full bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted   text-center"
+            className="block w-full bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted text-center"
           >
             Log Out
           </button>
@@ -326,34 +326,34 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "changeUsername"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-foreground  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-foreground">
               Change Username
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
+            {error && <p className="text-destructive mb-4">{error}</p>}
             <form onSubmit={handleChangeUsername}>
               <input
                 type="text"
                 value={newUsername}
                 onChange={(e) => setNewUsername(e.target.value)}
                 placeholder="New username"
-                className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground   mb-4"
+                className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground mb-4"
               />
               <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={() => setModal(null)}
-                  className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                  className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+                  className="bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
                 >
                   Save
                 </button>
@@ -366,41 +366,41 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "changePassword"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-foreground  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-foreground">
               Change Password
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
+            {error && <p className="text-destructive mb-4">{error}</p>}
             <form onSubmit={handleChangePassword} className="space-y-4">
               <input
                 type="password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="Current password"
-                className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+                className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
               />
               <input
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="New password (min 8 characters)"
-                className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+                className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
               />
               <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={() => setModal(null)}
-                  className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                  className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+                  className="bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
                 >
                   Change Password
                 </button>
@@ -413,15 +413,15 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "changePasskey"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-foreground  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-foreground">
               Change Passkey
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
-            <p className="text-muted-foreground   mb-4">
+            {error && <p className="text-destructive mb-4">{error}</p>}
+            <p className="text-muted-foreground mb-4">
               Click below to register a new passkey. Your browser will prompt
               you to use your security key or biometric.
             </p>
@@ -429,14 +429,14 @@ export default function Account() {
               <button
                 type="button"
                 onClick={() => setModal(null)}
-                className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
               >
                 Cancel
               </button>
               <button
                 onClick={handleChangePasskey}
                 disabled={loading}
-                className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+                className="bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
               >
                 {loading ? "Registering..." : "Register New Passkey"}
               </button>
@@ -448,15 +448,15 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "deletePasskey"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-foreground  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-foreground">
               Delete Passkey
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
-            <p className="text-muted-foreground   mb-4">
+            {error && <p className="text-destructive mb-4">{error}</p>}
+            <p className="text-muted-foreground mb-4">
               Click below to delete your current passkey. Your browser will
               prompt you to use your security key or biometric.
             </p>
@@ -464,14 +464,14 @@ export default function Account() {
               <button
                 type="button"
                 onClick={() => setModal(null)}
-                className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeletePasskey}
                 disabled={loading}
-                className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+                className="bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
               >
                 {loading ? "Deleting..." : "Delete Passkey"}
               </button>
@@ -483,15 +483,15 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "addPassword"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-foreground  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-foreground">
               Add Password
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
-            <p className="text-muted-foreground   mb-4">
+            {error && <p className="text-destructive mb-4">{error}</p>}
+            <p className="text-muted-foreground mb-4">
               First, register a passkey for identity verification. Then set your
               email and password.
             </p>
@@ -501,27 +501,27 @@ export default function Account() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+                className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
               />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password (min 8 characters)"
-                className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+                className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
               />
               <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={() => setModal(null)}
-                  className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                  className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+                  className="bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
                 >
                   {loading
                     ? "Registering passkey..."
@@ -536,34 +536,34 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "addPasskey"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-foreground  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-foreground">
               Add Passkey
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
+            {error && <p className="text-destructive mb-4">{error}</p>}
             <form onSubmit={handleAddPasskey} className="space-y-4">
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Current password"
-                className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+                className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
               />
               <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={() => setModal(null)}
-                  className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                  className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-primary  text-primary-foreground  py-2 px-4 rounded-md hover:bg-accent    hover:text-accent-foreground   disabled:opacity-50"
+                  className="bg-primary text-primary-foreground py-2 px-4 rounded-md hover:bg-accent hover:text-accent-foreground disabled:opacity-50"
                 >
                   {loading
                     ? "Registering passkey..."
@@ -578,15 +578,15 @@ export default function Account() {
         <ReactModal
           isOpen={modal === "deleteAccount"}
           onRequestClose={() => setModal(null)}
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black/50"
+          overlayClassName="fixed inset-0 bg-black/50"
         >
-          <div className="bg-card  text-card-foreground   p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4 text-destructive  ">
+          <div className="bg-card text-card-foreground p-6 rounded-lg shadow-lg w-96">
+            <h3 className="text-xl font-bold mb-4 text-destructive">
               Delete Account
             </h3>
-            {error && <p className="text-destructive   mb-4">{error}</p>}
-            <p className="text-muted-foreground   mb-4">
+            {error && <p className="text-destructive mb-4">{error}</p>}
+            <p className="text-muted-foreground mb-4">
               This action is permanent and cannot be undone. All your data,
               including comments, will be deleted.
             </p>
@@ -597,10 +597,10 @@ export default function Account() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password to confirm"
-                  className="w-full p-2 border border-border   rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring   bg-inherit text-foreground  "
+                  className="w-full p-2 border border-input rounded-md focus:outline-hidden focus:ring-2 focus:ring-ring bg-inherit text-foreground"
                 />
               ) : (
-                <p className="text-muted-foreground  ">
+                <p className="text-muted-foreground">
                   Click below to verify with your passkey.
                 </p>
               )}
@@ -608,7 +608,7 @@ export default function Account() {
                 <button
                   type="button"
                   onClick={() => setModal(null)}
-                  className="mr-2 bg-muted   text-foreground   py-2 px-4 rounded-md hover:bg-muted  "
+                  className="mr-2 bg-muted text-foreground py-2 px-4 rounded-md hover:bg-muted"
                 >
                   Cancel
                 </button>
@@ -616,7 +616,7 @@ export default function Account() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="bg-destructive  py-2 px-4 rounded-md hover:bg-destructive    hover:text-accent-foreground  disabled:opacity-50"
+                    className="bg-destructive py-2 px-4 rounded-md hover:bg-destructive hover:text-destructive-foreground disabled:opacity-50 text-destructive-foreground"
                   >
                     {loading ? "Deleting..." : "Delete Account"}
                   </button>
@@ -625,7 +625,7 @@ export default function Account() {
                     type="button"
                     onClick={handleDeleteAccount}
                     disabled={loading}
-                    className="bg-destructive  py-2 px-4 rounded-md hover:bg-destructive    hover:text-accent-foreground  disabled:opacity-50"
+                    className="bg-destructive py-2 px-4 rounded-md hover:bg-destructive hover:text-destructive-foreground disabled:opacity-50 text-destructive-foreground"
                   >
                     {loading ? "Deleting..." : "Delete Account"}
                   </button>

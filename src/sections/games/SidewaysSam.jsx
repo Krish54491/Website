@@ -21,7 +21,7 @@ const Sam = ({ x, y, w, h }) => {
 
       {/* Head (skin tone square) */}
       <div
-        className="bg-orange-900 dark:bg-yellow-200  mx-auto"
+        className="bg-orange-900 dark:bg-yellow-200 mx-auto"
         style={{ width: headSize, height: headSize }}
       ></div>
 
@@ -46,7 +46,7 @@ const Sam = ({ x, y, w, h }) => {
 
       {/* Pants */}
       <div
-        className="bg-primary  text-primary-foreground  mx-auto"
+        className="bg-primary text-primary-foreground mx-auto"
         style={{ width: torsoWidth, height: pantsHeight }}
       ></div>
     </div>
@@ -396,7 +396,7 @@ export const SidewaysSam = () => {
           className={`${!gameStarted ? "hidden" : "flex flex-col items-center justify-normal mt-4"}`}
         >
           <div
-            className="border-4  border-border  w-full md:w-1/2 h-[40vh] overflow-hidden"
+            className="border-4 border-input w-full md:w-1/2 h-[40vh] overflow-hidden"
             ref={borderRef}
           >
             <Sam x={x} y={y} w={width} h={height} />
@@ -414,7 +414,7 @@ export const SidewaysSam = () => {
           </div>
           <div className="flex flex-row justify-center items-center mt-4">
             <button
-              className="bg-primary  text-primary-foreground   p-4 mt-1 mx-4 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+              className="bg-primary text-primary-foreground p-4 mt-1 mx-4 rounded-md hover:text-accent-foreground hover:bg-accent"
               onMouseDown={() =>
                 setMouseDown({ left: true, right: mouseDown.right })
               }
@@ -435,7 +435,7 @@ export const SidewaysSam = () => {
               {"<-"}
             </button>
             <button
-              className="bg-primary  text-primary-foreground   p-4 mt-1 mx-4 rounded-md hover:text-accent-foreground   hover:bg-accent  "
+              className="bg-primary text-primary-foreground p-4 mt-1 mx-4 rounded-md hover:text-accent-foreground hover:bg-accent"
               onMouseDown={() =>
                 setMouseDown({ left: mouseDown.left, right: true })
               }
