@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Square = ({ value, onSquareClick }) => {
   return (
     <button
-      className={`border-2 dark:border-neutral-200 border-slate-900 p-2 lg:p-20 text-8xl rounded-md h-24 w-24 sm:h-52 sm:w-52 md:h-60 md:w-60 lg:w-65 lg:h-65 ${
+      className={`border-2  border-games-light-border dark:border-games-dark-border p-2 lg:p-20 text-8xl rounded-md h-24 w-24 sm:h-52 sm:w-52 md:h-60 md:w-60 lg:w-65 lg:h-65 ${
         value ? "" : "hover:animate-scale"
       }`}
       onClick={onSquareClick}
@@ -95,7 +95,7 @@ export const TicTacToe = () => {
         <li key={move}>
           <button
             onClick={() => jumpTo(move)}
-            className="bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md my-1"
+            className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md my-1"
           >
             Go to move # {move}
           </button>
@@ -106,7 +106,7 @@ export const TicTacToe = () => {
       <li key={move}>
         <button
           onClick={() => jumpTo(move)}
-          className={`bg-cyan-500 dark:bg-indigo-800 p-2 rounded-md my-1 ${
+          className={`bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md my-1 ${
             !status.includes("Next player:")
               ? "animate-bounce"
               : "hover:animate-wiggle"
@@ -119,28 +119,30 @@ export const TicTacToe = () => {
   });
 
   return (
-    <>
-      <div className="flex flex-col lg:flex-row justify-center mt-2 items-center">
-        <div className="flex flex-row">
-          <Board
-            xIsNext={xIsNext}
-            squares={currentSquares}
-            onPlay={handlePlay}
-          />
+    <section className="section-games">
+      <>
+        <div className="flex flex-col lg:flex-row justify-center mt-2 items-center">
+          <div className="flex flex-row">
+            <Board
+              xIsNext={xIsNext}
+              squares={currentSquares}
+              onPlay={handlePlay}
+            />
+          </div>
+          <ol className="flex items-start justify-center flex-col m-3 ">
+            {status}
+            {moves}
+            <Link
+              to="/ultimatetictactoe"
+              className="flex items-center justify-center"
+            >
+              <button className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 my-1 rounded-md hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent ">
+                Ultimate Tic-Tac-Toe
+              </button>
+            </Link>
+          </ol>
         </div>
-        <ol className="flex items-start justify-center flex-col m-3 ">
-          {status}
-          {moves}
-          <Link
-            to="/ultimatetictactoe"
-            className="flex items-center justify-center"
-          >
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 my-1 rounded-md hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
-              Ultimate Tic-Tac-Toe
-            </button>
-          </Link>
-        </ol>
-      </div>
-    </>
+      </>
+    </section>
   );
 };

@@ -1,26 +1,26 @@
 // components:
 
-import { TicTacToe } from "./games/TicTacToe.jsx";
-import { Countdown } from "./tools/Countdown.jsx";
-import { MouseGame } from "./games/MouseGame.jsx";
-import { Clicker } from "./games/Clicker.jsx";
+import { TicTacToe } from "./sections/games/TicTacToe.jsx";
+import { Countdown } from "./sections/tools/Countdown.jsx";
+import { MouseGame } from "./sections/games/MouseGame.jsx";
+import { Clicker } from "./sections/games/Clicker.jsx";
 import { useState, useEffect } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import { Nav } from "./Nav.jsx";
-import { ToDoList } from "./tools/TodoList.jsx";
-import { SidewaysSam } from "./games/SidewaysSam.jsx";
-import { UltimateTicTacToe } from "./games/UltimateTicTacToe.jsx";
-import { Pokedex } from "./games/Pokedex.jsx";
-import { VideoTranslator } from "./tools/VideoTranslator.jsx";
-import { VideoRater } from "./tools/VideoRater.jsx";
-import { BaseConverter } from "./tools/BetterBaseConverter.tsx";
+import { ToDoList } from "./sections/tools/TodoList.jsx";
+import { SidewaysSam } from "./sections/games/SidewaysSam.jsx";
+import { UltimateTicTacToe } from "./sections/games/UltimateTicTacToe.jsx";
+import { Pokedex } from "./sections/games/Pokedex.jsx";
+import { VideoTranslator } from "./sections/tools/VideoTranslator.jsx";
+import { VideoRater } from "./sections/tools/VideoRater.jsx";
+import { BaseConverter } from "./sections/tools/BetterBaseConverter.tsx";
 import Cards from "./components/Cards.tsx";
 import Ampharos from "./assets/Ampharos.png";
 import Comments from "./Comments.jsx";
-import Login from "./Login.jsx";
-import Register from "./Register.jsx";
-import Tos from "./Tos.jsx";
-import Account from "./Account.jsx";
+import Login from "./sections/home/Login.jsx";
+import Register from "./sections/home/Register.jsx";
+import Tos from "./sections/home/Tos.jsx";
+import Account from "./sections/home/Account.jsx";
 import { games, tools } from "./utils/constants.ts";
 import FrontPage from "./testing.jsx";
 function PokemonImage({ pokemonId, getPokemonPic }) {
@@ -183,11 +183,11 @@ function App() {
         <Route path="/testing" element={<FrontPage />} />
         <Route
           path="/games"
-          element={<Cards items={games} listName="Games" />}
+          element={<Cards items={games} listName="Games" section="games" />}
         />
         <Route
           path="/tools"
-          element={<Cards items={tools} listName="Tools" />}
+          element={<Cards items={tools} listName="Tools" section="tools" />}
         />
         <Route path="/baseconverter" element={<BaseConverter />} />
         <Route path="/login" element={<Login />} />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import cookie from "../assets/cookie.png";
+import cookie from "../../assets/cookie.png";
 
 const startTime = Date.now();
 
@@ -67,40 +67,44 @@ export const Clicker = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold text-center mt-4">
-          Clicker Game made in 75 minutes
-        </h1>
-        <h2 className="text-2xl text-center mt-2">
-          Time Played: {formatTime(time)}
-        </h2>
-        <h2 className="text-2xl text-center mt-2">Times Clicked: {clicked}</h2>
-        <img
-          className="w-96 h-96"
-          src={cookie}
-          alt="Cookie!"
-          onClick={increaseClicked}
-        ></img>
-      </div>
-      <div className="flex flex-row items-end justify-center">
-        <button
-          className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
-          onClick={increaseGrandma}
-        >
-          Grandma(clicks for you every 5 seconds): {grandmas}
-        </button>
-        <button
-          className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
-          onClick={increaseClickMult}
-        >
-          Click Multiplier: {clickMult}
-        </button>
-      </div>
-      <div className="flex flex-col items-center justify-center text-red-600">
-        {grandBroke ? <p>Can&apos;t afford a Grandma</p> : ""}
-        {multBroke ? <p>Can&apos;t afford a Multiplier</p> : ""}
-      </div>
-    </>
+    <section className="section-games">
+      <>
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-3xl font-bold text-center mt-4">
+            Clicker Game made in 75 minutes
+          </h1>
+          <h2 className="text-2xl text-center mt-2">
+            Time Played: {formatTime(time)}
+          </h2>
+          <h2 className="text-2xl text-center mt-2">
+            Times Clicked: {clicked}
+          </h2>
+          <img
+            className="w-96 h-96"
+            src={cookie}
+            alt="Cookie!"
+            onClick={increaseClicked}
+          ></img>
+        </div>
+        <div className="flex flex-row items-end justify-center">
+          <button
+            className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md m-1 hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+            onClick={increaseGrandma}
+          >
+            Grandma(clicks for you every 5 seconds): {grandmas}
+          </button>
+          <button
+            className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md m-1 hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+            onClick={increaseClickMult}
+          >
+            Click Multiplier: {clickMult}
+          </button>
+        </div>
+        <div className="flex flex-col items-center justify-center text-games-light-destructive dark:text-games-dark-destructive">
+          {grandBroke ? <p>Can&apos;t afford a Grandma</p> : ""}
+          {multBroke ? <p>Can&apos;t afford a Multiplier</p> : ""}
+        </div>
+      </>
+    </section>
   );
 };

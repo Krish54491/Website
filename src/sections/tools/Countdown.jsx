@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Confetti } from "../components/Confetti.jsx";
+import { Confetti } from "../../components/Confetti.jsx";
 
 export const Countdown = () => {
   const [initial, setInitial] = useState({
@@ -81,44 +81,46 @@ export const Countdown = () => {
     }
   };
   return (
-    <>
-      {isConfettiTime && <Confetti />}
-      <div className="flex flex-col justify-center items-center">
-        <input
-          type="text"
-          disabled={timerActive}
-          value={
-            isConfettiTime
-              ? "Congrats!"
-              : minutes + ":" + (seconds < 10 ? `0${seconds}` : seconds)
-          }
-          onChange={inputChange}
-          className={`text-5xl lg:text-9xl m-5 text-center bg-inherit w-fit`}
-        ></input>
-        <div className="flex flex-row m-2">
-          {timerActive ? (
+    <section className="section-tools">
+      <>
+        {isConfettiTime && <Confetti />}
+        <div className="flex flex-col justify-center items-center">
+          <input
+            type="text"
+            disabled={timerActive}
+            value={
+              isConfettiTime
+                ? "Congrats!"
+                : minutes + ":" + (seconds < 10 ? `0${seconds}` : seconds)
+            }
+            onChange={inputChange}
+            className={`text-5xl lg:text-9xl m-5 text-center bg-inherit w-fit`}
+          ></input>
+          <div className="flex flex-row m-2">
+            {timerActive ? (
+              <button
+                className="p-2 bg-tools-light-destructive dark:bg-tools-dark-destructive  rounded-md m-2"
+                onClick={() => setTimerActive(false)}
+              >
+                Stop
+              </button>
+            ) : (
+              <button
+                className="p-2 bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  rounded-md m-2"
+                onClick={() => startTimer()}
+              >
+                Start
+              </button>
+            )}
             <button
-              className="p-2 bg-red-500 dark:bg-red-600 rounded-md m-2"
-              onClick={() => setTimerActive(false)}
+              className="p-2 bg-tools-light-secondary dark:bg-tools-dark-secondary text-tools-light-secondary-foreground dark:text-tools-dark-secondary-foreground  rounded-md m-2"
+              onClick={() => reset()}
             >
-              Stop
+              Reset
             </button>
-          ) : (
-            <button
-              className="p-2 bg-green-500 dark:bg-green-600 rounded-md m-2"
-              onClick={() => startTimer()}
-            >
-              Start
-            </button>
-          )}
-          <button
-            className="p-2 bg-yellow-500 dark:bg-yellow-600 rounded-md m-2"
-            onClick={() => reset()}
-          >
-            Reset
-          </button>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </section>
   );
 };

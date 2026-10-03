@@ -136,23 +136,23 @@ export default function Comments() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md mt-8">
+    <div className="max-w-2xl mx-auto p-4 bg-home-light-card dark:bg-home-dark-card text-home-light-card-foreground dark:text-home-dark-card-foreground  rounded-lg shadow-md mt-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+        <h2 className="text-2xl font-bold text-home-light-foreground dark:text-home-dark-foreground ">
           Comments
         </h2>
 
         {loggedIn ? (
           <button
             onClick={() => navigate("/account")}
-            className="bg-cyan-500 py-2 px-4 rounded-md shadow-lg hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black"
+            className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-home-light-accent dark:hover:bg-home-dark-accent   hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground "
           >
             Account
           </button>
         ) : (
           <button
             onClick={() => navigate("/login")}
-            className="bg-cyan-500 py-2 px-4 rounded-md shadow-lg hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black"
+            className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground py-2 px-4 rounded-md shadow-lg hover:bg-home-light-accent dark:hover:bg-home-dark-accent   hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground "
           >
             Login
           </button>
@@ -164,12 +164,12 @@ export default function Comments() {
             placeholder="Write a comment..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300 bg-inherit"
+            className="w-full p-2 border border-home-light-border dark:border-home-dark-border  rounded-md focus:outline-hidden focus:ring-2 focus:ring-home-light-ring dark:focus:ring-home-dark-ring  bg-inherit"
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-cyan-500 py-2 px-4 rounded-md hover:bg-cyan-600 dark:bg-blue-800 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black "
+          className="w-full bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground py-2 px-4 rounded-md hover:bg-home-light-accent dark:hover:bg-home-dark-accent   hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  "
         >
           Add Comment
         </button>
@@ -178,30 +178,30 @@ export default function Comments() {
         {comments.map((comment) => (
           <li
             key={comment.id}
-            className="p-4 bg-gray-100 dark:bg-gray-700 rounded-md shadow-xs relative"
+            className="p-4 bg-home-light-muted dark:bg-home-dark-muted  rounded-md shadow-xs relative"
           >
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              <strong className="text-gray-900 dark:text-gray-100">
+            <p className="text-sm text-home-light-muted-foreground dark:text-home-dark-muted-foreground ">
+              <strong className="text-home-light-foreground dark:text-home-dark-foreground ">
                 {comment.username}
               </strong>{" "}
               - {new Date(comment.created_at).toLocaleString()}
             </p>
-            <p className="text-gray-800 dark:text-gray-200">
+            <p className="text-home-light-foreground dark:text-home-dark-foreground ">
               {comment.content}
             </p>
             <button
               onClick={() =>
                 setMenuOpen((prev) => (prev === comment.id ? null : comment.id))
               }
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
+              className="absolute top-2 right-2 text-home-light-muted-foreground dark:text-home-dark-muted-foreground hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground "
             >
               &#x22EE;
             </button>
             {menuOpen === comment.id && (
-              <div className="absolute top-8 right-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md shadow-lg">
+              <div className="absolute top-8 right-2 bg-home-light-card dark:bg-home-dark-card text-home-light-card-foreground dark:text-home-dark-card-foreground  border border-home-light-border dark:border-home-dark-border  rounded-md shadow-lg">
                 <button
                   onClick={() => handleDeleteComment(comment.id)}
-                  className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
+                  className="block px-4 py-2 text-sm text-home-light-destructive dark:text-home-dark-destructive hover:bg-home-light-muted dark:hover:bg-home-dark-muted  w-full text-left"
                 >
                   Delete
                 </button>
@@ -216,7 +216,7 @@ export default function Comments() {
         amountOfComments < totalComments && (
           <button
             onClick={() => setAmountOfComments((prev) => prev + 5)}
-            className="w-full bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 py-2 px-4 rounded-md hover:bg-gray-400 dark:hover:bg-gray-600 mt-4"
+            className="w-full bg-home-light-muted dark:bg-home-dark-muted  text-home-light-foreground dark:text-home-dark-foreground  py-2 px-4 rounded-md hover:bg-home-light-muted dark:hover:bg-home-dark-muted  mt-4"
           >
             Load More
           </button>

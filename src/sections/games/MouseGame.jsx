@@ -152,60 +152,64 @@ export const MouseGame = () => {
   // have restart button and potentially high score(score will be time survived)
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-normal mt-4">
-        <h1 className="text-4xl font-bold mb-4">Mouse Dodge</h1>
-        <p className="text-xl mb-2 text-center">
-          {cheater
-            ? "Don't try to cheat my game..."
-            : "Avoid the projectiles and survive as long as you can!"}
-        </p>
-        <p className="text-xl mb-2">High Score: {formatTime(highScore)}</p>
-        <p className="text-lg mb-4">
-          {gameStarted
-            ? "Time Survived: " + formatTime(timeSurvived)
-            : timeSurvived
-              ? "Previous run: " + formatTime(timeSurvived)
-              : "Click Start to begin!"}
-        </p>
-        <div
-          className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4 dark:border-neutral-200 border-slate-900 lg relative` : ""}`}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={() => endGame(false)}
-        >
-          <button
-            className={`${!gameStarted ? "mt-10 p-2 bg-green-500 dark:bg-green-600 rounded-md m-2" : "hidden"}`}
-            onClick={start}
+    <section className="section-games">
+      <>
+        <div className="flex flex-col items-center justify-normal mt-4">
+          <h1 className="text-4xl font-bold mb-4">Mouse Dodge</h1>
+          <p className="text-xl mb-2 text-center">
+            {cheater
+              ? "Don't try to cheat my game..."
+              : "Avoid the projectiles and survive as long as you can!"}
+          </p>
+          <p className="text-xl mb-2">High Score: {formatTime(highScore)}</p>
+          <p className="text-lg mb-4">
+            {gameStarted
+              ? "Time Survived: " + formatTime(timeSurvived)
+              : timeSurvived
+                ? "Previous run: " + formatTime(timeSurvived)
+                : "Click Start to begin!"}
+          </p>
+          <div
+            className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-games-light-border dark:border-games-dark-border lg relative` : ""}`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => endGame(false)}
           >
-            Start
+            <button
+              className={`${!gameStarted ? "mt-10 p-2 bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  rounded-md m-2" : "hidden"}`}
+              onClick={start}
+            >
+              Start
+            </button>
+            {gameStarted &&
+              projectiles.map((p, i) => (
+                <div
+                  key={i}
+                  onMouseEnter={() => endGame(false)}
+                  style={{
+                    position: "absolute",
+                    left: p.x - 10,
+                    top: p.y,
+                    width: 30,
+                    height: 30,
+                    background: "red",
+                    borderRadius: "50%",
+                  }}
+                />
+              ))}
+          </div>
+          <p>
+            X: {position.x}, Y: {position.y}
+          </p>
+          <button
+            className={
+              "mt-2 p-2 bg-games-light-secondary dark:bg-games-dark-secondary text-games-light-secondary-foreground dark:text-games-dark-secondary-foreground  rounded-md m-2"
+            }
+            onClick={resetHighScore}
+          >
+            Reset High Score
           </button>
-          {gameStarted &&
-            projectiles.map((p, i) => (
-              <div
-                key={i}
-                onMouseEnter={() => endGame(false)}
-                style={{
-                  position: "absolute",
-                  left: p.x - 10,
-                  top: p.y,
-                  width: 30,
-                  height: 30,
-                  background: "red",
-                  borderRadius: "50%",
-                }}
-              />
-            ))}
         </div>
-        <p>
-          X: {position.x}, Y: {position.y}
-        </p>
-        <button
-          className={"mt-2 p-2 bg-yellow-500 dark:bg-yellow-600 rounded-md m-2"}
-          onClick={resetHighScore}
-        >
-          Reset High Score
-        </button>
-      </div>
-    </>
+      </>
+    </section>
   );
 };

@@ -384,3 +384,72 @@ html {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
+/* Fixed section styling: folder components choose their own section. */
+@layer base {
+  body {
+    @apply bg-home-light-background text-home-light-foreground dark:bg-home-dark-background dark:text-home-dark-foreground font-home-body;
+  }
+}
+@layer components {
+  .section-home {
+    @apply bg-home-light-background text-home-light-foreground dark:bg-home-dark-background dark:text-home-dark-foreground font-home-body;
+  }
+  .section-home :is(h1, h2, h3, h4, h5, h6) {
+    @apply font-home-heading;
+  }
+  .section-home :is(code, pre, kbd, samp) {
+    @apply font-home-mono;
+  }
+  .section-home .section-card {
+    @apply bg-home-light-card text-home-light-card-foreground border-home-light-border dark:bg-home-dark-card dark:text-home-dark-card-foreground dark:border-home-dark-border hover:bg-home-light-accent hover:text-home-light-accent-foreground dark:hover:bg-home-dark-accent dark:hover:text-home-dark-accent-foreground;
+  }
+  .section-home .section-muted {
+    @apply bg-home-light-muted dark:bg-home-dark-muted;
+  }
+  .section-games {
+    @apply bg-games-light-background text-games-light-foreground dark:bg-games-dark-background dark:text-games-dark-foreground font-games-body;
+  }
+  .section-games :is(h1, h2, h3, h4, h5, h6) {
+    @apply font-games-heading;
+  }
+  .section-games :is(code, pre, kbd, samp) {
+    @apply font-games-mono;
+  }
+  .section-games .section-card {
+    @apply bg-games-light-card text-games-light-card-foreground border-games-light-border dark:bg-games-dark-card dark:text-games-dark-card-foreground dark:border-games-dark-border hover:bg-games-light-accent hover:text-games-light-accent-foreground dark:hover:bg-games-dark-accent dark:hover:text-games-dark-accent-foreground;
+  }
+  .section-games .section-muted {
+    @apply bg-games-light-muted dark:bg-games-dark-muted;
+  }
+  .section-tools {
+    @apply bg-tools-light-background text-tools-light-foreground dark:bg-tools-dark-background dark:text-tools-dark-foreground font-tools-body;
+  }
+  .section-tools :is(h1, h2, h3, h4, h5, h6) {
+    @apply font-tools-heading;
+  }
+  .section-tools :is(code, pre, kbd, samp) {
+    @apply font-tools-mono;
+  }
+  .section-tools .section-card {
+    @apply bg-tools-light-card text-tools-light-card-foreground border-tools-light-border dark:bg-tools-dark-card dark:text-tools-dark-card-foreground dark:border-tools-dark-border hover:bg-tools-light-accent hover:text-tools-light-accent-foreground dark:hover:bg-tools-dark-accent dark:hover:text-tools-dark-accent-foreground;
+  }
+  .section-tools .section-muted {
+    @apply bg-tools-light-muted dark:bg-tools-dark-muted;
+  }
+  .section-projects {
+    @apply bg-projects-light-background text-projects-light-foreground dark:bg-projects-dark-background dark:text-projects-dark-foreground font-projects-body;
+  }
+  .section-projects :is(h1, h2, h3, h4, h5, h6) {
+    @apply font-projects-heading;
+  }
+  .section-projects :is(code, pre, kbd, samp) {
+    @apply font-projects-mono;
+  }
+  .section-projects .section-card {
+    @apply bg-projects-light-card text-projects-light-card-foreground border-projects-light-border dark:bg-projects-dark-card dark:text-projects-dark-card-foreground dark:border-projects-dark-border hover:bg-projects-light-accent hover:text-projects-light-accent-foreground dark:hover:bg-projects-dark-accent dark:hover:text-projects-dark-accent-foreground;
+  }
+  .section-projects .section-muted {
+    @apply bg-projects-light-muted dark:bg-projects-dark-muted;
+  }
+}

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
-import realRock from "../assets/Rock.png";
+import realRock from "../../assets/Rock.png";
 const Sam = ({ x, y, w, h }) => {
   // Sam's character model
   const headSize = w * 0.5;
@@ -46,7 +46,7 @@ const Sam = ({ x, y, w, h }) => {
 
       {/* Pants */}
       <div
-        className="bg-blue-600 mx-auto"
+        className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground mx-auto"
         style={{ width: torsoWidth, height: pantsHeight }}
       ></div>
     </div>
@@ -368,94 +368,96 @@ export const SidewaysSam = () => {
   // sam can glitch out if they use inspect element, so track location of the border, and endgame if sam goes out of bounds. - solved
   // weird glitch where if you click the the left button it will jet you left and stay going to left - solved
   return (
-    <>
-      <div className="flex flex-col items-center justify-normal mt-4">
-        <h1 className="text-4xl font-bold mb-4">Sideways Sam</h1>
-        <p className="text-center">
-          In this game, Sam has to dodge rocks that I&apos;m throwing at him.
-          Yes, me.
-        </p>
-        <br></br>
-        <p>High Score: {highscore}</p>
-        <p className={`${!gameStarted ? "hidden" : ""}`}>Score: {score}</p>
-        <button
-          className={`${!gameStarted ? "mt-10 p-2 bg-green-500 dark:bg-green-600 rounded-md m-2" : "hidden"}`}
-          onClick={startGame}
-        >
-          Start Game
-        </button>
-        <button
-          className={`${!gameStarted ? "mt-4 p-2 bg-yellow-500 dark:bg-yellow-600 rounded-md m-2" : "hidden"}`}
-          onClick={resetHighScore}
-        >
-          Reset High Score
-        </button>
-      </div>
-      <div
-        className={`${!gameStarted ? "hidden" : "flex flex-col items-center justify-normal mt-4"}`}
-      >
+    <section className="section-games">
+      <>
+        <div className="flex flex-col items-center justify-normal mt-4">
+          <h1 className="text-4xl font-bold mb-4">Sideways Sam</h1>
+          <p className="text-center">
+            In this game, Sam has to dodge rocks that I&apos;m throwing at him.
+            Yes, me.
+          </p>
+          <br></br>
+          <p>High Score: {highscore}</p>
+          <p className={`${!gameStarted ? "hidden" : ""}`}>Score: {score}</p>
+          <button
+            className={`${!gameStarted ? "mt-10 p-2 bg-games-light-primary text-games-light-primary-foreground dark:bg-games-dark-primary dark:text-games-dark-primary-foreground rounded-md m-2" : "hidden"}`}
+            onClick={startGame}
+          >
+            Start Game
+          </button>
+          <button
+            className={`${!gameStarted ? "mt-4 p-2 bg-games-light-secondary text-games-light-secondary-foreground dark:bg-games-dark-secondary dark:text-games-dark-secondary-foreground rounded-md m-2" : "hidden"}`}
+            onClick={resetHighScore}
+          >
+            Reset High Score
+          </button>
+        </div>
         <div
-          className="border-4 dark:border-neutral-200 border-slate-900 w-full md:w-1/2 h-[40vh] overflow-hidden"
-          ref={borderRef}
+          className={`${!gameStarted ? "hidden" : "flex flex-col items-center justify-normal mt-4"}`}
         >
-          <Sam x={x} y={y} w={width} h={height} />
-          {gameStarted &&
-            projectiles.map((p, i) => (
-              <Rock
-                x={p.x}
-                y={p.y}
-                w={rockSize}
-                h={rockSize}
-                secret={easterEgg}
-                key={i}
-              />
-            ))}
-        </div>
-        <div className="flex flex-row justify-center items-center mt-4">
-          <button
-            className="bg-cyan-500 dark:bg-blue-800 p-4 mt-1 mx-4 rounded-md hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
-            onMouseDown={() =>
-              setMouseDown({ left: true, right: mouseDown.right })
-            }
-            onMouseUp={() =>
-              setMouseDown({ left: false, right: mouseDown.right })
-            }
-            onMouseLeave={() =>
-              setMouseDown({ left: false, right: mouseDown.right })
-            }
-            onTouchStart={() =>
-              setMouseDown({ left: true, right: mouseDown.right })
-            }
-            onTouchEnd={() =>
-              setMouseDown({ left: false, right: mouseDown.right })
-            }
-            draggable="false"
+          <div
+            className="border-4  border-games-light-border dark:border-games-dark-border w-full md:w-1/2 h-[40vh] overflow-hidden"
+            ref={borderRef}
           >
-            {"<-"}
-          </button>
-          <button
-            className="bg-cyan-500 dark:bg-blue-800 p-4 mt-1 mx-4 rounded-md hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
-            onMouseDown={() =>
-              setMouseDown({ left: mouseDown.left, right: true })
-            }
-            onMouseUp={() =>
-              setMouseDown({ left: mouseDown.left, right: false })
-            }
-            onMouseLeave={() =>
-              setMouseDown({ left: mouseDown.left, right: false })
-            }
-            onTouchStart={() =>
-              setMouseDown({ left: mouseDown.left, right: true })
-            }
-            onTouchEnd={() =>
-              setMouseDown({ left: mouseDown.left, right: false })
-            }
-            draggable="false"
-          >
-            {"->"}
-          </button>
+            <Sam x={x} y={y} w={width} h={height} />
+            {gameStarted &&
+              projectiles.map((p, i) => (
+                <Rock
+                  x={p.x}
+                  y={p.y}
+                  w={rockSize}
+                  h={rockSize}
+                  secret={easterEgg}
+                  key={i}
+                />
+              ))}
+          </div>
+          <div className="flex flex-row justify-center items-center mt-4">
+            <button
+              className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-4 mt-1 mx-4 rounded-md hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+              onMouseDown={() =>
+                setMouseDown({ left: true, right: mouseDown.right })
+              }
+              onMouseUp={() =>
+                setMouseDown({ left: false, right: mouseDown.right })
+              }
+              onMouseLeave={() =>
+                setMouseDown({ left: false, right: mouseDown.right })
+              }
+              onTouchStart={() =>
+                setMouseDown({ left: true, right: mouseDown.right })
+              }
+              onTouchEnd={() =>
+                setMouseDown({ left: false, right: mouseDown.right })
+              }
+              draggable="false"
+            >
+              {"<-"}
+            </button>
+            <button
+              className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-4 mt-1 mx-4 rounded-md hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+              onMouseDown={() =>
+                setMouseDown({ left: mouseDown.left, right: true })
+              }
+              onMouseUp={() =>
+                setMouseDown({ left: mouseDown.left, right: false })
+              }
+              onMouseLeave={() =>
+                setMouseDown({ left: mouseDown.left, right: false })
+              }
+              onTouchStart={() =>
+                setMouseDown({ left: mouseDown.left, right: true })
+              }
+              onTouchEnd={() =>
+                setMouseDown({ left: mouseDown.left, right: false })
+              }
+              draggable="false"
+            >
+              {"->"}
+            </button>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </section>
   );
 };

@@ -64,11 +64,11 @@ function Card({ item }: { item: Item }) {
   return (
     <Link
       to={item.path}
-      className={`${item.mobile ? "" : "hidden md:block"} group relative overflow-hidden rounded-lg border-black dark:border-white border-2 bg-cyan-500 dark:bg-blue-800 hover:bg-cyan-600 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black transition-colors duration-200`}
+      className={`${item.mobile ? "" : "hidden md:block"} group relative overflow-hidden rounded-lg section-card border-2 transition-colors duration-200`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative aspect-video w-full overflow-hidden bg-gray-400 dark:bg-gray-700 ">
+      <div className="relative aspect-video w-full overflow-hidden section-muted ">
         <img
           src={thumbnailUrl}
           alt={item.name}
@@ -99,12 +99,14 @@ function Card({ item }: { item: Item }) {
 export default function CardMain({
   items = [],
   listName = "How?",
+  section,
 }: {
   items: Item[];
   listName: string;
+  section: "games" | "tools" | "projects" | "home";
 }) {
   return (
-    <div className="">
+    <div className={`section-${section}`}>
       <h1 className="text-4xl font-bold mb-4 text-center my-2">{listName}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
         {items && items.length > 0 ? (
@@ -194,11 +196,11 @@ function GameCard({ game }) {
   return (
     <Link
       to={game.path}
-      className="group relative overflow-hidden rounded-lg bg-cyan-500 dark:bg-blue-800 hover:bg-cyan-600 dark:hover:bg-blue-700 hover:text-white dark:hover:text-black transition-colors duration-200"
+      className="group relative overflow-hidden rounded-lg section-card transition-colors duration-200"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative aspect-video w-full overflow-hidden bg-gray-400 dark:bg-gray-700">
+      <div className="relative aspect-video w-full overflow-hidden section-muted">
         <img
           src={game.thumbnail}
           alt={game.name}

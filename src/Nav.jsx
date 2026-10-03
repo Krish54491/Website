@@ -17,7 +17,7 @@ export const Nav = () => {
     <>
       <nav onMouseLeave={() => setMenuOpen(false)}>
         <button
-          className={` md:hidden text-white focus:outline-hidden`}
+          className={` md:hidden text-home-light-foreground dark:text-home-dark-foreground focus:outline-hidden`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -37,29 +37,29 @@ export const Nav = () => {
           </svg>
         </button>
         <div
-          className={`flex-row justify-center md:hidden ${menuOpen ? "flex flex-col" : "hidden space-x-2"} p-2 space-y-2 md:space-y-0 absolute md:static bg-sky-500 dark:bg-indigo-800 left-0 w-full md:w-auto  md:top-auto z-10 md:items-center`}
+          className={`flex-row justify-center md:hidden ${menuOpen ? "flex flex-col" : "hidden space-x-2"} p-2 space-y-2 md:space-y-0 absolute md:static bg-home-light-muted dark:bg-home-dark-muted  left-0 w-full md:w-auto  md:top-auto z-10 md:items-center`}
         >
           <button
             className={
-              "bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 px-4 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
+              "bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 px-4 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent "
             }
           >
             <Link to="/" className={`${menuOpen ? "block w-full" : ""}`}>
               Home
             </Link>
           </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 px-4 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+          <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 px-4 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
             <Link to="/games" className={`${menuOpen ? "block w-full" : ""}`}>
               Games
             </Link>
           </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 px-4 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+          <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 px-4 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
             <Link to="/tools" className={`${menuOpen ? "block w-full" : ""}`}>
               Tools
             </Link>
           </button>
 
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+          <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
             <a
               href={chipmunk}
               className={`${menuOpen ? "block w-full" : ""}`}
@@ -68,7 +68,7 @@ export const Nav = () => {
               Chipmunk
             </a>
           </button>
-          <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+          <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
             <a
               href={`/${krish_resume}`}
               className={`${menuOpen ? "block w-full" : ""}`}
@@ -81,12 +81,12 @@ export const Nav = () => {
         </div>
 
         <div
-          className={`flex-row justify-center hidden md:flex ${menuOpen ? "flex flex-col md:flex-row" : "hidden"} space-x-2 p-2 space-y-2 md:space-y-0 absolute md:static bg-cyan-500 dark:bg-blue-800 left-0 w-fit md:w-full  md:top-auto z-10 md:items-center`}
+          className={`flex-row justify-center hidden md:flex ${menuOpen ? "flex flex-col md:flex-row" : "hidden"} space-x-2 p-2 space-y-2 md:space-y-0 absolute md:static bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  left-0 w-fit md:w-full  md:top-auto z-10 md:items-center`}
         >
           <Link to="/">
             <button
               className={
-                "bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 px-4 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700"
+                "bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 px-4 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent "
               }
             >
               Home
@@ -100,7 +100,7 @@ export const Nav = () => {
             onMouseLeave={() => setGamesOpen(false)}
           >
             <Link to="/games">
-              <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700 flex items-center gap-1">
+              <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent  flex items-center gap-1">
                 Games
                 <svg
                   className={`w-4 h-4 transition-transform ${
@@ -120,10 +120,10 @@ export const Nav = () => {
               </button>
             </Link>
             {gamesOpen && (
-              <div className="absolute left-0 mt-0 w-48 bg-cyan-400 dark:bg-blue-900 rounded-md py-2 shadow-lg z-20">
+              <div className="absolute left-0 mt-0 w-48 bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  rounded-md py-2 shadow-lg z-20">
                 {GAMESNAV.map((game) => (
                   <Link key={game.path} to={game.path}>
-                    <button className="block w-full text-left px-4 py-2 hover:bg-cyan-600 dark:hover:bg-blue-800 hover:text-white dark:hover:text-black">
+                    <button className="block w-full text-left px-4 py-2 hover:bg-home-light-accent dark:hover:bg-home-dark-accent  hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground ">
                       {game.label}
                     </button>
                   </Link>
@@ -139,7 +139,7 @@ export const Nav = () => {
             onMouseLeave={() => setToolsOpen(false)}
           >
             <Link to="/tools">
-              <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700 flex items-center gap-1">
+              <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent  flex items-center gap-1">
                 Tools
                 <svg
                   className={`w-4 h-4 transition-transform ${
@@ -159,10 +159,10 @@ export const Nav = () => {
               </button>
             </Link>
             {toolsOpen && (
-              <div className="absolute left-0 mt-0 w-48 bg-cyan-400 dark:bg-blue-900 rounded-md shadow-lg py-2 z-20">
+              <div className="absolute left-0 mt-0 w-48 bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  rounded-md shadow-lg py-2 z-20">
                 {TOOLSNAV.map((tool) => (
                   <Link key={tool.path} to={tool.path}>
-                    <button className="block w-full text-left px-4 py-2 hover:bg-cyan-600 dark:hover:bg-blue-800 hover:text-white dark:hover:text-black">
+                    <button className="block w-full text-left px-4 py-2 hover:bg-home-light-accent dark:hover:bg-home-dark-accent  hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground ">
                       {tool.label}
                     </button>
                   </Link>
@@ -172,12 +172,12 @@ export const Nav = () => {
           </div>
 
           <a href={chipmunk} target="_blank">
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+            <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
               Chipmunk
             </button>
           </a>
           <a href={pianowizards} target="_blank">
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+            <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
               Piano Wizards
             </button>
           </a>
@@ -186,7 +186,7 @@ export const Nav = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="bg-cyan-500 dark:bg-blue-800 p-2 rounded-md m-1 hover:text-white dark:hover:text-black hover:bg-cyan-600 dark:hover:bg-blue-700">
+            <button className="bg-home-light-primary dark:bg-home-dark-primary text-home-light-primary-foreground dark:text-home-dark-primary-foreground  p-2 rounded-md m-1 hover:text-home-light-accent-foreground dark:hover:text-home-dark-accent-foreground  hover:bg-home-light-accent dark:hover:bg-home-dark-accent ">
               My Resume
             </button>
           </a>
