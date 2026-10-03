@@ -77,7 +77,7 @@ export function VideoRater() {
   }, [jobId]);
 
   return (
-    <section className="section-tools">
+    <section className="section-page">
       <div style={{ maxWidth: 500, margin: "auto", padding: 20 }}>
         <h1 className="flex flex-col items-center justify-normal mt-2">
           AI Video Rater
@@ -104,7 +104,7 @@ export function VideoRater() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  p-2 my-1 rounded-md hover:text-tools-light-accent-foreground dark:hover:text-tools-dark-accent-foreground  hover:bg-tools-light-accent dark:hover:bg-tools-dark-accent "
+              className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
             >
               {loading
                 ? queuePosition
@@ -127,7 +127,7 @@ export function VideoRater() {
               <a
                 href={transcriptUrl}
                 download
-                className="bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  p-2 my-1 rounded-md hover:text-tools-light-accent-foreground dark:hover:text-tools-dark-accent-foreground  hover:bg-tools-light-accent dark:hover:bg-tools-dark-accent "
+                className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
               >
                 Download Transcript
               </a>

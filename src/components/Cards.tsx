@@ -99,14 +99,12 @@ function Card({ item }: { item: Item }) {
 export default function CardMain({
   items = [],
   listName = "How?",
-  section,
 }: {
   items: Item[];
   listName: string;
-  section: "games" | "tools" | "projects" | "home";
 }) {
   return (
-    <div className={`section-${section}`}>
+    <div className="section-page">
       <h1 className="text-4xl font-bold mb-4 text-center my-2">{listName}</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-4">
         {items && items.length > 0 ? (

@@ -71,7 +71,7 @@ export function VideoTranslator() {
   }
 
   return (
-    <section className="section-tools">
+    <section className="section-page">
       <>
         <div style={{ maxWidth: 500, margin: "auto", padding: 20 }}>
           <h1 className="flex flex-col items-center justify-normal mt-2">
@@ -105,7 +105,7 @@ export function VideoTranslator() {
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="m-2 p-2 bg-tools-light-muted dark:bg-tools-dark-muted text-tools-light-foreground dark:text-tools-dark-foreground   border rounded-sm"
+                  className="m-2 p-2 bg-muted  text-foreground    border rounded-sm"
                 >
                   <option value="English">English</option>
                   <option value="Catalan">Catalan</option>
@@ -183,7 +183,7 @@ export function VideoTranslator() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  p-2 my-1 rounded-md hover:text-tools-light-accent-foreground dark:hover:text-tools-dark-accent-foreground  hover:bg-tools-light-accent dark:hover:bg-tools-dark-accent "
+              className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
             >
               {loading ? "Uploading..." : "Submit"}
             </button>
@@ -201,7 +201,7 @@ export function VideoTranslator() {
               </p>
 
               <a
-                className="bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  p-2 my-1 rounded-md hover:text-tools-light-accent-foreground dark:hover:text-tools-dark-accent-foreground  hover:bg-tools-light-accent dark:hover:bg-tools-dark-accent "
+                className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
                 disabled={audioLoading || !audioUrl}
                 href={audioUrl}
                 download="translated_audio.mp3"
@@ -279,7 +279,7 @@ export function VideoTranslator() {
 //           </label>
 //         </div>
 //         <div className="flex flex-row items-center justify-center">
-//             <button type="submit" disabled={loading}  className="bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  p-2 my-1 rounded-md hover:text-tools-light-accent-foreground dark:hover:text-tools-dark-accent-foreground  hover:bg-tools-light-accent dark:hover:bg-tools-dark-accent ">
+//             <button type="submit" disabled={loading}  className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  ">
 //               {loading ? "Uploading..." : "Submit"}
 //             </button>
 //         </div>
@@ -295,7 +295,7 @@ export function VideoTranslator() {
 //             />
 //           {transcriptUrl && (
 //             <a href={transcriptUrl} download
-//             className="bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  p-2 my-1 rounded-md hover:text-tools-light-accent-foreground dark:hover:text-tools-dark-accent-foreground  hover:bg-tools-light-accent dark:hover:bg-tools-dark-accent "
+//             className="bg-primary  text-primary-foreground   p-2 my-1 rounded-md hover:text-accent-foreground   hover:bg-accent  "
 //             >
 //               Download Transcript
 //             </a>

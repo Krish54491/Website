@@ -1,15 +1,15 @@
 export default function Tos() {
   return (
-    <section className="section-home">
-      <div className="max-w-2xl mx-auto p-4 bg-home-light-card dark:bg-home-dark-card text-home-light-card-foreground dark:text-home-dark-card-foreground  rounded-lg shadow-md mt-8">
-        <h2 className="text-2xl font-bold text-home-light-foreground dark:text-home-dark-foreground  mb-4">
+    <section className="section-page">
+      <div className="max-w-2xl mx-auto p-4 bg-card  text-card-foreground   rounded-lg shadow-md mt-8">
+        <h2 className="text-2xl font-bold text-foreground   mb-4">
           Terms of Service
         </h2>
 
-        <div className="space-y-4 text-home-light-muted-foreground dark:text-home-dark-muted-foreground  text-sm leading-relaxed">
+        <div className="space-y-4 text-muted-foreground   text-sm leading-relaxed">
           <p>Last updated: 9/2/2026</p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             1. Acceptance of Terms
           </h3>
           <p>
@@ -17,7 +17,7 @@ export default function Tos() {
             Service. If you do not agree, do not create an account.
           </p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             2. Account Registration
           </h3>
           <p>
@@ -27,7 +27,7 @@ export default function Tos() {
             credentials.
           </p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             3. User Data
           </h3>
           <p>
@@ -37,7 +37,7 @@ export default function Tos() {
             algorithm.
           </p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             4. Account Deletion
           </h3>
           <p>
@@ -46,7 +46,7 @@ export default function Tos() {
             data, including your comments.
           </p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             5. Acceptable Use
           </h3>
           <p>
@@ -55,7 +55,7 @@ export default function Tos() {
             suspend or terminate accounts that violate these terms.
           </p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             6. Disclaimer
           </h3>
           <p>
@@ -64,7 +64,7 @@ export default function Tos() {
             interruptions.
           </p>
 
-          <h3 className="text-lg font-semibold text-home-light-foreground dark:text-home-dark-foreground ">
+          <h3 className="text-lg font-semibold text-foreground  ">
             7. Changes to Terms
           </h3>
           <p>

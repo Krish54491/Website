@@ -152,7 +152,7 @@ export const MouseGame = () => {
   // have restart button and potentially high score(score will be time survived)
 
   return (
-    <section className="section-games">
+    <section className="section-page">
       <>
         <div className="flex flex-col items-center justify-normal mt-4">
           <h1 className="text-4xl font-bold mb-4">Mouse Dodge</h1>
@@ -170,12 +170,12 @@ export const MouseGame = () => {
                 : "Click Start to begin!"}
           </p>
           <div
-            className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-games-light-border dark:border-games-dark-border lg relative` : ""}`}
+            className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-border  lg relative` : ""}`}
             onMouseMove={handleMouseMove}
             onMouseLeave={() => endGame(false)}
           >
             <button
-              className={`${!gameStarted ? "mt-10 p-2 bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  rounded-md m-2" : "hidden"}`}
+              className={`${!gameStarted ? "mt-10 p-2 bg-primary  text-primary-foreground   rounded-md m-2" : "hidden"}`}
               onClick={start}
             >
               Start
@@ -202,7 +202,7 @@ export const MouseGame = () => {
           </p>
           <button
             className={
-              "mt-2 p-2 bg-games-light-secondary dark:bg-games-dark-secondary text-games-light-secondary-foreground dark:text-games-dark-secondary-foreground  rounded-md m-2"
+              "mt-2 p-2 bg-secondary  text-secondary-foreground   rounded-md m-2"
             }
             onClick={resetHighScore}
           >

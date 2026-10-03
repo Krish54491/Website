@@ -103,7 +103,7 @@ export function BaseConverter() {
    Bases supported: 2-110
   */
   return (
-    <section className="section-tools">
+    <section className="section-page">
       <>
         <div className="text-center my-2">
           <h2 className="text-2xl font-bold my-2">Base Converter</h2>
@@ -123,7 +123,7 @@ export function BaseConverter() {
                 setNumInput(e.target?.value ?? "");
                 setShowResult(false);
               }}
-              className="bg-inherit m-2 rounded-md border-2 text-3xl w-full md:w-1/2 text-center border-tools-light-border dark:border-tools-dark-border  border-spacing-2"
+              className="bg-inherit m-2 rounded-md border-2 text-3xl w-full md:w-1/2 text-center border-border   border-spacing-2"
             ></input>
           </div>
           <h3 className="text-2xl font-bold my-2">Base:</h3>
@@ -136,13 +136,13 @@ export function BaseConverter() {
                 setResult(convert(numInput, val, baseInput[1]));
                 setShowResult(true);
               }}
-              className="bg-tools-light-muted dark:bg-tools-dark-muted  ml-2 rounded-md border-2 text-3xl border-tools-light-border dark:border-tools-dark-border  border-spacing-2"
+              className="bg-muted   ml-2 rounded-md border-2 text-3xl border-border   border-spacing-2"
             >
               {baseOptions.map((n) => (
                 <option
                   key={n}
                   value={String(n)}
-                  className="bg-tools-light-muted dark:bg-tools-dark-muted  text-tools-light-foreground dark:text-tools-dark-foreground  text-sm md:text-base"
+                  className="bg-muted   text-foreground   text-sm md:text-base"
                 >
                   {n}
                 </option>
@@ -159,7 +159,7 @@ export function BaseConverter() {
               fill="#000000"
               version="1.1"
               id="Capa_1"
-              className="w-8 h-8 m-2  fill-tools-light-foreground dark:fill-tools-dark-foreground"
+              className="w-8 h-8 m-2  fill-foreground "
               viewBox="0 0 340.034 340.034"
               xmlSpace="preserve"
             >
@@ -177,13 +177,13 @@ export function BaseConverter() {
                 setResult(convert(numInput, baseInput[0], val));
                 setShowResult(true);
               }}
-              className="bg-tools-light-muted dark:bg-tools-dark-muted  rounded-md border-2 text-3xl border-tools-light-border dark:border-tools-dark-border  border-spacing-2"
+              className="bg-muted   rounded-md border-2 text-3xl border-border   border-spacing-2"
             >
               {baseOptions.map((n) => (
                 <option
                   key={n}
                   value={String(n)}
-                  className="bg-tools-light-muted dark:bg-tools-dark-muted  text-tools-light-foreground dark:text-tools-dark-foreground  text-sm md:text-base"
+                  className="bg-muted   text-foreground   text-sm md:text-base"
                 >
                   {n}
                 </option>
@@ -209,7 +209,7 @@ export function BaseConverter() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512.000000 512.000000"
                 preserveAspectRatio="xMidYMid meet"
-                className="w-8 h-8 m-2  fill-tools-light-foreground dark:fill-tools-dark-foreground"
+                className="w-8 h-8 m-2  fill-foreground "
               >
                 {" "}
                 <g
@@ -237,7 +237,7 @@ export function BaseConverter() {
                       type="text"
                       value={result}
                       readOnly
-                      className="bg-inherit rounded-md border-2 w-full text-center border-tools-light-border dark:border-tools-dark-border  border-spacing-2 text-2xl font-bold pr-10"
+                      className="bg-inherit rounded-md border-2 w-full text-center border-border   border-spacing-2 text-2xl font-bold pr-10"
                     ></input>
                     <button
                       type="button"
@@ -245,7 +245,7 @@ export function BaseConverter() {
                       onClick={() => {
                         navigator.clipboard.writeText(result);
                       }}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-tools-light-foreground dark:fill-tools-dark-foreground  hover:fill-tools-light-foreground dark:hover:fill-tools-dark-foreground  transition-colors"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-foreground   hover:fill-foreground   transition-colors"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +272,7 @@ export function BaseConverter() {
                           type="text"
                           value={twosComplement(numInput)}
                           readOnly
-                          className="bg-inherit rounded-md border-2 w-full text-center border-tools-light-border dark:border-tools-dark-border  border-spacing-2 text-2xl font-bold pr-10"
+                          className="bg-inherit rounded-md border-2 w-full text-center border-border   border-spacing-2 text-2xl font-bold pr-10"
                         ></input>
                         <button
                           type="button"
@@ -282,7 +282,7 @@ export function BaseConverter() {
                               twosComplement(numInput),
                             );
                           }}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-tools-light-foreground dark:fill-tools-dark-foreground  hover:fill-tools-light-foreground dark:hover:fill-tools-dark-foreground  transition-colors"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-foreground   hover:fill-foreground   transition-colors"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -310,7 +310,7 @@ export function BaseConverter() {
                           type="text"
                           value={twosComplement(result)}
                           readOnly
-                          className="bg-inherit rounded-md border-2 w-full text-center border-tools-light-border dark:border-tools-dark-border  border-spacing-2 text-2xl font-bold pr-10"
+                          className="bg-inherit rounded-md border-2 w-full text-center border-border   border-spacing-2 text-2xl font-bold pr-10"
                         ></input>
                         <button
                           type="button"
@@ -320,7 +320,7 @@ export function BaseConverter() {
                               twosComplement(result),
                             );
                           }}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-tools-light-foreground dark:fill-tools-dark-foreground  hover:fill-tools-light-foreground dark:hover:fill-tools-dark-foreground  transition-colors"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-sm fill-foreground   hover:fill-foreground   transition-colors"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -339,7 +339,7 @@ export function BaseConverter() {
               </>
             )}
             {result === "Invalid input" && (
-              <h2 className="text-2xl font-bold my-2 text-tools-light-destructive dark:text-tools-dark-destructive">
+              <h2 className="text-2xl font-bold my-2 text-destructive ">
                 Invalid input
               </h2>
             )}

@@ -385,71 +385,384 @@ html {
   overflow-y: scroll;
 }
 
-/* Fixed section styling: folder components choose their own section. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+:root,
+:root[data-section="home"] {
+  --background: var(--color-home-light-background);
+  --foreground: var(--color-home-light-foreground);
+  --card: var(--color-home-light-card);
+  --card-foreground: var(--color-home-light-card-foreground);
+  --popover: var(--color-home-light-popover);
+  --popover-foreground: var(--color-home-light-popover-foreground);
+  --primary: var(--color-home-light-primary);
+  --primary-foreground: var(--color-home-light-primary-foreground);
+  --secondary: var(--color-home-light-secondary);
+  --secondary-foreground: var(--color-home-light-secondary-foreground);
+  --muted: var(--color-home-light-muted);
+  --muted-foreground: var(--color-home-light-muted-foreground);
+  --accent: var(--color-home-light-accent);
+  --accent-foreground: var(--color-home-light-accent-foreground);
+  --destructive: var(--color-home-light-destructive);
+  --border: var(--color-home-light-border);
+  --input: var(--color-home-light-input);
+  --ring: var(--color-home-light-ring);
+  --sidebar: var(--color-home-light-sidebar);
+  --sidebar-foreground: var(--color-home-light-sidebar-foreground);
+  --sidebar-primary: var(--color-home-light-sidebar-primary);
+  --sidebar-primary-foreground: var(
+    --color-home-light-sidebar-primary-foreground
+  );
+  --sidebar-accent: var(--color-home-light-sidebar-accent);
+  --sidebar-accent-foreground: var(
+    --color-home-light-sidebar-accent-foreground
+  );
+  --sidebar-border: var(--color-home-light-sidebar-border);
+  --sidebar-ring: var(--color-home-light-sidebar-ring);
+  --chart-1: var(--color-home-light-chart-1);
+  --chart-2: var(--color-home-light-chart-2);
+  --chart-3: var(--color-home-light-chart-3);
+  --chart-4: var(--color-home-light-chart-4);
+  --chart-5: var(--color-home-light-chart-5);
+  --section-body: var(--font-home-body);
+  --section-heading: var(--font-home-heading);
+  --section-mono: var(--font-home-mono);
+}
+:root[data-section="games"] {
+  --background: var(--color-games-light-background);
+  --foreground: var(--color-games-light-foreground);
+  --card: var(--color-games-light-card);
+  --card-foreground: var(--color-games-light-card-foreground);
+  --popover: var(--color-games-light-popover);
+  --popover-foreground: var(--color-games-light-popover-foreground);
+  --primary: var(--color-games-light-primary);
+  --primary-foreground: var(--color-games-light-primary-foreground);
+  --secondary: var(--color-games-light-secondary);
+  --secondary-foreground: var(--color-games-light-secondary-foreground);
+  --muted: var(--color-games-light-muted);
+  --muted-foreground: var(--color-games-light-muted-foreground);
+  --accent: var(--color-games-light-accent);
+  --accent-foreground: var(--color-games-light-accent-foreground);
+  --destructive: var(--color-games-light-destructive);
+  --border: var(--color-games-light-border);
+  --input: var(--color-games-light-input);
+  --ring: var(--color-games-light-ring);
+  --sidebar: var(--color-games-light-sidebar);
+  --sidebar-foreground: var(--color-games-light-sidebar-foreground);
+  --sidebar-primary: var(--color-games-light-sidebar-primary);
+  --sidebar-primary-foreground: var(
+    --color-games-light-sidebar-primary-foreground
+  );
+  --sidebar-accent: var(--color-games-light-sidebar-accent);
+  --sidebar-accent-foreground: var(
+    --color-games-light-sidebar-accent-foreground
+  );
+  --sidebar-border: var(--color-games-light-sidebar-border);
+  --sidebar-ring: var(--color-games-light-sidebar-ring);
+  --chart-1: var(--color-games-light-chart-1);
+  --chart-2: var(--color-games-light-chart-2);
+  --chart-3: var(--color-games-light-chart-3);
+  --chart-4: var(--color-games-light-chart-4);
+  --chart-5: var(--color-games-light-chart-5);
+  --section-body: var(--font-games-body);
+  --section-heading: var(--font-games-heading);
+  --section-mono: var(--font-games-mono);
+}
+:root[data-section="tools"] {
+  --background: var(--color-tools-light-background);
+  --foreground: var(--color-tools-light-foreground);
+  --card: var(--color-tools-light-card);
+  --card-foreground: var(--color-tools-light-card-foreground);
+  --popover: var(--color-tools-light-popover);
+  --popover-foreground: var(--color-tools-light-popover-foreground);
+  --primary: var(--color-tools-light-primary);
+  --primary-foreground: var(--color-tools-light-primary-foreground);
+  --secondary: var(--color-tools-light-secondary);
+  --secondary-foreground: var(--color-tools-light-secondary-foreground);
+  --muted: var(--color-tools-light-muted);
+  --muted-foreground: var(--color-tools-light-muted-foreground);
+  --accent: var(--color-tools-light-accent);
+  --accent-foreground: var(--color-tools-light-accent-foreground);
+  --destructive: var(--color-tools-light-destructive);
+  --border: var(--color-tools-light-border);
+  --input: var(--color-tools-light-input);
+  --ring: var(--color-tools-light-ring);
+  --sidebar: var(--color-tools-light-sidebar);
+  --sidebar-foreground: var(--color-tools-light-sidebar-foreground);
+  --sidebar-primary: var(--color-tools-light-sidebar-primary);
+  --sidebar-primary-foreground: var(
+    --color-tools-light-sidebar-primary-foreground
+  );
+  --sidebar-accent: var(--color-tools-light-sidebar-accent);
+  --sidebar-accent-foreground: var(
+    --color-tools-light-sidebar-accent-foreground
+  );
+  --sidebar-border: var(--color-tools-light-sidebar-border);
+  --sidebar-ring: var(--color-tools-light-sidebar-ring);
+  --chart-1: var(--color-tools-light-chart-1);
+  --chart-2: var(--color-tools-light-chart-2);
+  --chart-3: var(--color-tools-light-chart-3);
+  --chart-4: var(--color-tools-light-chart-4);
+  --chart-5: var(--color-tools-light-chart-5);
+  --section-body: var(--font-tools-body);
+  --section-heading: var(--font-tools-heading);
+  --section-mono: var(--font-tools-mono);
+}
+:root[data-section="projects"] {
+  --background: var(--color-projects-light-background);
+  --foreground: var(--color-projects-light-foreground);
+  --card: var(--color-projects-light-card);
+  --card-foreground: var(--color-projects-light-card-foreground);
+  --popover: var(--color-projects-light-popover);
+  --popover-foreground: var(--color-projects-light-popover-foreground);
+  --primary: var(--color-projects-light-primary);
+  --primary-foreground: var(--color-projects-light-primary-foreground);
+  --secondary: var(--color-projects-light-secondary);
+  --secondary-foreground: var(--color-projects-light-secondary-foreground);
+  --muted: var(--color-projects-light-muted);
+  --muted-foreground: var(--color-projects-light-muted-foreground);
+  --accent: var(--color-projects-light-accent);
+  --accent-foreground: var(--color-projects-light-accent-foreground);
+  --destructive: var(--color-projects-light-destructive);
+  --border: var(--color-projects-light-border);
+  --input: var(--color-projects-light-input);
+  --ring: var(--color-projects-light-ring);
+  --sidebar: var(--color-projects-light-sidebar);
+  --sidebar-foreground: var(--color-projects-light-sidebar-foreground);
+  --sidebar-primary: var(--color-projects-light-sidebar-primary);
+  --sidebar-primary-foreground: var(
+    --color-projects-light-sidebar-primary-foreground
+  );
+  --sidebar-accent: var(--color-projects-light-sidebar-accent);
+  --sidebar-accent-foreground: var(
+    --color-projects-light-sidebar-accent-foreground
+  );
+  --sidebar-border: var(--color-projects-light-sidebar-border);
+  --sidebar-ring: var(--color-projects-light-sidebar-ring);
+  --chart-1: var(--color-projects-light-chart-1);
+  --chart-2: var(--color-projects-light-chart-2);
+  --chart-3: var(--color-projects-light-chart-3);
+  --chart-4: var(--color-projects-light-chart-4);
+  --chart-5: var(--color-projects-light-chart-5);
+  --section-body: var(--font-projects-body);
+  --section-heading: var(--font-projects-heading);
+  --section-mono: var(--font-projects-mono);
+}
+@media (prefers-color-scheme: dark) {
+  :root,
+  :root[data-section="home"] {
+    --background: var(--color-home-dark-background);
+    --foreground: var(--color-home-dark-foreground);
+    --card: var(--color-home-dark-card);
+    --card-foreground: var(--color-home-dark-card-foreground);
+    --popover: var(--color-home-dark-popover);
+    --popover-foreground: var(--color-home-dark-popover-foreground);
+    --primary: var(--color-home-dark-primary);
+    --primary-foreground: var(--color-home-dark-primary-foreground);
+    --secondary: var(--color-home-dark-secondary);
+    --secondary-foreground: var(--color-home-dark-secondary-foreground);
+    --muted: var(--color-home-dark-muted);
+    --muted-foreground: var(--color-home-dark-muted-foreground);
+    --accent: var(--color-home-dark-accent);
+    --accent-foreground: var(--color-home-dark-accent-foreground);
+    --destructive: var(--color-home-dark-destructive);
+    --border: var(--color-home-dark-border);
+    --input: var(--color-home-dark-input);
+    --ring: var(--color-home-dark-ring);
+    --sidebar: var(--color-home-dark-sidebar);
+    --sidebar-foreground: var(--color-home-dark-sidebar-foreground);
+    --sidebar-primary: var(--color-home-dark-sidebar-primary);
+    --sidebar-primary-foreground: var(
+      --color-home-dark-sidebar-primary-foreground
+    );
+    --sidebar-accent: var(--color-home-dark-sidebar-accent);
+    --sidebar-accent-foreground: var(
+      --color-home-dark-sidebar-accent-foreground
+    );
+    --sidebar-border: var(--color-home-dark-sidebar-border);
+    --sidebar-ring: var(--color-home-dark-sidebar-ring);
+    --chart-1: var(--color-home-dark-chart-1);
+    --chart-2: var(--color-home-dark-chart-2);
+    --chart-3: var(--color-home-dark-chart-3);
+    --chart-4: var(--color-home-dark-chart-4);
+    --chart-5: var(--color-home-dark-chart-5);
+    --section-body: var(--font-home-body);
+    --section-heading: var(--font-home-heading);
+    --section-mono: var(--font-home-mono);
+  }
+  :root[data-section="games"] {
+    --background: var(--color-games-dark-background);
+    --foreground: var(--color-games-dark-foreground);
+    --card: var(--color-games-dark-card);
+    --card-foreground: var(--color-games-dark-card-foreground);
+    --popover: var(--color-games-dark-popover);
+    --popover-foreground: var(--color-games-dark-popover-foreground);
+    --primary: var(--color-games-dark-primary);
+    --primary-foreground: var(--color-games-dark-primary-foreground);
+    --secondary: var(--color-games-dark-secondary);
+    --secondary-foreground: var(--color-games-dark-secondary-foreground);
+    --muted: var(--color-games-dark-muted);
+    --muted-foreground: var(--color-games-dark-muted-foreground);
+    --accent: var(--color-games-dark-accent);
+    --accent-foreground: var(--color-games-dark-accent-foreground);
+    --destructive: var(--color-games-dark-destructive);
+    --border: var(--color-games-dark-border);
+    --input: var(--color-games-dark-input);
+    --ring: var(--color-games-dark-ring);
+    --sidebar: var(--color-games-dark-sidebar);
+    --sidebar-foreground: var(--color-games-dark-sidebar-foreground);
+    --sidebar-primary: var(--color-games-dark-sidebar-primary);
+    --sidebar-primary-foreground: var(
+      --color-games-dark-sidebar-primary-foreground
+    );
+    --sidebar-accent: var(--color-games-dark-sidebar-accent);
+    --sidebar-accent-foreground: var(
+      --color-games-dark-sidebar-accent-foreground
+    );
+    --sidebar-border: var(--color-games-dark-sidebar-border);
+    --sidebar-ring: var(--color-games-dark-sidebar-ring);
+    --chart-1: var(--color-games-dark-chart-1);
+    --chart-2: var(--color-games-dark-chart-2);
+    --chart-3: var(--color-games-dark-chart-3);
+    --chart-4: var(--color-games-dark-chart-4);
+    --chart-5: var(--color-games-dark-chart-5);
+    --section-body: var(--font-games-body);
+    --section-heading: var(--font-games-heading);
+    --section-mono: var(--font-games-mono);
+  }
+  :root[data-section="tools"] {
+    --background: var(--color-tools-dark-background);
+    --foreground: var(--color-tools-dark-foreground);
+    --card: var(--color-tools-dark-card);
+    --card-foreground: var(--color-tools-dark-card-foreground);
+    --popover: var(--color-tools-dark-popover);
+    --popover-foreground: var(--color-tools-dark-popover-foreground);
+    --primary: var(--color-tools-dark-primary);
+    --primary-foreground: var(--color-tools-dark-primary-foreground);
+    --secondary: var(--color-tools-dark-secondary);
+    --secondary-foreground: var(--color-tools-dark-secondary-foreground);
+    --muted: var(--color-tools-dark-muted);
+    --muted-foreground: var(--color-tools-dark-muted-foreground);
+    --accent: var(--color-tools-dark-accent);
+    --accent-foreground: var(--color-tools-dark-accent-foreground);
+    --destructive: var(--color-tools-dark-destructive);
+    --border: var(--color-tools-dark-border);
+    --input: var(--color-tools-dark-input);
+    --ring: var(--color-tools-dark-ring);
+    --sidebar: var(--color-tools-dark-sidebar);
+    --sidebar-foreground: var(--color-tools-dark-sidebar-foreground);
+    --sidebar-primary: var(--color-tools-dark-sidebar-primary);
+    --sidebar-primary-foreground: var(
+      --color-tools-dark-sidebar-primary-foreground
+    );
+    --sidebar-accent: var(--color-tools-dark-sidebar-accent);
+    --sidebar-accent-foreground: var(
+      --color-tools-dark-sidebar-accent-foreground
+    );
+    --sidebar-border: var(--color-tools-dark-sidebar-border);
+    --sidebar-ring: var(--color-tools-dark-sidebar-ring);
+    --chart-1: var(--color-tools-dark-chart-1);
+    --chart-2: var(--color-tools-dark-chart-2);
+    --chart-3: var(--color-tools-dark-chart-3);
+    --chart-4: var(--color-tools-dark-chart-4);
+    --chart-5: var(--color-tools-dark-chart-5);
+    --section-body: var(--font-tools-body);
+    --section-heading: var(--font-tools-heading);
+    --section-mono: var(--font-tools-mono);
+  }
+  :root[data-section="projects"] {
+    --background: var(--color-projects-dark-background);
+    --foreground: var(--color-projects-dark-foreground);
+    --card: var(--color-projects-dark-card);
+    --card-foreground: var(--color-projects-dark-card-foreground);
+    --popover: var(--color-projects-dark-popover);
+    --popover-foreground: var(--color-projects-dark-popover-foreground);
+    --primary: var(--color-projects-dark-primary);
+    --primary-foreground: var(--color-projects-dark-primary-foreground);
+    --secondary: var(--color-projects-dark-secondary);
+    --secondary-foreground: var(--color-projects-dark-secondary-foreground);
+    --muted: var(--color-projects-dark-muted);
+    --muted-foreground: var(--color-projects-dark-muted-foreground);
+    --accent: var(--color-projects-dark-accent);
+    --accent-foreground: var(--color-projects-dark-accent-foreground);
+    --destructive: var(--color-projects-dark-destructive);
+    --border: var(--color-projects-dark-border);
+    --input: var(--color-projects-dark-input);
+    --ring: var(--color-projects-dark-ring);
+    --sidebar: var(--color-projects-dark-sidebar);
+    --sidebar-foreground: var(--color-projects-dark-sidebar-foreground);
+    --sidebar-primary: var(--color-projects-dark-sidebar-primary);
+    --sidebar-primary-foreground: var(
+      --color-projects-dark-sidebar-primary-foreground
+    );
+    --sidebar-accent: var(--color-projects-dark-sidebar-accent);
+    --sidebar-accent-foreground: var(
+      --color-projects-dark-sidebar-accent-foreground
+    );
+    --sidebar-border: var(--color-projects-dark-sidebar-border);
+    --sidebar-ring: var(--color-projects-dark-sidebar-ring);
+    --chart-1: var(--color-projects-dark-chart-1);
+    --chart-2: var(--color-projects-dark-chart-2);
+    --chart-3: var(--color-projects-dark-chart-3);
+    --chart-4: var(--color-projects-dark-chart-4);
+    --chart-5: var(--color-projects-dark-chart-5);
+    --section-body: var(--font-projects-body);
+    --section-heading: var(--font-projects-heading);
+    --section-mono: var(--font-projects-mono);
+  }
+}
 @layer base {
   body {
-    @apply bg-home-light-background text-home-light-foreground dark:bg-home-dark-background dark:text-home-dark-foreground font-home-body;
+    @apply bg-background text-foreground;
+    font-family: var(--section-body);
   }
 }
 @layer components {
-  .section-home {
-    @apply bg-home-light-background text-home-light-foreground dark:bg-home-dark-background dark:text-home-dark-foreground font-home-body;
+  .section-page {
+    @apply bg-background text-foreground;
+    font-family: var(--section-body);
   }
-  .section-home :is(h1, h2, h3, h4, h5, h6) {
-    @apply font-home-heading;
+  .section-page :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--section-heading);
   }
-  .section-home :is(code, pre, kbd, samp) {
-    @apply font-home-mono;
+  .section-page :is(code, pre, kbd, samp) {
+    font-family: var(--section-mono);
   }
-  .section-home .section-card {
-    @apply bg-home-light-card text-home-light-card-foreground border-home-light-border dark:bg-home-dark-card dark:text-home-dark-card-foreground dark:border-home-dark-border hover:bg-home-light-accent hover:text-home-light-accent-foreground dark:hover:bg-home-dark-accent dark:hover:text-home-dark-accent-foreground;
+  .section-card {
+    @apply bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground;
   }
-  .section-home .section-muted {
-    @apply bg-home-light-muted dark:bg-home-dark-muted;
-  }
-  .section-games {
-    @apply bg-games-light-background text-games-light-foreground dark:bg-games-dark-background dark:text-games-dark-foreground font-games-body;
-  }
-  .section-games :is(h1, h2, h3, h4, h5, h6) {
-    @apply font-games-heading;
-  }
-  .section-games :is(code, pre, kbd, samp) {
-    @apply font-games-mono;
-  }
-  .section-games .section-card {
-    @apply bg-games-light-card text-games-light-card-foreground border-games-light-border dark:bg-games-dark-card dark:text-games-dark-card-foreground dark:border-games-dark-border hover:bg-games-light-accent hover:text-games-light-accent-foreground dark:hover:bg-games-dark-accent dark:hover:text-games-dark-accent-foreground;
-  }
-  .section-games .section-muted {
-    @apply bg-games-light-muted dark:bg-games-dark-muted;
-  }
-  .section-tools {
-    @apply bg-tools-light-background text-tools-light-foreground dark:bg-tools-dark-background dark:text-tools-dark-foreground font-tools-body;
-  }
-  .section-tools :is(h1, h2, h3, h4, h5, h6) {
-    @apply font-tools-heading;
-  }
-  .section-tools :is(code, pre, kbd, samp) {
-    @apply font-tools-mono;
-  }
-  .section-tools .section-card {
-    @apply bg-tools-light-card text-tools-light-card-foreground border-tools-light-border dark:bg-tools-dark-card dark:text-tools-dark-card-foreground dark:border-tools-dark-border hover:bg-tools-light-accent hover:text-tools-light-accent-foreground dark:hover:bg-tools-dark-accent dark:hover:text-tools-dark-accent-foreground;
-  }
-  .section-tools .section-muted {
-    @apply bg-tools-light-muted dark:bg-tools-dark-muted;
-  }
-  .section-projects {
-    @apply bg-projects-light-background text-projects-light-foreground dark:bg-projects-dark-background dark:text-projects-dark-foreground font-projects-body;
-  }
-  .section-projects :is(h1, h2, h3, h4, h5, h6) {
-    @apply font-projects-heading;
-  }
-  .section-projects :is(code, pre, kbd, samp) {
-    @apply font-projects-mono;
-  }
-  .section-projects .section-card {
-    @apply bg-projects-light-card text-projects-light-card-foreground border-projects-light-border dark:bg-projects-dark-card dark:text-projects-dark-card-foreground dark:border-projects-dark-border hover:bg-projects-light-accent hover:text-projects-light-accent-foreground dark:hover:bg-projects-dark-accent dark:hover:text-projects-dark-accent-foreground;
-  }
-  .section-projects .section-muted {
-    @apply bg-projects-light-muted dark:bg-projects-dark-muted;
+  .section-muted {
+    @apply bg-muted;
   }
 }

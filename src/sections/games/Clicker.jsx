@@ -67,7 +67,7 @@ export const Clicker = () => {
   };
 
   return (
-    <section className="section-games">
+    <section className="section-page">
       <>
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-3xl font-bold text-center mt-4">
@@ -88,19 +88,19 @@ export const Clicker = () => {
         </div>
         <div className="flex flex-row items-end justify-center">
           <button
-            className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md m-1 hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+            className="bg-primary  text-primary-foreground   p-2 rounded-md m-1 hover:text-accent-foreground   hover:bg-accent  "
             onClick={increaseGrandma}
           >
             Grandma(clicks for you every 5 seconds): {grandmas}
           </button>
           <button
-            className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md m-1 hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+            className="bg-primary  text-primary-foreground   p-2 rounded-md m-1 hover:text-accent-foreground   hover:bg-accent  "
             onClick={increaseClickMult}
           >
             Click Multiplier: {clickMult}
           </button>
         </div>
-        <div className="flex flex-col items-center justify-center text-games-light-destructive dark:text-games-dark-destructive">
+        <div className="flex flex-col items-center justify-center text-destructive ">
           {grandBroke ? <p>Can&apos;t afford a Grandma</p> : ""}
           {multBroke ? <p>Can&apos;t afford a Multiplier</p> : ""}
         </div>

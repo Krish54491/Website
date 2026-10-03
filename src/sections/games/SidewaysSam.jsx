@@ -46,7 +46,7 @@ const Sam = ({ x, y, w, h }) => {
 
       {/* Pants */}
       <div
-        className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground mx-auto"
+        className="bg-primary  text-primary-foreground  mx-auto"
         style={{ width: torsoWidth, height: pantsHeight }}
       ></div>
     </div>
@@ -368,7 +368,7 @@ export const SidewaysSam = () => {
   // sam can glitch out if they use inspect element, so track location of the border, and endgame if sam goes out of bounds. - solved
   // weird glitch where if you click the the left button it will jet you left and stay going to left - solved
   return (
-    <section className="section-games">
+    <section className="section-page">
       <>
         <div className="flex flex-col items-center justify-normal mt-4">
           <h1 className="text-4xl font-bold mb-4">Sideways Sam</h1>
@@ -380,13 +380,13 @@ export const SidewaysSam = () => {
           <p>High Score: {highscore}</p>
           <p className={`${!gameStarted ? "hidden" : ""}`}>Score: {score}</p>
           <button
-            className={`${!gameStarted ? "mt-10 p-2 bg-games-light-primary text-games-light-primary-foreground dark:bg-games-dark-primary dark:text-games-dark-primary-foreground rounded-md m-2" : "hidden"}`}
+            className={`${!gameStarted ? "mt-10 p-2 bg-primary text-primary-foreground   rounded-md m-2" : "hidden"}`}
             onClick={startGame}
           >
             Start Game
           </button>
           <button
-            className={`${!gameStarted ? "mt-4 p-2 bg-games-light-secondary text-games-light-secondary-foreground dark:bg-games-dark-secondary dark:text-games-dark-secondary-foreground rounded-md m-2" : "hidden"}`}
+            className={`${!gameStarted ? "mt-4 p-2 bg-secondary text-secondary-foreground   rounded-md m-2" : "hidden"}`}
             onClick={resetHighScore}
           >
             Reset High Score
@@ -396,7 +396,7 @@ export const SidewaysSam = () => {
           className={`${!gameStarted ? "hidden" : "flex flex-col items-center justify-normal mt-4"}`}
         >
           <div
-            className="border-4  border-games-light-border dark:border-games-dark-border w-full md:w-1/2 h-[40vh] overflow-hidden"
+            className="border-4  border-border  w-full md:w-1/2 h-[40vh] overflow-hidden"
             ref={borderRef}
           >
             <Sam x={x} y={y} w={width} h={height} />
@@ -414,7 +414,7 @@ export const SidewaysSam = () => {
           </div>
           <div className="flex flex-row justify-center items-center mt-4">
             <button
-              className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-4 mt-1 mx-4 rounded-md hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+              className="bg-primary  text-primary-foreground   p-4 mt-1 mx-4 rounded-md hover:text-accent-foreground   hover:bg-accent  "
               onMouseDown={() =>
                 setMouseDown({ left: true, right: mouseDown.right })
               }
@@ -435,7 +435,7 @@ export const SidewaysSam = () => {
               {"<-"}
             </button>
             <button
-              className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-4 mt-1 mx-4 rounded-md hover:text-games-light-accent-foreground dark:hover:text-games-dark-accent-foreground  hover:bg-games-light-accent dark:hover:bg-games-dark-accent "
+              className="bg-primary  text-primary-foreground   p-4 mt-1 mx-4 rounded-md hover:text-accent-foreground   hover:bg-accent  "
               onMouseDown={() =>
                 setMouseDown({ left: mouseDown.left, right: true })
               }

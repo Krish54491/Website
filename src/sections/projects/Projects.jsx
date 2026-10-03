@@ -1,3 +1,3 @@
 export default function tester() {
-  return <section className="section-projects" />;
+  return <h1>HELLO THERE</h1>;
 }

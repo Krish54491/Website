@@ -81,7 +81,7 @@ export const Countdown = () => {
     }
   };
   return (
-    <section className="section-tools">
+    <section className="section-page">
       <>
         {isConfettiTime && <Confetti />}
         <div className="flex flex-col justify-center items-center">
@@ -99,21 +99,21 @@ export const Countdown = () => {
           <div className="flex flex-row m-2">
             {timerActive ? (
               <button
-                className="p-2 bg-tools-light-destructive dark:bg-tools-dark-destructive  rounded-md m-2"
+                className="p-2 bg-destructive   rounded-md m-2"
                 onClick={() => setTimerActive(false)}
               >
                 Stop
               </button>
             ) : (
               <button
-                className="p-2 bg-tools-light-primary dark:bg-tools-dark-primary text-tools-light-primary-foreground dark:text-tools-dark-primary-foreground  rounded-md m-2"
+                className="p-2 bg-primary  text-primary-foreground   rounded-md m-2"
                 onClick={() => startTimer()}
               >
                 Start
               </button>
             )}
             <button
-              className="p-2 bg-tools-light-secondary dark:bg-tools-dark-secondary text-tools-light-secondary-foreground dark:text-tools-dark-secondary-foreground  rounded-md m-2"
+              className="p-2 bg-secondary  text-secondary-foreground   rounded-md m-2"
               onClick={() => reset()}
             >
               Reset

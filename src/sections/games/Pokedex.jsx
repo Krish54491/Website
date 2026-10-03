@@ -89,7 +89,7 @@ export const Pokedex = () => {
   );
 
   return (
-    <section className="section-games">
+    <section className="section-page">
       <>
         <div className="flex flex-row justify-center items-start m-4 ">
           <h1 className="flex justify-center items-start my-4 text-xl">
@@ -101,7 +101,7 @@ export const Pokedex = () => {
           <select
             value={sorting}
             onChange={(e) => setSorting(e.target.value)}
-            className="m-2 p-2 bg-games-light-muted dark:bg-games-dark-muted text-games-light-foreground dark:text-games-dark-foreground   border rounded-sm"
+            className="m-2 p-2 bg-muted  text-foreground    border rounded-sm"
           >
             <option value="all">All</option>
             <option value="found">Found</option>
@@ -202,7 +202,7 @@ export const Pokedex = () => {
                   : amount,
               )
             }
-            className="bg-games-light-primary dark:bg-games-dark-primary text-games-light-primary-foreground dark:text-games-dark-primary-foreground  p-2 rounded-md my-1"
+            className="bg-primary  text-primary-foreground   p-2 rounded-md my-1"
           >
             Load More
           </button>
