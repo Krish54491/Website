@@ -1,12 +1,4 @@
-type Card = {
-  id: string;
-  name: string;
-  description: string;
-  path: string;
-  lightThumbnail?: () => Promise<{ default: string }>; // only making optional for testing
-  darkThumbnail?: () => Promise<{ default: string }>; // only making optional for testing
-  mobile?: boolean; // default to true
-};
+import type { Card } from "./types";
 
 export const tools: Card[] = [
   {
@@ -14,7 +6,7 @@ export const tools: Card[] = [
     name: "Countdown Timer",
     description: "A simple countdown timer for your needs.",
     path: "/countdown",
-    darkThumbnail: () => import("../assets/tools/thumbnails/Countdown.png"),
+    darkThumbnail: () => import("../../assets/tools/thumbnails/Countdown.png"),
     mobile: true,
   },
   {
@@ -22,7 +14,7 @@ export const tools: Card[] = [
     name: "To-Do List",
     description: "A simple to-do list for your needs.",
     path: "/todo",
-    darkThumbnail: () => import("../assets/tools/thumbnails/ToDoList.png"),
+    darkThumbnail: () => import("../../assets/tools/thumbnails/ToDoList.png"),
     mobile: true,
   },
   {
@@ -31,7 +23,7 @@ export const tools: Card[] = [
     description: "Translate videos with ease.",
     path: "/videotranslator",
     darkThumbnail: () =>
-      import("../assets/tools/thumbnails/VideoTranslator.png"),
+      import("../../assets/tools/thumbnails/VideoTranslator.png"),
     mobile: true,
   },
   {
@@ -39,7 +31,8 @@ export const tools: Card[] = [
     name: "Video Rater",
     description: "Rate and review videos with ease.",
     path: "/videorater",
-    darkThumbnail: () => import("../assets/tools/thumbnails/VideoRater.png"),
+    darkThumbnail: () =>
+      import("../../assets/tools/thumbnails/VideoRater.png"),
     mobile: true,
   },
   {
@@ -48,7 +41,8 @@ export const tools: Card[] = [
     description:
       "Convert between different numberical bases(e.g binary, decimal, hexadecimal).",
     path: "/baseconverter",
-    darkThumbnail: () => import("../assets/tools/thumbnails/BaseConverter.png"),
+    darkThumbnail: () =>
+      import("../../assets/tools/thumbnails/BaseConverter.png"),
     mobile: true,
   },
 ];

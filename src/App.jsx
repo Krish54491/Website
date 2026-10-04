@@ -14,7 +14,8 @@ import { Pokedex } from "./sections/games/Pokedex.jsx";
 import { VideoTranslator } from "./sections/tools/VideoTranslator.jsx";
 import { VideoRater } from "./sections/tools/VideoRater.jsx";
 import { BaseConverter } from "./sections/tools/BetterBaseConverter.tsx";
-import Cards from "./components/Cards.tsx";
+import Games from "./sections/games/Games.tsx";
+import Tools from "./sections/tools/Tools.tsx";
 import Comments from "./Comments.jsx";
 import Login from "./sections/home/Login.jsx";
 import Register from "./sections/home/Register.jsx";
@@ -23,6 +24,7 @@ import Account from "./sections/home/Account.jsx";
 import { games, tools } from "./utils/constants.ts";
 import FrontPage from "./sections/home/FrontPage.jsx";
 import Project from "./sections/projects/Projects.jsx";
+import ProjectCaseStudy from "./sections/projects/ProjectCaseStudy.tsx";
 function App() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -63,14 +65,9 @@ function App() {
         <Route path="/videotranslator" element={<VideoTranslator />} />
         <Route path="/videorater" element={<VideoRater />} />
         <Route path="/projects" element={<Project />} />
-        <Route
-          path="/games"
-          element={<Cards items={games} listName="Games" />}
-        />
-        <Route
-          path="/tools"
-          element={<Cards items={tools} listName="Tools" />}
-        />
+        <Route path="/projects/:slug" element={<ProjectCaseStudy />} />
+        <Route path="/games" element={<Games />} />
+        <Route path="/tools" element={<Tools />} />
         <Route path="/baseconverter" element={<BaseConverter />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
