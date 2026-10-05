@@ -136,7 +136,7 @@ export default function Comments() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4 bg-card text-card-foreground rounded-lg shadow-md mt-8">
+    <div className="max-w-2xl mx-auto p-4 bg-card text-card-foreground rounded-lg shadow-md mt-8 border-2 border-border">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-foreground">Comments</h2>
 

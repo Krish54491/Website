@@ -1,20 +1,5 @@
-export const socialLinks = [
-  {
-    name: "LinkedIn",
-    icon: "linkedin",
-    href: "",
-  },
-  { name: "GitHub", icon: "github", href: "#" },
-  {
-    name: "Instagram",
-    icon: "instagram",
-    href: "",
-  },
-  { name: "YouTube", icon: "youtube", href: "#" },
-];
-export const CONTACT_INFO = "krishbharal@gmail.com";
-
 // Everything below is PLACEHOLDER content for the front page
+export const CONTACT_INFO = "krishbharal@gmail.com";
 export const HERO = {
   name: "Krish Bharal",
   nickname: "Krish544",

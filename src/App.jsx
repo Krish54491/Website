@@ -21,7 +21,7 @@ import Login from "./sections/home/Login.jsx";
 import Register from "./sections/home/Register.jsx";
 import Tos from "./sections/home/Tos.jsx";
 import Account from "./sections/home/Account.jsx";
-import { games, tools } from "./utils/constants.ts";
+import { games, NO_COMMENTS_PAGES, tools } from "./utils/constants.ts";
 import FrontPage from "./sections/home/FrontPage.jsx";
 import Project from "./sections/projects/Projects.jsx";
 import ProjectCaseStudy from "./sections/projects/ProjectCaseStudy.tsx";
@@ -48,10 +48,7 @@ function App() {
   }, [pathname]);
   return (
     <>
-      <Routes>
-        <Route path="/testing" element={<></>} />
-        <Route path="/*" element={<Nav />} />
-      </Routes>
+      <Nav />
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/tictactoe" element={<TicTacToe />} />
@@ -75,12 +72,16 @@ function App() {
         <Route path="/account" element={<Account />} />
       </Routes>
       <Routes>
-        <Route path="/testing" element={<></>} />
-        <Route
+        {NO_COMMENTS_PAGES.map((page) => {
+          return <Route key={page} path={page} element={<></>} />;
+        })}
+        <Route path="/*" element={<Comments />} />
+      </Routes>
+      <Routes>
+        <Route // will change to footer
           path="/*"
           element={
             <>
-              <Comments />
               <div className="flex flex-row items-center justify-center space-x-5 my-4">
                 <a
                   href="https://github.com/Krish54491"

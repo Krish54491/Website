@@ -232,3 +232,13 @@ export const reverseMap: Map<string, number> = new Map(
 );
 export const dropdownSpacing = 5;
 export const baseOptions = Array.from({ length: 109 }, (_, i) => i + 2);
+export const NO_COMMENTS_PAGES = [
+  // only the core pages shouldn't have comments I'll have to implement this in the backend as well each time it's updated
+  "/",
+  "/login",
+  "/account",
+  "/register",
+  "/games",
+  "/tools",
+  "/projects",
+];

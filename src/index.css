@@ -48,11 +48,11 @@
   /* need to add shadow lugia colors for decal */
 
   /* Purple GameCube colors for dark mode (purple and black) */
-  --color-games-dark-background: oklch(0.15 0.02 269.18);
+  --color-games-dark-background: oklch(0.25 0.02 264.1);
   --color-games-dark-foreground: oklch(0.95 0.01 238.46);
-  --color-games-dark-card: oklch(0.2 0.02 266.02);
+  --color-games-dark-card: oklch(0.24 0.03 268.15);
   --color-games-dark-card-foreground: oklch(0.95 0.01 238.46);
-  --color-games-dark-popover: oklch(0.2 0.02 266.02);
+  --color-games-dark-popover: oklch(0.24 0.03 268.15);
   --color-games-dark-popover-foreground: oklch(0.95 0.01 238.46);
   --color-games-dark-primary: oklch(0.54 0.14 286.21);
   --color-games-dark-primary-foreground: oklch(0.15 0.02 269.18);
@@ -63,7 +63,7 @@
   --color-games-dark-accent: oklch(0.3 0.03 271.05);
   --color-games-dark-accent-foreground: oklch(0.95 0.01 238.46);
   --color-games-dark-destructive: oklch(0.64 0.25 19.69);
-  --color-games-dark-border: oklch(0.95 0.01 238.46 / 15%);
+  --color-games-dark-border: oklch(0.48 0.03 307.8);
   --color-games-dark-input: oklch(0.95 0.01 238.46 / 20%);
   --color-games-dark-ring: oklch(0.57 0.13 286.94);
   --color-games-dark-chart-1: oklch(0.67 0.17 153.85);
@@ -73,12 +73,12 @@
   --color-games-dark-chart-5: oklch(0.6 0.15 300.14);
   --color-games-dark-sidebar: oklch(0.2 0.02 266.02);
   --color-games-dark-sidebar-foreground: oklch(0.95 0.01 238.46);
-  --color-games-dark-sidebar-primary: oklch(0.67 0.17 153.85);
+  --color-games-dark-sidebar-primary: oklch(0.54 0.14 286.21);
   --color-games-dark-sidebar-primary-foreground: oklch(0.15 0.02 269.18);
   --color-games-dark-sidebar-accent: oklch(0.3 0.03 271.05);
   --color-games-dark-sidebar-accent-foreground: oklch(0.95 0.01 238.46);
   --color-games-dark-sidebar-border: oklch(0.95 0.01 238.46 / 15%);
-  --color-games-dark-sidebar-ring: oklch(0.67 0.17 153.85);
+  --color-games-dark-sidebar-ring: oklch(0.54 0.14 286.21);
   /* need to add normal lugia colors for decal */
 
   /* Tools */
@@ -194,15 +194,15 @@
   --color-home-light-sidebar-ring: oklch(0.38 0.12 310);
 
   /* Dark Mode */
-  --color-home-dark-background: oklch(0.16 0.018 300);
+  --color-home-dark-background: oklch(0.22 0.03 293.87);
   --color-home-dark-foreground: oklch(0.94 0.012 90);
-  --color-home-dark-card: oklch(0.2 0.022 300);
+  --color-home-dark-card: oklch(0.27 0.03 292.23);
   --color-home-dark-card-foreground: oklch(0.94 0.012 90);
-  --color-home-dark-popover: oklch(0.22 0.025 300);
+  --color-home-dark-popover: oklch(0.34 0.04 296.86);
   --color-home-dark-popover-foreground: oklch(0.94 0.012 90);
-  --color-home-dark-primary: oklch(0.87 0.14 88);
-  --color-home-dark-primary-foreground: oklch(0.16 0.018 300);
-  --color-home-dark-secondary: oklch(0.25 0.065 310);
+  --color-home-dark-primary: oklch(0.89 0.1 88.19);
+  --color-home-dark-primary-foreground: oklch(0.35 0.05 296.43);
+  --color-home-dark-secondary: oklch(0.34 0.07 310.1);
   --color-home-dark-secondary-foreground: oklch(0.94 0.012 90);
   --color-home-dark-muted: oklch(0.25 0.018 290);
   --color-home-dark-muted-foreground: oklch(0.7 0.015 90);

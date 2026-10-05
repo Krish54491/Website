@@ -3,14 +3,7 @@ import SectionHeading from "../../components/ui/SectionHeading";
 import ButtonLink from "../../components/ui/ButtonLink";
 import InfoPanel from "../../components/ui/InfoPanel";
 import { BadgeList } from "../../components/ui/Badge";
-import SocialLinks from "../../components/ui/SocialLinks";
-import {
-  ABOUT,
-  CONTACT_INFO,
-  HERO,
-  SKILLS,
-  socialLinks,
-} from "../config/homeConfig";
+import { ABOUT, HERO, SKILLS, CONTACT_INFO } from "../config/homeConfig";
 import { krish_resume } from "../../utils/constants";
 
 function Hero() {
@@ -75,26 +68,6 @@ function Skills() {
 
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
-function Contact() {
-  return (
-    <section id="contact" className="py-10 sm:py-14">
-      <SectionHeading
-        title="Contact Me"
-        subtitle="Want to work together or just say hi? My inbox is open."
-      />
-      <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
-        <a
-          href={`mailto:${CONTACT_INFO}`}
-          className="text-lg font-semibold break-all text-foreground underline decoration-primary decoration-2 underline-offset-4 transition-colors duration-200 hover:text-primary sm:text-xl"
-        >
-          {CONTACT_INFO}
-        </a>
-        <SocialLinks links={socialLinks} />
-      </div>
-    </section>
-  );
-}
-
 export default function FrontPage() {
   return (
     <HomeTransition>
@@ -102,7 +75,6 @@ export default function FrontPage() {
         <Hero />
         <About />
         <Skills />
-        <Contact />
       </main>
     </HomeTransition>
   );

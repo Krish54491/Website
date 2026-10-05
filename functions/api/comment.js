@@ -6,6 +6,7 @@ import { filterComment } from "../utils/filter.js";
 import {
   COMMENT_COOLDOWN_MS,
   MAX_DUPLICATE_COMMENTS,
+  NO_COMMENTS_PAGES,
 } from "../utils/constants.js";
 
 /**
@@ -87,7 +88,12 @@ async function addComment(page, user, content) {
       { status: 400 },
     );
   }
-
+  if (NO_COMMENTS_PAGES.includes(page)) {
+    return Response.json(
+      { success: false, message: "No comments can be made on this page" },
+      { status: 400 },
+    );
+  }
   const db = getDb();
   try {
     // Atomic rate limit: 2-second cooldown between comments
