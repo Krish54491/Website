@@ -28,4 +28,13 @@ export const games: Card[] = [
     darkThumbnail: () => import("../../assets/games/thumbnails/Mouse Game.png"),
     mobile: false,
   },
+  {
+    id: "sidewayssam",
+    name: "Sideways Sam",
+    description: "Help Sam dodge rocks and avoid a concussion!",
+    path: "/sidewayssam",
+    darkThumbnail: () =>
+      import("../../assets/games/thumbnails/Sideways Sam.png"),
+    mobile: true,
+  },
 ];
