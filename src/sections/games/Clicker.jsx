@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import cookie from "../../assets/cookie.png";
+import cookie from "../../assets/games/cookie.png";
 
 const startTime = Date.now();
 

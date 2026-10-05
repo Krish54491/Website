@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
-import realRock from "../../assets/Rock.png";
+import realRock from "../../assets/games/Rock.png";
 const Sam = ({ x, y, w, h }) => {
   // Sam's character model
   const headSize = w * 0.5;

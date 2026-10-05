@@ -83,11 +83,9 @@
 
 # To-do List
 
-- change colors for projects dark mode, the light versions are fine
 - add some corrections to mobile Nav Bar
 - Blog creation(Not for this sprint)
 - Footer
-- make a contact me page
 - onhover of my profile picture have text(maybe)
 - on click swap it to a picture of me actually
 - personalize home page myself
