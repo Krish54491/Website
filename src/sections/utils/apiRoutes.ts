@@ -15,4 +15,5 @@ export const API_ROUTES = {
   ME: `${BASE_API_URL}/api/me`,
   LOGOUT: `${BASE_API_URL}/api/logout`,
   DELETE_ACCOUNT: `${BASE_API_URL}/api/delete-account`,
+  CONTACT: `${BASE_API_URL}/api/contact`,
 };

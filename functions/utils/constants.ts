@@ -11,3 +11,4 @@ export const NO_COMMENTS_PAGES = [
   "tools",
   "projects",
 ];
+export const CONTACT_INFO = "krishbharal@gmail.com";

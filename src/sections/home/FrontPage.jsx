@@ -6,7 +6,7 @@ import {
 } from "../../components/ui/Buttons";
 import InfoPanel from "../../components/ui/InfoPanel";
 import { BadgeList } from "../../components/ui/Badge";
-import { ABOUT, HERO, SKILLS, CONTACT_INFO } from "../config/homeConfig";
+import { ABOUT, HERO, SKILLS } from "../config/homeConfig";
 import { krish_resume } from "../utils/constants";
 function Hero() {
   return (
@@ -25,7 +25,7 @@ function Hero() {
           {HERO.tagline}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-          <WhirlpoolConicButton to="contactme">Contact me</WhirlpoolConicButton>
+          <WhirlpoolConicButton to="/contactme">Contact me</WhirlpoolConicButton>
           <CenterPillFillButton href={`/${krish_resume}`} external>
             Resume
           </CenterPillFillButton>

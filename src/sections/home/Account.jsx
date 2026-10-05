@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_ROUTES } from "../utils/apiRoutes.js";
+import { API_ROUTES } from "../utils/apiRoutes.ts";
 import { webAuthnLogin } from "../utils/webAuth.js";
 import ReactModal from "react-modal";
 
