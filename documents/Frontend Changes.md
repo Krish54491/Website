@@ -84,14 +84,18 @@
 # To-do List
 
 - change colors for projects dark mode, the light versions are fine
-- Remake Nav Bar
+- add some corrections to mobile Nav Bar
 - Blog creation(Not for this sprint)
 - Footer
-- add animation for shadow glow effect on cards
-- add border to cards(other than glow)
+- make a contact me page
+- onhover of my profile picture have text(maybe)
+- on click swap it to a picture of me actually
 - personalize home page myself
 - add all hover and animations
 - Every transition
 - add borders to things like comments and login to separate from background
 - Remake Accounts page and make TOS a modal instead
 - Animation to ease into every hover effect
+- Replace every Placeholder
+- Go through every tool or game to make sure they still look good and work!
+- Add back arrow for every thing thats a tool or game(basically make a shell for every future game or tool that will have this back arrow)

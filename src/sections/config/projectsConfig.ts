@@ -6,7 +6,7 @@ export type ProjectCard = {
   summary: string; // short summary of project
   techStack: string[]; // 2 - 5 tools/languages used in the creation of this Ex. Typescript, React, Cloudflare pages, Tailwind, Postgresql
   image: string; // path to image
-  path: string; // slug for the case study, the card links to /projects/<path> E.g "piano-wizards"
+  path: string; // slug for the case study, the card links to /projects/<path> E.g "pianoWizards"
 };
 
 type ArchitectureNode = {
@@ -50,7 +50,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
       "PLACEHOLDER: one or two sentences about what Piano Wizards is and who it was for.",
     techStack: ["React", "TypeScript", "Tailwind"],
     image: placeholderImage,
-    path: "piano-wizards",
+    path: "pianoWizards",
   },
   {
     name: "Chipmunk",
@@ -66,6 +66,6 @@ export const PROJECT_PAGES: Record<
   string,
   () => Promise<{ default: ProjectPage }>
 > = {
-  "piano-wizards": () => import("./projects/piano-wizards"),
+  pianoWizards: () => import("./projects/pianoWizards"),
   chipmunk: () => import("./projects/chipmunk"),
 };

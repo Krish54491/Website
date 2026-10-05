@@ -1,11 +1,13 @@
 import HomeTransition from "../../components/transitions/HomeTransition";
 import SectionHeading from "../../components/ui/SectionHeading";
-import ButtonLink from "../../components/ui/ButtonLink";
+import {
+  WhirlpoolConicButton,
+  CenterPillFillButton,
+} from "../../components/ui/Buttons";
 import InfoPanel from "../../components/ui/InfoPanel";
 import { BadgeList } from "../../components/ui/Badge";
 import { ABOUT, HERO, SKILLS, CONTACT_INFO } from "../config/homeConfig";
 import { krish_resume } from "../utils/constants";
-
 function Hero() {
   return (
     <section className="grid grid-cols-1 items-center gap-8 py-10 sm:py-16 md:grid-cols-[1fr_auto] md:gap-12 lg:py-24">
@@ -23,10 +25,10 @@ function Hero() {
           {HERO.tagline}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-          <ButtonLink href={`mailto:${CONTACT_INFO}`}>Contact me</ButtonLink>
-          <ButtonLink href={`/${krish_resume}`} variant="outline" external>
+          <WhirlpoolConicButton to="contactme">Contact me</WhirlpoolConicButton>
+          <CenterPillFillButton href={`/${krish_resume}`} external>
             Resume
-          </ButtonLink>
+          </CenterPillFillButton>
         </div>
       </div>
       <img

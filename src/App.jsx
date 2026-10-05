@@ -26,6 +26,7 @@ import { getSection } from "./sections/utils/section.ts";
 import FrontPage from "./sections/home/FrontPage.jsx";
 import Project from "./sections/projects/Projects.jsx";
 import ProjectCaseStudy from "./sections/projects/ProjectCaseStudy.tsx";
+import ContactMe from "./sections/home/ContactMe.tsx";
 import {
   NAV_BRAND,
   NAV_LINKS,
@@ -39,6 +40,7 @@ function App() {
   return (
     <>
       <Nav brand={NAV_BRAND} links={NAV_LINKS} resume={NAV_RESUME} />
+      {/* Actual content */}
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/tictactoe" element={<TicTacToe />} />
@@ -60,13 +62,16 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/tos" element={<Tos />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/contactme" element={<ContactMe />} />
       </Routes>
+      {/* Comments */}
       <Routes>
         {NO_COMMENTS_PAGES.map((page) => {
           return <Route key={page} path={page} element={<></>} />;
         })}
         <Route path="/*" element={<Comments />} />
       </Routes>
+      {/* Footer */}
       <Routes>
         <Route // will change to footer
           path="/*"

@@ -26,7 +26,7 @@ function CardNumber({ index }: { index?: number }) {
 
 function CaseStudyLink({ label }: { label: string }) {
   return (
-    <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">
+    <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary transition-transform duration-200 hover:text-foreground hover:-translate-y-1">
       {label}
       <span
         aria-hidden="true"
@@ -53,7 +53,10 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   if (layout === "vertical") {
     return (
-      <Link to={to} className={`flex h-full flex-col overflow-hidden ${cardClasses}`}>
+      <Link
+        to={to}
+        className={`flex h-full flex-col overflow-hidden ${cardClasses}`}
+      >
         <div className="overflow-hidden border-b border-border">
           <ThemedImage
             light={image}
