@@ -22,7 +22,7 @@ function BackLink() {
   return (
     <Link
       to="/projects"
-      className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors duration-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      className="mb-6 inline-flex items-center gap-1 text-sm md:text-md lg:text-lg text-muted-foreground transition-colors duration-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
       <span aria-hidden="true">←</span> Projects
     </Link>
@@ -163,7 +163,11 @@ export default function ProjectCaseStudy() {
 
             {state.page.architecture.length > 0 && (
               <section className="mt-12 sm:mt-16">
-                <SectionHeading as="h2" title="Architecture" className="mb-4!" />
+                <SectionHeading
+                  as="h2"
+                  title="Architecture"
+                  className="mb-4!"
+                />
                 <ArchitectureDiagram stages={state.page.architecture} />
               </section>
             )}
