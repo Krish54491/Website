@@ -25,12 +25,9 @@ const PokemonImage = memo(
       <a
         href={`https://bulbapedia.bulbagarden.net/wiki/${pokemonName}_(Pokémon)`}
         target="_blank"
+        className={`${pokemonComplete === 0 ? "brightness-0" : ""}`}
       >
-        <img
-          src={imgUrl}
-          className={`${pokemonComplete === 0 ? "brightness-0" : ""}`}
-          alt={pokemonName}
-        />
+        <img src={imgUrl} alt={pokemonName} />
       </a>
     );
   },
@@ -89,39 +86,60 @@ export const Pokedex = () => {
   );
 
   return (
-    <section className="section-page">
-      <>
-        <div className="flex flex-row justify-center items-start m-4">
-          <h1 className="flex justify-center items-start my-4 text-xl">
-            {" "}
-            {pokemonFound === 0
-              ? "No Pokémon found"
-              : `${pokemonFound - 1} out of ${pokedexCompletion.length - 1} Pokémon found - Sorting Method:`}{" "}
-          </h1>
-          <select
-            value={sorting}
-            onChange={(e) => setSorting(e.target.value)}
-            className="m-2 p-2 bg-muted text-foreground border rounded-sm"
-          >
-            <option value="all">All</option>
-            <option value="found">Found</option>
-            <option value="shiny">Shiny</option>
-            <option value="not found">Not Found</option>
-          </select>
-        </div>
-        <div className="flex flex-row flex-wrap">
-          {sorting === "all"
+    <>
+      <div className="flex flex-row justify-center items-start m-4">
+        <h1 className="flex justify-center items-start my-4 text-xl">
+          {" "}
+          {pokemonFound === 0
+            ? "No Pokémon found"
+            : `${pokemonFound - 1} out of ${pokedexCompletion.length - 1} Pokémon found - Sorting Method:`}{" "}
+        </h1>
+        <select
+          value={sorting}
+          onChange={(e) => setSorting(e.target.value)}
+          className="m-2 p-2 bg-muted text-foreground border rounded-sm"
+        >
+          <option value="all">All</option>
+          <option value="found">Found</option>
+          <option value="shiny">Shiny</option>
+          <option value="not found">Not Found</option>
+        </select>
+      </div>
+      <div className="flex flex-row flex-wrap">
+        {sorting === "all"
+          ? pokedexCompletion.map((item, idx) =>
+              idx > amount ? null : idx === 0 ? null : item === 0 ? (
+                <PokemonImage
+                  key={idx}
+                  pokemonId={idx}
+                  pokemonName={pokemonNames[idx]}
+                  pokemonComplete={pokedexCompletion[idx]}
+                  item={item}
+                  getPokemonPic={getPokemonPic}
+                />
+              ) : item === 2 ? (
+                <PokemonImage
+                  key={idx}
+                  pokemonId={idx}
+                  pokemonName={pokemonNames[idx]}
+                  pokemonComplete={pokedexCompletion[idx]}
+                  item={item}
+                  getPokemonPic={getPokemonPic}
+                />
+              ) : item === 1 ? (
+                <PokemonImage
+                  key={idx}
+                  pokemonId={idx}
+                  pokemonName={pokemonNames[idx]}
+                  pokemonComplete={pokedexCompletion[idx]}
+                  item={item}
+                  getPokemonPic={getPokemonPic}
+                />
+              ) : null,
+            )
+          : sorting === "found"
             ? pokedexCompletion.map((item, idx) =>
-                idx > amount ? null : idx === 0 ? null : item === 0 ? (
-                  <PokemonImage
-                    key={idx}
-                    pokemonId={idx}
-                    pokemonName={pokemonNames[idx]}
-                    pokemonComplete={pokedexCompletion[idx]}
-                    item={item}
-                    getPokemonPic={getPokemonPic}
-                  />
-                ) : item === 2 ? (
+                idx === 0 ? null : item === 2 ? (
                   <PokemonImage
                     key={idx}
                     pokemonId={idx}
@@ -141,7 +159,7 @@ export const Pokedex = () => {
                   />
                 ) : null,
               )
-            : sorting === "found"
+            : sorting === "shiny"
               ? pokedexCompletion.map((item, idx) =>
                   idx === 0 ? null : item === 2 ? (
                     <PokemonImage
@@ -152,20 +170,11 @@ export const Pokedex = () => {
                       item={item}
                       getPokemonPic={getPokemonPic}
                     />
-                  ) : item === 1 ? (
-                    <PokemonImage
-                      key={idx}
-                      pokemonId={idx}
-                      pokemonName={pokemonNames[idx]}
-                      pokemonComplete={pokedexCompletion[idx]}
-                      item={item}
-                      getPokemonPic={getPokemonPic}
-                    />
                   ) : null,
                 )
-              : sorting === "shiny"
+              : sorting === "not found"
                 ? pokedexCompletion.map((item, idx) =>
-                    idx === 0 ? null : item === 2 ? (
+                    idx === 0 ? null : item === 0 ? (
                       <PokemonImage
                         key={idx}
                         pokemonId={idx}
@@ -176,38 +185,24 @@ export const Pokedex = () => {
                       />
                     ) : null,
                   )
-                : sorting === "not found"
-                  ? pokedexCompletion.map((item, idx) =>
-                      idx === 0 ? null : item === 0 ? (
-                        <PokemonImage
-                          key={idx}
-                          pokemonId={idx}
-                          pokemonName={pokemonNames[idx]}
-                          pokemonComplete={pokedexCompletion[idx]}
-                          item={item}
-                          getPokemonPic={getPokemonPic}
-                        />
-                      ) : null,
-                    )
-                  : null}
-        </div>
-        <div
-          className={`${amount < pokedexCompletion.length ? "flex" : "hidden"} justify-center w-full`}
+                : null}
+      </div>
+      <div
+        className={`${amount < pokedexCompletion.length ? "flex" : "hidden"} justify-center w-full`}
+      >
+        <button
+          onClick={() =>
+            setAmount(
+              amount < pokedexCompletion.length
+                ? Math.min(amount + 100, pokedexCompletion.length)
+                : amount,
+            )
+          }
+          className="bg-primary text-primary-foreground p-2 rounded-md my-1"
         >
-          <button
-            onClick={() =>
-              setAmount(
-                amount < pokedexCompletion.length
-                  ? Math.min(amount + 100, pokedexCompletion.length)
-                  : amount,
-              )
-            }
-            className="bg-primary text-primary-foreground p-2 rounded-md my-1"
-          >
-            Load More
-          </button>
-        </div>
-      </>
-    </section>
+          Load More
+        </button>
+      </div>
+    </>
   );
 };

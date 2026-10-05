@@ -77,64 +77,62 @@ export function VideoRater() {
   }, [jobId]);
 
   return (
-    <section className="section-page">
-      <div style={{ maxWidth: 500, margin: "auto", padding: 20 }}>
-        <h1 className="flex flex-col items-center justify-normal mt-2">
-          AI Video Rater
-        </h1>
-        <h3 className="mb-4">
-          If the script score is -1, it means the AI errored out and could not
-          give a rating. This tool only works for English videos shorter than 30
-          minutes. Sometimes due to cold starting the server it may take a while
-          to respond. Doesn&apos;t work if the video is too big (1gb+).
-        </h3>
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-row mb-4">
-            <label>
-              Video file:
-              <input
-                type="file"
-                accept="video/*"
-                onChange={(e) => setFile(e.target.files[0])}
-                className="ml-1"
-              />
-            </label>
-          </div>
-          <div className="flex flex-row items-center justify-center">
-            <button
-              type="submit"
-              disabled={loading}
+    <div style={{ maxWidth: 500, margin: "auto", padding: 20 }}>
+      <h1 className="flex flex-col items-center justify-normal mt-2">
+        AI Video Rater
+      </h1>
+      <h3 className="mb-4">
+        If the script score is -1, it means the AI errored out and could not
+        give a rating. This tool only works for English videos shorter than 30
+        minutes. Sometimes due to cold starting the server it may take a while
+        to respond. Doesn&apos;t work if the video is too big (1gb+).
+      </h3>
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-row mb-4">
+          <label>
+            Video file:
+            <input
+              type="file"
+              accept="video/*"
+              onChange={(e) => setFile(e.target.files[0])}
+              className="ml-1"
+            />
+          </label>
+        </div>
+        <div className="flex flex-row items-center justify-center">
+          <button
+            type="submit"
+            disabled={loading}
+            className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
+          >
+            {loading
+              ? queuePosition
+                ? `Processing... (position ${queuePosition})`
+                : "Uploading..."
+              : "Submit"}
+          </button>
+        </div>
+      </form>
+
+      {error && <p className="text-destructive">{error}</p>}
+
+      {result && (
+        <div className="flex flex-col items-center justify-center">
+          <div
+            dangerouslySetInnerHTML={{ __html: result }}
+            className="flex flex-col my-2"
+          />
+          {transcriptUrl && (
+            <a
+              href={transcriptUrl}
+              download
               className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
             >
-              {loading
-                ? queuePosition
-                  ? `Processing... (position ${queuePosition})`
-                  : "Uploading..."
-                : "Submit"}
-            </button>
-          </div>
-        </form>
-
-        {error && <p className="text-destructive">{error}</p>}
-
-        {result && (
-          <div className="flex flex-col items-center justify-center">
-            <div
-              dangerouslySetInnerHTML={{ __html: result }}
-              className="flex flex-col my-2"
-            />
-            {transcriptUrl && (
-              <a
-                href={transcriptUrl}
-                download
-                className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent"
-              >
-                Download Transcript
-              </a>
-            )}
-          </div>
-        )}
-      </div>
-    </section>
+              Download Transcript
+            </a>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

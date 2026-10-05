@@ -126,71 +126,67 @@ export const UltimateTicTacToe = () => {
 
   // Renders the main 3x3 board of mini-boards
   return (
-    <section className="section-page">
-      <div className="flex flex-col items-center mt-2">
-        <div className="flex flex-col lg:flex-row items-center mt-1">
-          <div className="grid gap-4 grid-cols-3 grid-rows-3 px-3">
-            {Array(9)
-              .fill(0)
-              .map((_, i) => (
-                <div key={i} className="">
-                  {calculateWinner(squares[i]) ? (
-                    <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
-                      <button
-                        className="col-span-3 row-span-3 border-2 border-input p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
-                        style={{ minHeight: 0, minWidth: 0 }}
-                      >
-                        {calculateWinner(squares[i])}
-                      </button>
-                    </div>
-                  ) : squares[i].every(
-                      (val) => val !== 0 && val !== undefined,
-                    ) ? (
-                    <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
-                      <button
-                        className="col-span-3 row-span-3 border-2 border-input p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
-                        style={{ minHeight: 0, minWidth: 0 }}
-                      >
-                        -
-                      </button>
-                    </div>
-                  ) : (
-                    <MiniBoard
-                      boardIndex={i}
-                      disabled={gameOver}
-                      active={
-                        !gameOver &&
-                        (playingBoard === 10 || playingBoard === i) &&
-                        !calculateWinner(squares[i]) &&
-                        !squares[i].every(
-                          (val) => val !== 0 && val !== undefined,
-                        )
-                      }
-                    />
-                  )}
-                </div>
-              ))}
-          </div>
-          <ol className="flex items-start justify-center flex-col m-3">
-            {status}
-            <button
-              className={`bg-primary  text-primary-foreground   p-2 rounded-md my-1 ${
-                !status.includes("Next player:")
-                  ? "animate-bounce"
-                  : "hover:animate-wiggle"
-              }`}
-              onClick={restartGame}
-            >
-              Restart
-            </button>
-            <Link to="/tictactoe" className="flex items-center justify-center">
-              <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent">
-                Normal Tic-Tac-Toe
-              </button>
-            </Link>
-          </ol>
+    <div className="flex flex-col items-center mt-2">
+      <div className="flex flex-col lg:flex-row items-center mt-1">
+        <div className="grid gap-4 grid-cols-3 grid-rows-3 px-3">
+          {Array(9)
+            .fill(0)
+            .map((_, i) => (
+              <div key={i} className="">
+                {calculateWinner(squares[i]) ? (
+                  <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
+                    <button
+                      className="col-span-3 row-span-3 border-2 border-input p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
+                      style={{ minHeight: 0, minWidth: 0 }}
+                    >
+                      {calculateWinner(squares[i])}
+                    </button>
+                  </div>
+                ) : squares[i].every(
+                    (val) => val !== 0 && val !== undefined,
+                  ) ? (
+                  <div className="grid grid-cols-3 grid-rows-3 gap-1 w-full h-full">
+                    <button
+                      className="col-span-3 row-span-3 border-2 border-input p-2 lg:p-8 text-9xl rounded-md w-full h-full flex items-center justify-center md:w-50 md:h-50 lg:w-[16rem] lg:h-62"
+                      style={{ minHeight: 0, minWidth: 0 }}
+                    >
+                      -
+                    </button>
+                  </div>
+                ) : (
+                  <MiniBoard
+                    boardIndex={i}
+                    disabled={gameOver}
+                    active={
+                      !gameOver &&
+                      (playingBoard === 10 || playingBoard === i) &&
+                      !calculateWinner(squares[i]) &&
+                      !squares[i].every((val) => val !== 0 && val !== undefined)
+                    }
+                  />
+                )}
+              </div>
+            ))}
         </div>
+        <ol className="flex items-start justify-center flex-col m-3">
+          {status}
+          <button
+            className={`bg-primary  text-primary-foreground   p-2 rounded-md my-1 ${
+              !status.includes("Next player:")
+                ? "animate-bounce"
+                : "hover:animate-wiggle"
+            }`}
+            onClick={restartGame}
+          >
+            Restart
+          </button>
+          <Link to="/tictactoe" className="flex items-center justify-center">
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent">
+              Normal Tic-Tac-Toe
+            </button>
+          </Link>
+        </ol>
       </div>
-    </section>
+    </div>
   );
 };

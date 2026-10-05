@@ -119,30 +119,28 @@ export const TicTacToe = () => {
   });
 
   return (
-    <section className="section-page">
-      <>
-        <div className="flex flex-col lg:flex-row justify-center mt-2 items-center">
-          <div className="flex flex-row">
-            <Board
-              xIsNext={xIsNext}
-              squares={currentSquares}
-              onPlay={handlePlay}
-            />
-          </div>
-          <ol className="flex items-start justify-center flex-col m-3">
-            {status}
-            {moves}
-            <Link
-              to="/ultimatetictactoe"
-              className="flex items-center justify-center"
-            >
-              <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent">
-                Ultimate Tic-Tac-Toe
-              </button>
-            </Link>
-          </ol>
+    <>
+      <div className="flex flex-col lg:flex-row justify-center mt-2 items-center">
+        <div className="flex flex-row">
+          <Board
+            xIsNext={xIsNext}
+            squares={currentSquares}
+            onPlay={handlePlay}
+          />
         </div>
-      </>
-    </section>
+        <ol className="flex items-start justify-center flex-col m-3">
+          {status}
+          {moves}
+          <Link
+            to="/ultimatetictactoe"
+            className="flex items-center justify-center"
+          >
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent">
+              Ultimate Tic-Tac-Toe
+            </button>
+          </Link>
+        </ol>
+      </div>
+    </>
   );
 };

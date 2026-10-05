@@ -81,46 +81,44 @@ export const Countdown = () => {
     }
   };
   return (
-    <section className="section-page">
-      <>
-        {isConfettiTime && <Confetti />}
-        <div className="flex flex-col justify-center items-center">
-          <input
-            type="text"
-            disabled={timerActive}
-            value={
-              isConfettiTime
-                ? "Congrats!"
-                : minutes + ":" + (seconds < 10 ? `0${seconds}` : seconds)
-            }
-            onChange={inputChange}
-            className={`text-5xl lg:text-9xl m-5 text-center bg-inherit w-fit`}
-          ></input>
-          <div className="flex flex-row m-2">
-            {timerActive ? (
-              <button
-                className="p-2 bg-destructive rounded-md m-2 text-destructive-foreground"
-                onClick={() => setTimerActive(false)}
-              >
-                Stop
-              </button>
-            ) : (
-              <button
-                className="p-2 bg-primary text-primary-foreground rounded-md m-2"
-                onClick={() => startTimer()}
-              >
-                Start
-              </button>
-            )}
+    <>
+      {isConfettiTime && <Confetti />}
+      <div className="flex flex-col justify-center items-center">
+        <input
+          type="text"
+          disabled={timerActive}
+          value={
+            isConfettiTime
+              ? "Congrats!"
+              : minutes + ":" + (seconds < 10 ? `0${seconds}` : seconds)
+          }
+          onChange={inputChange}
+          className={`text-5xl lg:text-9xl m-5 text-center bg-inherit w-fit`}
+        ></input>
+        <div className="flex flex-row m-2">
+          {timerActive ? (
             <button
-              className="p-2 bg-secondary text-secondary-foreground rounded-md m-2"
-              onClick={() => reset()}
+              className="p-2 bg-destructive rounded-md m-2 text-destructive-foreground"
+              onClick={() => setTimerActive(false)}
             >
-              Reset
+              Stop
             </button>
-          </div>
+          ) : (
+            <button
+              className="p-2 bg-primary text-primary-foreground rounded-md m-2"
+              onClick={() => startTimer()}
+            >
+              Start
+            </button>
+          )}
+          <button
+            className="p-2 bg-secondary text-secondary-foreground rounded-md m-2"
+            onClick={() => reset()}
+          >
+            Reset
+          </button>
         </div>
-      </>
-    </section>
+      </div>
+    </>
   );
 };

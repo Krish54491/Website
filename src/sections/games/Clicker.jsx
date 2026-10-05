@@ -67,44 +67,40 @@ export const Clicker = () => {
   };
 
   return (
-    <section className="section-page">
-      <>
-        <div className="flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold text-center mt-4">
-            Clicker Game made in 75 minutes
-          </h1>
-          <h2 className="text-2xl text-center mt-2">
-            Time Played: {formatTime(time)}
-          </h2>
-          <h2 className="text-2xl text-center mt-2">
-            Times Clicked: {clicked}
-          </h2>
-          <img
-            className="w-96 h-96"
-            src={cookie}
-            alt="Cookie!"
-            onClick={increaseClicked}
-          ></img>
-        </div>
-        <div className="flex flex-row items-end justify-center">
-          <button
-            className="bg-primary text-primary-foreground p-2 rounded-md m-1 hover:text-accent-foreground hover:bg-accent"
-            onClick={increaseGrandma}
-          >
-            Grandma(clicks for you every 5 seconds): {grandmas}
-          </button>
-          <button
-            className="bg-primary text-primary-foreground p-2 rounded-md m-1 hover:text-accent-foreground hover:bg-accent"
-            onClick={increaseClickMult}
-          >
-            Click Multiplier: {clickMult}
-          </button>
-        </div>
-        <div className="flex flex-col items-center justify-center text-destructive">
-          {grandBroke ? <p>Can&apos;t afford a Grandma</p> : ""}
-          {multBroke ? <p>Can&apos;t afford a Multiplier</p> : ""}
-        </div>
-      </>
-    </section>
+    <>
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-3xl font-bold text-center mt-4">
+          Clicker Game made in 75 minutes
+        </h1>
+        <h2 className="text-2xl text-center mt-2">
+          Time Played: {formatTime(time)}
+        </h2>
+        <h2 className="text-2xl text-center mt-2">Times Clicked: {clicked}</h2>
+        <img
+          className="w-96 h-96"
+          src={cookie}
+          alt="Cookie!"
+          onClick={increaseClicked}
+        ></img>
+      </div>
+      <div className="flex flex-row items-end justify-center">
+        <button
+          className="bg-primary text-primary-foreground p-2 rounded-md m-1 hover:text-accent-foreground hover:bg-accent"
+          onClick={increaseGrandma}
+        >
+          Grandma(clicks for you every 5 seconds): {grandmas}
+        </button>
+        <button
+          className="bg-primary text-primary-foreground p-2 rounded-md m-1 hover:text-accent-foreground hover:bg-accent"
+          onClick={increaseClickMult}
+        >
+          Click Multiplier: {clickMult}
+        </button>
+      </div>
+      <div className="flex flex-col items-center justify-center text-destructive">
+        {grandBroke ? <p>Can&apos;t afford a Grandma</p> : ""}
+        {multBroke ? <p>Can&apos;t afford a Multiplier</p> : ""}
+      </div>
+    </>
   );
 };

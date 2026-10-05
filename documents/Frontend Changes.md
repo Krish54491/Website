@@ -83,7 +83,7 @@
 
 # To-do List
 
-- change colors for Home dark mode and games dark mode, the light versions are fine
+- change colors for projects dark mode, the light versions are fine
 - Remake Nav Bar
 - Blog creation(Not for this sprint)
 - Footer
@@ -94,3 +94,4 @@
 - Every transition
 - add borders to things like comments and login to separate from background
 - Remake Accounts page and make TOS a modal instead
+- Animation to ease into every hover effect

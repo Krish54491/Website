@@ -152,64 +152,62 @@ export const MouseGame = () => {
   // have restart button and potentially high score(score will be time survived)
 
   return (
-    <section className="section-page">
-      <>
-        <div className="flex flex-col items-center justify-normal mt-4">
-          <h1 className="text-4xl font-bold mb-4">Mouse Dodge</h1>
-          <p className="text-xl mb-2 text-center">
-            {cheater
-              ? "Don't try to cheat my game..."
-              : "Avoid the projectiles and survive as long as you can!"}
-          </p>
-          <p className="text-xl mb-2">High Score: {formatTime(highScore)}</p>
-          <p className="text-lg mb-4">
-            {gameStarted
-              ? "Time Survived: " + formatTime(timeSurvived)
-              : timeSurvived
-                ? "Previous run: " + formatTime(timeSurvived)
-                : "Click Start to begin!"}
-          </p>
-          <div
-            className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-input  lg relative` : ""}`}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={() => endGame(false)}
-          >
-            <button
-              className={`${!gameStarted ? "mt-10 p-2 bg-primary  text-primary-foreground   rounded-md m-2" : "hidden"}`}
-              onClick={start}
-            >
-              Start
-            </button>
-            {gameStarted &&
-              projectiles.map((p, i) => (
-                <div
-                  key={i}
-                  onMouseEnter={() => endGame(false)}
-                  style={{
-                    position: "absolute",
-                    left: p.x - 10,
-                    top: p.y,
-                    width: 30,
-                    height: 30,
-                    background: "var(--destructive)",
-                    borderRadius: "50%",
-                  }}
-                />
-              ))}
-          </div>
-          <p>
-            X: {position.x}, Y: {position.y}
-          </p>
+    <>
+      <div className="flex flex-col items-center justify-normal mt-4">
+        <h1 className="text-4xl font-bold mb-4">Mouse Dodge</h1>
+        <p className="text-xl mb-2 text-center">
+          {cheater
+            ? "Don't try to cheat my game..."
+            : "Avoid the projectiles and survive as long as you can!"}
+        </p>
+        <p className="text-xl mb-2">High Score: {formatTime(highScore)}</p>
+        <p className="text-lg mb-4">
+          {gameStarted
+            ? "Time Survived: " + formatTime(timeSurvived)
+            : timeSurvived
+              ? "Previous run: " + formatTime(timeSurvived)
+              : "Click Start to begin!"}
+        </p>
+        <div
+          className={`flex flex-col items-center justify-center ${gameStarted ? `w-96 h-96 border-4  border-input  lg relative` : ""}`}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={() => endGame(false)}
+        >
           <button
-            className={
-              "mt-2 p-2 bg-secondary  text-secondary-foreground   rounded-md m-2"
-            }
-            onClick={resetHighScore}
+            className={`${!gameStarted ? "mt-10 p-2 bg-primary  text-primary-foreground   rounded-md m-2" : "hidden"}`}
+            onClick={start}
           >
-            Reset High Score
+            Start
           </button>
+          {gameStarted &&
+            projectiles.map((p, i) => (
+              <div
+                key={i}
+                onMouseEnter={() => endGame(false)}
+                style={{
+                  position: "absolute",
+                  left: p.x - 10,
+                  top: p.y,
+                  width: 30,
+                  height: 30,
+                  background: "var(--destructive)",
+                  borderRadius: "50%",
+                }}
+              />
+            ))}
         </div>
-      </>
-    </section>
+        <p>
+          X: {position.x}, Y: {position.y}
+        </p>
+        <button
+          className={
+            "mt-2 p-2 bg-secondary  text-secondary-foreground   rounded-md m-2"
+          }
+          onClick={resetHighScore}
+        >
+          Reset High Score
+        </button>
+      </div>
+    </>
   );
 };
