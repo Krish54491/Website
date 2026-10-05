@@ -4,7 +4,7 @@ import {
   reverseMap,
   dropdownSpacing,
   baseOptions,
-} from "../../utils/constants";
+} from "../utils/constants";
 
 export function BaseConverter() {
   const [baseInput, setBaseInput] = useState<string[]>(["10", "2"]);

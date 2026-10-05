@@ -1,7 +1,11 @@
-// PLACEHOLDER: Code flows downward and ends with big "I'm in" text that gets deleted like terminal text (with a | line cursor), then fades to show the projects page.
+// PLACEHOLDER: Left and right curtains in the projects primary color close in, then open to show the page (also used for every case study).
 // Right now this just renders the page, the real transition gets built later.
 import type { ReactNode } from "react";
 
-export default function ProjectsTransition({ children }: { children: ReactNode }) {
+export default function ProjectsTransition({
+  children,
+}: {
+  children: ReactNode;
+}) {
   return <>{children}</>;
 }

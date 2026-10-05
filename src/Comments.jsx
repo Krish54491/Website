@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { API_ROUTES } from "./utils/apiRoutes";
+import { API_ROUTES } from "./sections/utils/apiRoutes";
 
 // this will a while so I'll start by writing what it should do first
 // This component is not in pages because it will be used in almost every page

@@ -6,7 +6,7 @@ import { MouseGame } from "./sections/games/MouseGame.jsx";
 import { Clicker } from "./sections/games/Clicker.jsx";
 import { useLayoutEffect } from "react";
 import { Route, Routes, Link, useLocation } from "react-router-dom";
-import { Nav } from "./Nav.jsx";
+import Nav from "./sections/navigation/Nav.tsx";
 import { ToDoList } from "./sections/tools/TodoList.jsx";
 import { SidewaysSam } from "./sections/games/SidewaysSam.jsx";
 import { UltimateTicTacToe } from "./sections/games/UltimateTicTacToe.jsx";
@@ -21,34 +21,24 @@ import Login from "./sections/home/Login.jsx";
 import Register from "./sections/home/Register.jsx";
 import Tos from "./sections/home/Tos.jsx";
 import Account from "./sections/home/Account.jsx";
-import { games, NO_COMMENTS_PAGES, tools } from "./utils/constants.ts";
+import { NO_COMMENTS_PAGES } from "./sections/utils/constants.ts";
+import { getSection } from "./sections/utils/section.ts";
 import FrontPage from "./sections/home/FrontPage.jsx";
 import Project from "./sections/projects/Projects.jsx";
 import ProjectCaseStudy from "./sections/projects/ProjectCaseStudy.tsx";
+import {
+  NAV_BRAND,
+  NAV_LINKS,
+  NAV_RESUME,
+} from "./sections/config/navConfig.ts";
 function App() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
-    const path = pathname.toLowerCase().replace(/\/$/, "") || "/";
-    const gamePaths = [
-      "/games",
-      "/clicker",
-      "/pokedex",
-      "/surveyspire",
-      ...games.map((game) => game.path),
-    ];
-    const toolPaths = ["/tools", ...tools.map((tool) => tool.path)];
-    document.documentElement.dataset.section =
-      gamePaths.includes(path) || path.startsWith("/games/")
-        ? "games"
-        : toolPaths.includes(path) || path.startsWith("/tools/")
-          ? "tools"
-          : path === "/projects" || path.startsWith("/projects/")
-            ? "projects"
-            : "home";
+    document.documentElement.dataset.section = getSection(pathname);
   }, [pathname]);
   return (
     <>
-      <Nav />
+      <Nav brand={NAV_BRAND} links={NAV_LINKS} resume={NAV_RESUME} />
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/tictactoe" element={<TicTacToe />} />

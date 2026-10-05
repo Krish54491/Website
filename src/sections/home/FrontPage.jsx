@@ -4,7 +4,7 @@ import ButtonLink from "../../components/ui/ButtonLink";
 import InfoPanel from "../../components/ui/InfoPanel";
 import { BadgeList } from "../../components/ui/Badge";
 import { ABOUT, HERO, SKILLS, CONTACT_INFO } from "../config/homeConfig";
-import { krish_resume } from "../../utils/constants";
+import { krish_resume } from "../utils/constants";
 
 function Hero() {
   return (

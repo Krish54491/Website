@@ -194,7 +194,7 @@
   --color-home-light-sidebar-ring: oklch(0.38 0.12 310);
 
   /* Dark Mode */
-  --color-home-dark-background: oklch(0.22 0.03 293.87);
+  --color-home-dark-background: oklch(0.23 0.01 52.99);
   --color-home-dark-foreground: oklch(0.94 0.012 90);
   --color-home-dark-card: oklch(0.27 0.03 292.23);
   --color-home-dark-card-foreground: oklch(0.94 0.012 90);
@@ -373,16 +373,6 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
-
-/* have to remove this when I redo Nav 
-
-DUE FOR REMOVAL!
-*/
-html {
-  scrollbar-gutter: stable;
-  overflow-x: hidden;
-  overflow-y: scroll;
 }
 
 @theme inline {

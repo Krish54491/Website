@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { API_ROUTES } from "../../utils/apiRoutes.js";
-import { webAuthnLogin } from "../../utils/webAuth.js";
+import { API_ROUTES } from "../utils/apiRoutes.js";
+import { webAuthnLogin } from "../utils/webAuth.js";
 
 export default function Register() {
   const navigate = useNavigate();
