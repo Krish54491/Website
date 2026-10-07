@@ -1,33 +1,60 @@
-// Everything below is PLACEHOLDER content for the front page
 export const HERO = {
   name: "Krish Bharal",
   nickname: "Krish544",
   descriptor: "Fullstack Developer",
   tagline: "A Computer Engineer That Loves Coding Too Much",
-  avatar: "/Krish544 Icon.png", // from /public
+  avatar: "/Krish544 Icon.png",
 };
 
 export const ABOUT: string[] = [
-  `Hey there, I'm Krish Bharal I love making things
-  PLACEHOLDER: First paragraph about yourself, where you are, what you study or work on.`,
-  "PLACEHOLDER: Second paragraph about what you enjoy outside of code (Pokemon, Jolteon, etc).",
+  `Hey there, I'm Krish Bharal I love making programs and tools that I personally use! Currently I'm a junior at the University of Texas at Dallas working toward a degree in Computer Engineering. I'm primarily software oriented with a bit experience in everything: Embedded, Frontend, Backend, Cloud, AI/ML, you name it I have experience with it.`,
+  `My strongest areas are frontend development with React and Tailwind CSS\n(as you can probably tell), AI/ML with Python, and backend development primarily with Node.js and PostgreSQL! That said, I like being able to jump between different parts of a project and learning whatever I need to build something from start to finish.`,
 ];
 
-// Placeholder:
 export const SKILLS: { category: string; items: string[] }[] = [
   {
     category: "Languages",
-    items: ["JavaScript", "TypeScript", "Python", "Java", "SQL"],
+    items: ["Python", "TypeScript", "JavaScript", "SQL", "Java", "Rust", "C++"],
   },
-  { category: "Frontend", items: ["React", "Tailwind CSS", "Vite"] },
+  {
+    category: "Frontend",
+    items: [
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "React Router",
+      "Vite",
+      "Dioxus",
+    ],
+  },
   {
     category: "Backend",
     items: [
-      "Cloudflare Pages Functions",
+      "Node.js",
+      "Express",
+      "FastAPI",
+      "Flask",
       "PostgreSQL",
-      "Drizzle ORM",
       "Supabase",
+      "Drizzle ORM",
+      "Selenium",
+      "Playwright",
     ],
+  },
+  {
+    category: "Cloud & DevOps",
+    items: [
+      "Cloudflare",
+      "Google Cloud Platform",
+      "Docker",
+      "GitHub Actions",
+      "Git",
+      "Linux",
+    ],
+  },
+  {
+    category: "AI / ML",
+    items: ["TensorFlow", "MediaPipe", "OpenCV", "Pandas"],
   },
 ];
 

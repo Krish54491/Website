@@ -25,7 +25,9 @@ function Hero() {
           {HERO.tagline}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-          <WhirlpoolConicButton to="/contactme">Contact me</WhirlpoolConicButton>
+          <WhirlpoolConicButton to="/contactme">
+            Contact me
+          </WhirlpoolConicButton>
           <CenterPillFillButton href={`/${krish_resume}`} external>
             Resume
           </CenterPillFillButton>
@@ -44,7 +46,7 @@ function About() {
   return (
     <section id="about" className="py-10 sm:py-14">
       <SectionHeading title="About Me" />
-      <div className="max-w-prose space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+      <div className="max-w-prose space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg whitespace-pre-line">
         {ABOUT.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
@@ -57,11 +59,17 @@ function Skills() {
   return (
     <section id="skills" className="py-10 sm:py-14">
       <SectionHeading title="Skills" />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+      {/* flex-wrap instead of grid so a partial last row gets centered */}
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
         {SKILLS.map((group) => (
-          <InfoPanel key={group.category} title={group.category}>
-            <BadgeList items={group.items} />
-          </InfoPanel>
+          <div
+            key={group.category}
+            className="w-9/10 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+          >
+            <InfoPanel title={group.category} className="h-full">
+              <BadgeList items={group.items} />
+            </InfoPanel>
+          </div>
         ))}
       </div>
     </section>
@@ -77,6 +85,7 @@ export default function FrontPage() {
         <Hero />
         <About />
         <Skills />
+        <p className="flex mt-10 justify-center">MORE IS PLANNED STAY TUNED!</p>
       </main>
     </HomeTransition>
   );
