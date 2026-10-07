@@ -155,7 +155,7 @@ export default function ContactMe() {
                 type="text"
                 required
                 autoComplete="name"
-                placeholder="Your secret identity"
+                placeholder="Your identity(who are you?)"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={sending}
@@ -181,7 +181,7 @@ export default function ContactMe() {
               id="content"
               rows={4}
               required
-              placeholder="Your message goes here. Ask me anything 👀"
+              placeholder="Your message goes here. Ask or tell me anything!"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               disabled={sending}

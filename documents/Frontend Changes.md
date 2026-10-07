@@ -85,11 +85,12 @@
 
 ## Urgent
 
-- Go through every tool or game to make sure they still look good and work!
 - Replace every Placeholder
 
 ## Needed, but not immediately
 
+- make a home page thats for your personal stuff instead
+- add education, job timeline and some projects you want to emphaize
 - add some corrections to mobile Nav Bar
 - Remake Accounts page and make TOS a modal instead
 
