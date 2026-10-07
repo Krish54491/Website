@@ -7,7 +7,6 @@ export type DiagramStage = {
 function ChevronDown() {
   return (
     <svg
-      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -30,10 +29,7 @@ export default function ArchitectureDiagram({
     <div className="overflow-hidden rounded-2xl border border-border bg-card bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] bg-size-[16px_16px] px-4 py-8 sm:px-8 sm:py-10">
       <ol className="flex flex-col items-center">
         {stages.map((stage, stageIdx) => (
-          <li
-            key={stageIdx}
-            className="flex w-full flex-col items-center"
-          >
+          <li key={stageIdx} className="flex w-full flex-col items-center">
             {stageIdx > 0 && <ChevronDown />}
             {stage.label && (
               <p className="mb-3 text-xs tracking-[0.2em] text-muted-foreground uppercase">

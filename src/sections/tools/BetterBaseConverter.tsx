@@ -240,7 +240,6 @@ export function BaseConverter() {
                   ></input>
                   <button
                     type="button"
-                    aria-label="Copy result"
                     onClick={() => {
                       navigator.clipboard.writeText(result);
                     }}
@@ -275,7 +274,6 @@ export function BaseConverter() {
                       ></input>
                       <button
                         type="button"
-                        aria-label="Copy result"
                         onClick={() => {
                           navigator.clipboard.writeText(
                             twosComplement(numInput),
@@ -313,7 +311,6 @@ export function BaseConverter() {
                       ></input>
                       <button
                         type="button"
-                        aria-label="Copy result"
                         onClick={() => {
                           navigator.clipboard.writeText(twosComplement(result));
                         }}

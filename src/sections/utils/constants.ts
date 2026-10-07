@@ -144,3 +144,23 @@ export const NO_COMMENTS_PAGES = [
   "/tools",
   "/projects",
 ];
+export const CONTACT_INFO = "krishbharal@gmail.com";
+export const socialLinks = [
+  {
+    name: "LinkedIn",
+    icon: "linkedin",
+    href: "https://www.linkedin.com/in/krish-bharal-389105296/",
+  },
+  { name: "GitHub", icon: "github", href: "https://github.com/Krish54491" },
+  // {
+  //   name: "Instagram",
+  //   icon: "instagram",
+  //   href: "#",
+  // },
+  {
+    name: "YouTube",
+    icon: "youtube",
+    href: "https://www.youtube.com/@krish544_was_stolen",
+  },
+  // { name: "Discord", icon: "discord", href: "#" },
+];

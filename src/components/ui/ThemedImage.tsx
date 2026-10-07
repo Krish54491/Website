@@ -43,7 +43,6 @@ export default function ThemedImage({
   if (!urls) {
     return (
       <div
-        aria-hidden="true"
         className={`animate-pulse bg-muted motion-reduce:animate-none ${className}`}
       />
     );

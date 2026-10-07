@@ -27,17 +27,11 @@ export default function SocialLinks({
           <li key={link.name}>
             <a
               href={link.href}
-              aria-label={link.name}
               target="_blank"
               rel="noopener noreferrer"
               className="block rounded-md p-1 text-foreground transition-colors duration-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="size-7"
-              >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="size-7">
                 <path d={icons[link.icon] ?? ""} />
               </svg>
             </a>

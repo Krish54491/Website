@@ -24,18 +24,14 @@ function BackLink() {
       to="/projects"
       className="mb-6 inline-flex items-center gap-1 text-sm md:text-md lg:text-lg text-muted-foreground transition-colors duration-200 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
     >
-      <span aria-hidden="true">←</span> Projects
+      <span>←</span> Projects
     </Link>
   );
 }
 
 function LoadingSkeleton() {
   return (
-    <div
-      aria-busy="true"
-      aria-label="Loading case study"
-      className="animate-pulse space-y-6 motion-reduce:animate-none"
-    >
+    <div className="animate-pulse space-y-6 motion-reduce:animate-none">
       <div className="h-12 w-2/3 rounded-lg bg-muted" />
       <div className="aspect-video w-full rounded-2xl bg-muted" />
       <div className="h-40 w-full rounded-2xl bg-muted" />
@@ -129,10 +125,7 @@ export default function ProjectCaseStudy() {
                           key={highlight}
                           className="flex gap-3 text-base text-muted-foreground sm:text-lg"
                         >
-                          <span
-                            aria-hidden="true"
-                            className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary"
-                          />
+                          <span className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" />
                           {highlight}
                         </li>
                       ))}

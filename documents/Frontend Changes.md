@@ -83,17 +83,30 @@
 
 # To-do List
 
-- add some corrections to mobile Nav Bar
-- Blog creation(Not for this sprint)
+## Urgent
+
 - Footer
+- Go through every tool or game to make sure they still look good and work!
+- Replace every Placeholder
+
+## Needed, but not immediately
+
+- add some corrections to mobile Nav Bar
+- Remake Accounts page and make TOS a modal instead
+
+## QOL
+
+- Every transition
+- Add back arrow for every thing thats a tool or game(basically make a shell for every future game or tool that will have this back arrow)
+- Add fade in for cards on home page
+- Animation to ease into every hover effect
+- add borders to things like comments and login to separate from background
+- add all hover and animations
+
+## Optional extras
+
+- Blog creation(Not for this sprint)
 - onhover of my profile picture have text(maybe)
 - on click swap it to a picture of me actually
 - personalize home page myself
-- add all hover and animations
 - Every transition
-- add borders to things like comments and login to separate from background
-- Remake Accounts page and make TOS a modal instead
-- Animation to ease into every hover effect
-- Replace every Placeholder
-- Go through every tool or game to make sure they still look good and work!
-- Add back arrow for every thing thats a tool or game(basically make a shell for every future game or tool that will have this back arrow)

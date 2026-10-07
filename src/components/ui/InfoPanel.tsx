@@ -62,7 +62,6 @@ export function LinkList({
             className="flex items-center gap-2 rounded-lg border border-border bg-muted px-4 py-2.5 font-semibold transition-colors duration-200 hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             <svg
-              aria-hidden="true"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

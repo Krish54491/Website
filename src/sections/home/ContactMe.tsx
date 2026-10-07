@@ -9,7 +9,7 @@ import {
 } from "react";
 import HomeTransition from "../../components/transitions/HomeTransition";
 import SectionHeading from "../../components/ui/SectionHeading";
-import { CONTACT_INFO } from "../config/homeConfig";
+import { CONTACT_INFO } from "../utils/constants.ts";
 import { API_ROUTES } from "../utils/apiRoutes.ts";
 
 type Status =
@@ -79,7 +79,6 @@ function Field({
 function MailIcon() {
   return (
     <svg
-      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -97,7 +96,6 @@ function MailIcon() {
 function CopyIcon() {
   return (
     <svg
-      aria-hidden="true"
       viewBox="0 0 512 512"
       fill="none"
       stroke="currentColor"
@@ -115,7 +113,6 @@ function CopyIcon() {
 function CheckIcon() {
   return (
     <svg
-      aria-hidden="true"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -157,18 +154,14 @@ function EmailRow() {
         type="button"
         onClick={copyEmail}
         title="Copy email"
-        aria-label={copied ? "Email copied" : "Copy email"}
         className="relative z-10 inline-flex size-8 cursor-pointer overflow-hidden rounded-md p-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        <span
-          aria-hidden="true"
-          className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,var(--color-primary)_0%,var(--color-accent)_50%,var(--color-primary)_100%)] motion-reduce:animate-none"
-        />
+        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,var(--color-primary)_0%,var(--color-accent)_50%,var(--color-primary)_100%)] motion-reduce:animate-none" />
         <span className="relative z-10 inline-flex size-full items-center justify-center rounded-md bg-card text-muted-foreground transition-all hover:bg-muted">
           {copied ? <CheckIcon /> : <CopyIcon />}
         </span>
       </button>
-      <span aria-live="polite" className="sr-only">
+      <span className="sr-only">
         {copied ? "Email copied to clipboard" : ""}
       </span>
       <HoverUnderline />
@@ -266,7 +259,7 @@ export default function ContactMe() {
             {sending ? "Sending..." : "Send Email →"}
             <HoverUnderline />
           </button>
-          <p aria-live="polite" className="mt-3 min-h-5 text-sm">
+          <p className="mt-3 min-h-5 text-sm">
             {status.state === "sent" && (
               <span className="text-primary">
                 Message sent, I'll get back to you soon!

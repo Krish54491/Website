@@ -20,10 +20,7 @@ export function WhirlpoolConicButton({
 
   const inner = (
     <>
-      <span
-        aria-hidden="true"
-        className="absolute -inset-full animate-spin bg-[conic-gradient(from_0deg,#ff7a00,#f43f5e,#8b5cf6,#06b6d4,#ff7a00)] opacity-0 transition-opacity group-hover:opacity-60 group-focus-visible:opacity-60 motion-reduce:animate-none"
-      />
+      <span className="absolute -inset-full animate-spin bg-[conic-gradient(from_0deg,#ff7a00,#f43f5e,#8b5cf6,#06b6d4,#ff7a00)] opacity-0 transition-opacity group-hover:opacity-60 group-focus-visible:opacity-60 motion-reduce:animate-none" />
       <span className="relative rounded-[10px] bg-zinc-950 px-8 py-3">
         {children}
       </span>

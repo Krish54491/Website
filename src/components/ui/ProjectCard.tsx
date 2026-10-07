@@ -28,10 +28,7 @@ function CaseStudyLink({ label }: { label: string }) {
   return (
     <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary transition-transform duration-200 hover:text-foreground hover:-translate-y-1">
       {label}
-      <span
-        aria-hidden="true"
-        className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none"
-      >
+      <span className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none">
         ↗
       </span>
     </span>
