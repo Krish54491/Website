@@ -93,6 +93,7 @@
 - add education, job timeline and some projects you want to emphaize
 - add some corrections to mobile Nav Bar
 - Remake Accounts page and make TOS a modal instead
+- make the projects case studies have an optional carousel on multiple images
 
 ## QOL
 
@@ -102,6 +103,7 @@
 - Animation to ease into every hover effect
 - add borders to things like comments and login to separate from background
 - add all hover and animations
+- make case study cards have some reaction on hover
 
 ## Optional extras
 

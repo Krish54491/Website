@@ -36,15 +36,15 @@ export default function ArchitectureDiagram({
                 {stage.label}
               </p>
             )}
-            <ul className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <ul className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row sm:items-stretch sm:flex-wrap">
               {stage.nodes.map((node) => (
                 <li
                   key={node.title}
-                  className={`w-full rounded-lg border border-border bg-card px-4 py-3 text-center ${stage.nodes.length === 1 ? "max-w-sm" : "max-w-sm sm:w-48"}`}
+                  className={`flex w-full flex-col gap-1 rounded-lg border border-border bg-card px-4 py-3 text-center ${stage.nodes.length === 1 ? "max-w-sm" : "max-w-sm sm:w-48"}`}
                 >
                   <p className="font-bold">{node.title}</p>
                   {node.description && (
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <p className="mt-auto text-xs text-muted-foreground">
                       {node.description}
                     </p>
                   )}

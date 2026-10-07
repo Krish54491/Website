@@ -1,5 +1,3 @@
-import placeholderImage from "../../assets/tools/thumbnails/Placeholder Image.png";
-
 export type ProjectCard = {
   // what shows on the general project page
   name: string;
