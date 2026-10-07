@@ -42,22 +42,24 @@ export type ProjectPage = {
 // 2. make ./projects/<path>.ts that default exports a ProjectPage
 // 3. add the <path> line to PROJECT_PAGES
 // Pages are lazy loaded so each case study is its own small chunk and only downloads when opened
-
+import PianoWizardsImage from "../../assets/projects/Piano Wizards.png";
+import ChipmunkImage from "../../assets/projects/Chipmunk.jpg";
 export const PROJECT_CARDS: ProjectCard[] = [
+  // order is from newest to oldest for now
   {
     name: "Piano Wizards",
     summary:
-      "PLACEHOLDER: one or two sentences about what Piano Wizards is and who it was for.",
-    techStack: ["React", "TypeScript", "Tailwind"],
-    image: placeholderImage,
+      "Hacklahoma 2026 1st Place Winner - A piano learning game that challenges you to match your opponent's wavelength. Improve your skills through fierce competition and repetition!  ",
+    techStack: ["React", "JavaScript", "Tailwind"],
+    image: PianoWizardsImage,
     path: "pianoWizards",
   },
   {
     name: "Chipmunk",
     summary:
-      "PLACEHOLDER: one or two sentences about what Chipmunk is and who it was for.",
+      "Hacklahoma 2025 3rd Place Winner - An unobtrusive assistant to make presentations effortless for the user. Contactless slide navigation, live subtitles, and automatic recording.",
     techStack: ["JavaScript", "HTML", "CSS"],
-    image: placeholderImage,
+    image: ChipmunkImage,
     path: "chipmunk",
   },
 ];
