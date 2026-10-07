@@ -95,7 +95,7 @@ export function VideoRater() {
               type="file"
               accept="video/*"
               onChange={(e) => setFile(e.target.files[0])}
-              className="ml-1"
+              className="ml-1 file:mr-3 file:cursor-pointer file:rounded-md file:border file:border-border file:bg-secondary file:px-3 file:py-1 file:text-secondary-foreground file:transition-colors hover:file:bg-accent hover:file:text-accent-foreground"
             />
           </label>
         </div>

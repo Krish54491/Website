@@ -85,7 +85,6 @@
 
 ## Urgent
 
-- Footer
 - Go through every tool or game to make sure they still look good and work!
 - Replace every Placeholder
 

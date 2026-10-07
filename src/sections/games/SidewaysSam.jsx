@@ -162,6 +162,8 @@ export const SidewaysSam = () => {
     setProjectiles([]);
     setRockSize(20);
     setEasterEgg(false);
+    setArmHit(false);
+    setPrevSamSpeed(5);
   };
   useEffect(() => {
     // score counter
@@ -223,14 +225,6 @@ export const SidewaysSam = () => {
         setArmHit(true);
       }
     };
-    const interval = setInterval(() => {
-      // increase difficulty every 10 seconds
-      setRockSpeed((rockSpeed) => Math.min(rockSpeed + 1, 100)); // cap rock speed at 100
-      setRockAmount((rockAmount) => Math.min(rockAmount + 1, 10)); // cap rock amount at 10
-      setSamSpeed(Math.min(prevSamSpeed + rockSpeed / 2, 10)); // cap sam speed at 10
-      setPrevSamSpeed(Math.min(prevSamSpeed + rockSpeed / 2, 10));
-      setArmHit(false); // reset arm hit
-    }, 10000);
 
     const moveInterval = setInterval(() => {
       setProjectiles((prev) => {
@@ -278,20 +272,33 @@ export const SidewaysSam = () => {
 
     return () => {
       clearInterval(moveInterval);
-      clearInterval(interval);
     };
   }, [
     gameStarted,
     bounds,
-    rockSpeed,
     x,
     width,
     height,
     samSpeed,
-    rockAmount,
-    prevSamSpeed,
     armhit,
+    rockSpeed,
+    rockAmount,
   ]);
+  useEffect(() => {
+    if (!gameStarted) return;
+
+    const interval = setInterval(() => {
+      // increase difficulty every 10 seconds
+      setRockSpeed((rockSpeed) => Math.min(rockSpeed + 1, 100)); // cap rock speed at 100
+      setRockAmount((rockAmount) => Math.min(rockAmount + 1, 10)); // cap rock amount at 10
+      setSamSpeed(Math.min(prevSamSpeed + rockSpeed / 2, 10)); // cap sam speed at 10
+      setPrevSamSpeed(Math.min(prevSamSpeed + rockSpeed / 2, 10));
+      setArmHit(false); // reset arm hit
+    }, 10000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [rockSpeed, rockAmount, prevSamSpeed, samSpeed, armhit, gameStarted]);
   useEffect(() => {
     if (!gameStarted) return;
     function updateBounds() {
