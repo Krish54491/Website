@@ -3,7 +3,7 @@ import type { ProjectPage } from "../projectsConfig";
 const pianoWizards: ProjectPage = {
   name: "Piano Wizards",
   role: "Backend Developer",
-  period: "Feburary 2026",
+  period: "February 2026",
   techStack: ["React", "TypeScript", "Tailwind", "Cloudflare Pages"],
   links: [
     {

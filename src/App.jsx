@@ -28,6 +28,7 @@ import Project from "./sections/projects/Projects.jsx";
 import ProjectCaseStudy from "./sections/projects/ProjectCaseStudy.tsx";
 import ContactMe from "./sections/home/ContactMe.tsx";
 import Footer from "./sections/Footer.tsx";
+import NotFound from "./sections/home/NotFound.jsx";
 function App() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -61,6 +62,7 @@ function App() {
           <Route path="/tos" element={<Tos />} />
           <Route path="/account" element={<Account />} />
           <Route path="/contactme" element={<ContactMe />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
         {/* Comments */}
         <Routes>

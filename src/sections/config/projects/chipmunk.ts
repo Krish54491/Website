@@ -3,7 +3,7 @@ import type { ProjectPage } from "../projectsConfig";
 const chipmunk: ProjectPage = {
   name: "Chipmunk",
   role: "Machine Learning Developer",
-  period: "Feburary 2025",
+  period: "February 2025",
   techStack: ["JavaScript", "HTML", "CSS", "GitHub Pages"],
   links: [
     {
