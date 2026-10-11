@@ -1,12 +1,11 @@
-import { NAV_LINKS } from "./config/navConfig";
 import { Link } from "react-router-dom";
 import { socialLinks } from "./utils/constants";
 
 export default function Footer() {
   return (
-    <footer className="mt-10 flex flex-col border-t border-border bg-muted px-6 py-12 text-muted-foreground transition-colors duration-500 md:px-12 md:py-16">
-      <div className="mx-auto flex w-full max-w-7xl flex-row justify-center gap-12">
-        <div className="hidden md:flex flex-col gap-y-3">
+    <footer className="mt-10 flex flex-col border-t border-border bg-muted px-6 py-6 text-muted-foreground transition-colors duration-500 md:px-12 md:py-8">
+      <div className="mx-auto flex w-full max-w-7xl flex-col md:flex-row justify-center gap-4 md:gap-5">
+        {/* <div className="hidden md:flex flex-col gap-y-3">
           <Link
             to="/"
             className="font-(family-name:--section-heading) text-lg font-semibold text-foreground transition-opacity duration-200 hover:opacity-80"
@@ -24,18 +23,18 @@ export default function Footer() {
               {link.label}
             </Link>
           ))}
-        </div>
-        <div className="flex justify-center">
+        </div> */}
+        <div className="flex justify-center  md:items-center ">
           <div>
             <Link
               to="/contactme"
-              className="relative font-(family-name:--section-heading) text-lg font-semibold text-foreground transition-colors duration-300 after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full hover:opacity-80"
+              className="relative font-(family-name:--section-heading) text-lg font-semibold text-foreground transition-colors duration-300 after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-foreground after:transition-all after:duration-300 hover:after:w-full hover:opacity-80"
             >
               Contact me
             </Link>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="flex flex-row gap-3">
           {socialLinks.map(({ name, icon, href }) => {
             const iconUrl = `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/${icon}.svg`;
 

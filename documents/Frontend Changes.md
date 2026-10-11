@@ -85,13 +85,8 @@
 
 ## Urgent
 
-- change buttons on home to be same
-- change home page secondary colors
-- fix contact me and resume buttons to be similar
-- fix contact me on footer to be better
+- change home page secondary colors - under review
 - Every transition
-- make rainbow button always rainbow
-- make rainbow button take primary color
 
 ## Needed, but not immediately
 
