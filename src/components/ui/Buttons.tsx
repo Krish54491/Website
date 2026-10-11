@@ -16,12 +16,12 @@ export function WhirlpoolConicButton({
   children,
 }: ButtonLinkProps) {
   const classes =
-    "group relative inline-flex overflow-hidden rounded-xl p-0.5 font-black text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
+    "group relative inline-flex overflow-hidden rounded-xl p-0.5 text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring transition-colors duration-100 hover:text-accent-foreground";
 
   const inner = (
     <>
-      <span className="absolute -inset-full animate-spin bg-[conic-gradient(from_0deg,#ff7a00,#f43f5e,#8b5cf6,#06b6d4,#ff7a00)] opacity-0 transition-opacity group-hover:opacity-60 group-focus-visible:opacity-60 motion-reduce:animate-none" />
-      <span className="relative rounded-[10px] bg-zinc-950 px-8 py-3">
+      <span className="absolute -inset-full animate-spin bg-[conic-gradient(from_0deg,#ff7a00,#f43f5e,#8b5cf6,#06b6d4,#ff7a00)] motion-reduce:animate-none" />
+      <span className="relative rounded-[10px] bg-primary px-8 py-3 transition duration-200 hover:bg-accent">
         {children}
       </span>
     </>
@@ -51,13 +51,13 @@ export function CenterPillFillButton({
   children,
 }: ButtonLinkProps) {
   const classes =
-    "relative px-10 py-3 border-2 border-primary text-primary font-bold rounded-full overflow-hidden group";
+    "relative px-10 py-3 border-2 border-primary text-primary font-bold rounded-full overflow-hidden group bg-accent";
   const inner = (
     <>
       <span className="relative z-10 group-hover:text-secondary transition-colors">
         {children}
       </span>
-      <div className="absolute inset-0 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-center"></div>
+      <div className="absolute inset-0 bg-primary scale-x-0 group-hover:scale-x-105 transition-transform origin-center motion-reduce:transition-none"></div>
     </>
   );
   if (to) {

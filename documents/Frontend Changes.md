@@ -85,7 +85,13 @@
 
 ## Urgent
 
-- Replace every Placeholder
+- change buttons on home to be same
+- change home page secondary colors
+- fix contact me and resume buttons to be similar
+- fix contact me on footer to be better
+- Every transition
+- make rainbow button always rainbow
+- make rainbow button take primary color
 
 ## Needed, but not immediately
 
@@ -97,13 +103,13 @@
 
 ## QOL
 
-- Every transition
 - Add back arrow for every thing thats a tool or game(basically make a shell for every future game or tool that will have this back arrow)
 - Add fade in for cards on home page
 - Animation to ease into every hover effect
 - add borders to things like comments and login to separate from background
 - add all hover and animations
 - make case study cards have some reaction on hover
+- make skill cards have reaction on hover
 
 ## Optional extras
 
@@ -111,4 +117,4 @@
 - onhover of my profile picture have text(maybe)
 - on click swap it to a picture of me actually
 - personalize home page myself
-- Every transition
+  - have some flying tech stack or something else in background of homepage going around it

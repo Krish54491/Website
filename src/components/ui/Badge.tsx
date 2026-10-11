@@ -16,7 +16,7 @@ export default function Badge({
 }) {
   return (
     <span
-      className={`inline-flex items-center text-xs font-medium sm:text-sm ${variants[variant]} hover:bg-background hover:scale-110 hover:text-primary hover:shadow-md hover:shadow-accent transition duration-200 ease-[ease] motion-reduce:transition-none motion-reduce:hover:scale-100`}
+      className={`inline-flex items-center text-xs font-medium sm:text-sm ${variants[variant]} hover:bg-accent dark:hover:bg-background hover:scale-110 hover:text-primary hover:shadow-md hover:shadow-accent transition duration-200 ease-[ease] motion-reduce:transition-none motion-reduce:hover:scale-100`}
     >
       {children}
     </span>
