@@ -34,7 +34,7 @@ export default function Footer() {
             </Link>
           </div>
         </div>
-        <div className="flex flex-row gap-3">
+        <div className="flex flex-row gap-3 justify-center">
           {socialLinks.map(({ name, icon, href }) => {
             const iconUrl = `https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/icons/${icon}.svg`;
 

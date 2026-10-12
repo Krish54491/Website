@@ -11,7 +11,7 @@ export default function Projects() {
           as="h1"
           eyebrow="Case studies"
           title="Projects"
-          subtitle="Things I've built with teams or for other people."
+          subtitle="Things I've built"
         />
         {PROJECT_CARDS.length === 0 ? (
           <p className="text-muted-foreground">No Projects</p>

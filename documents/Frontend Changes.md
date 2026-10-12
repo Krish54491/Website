@@ -86,7 +86,7 @@
 ## Urgent
 
 - change home page secondary colors - under review
-- Every transition
+- nonpersonalized transition
 
 ## Needed, but not immediately
 
@@ -95,6 +95,7 @@
 - add some corrections to mobile Nav Bar
 - Remake Accounts page and make TOS a modal instead
 - make the projects case studies have an optional carousel on multiple images
+- Every personalized transition
 
 ## QOL
 

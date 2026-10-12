@@ -121,7 +121,7 @@ export default function MobileNav({
                       {String(idx + 1).padStart(2, "0")}.
                     </span>
                     <span
-                      className={`border-b-2 pb-0.5 ${active ? "" : "border-transparent"}`}
+                      className={`border-b-2 pb-0.5 border-primary ${active ? "" : "border-transparent"}`}
                     >
                       {link.label}
                     </span>
