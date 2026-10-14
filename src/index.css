@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  --color-jolteonYellow: #fcd877;
-
   /* Colors are divided by section and have the prefix 'light' or 'dark' for the mode */
   /* They will also use the shadcn way of doing colors unless specificity is required */
   /* Naming Scheme is --color-[page]-[light/dark]-[component]: 

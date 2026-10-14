@@ -11,12 +11,17 @@ const gamePaths = [
   "/surveyspire",
   ...games.map((game) => game.path),
 ];
-const toolPaths = ["/tools", ...tools.map((tool) => tool.path)];
+const toolPaths = ["/tools", "/dailies-irl", ...tools.map((tool) => tool.path)];
 
 export function getSection(pathname: string): Section {
   const path = pathname.toLowerCase().replace(/\/$/, "") || "/";
   if (gamePaths.includes(path) || path.startsWith("/games/")) return "games";
-  if (toolPaths.includes(path) || path.startsWith("/tools/")) return "tools";
+  if (
+    toolPaths.includes(path) ||
+    path.startsWith("/tools/") ||
+    path.startsWith("/dailies-irl/")
+  )
+    return "tools";
   if (path === "/projects" || path.startsWith("/projects/")) return "projects";
   return "home";
 }
