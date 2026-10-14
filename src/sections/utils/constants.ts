@@ -144,7 +144,7 @@ export const NO_COMMENTS_PAGES = [
   "/tools",
   "/projects",
 ];
-export const CONTACT_INFO = "krishbharal@gmail.com";
+export const CONTACT_INFO = "krish544@krish544.com";
 export const socialLinks = [
   {
     name: "LinkedIn",
