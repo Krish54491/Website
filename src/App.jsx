@@ -31,6 +31,7 @@ import Footer from "./sections/Footer.tsx";
 import NotFound from "./sections/home/NotFound.jsx";
 import DailiesHome from "./sections/other/dailies-irl/DailiesHome.jsx";
 import DailiesPrivacyPolicy from "./sections/other/dailies-irl/DailiesPrivacyPolicy.jsx";
+import DailiesTOS from "./sections/other/dailies-irl/DailiesTos.jsx";
 function App() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -69,6 +70,7 @@ function App() {
             path="/dailies-irl/privacy-policy"
             element={<DailiesPrivacyPolicy />}
           />
+          <Route path="/dailies-irl/tos" element={<DailiesTOS />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         {/* Comments */}

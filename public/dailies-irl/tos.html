@@ -1,0 +1,330 @@
+<!doctype html>
+<!-- Static copy of the Dailies IRL terms of service so it can be read with JavaScript disabled.
+     Keep in sync with src/sections/other/dailies-irl/DailiesTos.jsx -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dailies IRL - Terms of Service</title>
+    <link rel="icon" type="image/png" href="/Krish544%20Icon.png" />
+    <style>
+      /* Mirrors the tools section palette from src/index.css */
+      :root {
+        color-scheme: light dark;
+        --background: oklch(0.9555 0.0125 271.28);
+        --foreground: oklch(0.21 0.03 264.67);
+        --muted-foreground: oklch(0.55 0.02 264.37);
+        --border: oklch(0.8893 0.0169 259.42);
+        --primary: oklch(0.48 0.2 260.48);
+        --primary-foreground: oklch(1 0 0);
+        --accent: oklch(0.95 0.02 261.78);
+        --accent-foreground: oklch(0.48 0.2 260.48);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background: oklch(0.26 0.03 262.71);
+          --foreground: oklch(0.93 0.01 264.6);
+          --muted-foreground: oklch(0.71 0.02 261.33);
+          --border: oklch(0.35 0.04 262.16);
+          --primary: oklch(0.56 0.24 260.95);
+          --primary-foreground: oklch(1 0 0);
+          --accent: oklch(0.33 0.04 264.82);
+          --accent-foreground: oklch(0.93 0.01 264.6);
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--muted-foreground);
+        font-family: "Source Serif 4", serif;
+        line-height: 1.65;
+      }
+      main {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 2rem 16px 3rem;
+        overflow-wrap: anywhere;
+      }
+      h1,
+      h2,
+      address {
+        color: var(--foreground);
+      }
+      h1,
+      h2 {
+        font-family: "Inter", sans-serif;
+        line-height: 1.25;
+      }
+      h1 {
+        font-size: 1.875rem;
+        margin: 1.5rem 0 0.5rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin: 2.5rem 0 0.75rem;
+      }
+      a {
+        color: var(--foreground);
+        text-underline-offset: 2px;
+      }
+      .back {
+        display: inline-block;
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        background: var(--primary);
+        color: var(--primary-foreground);
+        text-decoration: none;
+      }
+      .back:hover {
+        background: var(--accent);
+        color: var(--accent-foreground);
+      }
+      .dates {
+        font-size: 0.875rem;
+        margin-top: 0;
+      }
+      ul {
+        padding-left: 1.5rem;
+      }
+      li + li {
+        margin-top: 0.5rem;
+      }
+      address {
+        font-style: normal;
+      }
+      footer {
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.875rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="/dailies-irl">&larr; Back to Dailies IRL</a>
+
+      <h1>Dailies IRL - Terms of Service</h1>
+      <p class="dates">
+        Effective date: October 14, 2026<br />
+        Last updated: October 14, 2026
+      </p>
+
+      <p>
+        These terms are an agreement between you and Krish Bharal ("we", "us"),
+        the developer of Dailies IRL. By installing or using the Dailies IRL
+        Chrome extension (together with the Google Apps Script project that runs
+        its schedule, "Dailies IRL" or "the service"), you agree to these terms.
+        If you do not agree, do not install or use Dailies IRL.
+      </p>
+
+      <section>
+        <h2>1. What Dailies IRL does</h2>
+        <p>
+          Dailies IRL lets you write categories of tasks and adds tasks picked at
+          random from them to a "Dailies IRL" list in your Google Tasks, on a
+          daily, weekly or monthly schedule that you choose. It runs in your own
+          Google account using Google's services.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Who can use it</h2>
+        <p>
+          You must be at least 13 years old, or the minimum age to have a Google
+          account in your country if that is higher, and you must have your own
+          Google account. You may only connect a Google account that you own or
+          are allowed to use.
+        </p>
+      </section>
+
+      <section>
+        <h2>3. Your Google account and Google's terms</h2>
+        <p>
+          Dailies IRL works through your Google account and Google services,
+          including Google Tasks, Google Apps Script and Google sign-in. Your use
+          of those services is also covered by Google's Terms of Service
+          (<a href="https://policies.google.com/terms" rel="noopener noreferrer">https://policies.google.com/terms</a>)
+          and Google's Privacy Policy
+          (<a href="https://policies.google.com/privacy" rel="noopener noreferrer">https://policies.google.com/privacy</a>).
+          You must follow those terms and all laws that apply to you when you use
+          Dailies IRL.
+        </p>
+        <p>You are responsible for keeping your Google account secure.</p>
+      </section>
+
+      <section>
+        <h2>4. Permissions and what Dailies IRL does in your account</h2>
+        <p>When you sign in, you allow Dailies IRL to:</p>
+        <ul>
+          <li>
+            create a "Dailies IRL" list in your Google Tasks and add tasks to
+            it;
+          </li>
+          <li>
+            delete unfinished tasks it created in that list, only if you turn on
+            "Auto delete unfinished tasks" for a category;
+          </li>
+          <li>
+            create one hourly timer (an Apps Script trigger) in your account so
+            tasks are added on schedule;
+          </li>
+          <li>show your email address on the settings page.</li>
+        </ul>
+        <p>
+          How your data is handled is explained in the Dailies IRL Privacy Policy
+          (<a href="/dailies-irl/privacy-policy">https://krish544.com/dailies-irl/privacy-policy</a>),
+          which is part of these terms.
+        </p>
+        <p>
+          You can stop all of this at any time: delete your data from the
+          settings page, remove Dailies IRL's access at
+          <a href="https://myaccount.google.com/connections" rel="noopener noreferrer">https://myaccount.google.com/connections</a>,
+          and uninstall the extension.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Your content</h2>
+        <p>
+          The categories and task names you write belong to you. You give us only
+          the permission needed to store them in your own Google account and add
+          them to your Google Tasks, so that Dailies IRL can work. We do not
+          claim any ownership of them.
+        </p>
+        <p>Do not use Dailies IRL to store or create anything illegal.</p>
+      </section>
+
+      <section>
+        <h2>6. Acceptable use</h2>
+        <p>You agree not to:</p>
+        <ul>
+          <li>use Dailies IRL in a way that breaks any law or Google's terms;</li>
+          <li>try to get into another person's account or data;</li>
+          <li>
+            overload, attack, disrupt or try to get around the limits of Dailies
+            IRL or the Google services it uses;
+          </li>
+          <li>
+            call the Dailies IRL Apps Script project from anything other than the
+            official extension, or copy its OAuth client credentials;
+          </li>
+          <li>
+            copy, sell or publish Dailies IRL, or a changed version of it, as
+            your own product, except as allowed by any open-source license we
+            publish the code under.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>7. It's free, and it can change</h2>
+        <p>
+          Dailies IRL is currently free. We may add, change or remove features,
+          or stop offering Dailies IRL, at any time and without notice. Dailies
+          IRL also depends on Google services and their limits (for example, Apps
+          Script quotas and the timing of triggers), which we do not control.
+          Tasks may sometimes be added late, be skipped, or not be added at all.
+        </p>
+      </section>
+
+      <section>
+        <h2>8. No warranty</h2>
+        <p>
+          Dailies IRL is a hobby project provided "AS IS" and "AS AVAILABLE",
+          without warranties of any kind, express or implied, including any
+          warranties of merchantability, fitness for a particular purpose, and
+          non-infringement. We do not promise that Dailies IRL will be
+          uninterrupted, error-free or secure, or that it will keep or add any
+          task correctly.
+        </p>
+        <p>
+          Dailies IRL is a tool to help you build habits. It is not medical,
+          health, fitness, financial or other professional advice. You choose the
+          tasks you write, and you decide whether and how to do them. Use your
+          own judgment and do only what is safe for you.
+        </p>
+        <p>
+          Keep your own copy of anything important. We are not responsible for
+          lost tasks or settings.
+        </p>
+      </section>
+
+      <section>
+        <h2>9. Limitation of liability</h2>
+        <p>
+          To the fullest extent allowed by law, Krish Bharal will not be liable
+          for any indirect, incidental, special, consequential or punitive
+          damages, or any loss of data, tasks, time, profits or goodwill, arising
+          from or related to your use of, or inability to use, Dailies IRL. In
+          any case, our total liability for any claim related to Dailies IRL will
+          not be more than the amount you paid us to use it in the 12 months
+          before the claim, which is zero if you have not paid anything.
+        </p>
+        <p>
+          Some places do not allow some of these limits, so they may not all
+          apply to you. Nothing in these terms limits any rights you have under
+          the law that cannot be waived.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Ending use</h2>
+        <p>
+          You can stop using Dailies IRL at any time by following the steps in
+          section 4. We may stop providing Dailies IRL to you, or block access,
+          if you break these terms or if we have to for legal or security
+          reasons. Sections 5, 8, 9, 11 and 13 still apply after you stop using
+          Dailies IRL.
+        </p>
+      </section>
+
+      <section>
+        <h2>11. Governing law</h2>
+        <p>
+          These terms are governed by the laws of State of Texas, United States,
+          without regard to its conflict-of-law rules, except where the law where
+          you live gives you the right to use your local laws or courts.
+        </p>
+      </section>
+
+      <section>
+        <h2>12. Changes to these terms</h2>
+        <p>
+          We may update these terms. The new version will be posted at this
+          address with a new "Last updated" date. If a change is important, we
+          will also tell you inside the extension. If you keep using Dailies IRL
+          after the change takes effect, you accept the new terms.
+        </p>
+      </section>
+
+      <section>
+        <h2>13. General</h2>
+        <p>
+          If any part of these terms can't be enforced, the rest still applies.
+          If we don't enforce a part of these terms, that doesn't mean we give up
+          the right to enforce it later. These terms and the Privacy Policy are
+          the whole agreement between you and us about Dailies IRL.
+        </p>
+      </section>
+
+      <section>
+        <h2>14. Contact</h2>
+        <address>
+          Krish Bharal<br />
+          Email: <a href="mailto:support@krish544.com">support@krish544.com</a><br />
+          Website:
+          <a href="https://krish544.com/dailies-irl">https://krish544.com/dailies-irl</a>
+        </address>
+      </section>
+
+      <footer>
+        Dailies IRL is not made, endorsed or sponsored by Google. Google, Google
+        Tasks, Chrome and Google Apps Script are trademarks of Google LLC.
+      </footer>
+    </main>
+  </body>
+</html>

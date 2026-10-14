@@ -144,6 +144,7 @@ export const NO_COMMENTS_PAGES = [
   "/tools",
   "/projects",
   "/dailies-irl/privacy-policy",
+  "/dailies-irl/tos",
 ];
 export const CONTACT_INFO = "krish544@krish544.com";
 export const socialLinks = [

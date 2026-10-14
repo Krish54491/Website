@@ -38,19 +38,19 @@ export default function DailiesHome() {
         <div className="w-full sm:w-[calc(50%-0.75rem)]">
           <Link
             to="/dailies-irl/privacy-policy"
-            className="flex items-center justify-center"
+            className="flex items-center justify-center "
           >
-            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full">
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full border-border border-2">
               Privacy Policy
             </button>
           </Link>
         </div>
         <div className="w-full sm:w-[calc(50%-0.75rem)]">
           <Link
-            to="/dailies-irl/TOS"
+            to="/dailies-irl/tos"
             className="flex items-center justify-center"
           >
-            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full">
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full border-border border-2">
               Terms Of Service
             </button>
           </Link>
@@ -58,7 +58,7 @@ export default function DailiesHome() {
         <div className="w-full sm:w-[calc(50%-0.75rem)]">
           <a href="" className="flex items-center justify-center">
             <button
-              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full"
+              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full border-border border-2"
               disabled // have to change once up
             >
               Google Extension Page(Coming Soon)
