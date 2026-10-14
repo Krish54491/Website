@@ -1,5 +1,6 @@
 import SectionHeading from "../../../components/ui/SectionHeading";
 import { Link } from "react-router-dom";
+import DailiesLogo from "../../../assets/other/dailies-irl/Dailies IRL Logo.png";
 export default function DailiesHome() {
   /*
     Quick description of Dailies IRL google Extension with links to it's
@@ -28,6 +29,10 @@ export default function DailiesHome() {
           <strong className="font-bold text-primary"> REAL LIFE DAILIES</strong>
           , of course instead of pulls you just improve yourself(lame).
         </p>
+        <img
+          src={DailiesLogo}
+          className="flex justify-center mx-auto w-1/2 md:w-1/4"
+        />
       </div>
       <div className="mx-auto mt-6 flex w-11/12 max-w-xl flex-wrap justify-center gap-4 sm:gap-6">
         <div className="w-full sm:w-[calc(50%-0.75rem)]">
@@ -35,7 +40,7 @@ export default function DailiesHome() {
             to="/dailies-irl/privacy-policy"
             className="flex items-center justify-center"
           >
-            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent w-full">
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full">
               Privacy Policy
             </button>
           </Link>
@@ -45,7 +50,7 @@ export default function DailiesHome() {
             to="/dailies-irl/TOS"
             className="flex items-center justify-center"
           >
-            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent w-full">
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full">
               Terms Of Service
             </button>
           </Link>
@@ -53,7 +58,7 @@ export default function DailiesHome() {
         <div className="w-full sm:w-[calc(50%-0.75rem)]">
           <a href="" className="flex items-center justify-center">
             <button
-              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-accent w-full"
+              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full"
               disabled // have to change once up
             >
               Google Extension Page(Coming Soon)

@@ -1,0 +1,540 @@
+<!doctype html>
+<!-- Static copy of the Dailies IRL privacy policy so it can be read with JavaScript disabled.
+     Keep in sync with src/sections/other/dailies-irl/DailiesPrivacyPolicy.jsx -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dailies IRL - Privacy Policy</title>
+    <link rel="icon" type="image/png" href="/Krish544%20Icon.png" />
+    <style>
+      /* Mirrors the home section palette from src/index.css */
+      :root {
+        color-scheme: light dark;
+        --background: oklch(0.98 0.008 95);
+        --foreground: oklch(0.18 0.018 300);
+        --muted-foreground: oklch(0.46 0.018 250);
+        --border: oklch(0.85 0.018 90);
+        --primary: #ffe5a3;
+        --primary-foreground: oklch(0.18 0.018 300);
+        --accent: #779bb6;
+        --accent-foreground: oklch(0.98 0.008 95);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --background: oklch(0.23 0.01 52.99);
+          --foreground: oklch(0.94 0.012 90);
+          --muted-foreground: #9ca5b8;
+          --border: oklch(0.34 0.035 300);
+          --primary: oklch(0.89 0.1 88.19);
+          --primary-foreground: oklch(0.35 0.05 296.43);
+          --accent: #20364b;
+          --accent-foreground: #7acbfa;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--background);
+        color: var(--muted-foreground);
+        font-family: "Source Serif 4", serif;
+        line-height: 1.65;
+      }
+      main {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 2rem 16px 3rem;
+        overflow-wrap: anywhere;
+      }
+      h1,
+      h2,
+      code,
+      address,
+      strong,
+      .label {
+        color: var(--foreground);
+      }
+      h1,
+      h2 {
+        font-family: "Source Code Pro", monospace;
+        line-height: 1.25;
+      }
+      h1 {
+        font-size: 1.875rem;
+        margin: 1.5rem 0 0.5rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin: 2.5rem 0 0.75rem;
+      }
+      code {
+        font-family: "Source Code Pro", monospace;
+        font-size: 0.85em;
+      }
+      .scope {
+        display: block;
+      }
+      a {
+        color: var(--foreground);
+        text-underline-offset: 2px;
+      }
+      .back {
+        display: inline-block;
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        background: var(--primary);
+        color: var(--primary-foreground);
+        text-decoration: none;
+      }
+      .back:hover {
+        background: var(--accent);
+        color: var(--accent-foreground);
+      }
+      .dates {
+        font-size: 0.875rem;
+        margin-top: 0;
+      }
+      ol,
+      ul {
+        padding-left: 1.5rem;
+      }
+      li + li {
+        margin-top: 0.5rem;
+      }
+      li p {
+        margin: 0.25rem 0;
+      }
+      .label {
+        font-weight: 600;
+      }
+      address {
+        font-style: normal;
+      }
+      footer {
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        font-size: 0.875rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="/dailies-irl">&larr; Back to Dailies IRL</a>
+
+      <h1>Dailies IRL - Privacy Policy</h1>
+      <p class="dates">
+        Effective date: October 14, 2026<br />
+        Last updated: October 14, 2026
+      </p>
+
+      <p>
+        Dailies IRL ("Dailies IRL", "the extension", "we", "us") is a Chrome
+        extension made by Krish Bharal, an independent developer. It adds tasks
+        that you write, picked at random, to a "Dailies IRL" list in your Google
+        Tasks on a daily, weekly or monthly schedule.
+      </p>
+      <p>
+        This policy explains what data Dailies IRL accesses, how it is used,
+        where it is stored, who it is shared with, and how you can delete it. It
+        covers the Dailies IRL Chrome extension and the Google Apps Script
+        project that runs its schedule. The same policy is linked from the
+        Dailies IRL homepage
+        (<a href="https://krish544.com/dailies-irl">https://krish544.com/dailies-irl</a>),
+        the Google sign-in (consent) screen, and the Chrome Web Store listing.
+      </p>
+      <p class="label">The short version:</p>
+      <ul>
+        <li>
+          We have no servers of our own. Everything Dailies IRL stores stays in
+          your own Google account.
+        </li>
+        <li>
+          We do not collect analytics, use cookies for tracking, show ads, or
+          sell or share your data with anyone.
+        </li>
+        <li>
+          We, the developer, cannot see your tasks, your settings, or your email
+          address.
+        </li>
+        <li>You can delete everything at any time (see section 8).</li>
+      </ul>
+
+      <section>
+        <h2>1. Google permissions (scopes) we request and why</h2>
+        <p>
+          When you first use Dailies IRL, Google asks you to sign in and allow
+          these permissions. Each one is used only for the purpose listed.
+        </p>
+        <ol type="a">
+          <li>
+            <p class="label">Google Tasks</p>
+            <code class="scope">https://www.googleapis.com/auth/tasks</code>
+            <p>"Create, edit, organize, and delete all your tasks."</p>
+            <p>Used to:</p>
+            <ul>
+              <li>
+                read the names of your task lists, only to find the list called
+                "Dailies IRL" (or create it if it doesn't exist);
+              </li>
+              <li>
+                add the tasks Dailies IRL picks for you to that list, with a due
+                date;
+              </li>
+              <li>
+                if, and only if, you turn on "Auto delete unfinished tasks" for
+                a category, delete unfinished tasks that Dailies IRL created in
+                that list once their period has ended.
+              </li>
+            </ul>
+            <p>
+              Dailies IRL does not read, change or delete tasks in any of your
+              other task lists, and it does not delete tasks you have completed.
+            </p>
+          </li>
+          <li>
+            <p class="label">Run when you are not present</p>
+            <code class="scope">https://www.googleapis.com/auth/script.scriptapp</code>
+            <p>
+              Used to create one hourly timer (an Apps Script "trigger") in your
+              own Google account. The timer lets your tasks be added on schedule
+              even when Chrome is closed. It runs as you, only works on your own
+              data, and is created when you first save your settings.
+            </p>
+          </li>
+          <li>
+            <p class="label">Your email address</p>
+            <code class="scope">https://www.googleapis.com/auth/userinfo.email</code>
+            <p>
+              Used only to show which Google account you are signed in with on
+              the settings page ("Signed in as ..."). It is not stored, logged
+              or sent anywhere else.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>2. Information Dailies IRL accesses and stores</h2>
+        <ol type="a">
+          <li>
+            <strong>Your settings.</strong> These are the things you type into
+            the settings page: your time zone, your "day off" and "double tasks"
+            chances, your category names, schedules and counts, the task names
+            you write, and which tasks are marked "Big".
+            <p>
+              <strong>Stored in:</strong> Google Apps Script "user properties"
+              in your own Google account. Only your account can read them. We
+              cannot.
+            </p>
+          </li>
+          <li>
+            <strong>Schedule records.</strong> A small record of when each
+            category last added tasks (for example "2026-10-13"), so tasks are
+            never added twice for the same day, week or month.
+            <p>
+              <strong>Stored in:</strong> the same Apps Script user properties
+              in your account.
+            </p>
+          </li>
+          <li>
+            <strong>Your agreement.</strong> Which version of the data use
+            notice on the settings page you agreed to, and when. Nothing is
+            saved until you agree.
+            <p>
+              <strong>Stored in:</strong> the same Apps Script user properties
+              in your account, and in your browser's local storage on your own
+              computer.
+            </p>
+          </li>
+          <li>
+            <strong>The tasks Dailies IRL creates.</strong> These are task names
+            from your settings, with due dates. Each task's notes say which
+            category it came from (for example "Dailies IRL · Chores") plus a
+            short tag, so that Auto delete can find it later.
+            <p>
+              <strong>Stored in:</strong> your Google Tasks, in the "Dailies
+              IRL" list, like any other task.
+            </p>
+          </li>
+          <li>
+            <strong>Your unfinished Dailies IRL tasks.</strong> Only if you turn
+            on Auto delete, the unfinished tasks in the "Dailies IRL" list are
+            read when a new period starts, to find the ones from that category's
+            earlier periods and delete them. They are not stored or sent
+            anywhere.
+          </li>
+          <li>
+            <strong>Your task list names.</strong> Read each time the schedule
+            runs, only to find the "Dailies IRL" list. They are not stored or
+            sent anywhere.
+          </li>
+          <li>
+            <strong>Your email address.</strong> See section 1(c). It is not
+            stored.
+          </li>
+          <li>
+            <strong>Sign-in tokens.</strong> Chrome's built-in sign-in system
+            (the chrome.identity API) gets and manages the access token that
+            lets the extension talk to Google. Chrome keeps it in memory.
+            Dailies IRL does not save it, log it or send it anywhere except to
+            Google.
+          </li>
+          <li>
+            <strong>Theme choice.</strong> Your System/Light/Dark choice is
+            saved in your browser's local storage on your own computer. It is
+            not sent anywhere.
+          </li>
+        </ol>
+        <p class="label">Dailies IRL does NOT collect:</p>
+        <ul>
+          <li>your browsing history, web page content or the tabs you visit;</li>
+          <li>analytics, tracking data, cookies or advertising IDs;</li>
+          <li>
+            your name, contacts, location, payment details or any other personal
+            information;
+          </li>
+          <li>any Google data besides what is listed above.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. How your information is used</h2>
+        <p>
+          Your information is used only to provide Dailies IRL's single purpose:
+          adding randomly picked tasks that you wrote to your Google Tasks on
+          the schedule you set, and showing you your settings so you can change
+          them.
+        </p>
+        <p>
+          It is never used for advertising, for building profiles about you, to
+          decide credit or lending, to train or improve any artificial
+          intelligence or machine learning model, or for any purpose unrelated
+          to the feature described above.
+        </p>
+      </section>
+
+      <section>
+        <h2>4. How your information moves</h2>
+        <p>Dailies IRL has no backend server. Data only moves between:</p>
+        <ul>
+          <li>the Dailies IRL extension in your Chrome browser, and</li>
+          <li>
+            Google's own services, running as you: the Google Apps Script API
+            (script.googleapis.com), Google Apps Script, and the Google Tasks
+            API.
+          </li>
+        </ul>
+        <p>
+          All of these connections use HTTPS (encrypted in transit). The
+          extension does not load or run code from the internet; the Apps Script
+          project only sends back data such as your settings.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Who we share your information with</h2>
+        <p>
+          We do not sell, rent, trade, transfer or disclose your Google user data
+          or any other information to anyone. There are no advertising networks,
+          data brokers, analytics providers or other third parties involved.
+        </p>
+        <p>
+          The only company that handles your data is Google, because Dailies IRL
+          runs entirely on Google's services in your own account. Google's
+          handling of that data is covered by the Google Privacy Policy
+          (<a href="https://policies.google.com/privacy" rel="noopener noreferrer">https://policies.google.com/privacy</a>).
+        </p>
+        <p>
+          We would only ever disclose information if it is required by law, and
+          as explained in section 6, we do not have access to your settings or
+          tasks in the first place.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. What the developer can see</h2>
+        <p>
+          Because the scheduler is a Google Apps Script project owned by the
+          developer, Google provides the developer with limited technical
+          information about how the project runs, the same as for any Apps
+          Script project:
+        </p>
+        <ul>
+          <li>
+            when a function ran, how long it took, and whether it succeeded or
+            failed;
+          </li>
+          <li>
+            error messages from failed runs. These are written by Dailies IRL
+            itself, and some can include the name of one of your categories (for
+            example "Chores needs at least one task");
+          </li>
+          <li>
+            the total number of accounts that used the project. Google
+            identifies users in these logs with temporary anonymous keys, not
+            names or email addresses.
+          </li>
+        </ul>
+        <p>
+          The developer uses this information only to find and fix bugs. Google
+          keeps these logs for a limited time set by Google, and they are not
+          copied or kept anywhere else. The developer cannot see your task names,
+          your other settings, your Google Tasks or your email address.
+        </p>
+        <p>No person reads your data, except you.</p>
+      </section>
+
+      <section>
+        <h2>7. Data protection and security</h2>
+        <ul>
+          <li>
+            Your data stays inside your own Google account, protected by your
+            Google sign-in. Only your account can read your Apps Script user
+            properties and your Google Tasks.
+          </li>
+          <li>Google encrypts this data in transit (HTTPS) and at rest.</li>
+          <li>
+            Access tokens are handled by Chrome's identity API and never saved by
+            Dailies IRL.
+          </li>
+          <li>
+            We request only the permissions Dailies IRL needs to work (section
+            1).
+          </li>
+          <li>
+            The extension contains all of its own code, follows Chrome's
+            Manifest V3 rules, and does not run code downloaded from the
+            internet.
+          </li>
+          <li>
+            Everything you send is checked by the Apps Script project before it
+            is saved.
+          </li>
+        </ul>
+        <p>
+          No system is perfectly secure, but because we don't run our own
+          servers or keep copies of your data, there is no Dailies IRL database
+          to be breached.
+        </p>
+      </section>
+
+      <section>
+        <h2>8. How long data is kept and how to delete it</h2>
+        <p>
+          Your settings and schedule records are kept in your Google account
+          until you delete them. The tasks Dailies IRL created stay in your
+          Google Tasks until you (or "Auto delete", if you turn it on) delete
+          them.
+        </p>
+        <p>To delete your data:</p>
+        <ol>
+          <li>
+            Open the Dailies IRL settings page and click "Delete my data". This
+            removes all your settings, schedule records and agreement record
+            from your Google account and turns off the hourly timer.
+          </li>
+          <li>
+            To also remove the tasks it created, tick "Also delete the Dailies
+            IRL list" before clicking "Delete my data", or delete the "Dailies
+            IRL" list yourself in Google Tasks
+            (<a href="https://tasks.google.com/" rel="noopener noreferrer">https://tasks.google.com/</a>).
+          </li>
+          <li>
+            Remove Dailies IRL's access to your Google account at
+            <a href="https://myaccount.google.com/connections" rel="noopener noreferrer">https://myaccount.google.com/connections</a>.
+          </li>
+          <li>
+            Uninstall the extension from <code>chrome://extensions</code>. This
+            also removes your theme choice.
+          </li>
+        </ol>
+        <p>
+          You can also see and delete the hourly timer yourself under "My
+          Triggers" at
+          <a href="https://script.google.com/home/triggers" rel="noopener noreferrer">https://script.google.com/home/triggers</a>.
+        </p>
+        <p>
+          If you would like help deleting your data, email
+          <a href="mailto:support@krish544.com">support@krish544.com</a> and we
+          will explain how. Since we cannot access your data ourselves, the
+          steps above are how it is deleted.
+        </p>
+        <p>
+          You can view all of your settings at any time on the settings page,
+          and all created tasks in Google Tasks.
+        </p>
+      </section>
+
+      <section>
+        <h2>9. Google API Services User Data Policy (Limited Use)</h2>
+        <p>
+          Dailies IRL's use and transfer to any other app of information
+          received from Google APIs will adhere to the Google API Services User
+          Data Policy
+          (<a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener noreferrer">https://developers.google.com/terms/api-services-user-data-policy</a>),
+          including the Limited Use requirements.
+        </p>
+        <p>
+          The use of information received from Google APIs will also adhere to
+          the Chrome Web Store User Data Policy
+          (<a href="https://developer.chrome.com/docs/webstore/program-policies" rel="noopener noreferrer">https://developer.chrome.com/docs/webstore/program-policies</a>),
+          including the Limited Use requirements.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Children's privacy</h2>
+        <p>
+          Dailies IRL is not directed to children under 13 (or the minimum age
+          to have a Google account in your country) and does not knowingly
+          collect data from them. Using it requires your own Google account. If
+          you believe a child has used Dailies IRL, contact
+          <a href="mailto:support@krish544.com">support@krish544.com</a> and we
+          will help remove the data.
+        </p>
+      </section>
+
+      <section>
+        <h2>11. Your rights</h2>
+        <p>
+          Depending on where you live (for example, in the EU, UK or
+          California), you may have the right to access, correct, delete or move
+          your data, or to object to how it is used. With Dailies IRL you can do
+          all of this yourself: view and change everything on the settings page,
+          delete it as described in section 8, and keep your tasks in Google
+          Tasks. We do not sell or "share" personal information for advertising.
+          For any request or question, contact
+          <a href="mailto:support@krish544.com">support@krish544.com</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>12. Changes to this policy</h2>
+        <p>
+          If this policy changes, the new version will be posted at this address
+          with a new "Last updated" date. If Dailies IRL ever starts to use your
+          data in a new way or to request a new Google permission, we will tell
+          you inside the extension and ask for your permission before it does.
+        </p>
+      </section>
+
+      <section>
+        <h2>13. Contact</h2>
+        <address>
+          Krish Bharal<br />
+          Email: <a href="mailto:support@krish544.com">support@krish544.com</a><br />
+          Website:
+          <a href="https://krish544.com/dailies-irl">https://krish544.com/dailies-irl</a>
+        </address>
+      </section>
+
+      <footer>
+        Dailies IRL is not made, endorsed or sponsored by Google. Google, Google
+        Tasks, Chrome and Google Apps Script are trademarks of Google LLC.
+      </footer>
+    </main>
+  </body>
+</html>

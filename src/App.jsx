@@ -30,6 +30,7 @@ import ContactMe from "./sections/home/ContactMe.tsx";
 import Footer from "./sections/Footer.tsx";
 import NotFound from "./sections/home/NotFound.jsx";
 import DailiesHome from "./sections/other/dailies-irl/DailiesHome.jsx";
+import DailiesPrivacyPolicy from "./sections/other/dailies-irl/DailiesPrivacyPolicy.jsx";
 function App() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -64,6 +65,10 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/contactme" element={<ContactMe />} />
           <Route path="/dailies-irl" element={<DailiesHome />} />
+          <Route
+            path="/dailies-irl/privacy-policy"
+            element={<DailiesPrivacyPolicy />}
+          />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         {/* Comments */}
