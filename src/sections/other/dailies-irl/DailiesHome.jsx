@@ -56,12 +56,14 @@ export default function DailiesHome() {
           </Link>
         </div>
         <div className="w-full sm:w-[calc(50%-0.75rem)]">
-          <a href="" className="flex items-center justify-center">
-            <button
-              className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full border-border border-2"
-              disabled // have to change once up
-            >
-              Google Extension Page(Coming Soon)
+          <a
+            href="https://chromewebstore.google.com/detail/pneipnklblkocebmblmmnecchaangmbd?utm_source=item-share-cb"
+            className="flex items-center justify-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="bg-primary text-primary-foreground p-2 my-1 rounded-md hover:text-accent-foreground hover:bg-secondary w-full border-border border-2">
+              Google Extension Page
             </button>
           </a>
         </div>
