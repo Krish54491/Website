@@ -31,8 +31,7 @@ export const tools: Card[] = [
     name: "Video Rater",
     description: "Rate and review videos with ease.",
     path: "/videorater",
-    darkThumbnail: () =>
-      import("../../assets/tools/thumbnails/VideoRater.png"),
+    darkThumbnail: () => import("../../assets/tools/thumbnails/VideoRater.png"),
     mobile: true,
   },
   {
@@ -43,6 +42,16 @@ export const tools: Card[] = [
     path: "/baseconverter",
     darkThumbnail: () =>
       import("../../assets/tools/thumbnails/BaseConverter.png"),
+    mobile: true,
+  },
+  {
+    id: "dailies-irl",
+    name: "Dailies IRL",
+    description:
+      "Allows you to customize google tasks to give you scheduled random quests!",
+    path: "/dailies-irl",
+    lightThumbnail: () =>
+      import("../../assets/other/dailies-irl/Dailies IRL Logo.png"),
     mobile: true,
   },
 ];
