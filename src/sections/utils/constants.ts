@@ -146,7 +146,7 @@ export const NO_COMMENTS_PAGES = [
   "/dailies-irl/privacy-policy",
   "/dailies-irl/tos",
 ];
-export const CONTACT_INFO = "krish544@krish544.com";
+export const CONTACT_INFO = "krishbharal@gmail.com";
 export const socialLinks = [
   {
     name: "LinkedIn",
