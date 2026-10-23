@@ -85,8 +85,10 @@
 
 ## Urgent
 
-- change home page secondary colors - under review
 - nonpersonalized transition
+- click on profile and it picks new plush to be profile, puts the replaced plush as an object in the background that can be moved using matter.js
+- ring of electricity around profile pic
+- lugia in background of games
 
 ## Needed, but not immediately
 
@@ -114,3 +116,8 @@
 - on click swap it to a picture of me actually
 - personalize home page myself
   - have some flying tech stack or something else in background of homepage going around it
+
+## Current unsolved Issues(not new functionality)
+
+- Railway env variables got exposed(not my fault the service itself had a security leak)
+  need to replace them for the services on website

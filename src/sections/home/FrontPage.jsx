@@ -8,83 +8,321 @@ import InfoPanel from "../../components/ui/InfoPanel";
 import { BadgeList } from "../../components/ui/Badge";
 import { ABOUT, HERO, SKILLS } from "../config/homeConfig";
 import { krish_resume } from "../utils/constants";
-function Hero() {
-  return (
-    <section className="grid grid-cols-1 items-center gap-8 py-10 sm:py-16 md:grid-cols-[1fr_auto] md:gap-12 lg:py-24">
-      <div className="order-2 text-center md:order-1 md:text-left">
-        <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-          {HERO.descriptor}
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-          {HERO.name}
-        </h1>
-        <p className="mt-2 text-2xl font-bold text-accent sm:text-3xl dark:text-primary">
-          aka {HERO.nickname}
-        </p>
-        <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground sm:text-lg md:mx-0">
-          {HERO.tagline}
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-          <WhirlpoolConicButton to="/contactme">
-            Contact me
-          </WhirlpoolConicButton>
-          <CenterPillFillButton href={`/${krish_resume}`} external>
-            Resume
-          </CenterPillFillButton>
-        </div>
-      </div>
-      <img
-        src={HERO.avatar}
-        alt={HERO.name}
-        className="order-1 mx-auto size-40 rounded-full border-4 border-primary object-cover shadow-xl shadow-primary/30 sm:size-56 md:order-2 lg:size-72"
-      />
-    </section>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="py-10 sm:py-14">
-      <SectionHeading title="About Me" />
-      <div className="max-w-prose space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg whitespace-pre-line">
-        {ABOUT.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Skills() {
-  return (
-    <section id="skills" className="py-10 sm:py-14">
-      <SectionHeading title="Skills" />
-      {/* flex-wrap instead of grid so a partial last row gets centered */}
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-        {SKILLS.map((group) => (
-          <div
-            key={group.category}
-            className="w-9/10 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
-          >
-            <InfoPanel title={group.category} className="h-full">
-              <BadgeList items={group.items} />
-            </InfoPanel>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+import { useRef, useEffect, useState } from "react";
+import {
+  Engine,
+  Render,
+  Runner,
+  Bodies,
+  Body,
+  Composite,
+  Events,
+  Mouse,
+  MouseConstraint,
+  Query,
+} from "matter-js";
 
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
+// plushies that can be spawned, for now from a list, but in the future have an api to get them from
+// also add rarities
+import Ampharos from "../../assets/Ampharos.png";
+const POSSIBLE_PLUSHES = [
+  { path: "/Krish544 Icon.png", name: "jolteon" },
+  { path: Ampharos, name: "Ampharos" },
+  // { path: "", name: "Kasane Teto" }, // baguette girl
+  // { path: "", name: "Hatsune Miku" },
+];
+const PLUSH_SIZE = 80; // diameter in px
+const WALL = 200; // wall thickness, thick so fast plushies don't tunnel through
+const WALL_LENGTH = 10000; // long enough that resizing only has to move the walls
+
 export default function FrontPage() {
+  // plushies live in a matter.js world drawn on a canvas behind the page,
+  // clicking the pfp adds one and they can be dragged around with the mouse
+  const canvas = useRef();
+  //Matter.js references
+  const engine = useRef();
+  const render = useRef();
+  const runner = useRef();
+  const mouse = useRef();
+  const mouseConstraint = useRef();
+  const walls = useRef({});
+  const [holding, setHolding] = useState(false); // check if user is holding plush
+
+  useEffect(() => {
+    initializeRenderer(); //Initialize Matter.js objects
+    window.addEventListener("scroll", updateMouseOffset);
+    window.addEventListener("resize", resizeRenderer);
+
+    return () => {
+      //Done when the component closes. Do the opposite.
+      clearRenderer(); //Remove all data from Matter.js
+      window.removeEventListener("scroll", updateMouseOffset);
+      window.removeEventListener("resize", resizeRenderer);
+    };
+  }, []);
+
+  //Initialize everything from Matter.js
+  const initializeRenderer = () => {
+    if (!canvas.current) return; //It's good to always check if your reference exists.
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    // made here instead of in useRef so StrictMode's remount gets a fresh world
+    engine.current = Engine.create();
+    render.current = Render.create({
+      element: canvas.current,
+      engine: engine.current,
+      options: {
+        width,
+        height,
+        wireframes: false, // needed for sprites to show
+        background: "transparent", // let the site theme show through
+        pixelRatio: window.devicePixelRatio,
+      },
+    });
+
+    // floor, ceiling, and walls just outside the edges of the screen
+    const wallOptions = { isStatic: true, friction: 1 };
+    walls.current = {
+      floor: Bodies.rectangle(
+        width / 2,
+        height + WALL / 2,
+        WALL_LENGTH,
+        WALL,
+        wallOptions,
+      ),
+      ceiling: Bodies.rectangle(
+        width / 2,
+        -WALL / 2,
+        WALL_LENGTH,
+        WALL,
+        wallOptions,
+      ),
+      left: Bodies.rectangle(
+        -WALL / 2,
+        height / 2,
+        WALL,
+        WALL_LENGTH,
+        wallOptions,
+      ),
+      right: Bodies.rectangle(
+        width + WALL / 2,
+        height / 2,
+        WALL,
+        WALL_LENGTH,
+        wallOptions,
+      ),
+    };
+    Composite.add(engine.current.world, Object.values(walls.current));
+
+    // mouse is on the body since the canvas sits behind the page and can't get clicks
+    mouse.current = Mouse.create(document.body);
+    removeBlockingListeners(mouse.current);
+    document.body.addEventListener("mousedown", blockPressOnPlushie);
+    document.body.addEventListener("touchstart", blockPressOnPlushie, {
+      passive: false,
+    });
+    updateMouseOffset();
+    mouseConstraint.current = MouseConstraint.create(engine.current, {
+      mouse: mouse.current,
+      constraint: { stiffness: 0.2, render: { visible: false } },
+    });
+    Composite.add(engine.current.world, mouseConstraint.current);
+    // only fires when a plushie is actually grabbed, unlike raw mouse/touch events
+    Events.on(mouseConstraint.current, "startdrag", () => setHolding(true));
+    Events.on(mouseConstraint.current, "enddrag", () => setHolding(false));
+
+    Render.run(render.current);
+    runner.current = Runner.create();
+    Runner.run(runner.current, engine.current);
+  };
+
+  // Matter's mouse calls preventDefault on wheel and touch events, which would stop
+  // the page from scrolling and taps from clicking. Swap those listeners for ones
+  // that only block the browser while a plushie is actually being dragged.
+  const removeBlockingListeners = (m) => {
+    m.element.removeEventListener("wheel", m.mousewheel);
+    m.element.removeEventListener("touchmove", m.mousemove);
+    m.element.removeEventListener("touchstart", m.mousedown);
+    m.element.removeEventListener("touchend", m.mouseup);
+
+    const forwardTouch = (handler) => (event) =>
+      handler({
+        changedTouches: event.changedTouches,
+        preventDefault: () => {
+          if (mouseConstraint.current?.body) event.preventDefault();
+        },
+      });
+    m.touchmove = forwardTouch(m.mousemove);
+    m.touchstart = forwardTouch(m.mousedown);
+    m.touchend = forwardTouch(m.mouseup);
+    m.element.addEventListener("touchmove", m.touchmove, { passive: false });
+    m.element.addEventListener("touchstart", m.touchstart, { passive: false });
+    m.element.addEventListener("touchend", m.touchend, { passive: false });
+  };
+
+  // true if the screen point is on a plushie (walls are static so they're skipped),
+  // the canvas is fixed at the top left so screen coords are world coords
+  const isOverPlushie = (x, y) =>
+    Query.point(
+      Composite.allBodies(engine.current.world).filter((b) => !b.isStatic),
+      { x, y },
+    ).length > 0;
+
+  // stop the browser selecting text / scrolling when the press lands on a plushie,
+  // has to happen on the press itself since a selection can't be undone once started
+  const blockPressOnPlushie = (event) => {
+    if (!engine.current) return;
+    const point = event.touches ? event.touches[0] : event;
+    if (isOverPlushie(point.clientX, point.clientY)) event.preventDefault();
+  };
+
+  // Matter gives mouse positions relative to the whole page, but the canvas is fixed
+  // to the screen, so shift by the scroll amount
+  const updateMouseOffset = () => {
+    if (!mouse.current) return;
+    Mouse.setOffset(mouse.current, { x: -window.scrollX, y: -window.scrollY });
+  };
+
+  // keep the canvas and walls matching the window size
+  const resizeRenderer = () => {
+    if (!render.current) return;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    Render.setSize(render.current, width, height);
+    Body.setPosition(walls.current.floor, {
+      x: width / 2,
+      y: height + WALL / 2,
+    });
+    Body.setPosition(walls.current.ceiling, { x: width / 2, y: -WALL / 2 });
+    Body.setPosition(walls.current.right, {
+      x: width + WALL / 2,
+      y: height / 2,
+    });
+    Body.setPosition(walls.current.left, { x: -WALL / 2, y: height / 2 });
+  };
+
+  // drop a random plushie in near the top middle of the screen
+  const addPlushie = () => {
+    const plush =
+      POSSIBLE_PLUSHES[Math.floor(Math.random() * POSSIBLE_PLUSHES.length)];
+    // load the image first so the sprite can be scaled to PLUSH_SIZE whatever its real size is
+    const img = new Image();
+    img.onload = () => {
+      if (!engine.current) return;
+      const scale = PLUSH_SIZE / Math.max(img.naturalWidth, img.naturalHeight);
+      const x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
+      Composite.add(
+        engine.current.world,
+        Bodies.circle(x, PLUSH_SIZE, PLUSH_SIZE / 2, {
+          label: plush.name,
+          restitution: 0.4,
+          friction: 0.3,
+          render: {
+            sprite: { texture: plush.path, xScale: scale, yScale: scale },
+          },
+        }),
+      );
+    };
+    img.src = plush.path;
+  };
+
+  //Remove everything when closed. Self-explanatory.
+  const clearRenderer = () => {
+    if (mouse.current) {
+      const m = mouse.current;
+      m.element.removeEventListener("mousemove", m.mousemove);
+      m.element.removeEventListener("mousedown", m.mousedown);
+      m.element.removeEventListener("mouseup", m.mouseup);
+      m.element.removeEventListener("touchmove", m.touchmove);
+      m.element.removeEventListener("touchstart", m.touchstart);
+      m.element.removeEventListener("touchend", m.touchend);
+      mouse.current = null;
+    }
+    document.body.removeEventListener("mousedown", blockPressOnPlushie);
+    document.body.removeEventListener("touchstart", blockPressOnPlushie);
+
+    if (!render.current) return;
+    Render.stop(render.current);
+    Runner.stop(runner.current);
+    render.current.canvas.remove();
+    render.current.textures = {};
+    render.current = null;
+
+    if (!engine.current) return;
+    Composite.clear(engine.current.world);
+    Engine.clear(engine.current);
+    engine.current = null;
+  };
+
   return (
     <HomeTransition>
-      <main className="section-page mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-        <Hero />
-        <About />
-        <Skills />
+      <div ref={canvas} className="pointer-events-none fixed inset-0 z-0" />
+      {/* relative + z-10 puts all the content above the canvas, bg-transparent so
+          .section-page's background doesn't hide it (body already has the same bg) */}
+      <main
+        className={`section-page relative z-10 mx-auto w-full max-w-5xl bg-transparent px-4 sm:px-6 lg:px-8 ${holding ? "cursor-grabbing select-none" : ""}`}
+      >
+        {/* title, pfp, and buttons */}
+        <section className="grid grid-cols-1 items-center gap-8 py-10 sm:py-16 md:grid-cols-[1fr_auto] md:gap-12 lg:py-24">
+          <div className="z-[inherit] order-2 text-center md:order-1 md:text-left">
+            <p className="mb-3 text-sm font-semibold tracking-[0.2em] text-muted-foreground uppercase">
+              {HERO.descriptor}
+            </p>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+              {HERO.name}
+            </h1>
+            <p className="mt-2 text-2xl font-bold text-accent sm:text-3xl dark:text-primary">
+              aka {HERO.nickname}
+            </p>
+            <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground sm:text-lg md:mx-0">
+              {HERO.tagline}
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+              <WhirlpoolConicButton to="/contactme">
+                Contact me
+              </WhirlpoolConicButton>
+              <CenterPillFillButton href={`/${krish_resume}`} external>
+                Resume
+              </CenterPillFillButton>
+            </div>
+          </div>
+          <img
+            src={HERO.avatar}
+            alt={HERO.name}
+            className="order-1 mx-auto size-40 rounded-full border-4 border-primary object-cover shadow-xl shadow-primary/30 sm:size-56 md:order-2 lg:size-72"
+            onClick={addPlushie}
+          />
+        </section>
+        {/* About me area */}
+        <section id="about" className="py-10 sm:py-14">
+          <SectionHeading title="About Me" />
+          <div className="max-w-prose space-y-4 text-base leading-relaxed text-muted-foreground sm:text-lg whitespace-pre-line">
+            {ABOUT.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+        {/* Skills */}
+        <section id="skills" className="py-10 sm:py-14">
+          <SectionHeading title="Skills" />
+          {/* flex-wrap instead of grid so a partial last row gets centered */}
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+            {SKILLS.map((group) => (
+              <div
+                key={group.category}
+                className="w-9/10 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              >
+                <InfoPanel title={group.category} className="h-full">
+                  <BadgeList items={group.items} />
+                </InfoPanel>
+              </div>
+            ))}
+          </div>
+        </section>
         <p className="flex mt-10 justify-center">MORE IS PLANNED STAY TUNED!</p>
       </main>
     </HomeTransition>

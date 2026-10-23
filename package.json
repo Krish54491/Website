@@ -28,6 +28,7 @@
     "bcryptjs": "^3.0.3",
     "cookie": "^1.1.1",
     "drizzle-orm": "^0.45.1",
+    "matter-js": "^0.20.0",
     "pokemon-sprites": "github:PokeAPI/sprites",
     "postgres": "^3.4.8",
     "react": "^18.3.1",
