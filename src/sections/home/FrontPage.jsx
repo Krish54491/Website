@@ -20,6 +20,7 @@ import {
   Mouse,
   MouseConstraint,
   Query,
+  Vertices,
 } from "matter-js";
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
@@ -28,7 +29,18 @@ const WALL = 200; // wall thickness, thick so fast plushies don't tunnel through
 const WALL_LENGTH = 10000; // long enough that resizing only has to move the walls
 // obstacles are their own collision category so the mouse can't grab them
 const OBSTACLE_CATEGORY = 0x0002;
-
+const THRESHOLD = 0; // how high alpha needs to be alpha > threshold
+const weights = [
+  { rarity: 3, weight: 0.5 },
+  {
+    rarity: 4,
+    weight: 0.35,
+  },
+  {
+    rarity: 5,
+    weight: 0.15,
+  },
+];
 export default function FrontPage() {
   // plushies live in a matter.js world drawn on a canvas behind the page,
   // clicking the pfp adds one and they can be dragged around with the mouse
@@ -81,7 +93,7 @@ export default function FrontPage() {
       options: {
         width,
         height,
-        wireframes: false, // needed for sprites to show
+        wireframes: false, // needed to be false for sprites to show
         background: "transparent", // let the site theme show through
         pixelRatio: window.devicePixelRatio,
       },
@@ -288,26 +300,17 @@ export default function FrontPage() {
       };
     } else {
       const spriteUrl = pokemon.sprites.front_default;
-      console.log({ path: spriteUrl, name: pokemon.name });
       return { path: spriteUrl, name: pokemon.name };
     }
   };
-
+  const testerRef = useRef(null); // testing
+  function findPixelAlpha(x, y, width) {
+    return (y * width + x) * 4 + 3; // red channel +3 to get alpha
+  }
   // drop a random plushie in near the top middle of the screen
   const addPlushie = async () => {
     // weighting is 50% 3 star, 35% 4 star, 15% 5 star
     // it's magic numbers for the record
-    const weights = [
-      { rarity: 3, weight: 0.5 },
-      {
-        rarity: 4,
-        weight: 0.35,
-      },
-      {
-        rarity: 5,
-        weight: 0.15,
-      },
-    ];
     const rollOdds = Math.random();
     let rarityObtained = 3; // 3 by default
     let count = 0;
@@ -329,13 +332,48 @@ export default function FrontPage() {
       : await getPokemonImage();
     // load the image first so the sprite can be scaled to PLUSH_SIZE whatever its real size is
     const img = new Image();
+    img.crossOrigin = "anonymous";
+    const testcanva = testerRef.current;
+    const ctx = testcanva.getContext("2d");
+
     img.onload = () => {
-      if (!engine.current) return;
+      // testing
+      // canvas matches the real image so the hull is measured in true image pixels
+      testcanva.width = img.naturalWidth;
+      testcanva.height = img.naturalHeight;
+      ctx.clearRect(0, 0, testcanva.width, testcanva.height);
+
+      // Draw image at coordinate position (x=0, y=0), no stretching
+      ctx.drawImage(img, 0, 0);
+      const data = ctx.getImageData(0, 0, testcanva.width, testcanva.height);
+      const width = data.width;
+      const height = data.height;
+      console.log("Width: " + width + " Height: " + height);
+      console.log(data);
+      console.log(data.data[findPixelAlpha(0, 0, width)]);
+      console.log(data.data[findPixelAlpha(width / 2, height / 2, width)]);
+      let newData = [];
+      for (let x = 0; x < width; x++) {
+        for (let y = 0; y < height; y++) {
+          const i = findPixelAlpha(x, y, width);
+          if (data.data[i] > THRESHOLD) {
+            // keep it
+            newData.push({ x: x, y: y });
+          }
+        }
+      }
+      console.log(newData);
       const scale = PLUSH_SIZE / Math.max(img.naturalWidth, img.naturalHeight);
+      const hull = Vertices.hull(newData);
+      // hull is in image pixels, shrink it to on-screen size so it matches the sprite
+      const scaledHull = hull.map((p) => ({ x: p.x * scale, y: p.y * scale }));
+      // working code
+      if (!engine.current) return;
       const x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
       Composite.add(
         engine.current.world,
-        Bodies.circle(x, PLUSH_SIZE, PLUSH_SIZE / 2, {
+        // y = PLUSH_SIZE keeps the whole shape below the ceiling (which ends at y = 0)
+        Bodies.fromVertices(x, PLUSH_SIZE, scaledHull, {
           label: plush.name,
           restitution: 0.4,
           friction: 0.3,
@@ -379,6 +417,7 @@ export default function FrontPage() {
 
   return (
     <HomeTransition>
+      <canvas ref={testerRef} width={160} height={160} className="hidden" />
       <div ref={canvas} className="pointer-events-none fixed inset-0 z-0" />
       {/* relative + z-10 puts all the content above the canvas, bg-transparent so
           .section-page's background doesn't hide it (body already has the same bg) */}
