@@ -23,7 +23,7 @@ import {
 } from "matter-js";
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
-const PLUSH_SIZE = 80; // diameter in px
+const PLUSH_SIZE = 50; // diameter in px
 const WALL = 200; // wall thickness, thick so fast plushies don't tunnel through
 const WALL_LENGTH = 10000; // long enough that resizing only has to move the walls
 // obstacles are their own collision category so the mouse can't grab them
