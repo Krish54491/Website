@@ -24,7 +24,7 @@ import {
 } from "matter-js";
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
-const PLUSH_SIZE = 50; // diameter in px
+const PLUSH_SIZE = 50; // size of the biggest side of the visible plushie in px
 const WALL = 200; // wall thickness, thick so fast plushies don't tunnel through
 const WALL_LENGTH = 10000; // long enough that resizing only has to move the walls
 // obstacles are their own collision category so the mouse can't grab them
@@ -41,6 +41,77 @@ const weights = [
     weight: 0.15,
   },
 ];
+
+function findPixelAlpha(x, y, width) {
+  return (y * width + x) * 4 + 3; // red channel +3 to get alpha
+}
+
+// traced shapes by image path, so each image only gets scanned once
+const shapeCache = new Map();
+
+// trace the visible pixels of an image into a convex hull scaled to PLUSH_SIZE, plus
+// where the hull's centre sits in the image so the sprite can be lined up with the body.
+// returns null if the image can't be read (e.g. another site that blocks it)
+function getPlushShape(img, path) {
+  if (shapeCache.has(path)) return shapeCache.get(path);
+  const width = img.naturalWidth;
+  const height = img.naturalHeight;
+
+  // never added to the page, it's just scratch space to read the pixels from
+  const scratch = document.createElement("canvas");
+  scratch.width = width;
+  scratch.height = height;
+  const ctx = scratch.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  let data;
+  try {
+    data = ctx.getImageData(0, 0, width, height).data;
+  } catch {
+    return null; // tainted canvas, the image's site didn't allow reading it
+  }
+
+  // only the leftmost and rightmost solid pixel of each row can be on the hull,
+  // corners of both pixels are used so the hull covers them fully
+  const points = [];
+  for (let y = 0; y < height; y++) {
+    let left = 0;
+    while (left < width && data[findPixelAlpha(left, y, width)] <= THRESHOLD)
+      left++;
+    if (left === width) continue; // empty row
+    let right = width - 1;
+    while (data[findPixelAlpha(right, y, width)] <= THRESHOLD) right--;
+    points.push(
+      { x: left, y },
+      { x: right + 1, y },
+      { x: left, y: y + 1 },
+      { x: right + 1, y: y + 1 },
+    );
+  }
+  if (points.length === 0) return null; // fully transparent image
+
+  const hull = Vertices.hull(points);
+  // scale by the visible part, not the whole image, so transparent padding doesn't shrink it
+  const xs = hull.map((p) => p.x);
+  const ys = hull.map((p) => p.y);
+  const visibleSize = Math.max(
+    Math.max(...xs) - Math.min(...xs),
+    Math.max(...ys) - Math.min(...ys),
+  );
+  const scale = PLUSH_SIZE / visibleSize;
+  // body.position ends up at the hull's centre of mass, so the sprite needs to be
+  // drawn with that same image pixel on it (offsets are fractions of the full image)
+  const centre = Vertices.centre(hull);
+
+  const shape = {
+    vertices: hull.map((p) => ({ x: p.x * scale, y: p.y * scale })),
+    scale,
+    xOffset: centre.x / width,
+    yOffset: centre.y / height,
+  };
+  shapeCache.set(path, shape);
+  return shape;
+}
+
 export default function FrontPage() {
   // plushies live in a matter.js world drawn on a canvas behind the page,
   // clicking the pfp adds one and they can be dragged around with the mouse
@@ -303,10 +374,6 @@ export default function FrontPage() {
       return { path: spriteUrl, name: pokemon.name };
     }
   };
-  const testerRef = useRef(null); // testing
-  function findPixelAlpha(x, y, width) {
-    return (y * width + x) * 4 + 3; // red channel +3 to get alpha
-  }
   // drop a random plushie in near the top middle of the screen
   const addPlushie = async () => {
     // weighting is 50% 3 star, 35% 4 star, 15% 5 star
@@ -330,58 +397,44 @@ export default function FrontPage() {
     const plush = plushesForRarity[0]
       ? plushesForRarity[Math.floor(Math.random() * plushesForRarity.length)]
       : await getPokemonImage();
-    // load the image first so the sprite can be scaled to PLUSH_SIZE whatever its real size is
+    // load the image first so its pixels can be traced into the body's shape
     const img = new Image();
-    img.crossOrigin = "anonymous";
-    const testcanva = testerRef.current;
-    const ctx = testcanva.getContext("2d");
+    img.crossOrigin = "anonymous"; // has to be before src so other sites' images can be read
 
     img.onload = () => {
-      // testing
-      // canvas matches the real image so the hull is measured in true image pixels
-      testcanva.width = img.naturalWidth;
-      testcanva.height = img.naturalHeight;
-      ctx.clearRect(0, 0, testcanva.width, testcanva.height);
-
-      // Draw image at coordinate position (x=0, y=0), no stretching
-      ctx.drawImage(img, 0, 0);
-      const data = ctx.getImageData(0, 0, testcanva.width, testcanva.height);
-      const width = data.width;
-      const height = data.height;
-      console.log("Width: " + width + " Height: " + height);
-      console.log(data);
-      console.log(data.data[findPixelAlpha(0, 0, width)]);
-      console.log(data.data[findPixelAlpha(width / 2, height / 2, width)]);
-      let newData = [];
-      for (let x = 0; x < width; x++) {
-        for (let y = 0; y < height; y++) {
-          const i = findPixelAlpha(x, y, width);
-          if (data.data[i] > THRESHOLD) {
-            // keep it
-            newData.push({ x: x, y: y });
-          }
-        }
-      }
-      console.log(newData);
-      const scale = PLUSH_SIZE / Math.max(img.naturalWidth, img.naturalHeight);
-      const hull = Vertices.hull(newData);
-      // hull is in image pixels, shrink it to on-screen size so it matches the sprite
-      const scaledHull = hull.map((p) => ({ x: p.x * scale, y: p.y * scale }));
-      // working code
       if (!engine.current) return;
+      const shape = getPlushShape(img, plush.path);
       const x = window.innerWidth / 2 + (Math.random() - 0.5) * 200;
-      Composite.add(
-        engine.current.world,
+      const options = { label: plush.name, restitution: 0.4, friction: 0.3 };
+      let body;
+      if (shape) {
         // y = PLUSH_SIZE keeps the whole shape below the ceiling (which ends at y = 0)
-        Bodies.fromVertices(x, PLUSH_SIZE, scaledHull, {
-          label: plush.name,
-          restitution: 0.4,
-          friction: 0.3,
+        body = Bodies.fromVertices(x, PLUSH_SIZE, shape.vertices, {
+          ...options,
+          render: {
+            sprite: {
+              texture: plush.path,
+              xScale: shape.scale,
+              yScale: shape.scale,
+            },
+          },
+        });
+        // matter guesses the offset from the body's bounds while creating it, which is
+        // wrong when the image has transparent padding, so it's set after
+        body.render.sprite.xOffset = shape.xOffset;
+        body.render.sprite.yOffset = shape.yOffset;
+      } else {
+        // couldn't read the pixels, fall back to a circle the size of the whole image
+        const scale =
+          PLUSH_SIZE / Math.max(img.naturalWidth, img.naturalHeight);
+        body = Bodies.circle(x, PLUSH_SIZE, PLUSH_SIZE / 2, {
+          ...options,
           render: {
             sprite: { texture: plush.path, xScale: scale, yScale: scale },
           },
-        }),
-      );
+        });
+      }
+      Composite.add(engine.current.world, body);
     };
     img.src = plush.path;
   };
@@ -417,7 +470,6 @@ export default function FrontPage() {
 
   return (
     <HomeTransition>
-      <canvas ref={testerRef} width={160} height={160} className="hidden" />
       <div ref={canvas} className="pointer-events-none fixed inset-0 z-0" />
       {/* relative + z-10 puts all the content above the canvas, bg-transparent so
           .section-page's background doesn't hide it (body already has the same bg) */}
