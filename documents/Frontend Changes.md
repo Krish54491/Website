@@ -86,7 +86,7 @@
 ## Urgent
 
 - nonpersonalized transition
-- click on profile and it picks new plush to be profile, puts the replaced plush as an object in the background that can be moved using matter.js
+- click on profile and it spawns new plush, puts the replaced plush as an object in the background that can be moved using matter.js
 - ring of electricity around profile pic
 - lugia in background of games
 

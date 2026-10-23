@@ -166,3 +166,30 @@ export const socialLinks = [
   },
   // { name: "Discord", icon: "discord", href: "#" },
 ];
+// plushies that can be spawned, for now from a list, but in the future have an api to get them from - not needed
+// also add rarities
+import Ampharos from "../../assets/home/plushes/Ampharos.webp";
+import Teto from "../../assets/home/plushes/Teto.webp";
+import ShadowLugia from "../../assets/home/plushes/Shadow Lugia.webp";
+import Miku from "../../assets/home/plushes/Miku.webp";
+import Denia from "../../assets/home/plushes/Denia(wuwa).webp";
+import Kirby from "../../assets/home/plushes/Kirby.webp";
+import BusChan from "../../assets/home/plushes/Bus(tuyu).webp";
+import Joker from "../../assets/home/plushes/Joker(persona 5).webp";
+export const POSSIBLE_PLUSHES: {
+  path: string;
+  name: string;
+  rarity: number; // num is amount of stars from 4-5, I love gacha games after all
+  // 3 stars will be random pokemon!
+}[] = [
+  { path: "/Krish544 Icon.png", name: "jolteon", rarity: 4 },
+  { path: Ampharos, name: "Ampharos", rarity: 4 },
+  { path: Teto, name: "Kasane Teto", rarity: 5 }, // baguette girl
+  { path: Miku, name: "Hatsune Miku", rarity: 4 },
+  { path: ShadowLugia, name: "Shadow Lugia", rarity: 5 },
+  { path: Denia, name: "Denia(From Wuthering Waves)", rarity: 5 },
+  { path: Kirby, name: "Kirby", rarity: 4 },
+  { path: BusChan, name: "Bus-chan from tuyu", rarity: 5 }, // ball reference, if you know tuyu and you contact me +500 reputation
+  { path: Joker, name: "Joker Persona 5", rarity: 4 },
+];
+// not actually gonna do true gacha system, since it's way too complex for such a low amount

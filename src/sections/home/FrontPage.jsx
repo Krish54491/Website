@@ -7,7 +7,7 @@ import {
 import InfoPanel from "../../components/ui/InfoPanel";
 import { BadgeList } from "../../components/ui/Badge";
 import { ABOUT, HERO, SKILLS } from "../config/homeConfig";
-import { krish_resume } from "../utils/constants";
+import { krish_resume, POSSIBLE_PLUSHES } from "../utils/constants";
 import { useRef, useEffect, useState } from "react";
 import {
   Engine,
@@ -21,21 +21,13 @@ import {
   MouseConstraint,
   Query,
 } from "matter-js";
-
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
-// plushies that can be spawned, for now from a list, but in the future have an api to get them from
-// also add rarities
-import Ampharos from "../../assets/Ampharos.png";
-const POSSIBLE_PLUSHES = [
-  { path: "/Krish544 Icon.png", name: "jolteon" },
-  { path: Ampharos, name: "Ampharos" },
-  // { path: "", name: "Kasane Teto" }, // baguette girl
-  // { path: "", name: "Hatsune Miku" },
-];
 const PLUSH_SIZE = 80; // diameter in px
 const WALL = 200; // wall thickness, thick so fast plushies don't tunnel through
 const WALL_LENGTH = 10000; // long enough that resizing only has to move the walls
+// obstacles are their own collision category so the mouse can't grab them
+const OBSTACLE_CATEGORY = 0x0002;
 
 export default function FrontPage() {
   // plushies live in a matter.js world drawn on a canvas behind the page,
@@ -49,19 +41,30 @@ export default function FrontPage() {
   const mouseConstraint = useRef();
   const walls = useRef({});
   const [holding, setHolding] = useState(false); // check if user is holding plush
-
+  const obstacles = useRef([]); // { el, body, w, h }
+  const main = useRef();
   useEffect(() => {
     initializeRenderer(); //Initialize Matter.js objects
-    window.addEventListener("scroll", updateMouseOffset);
+    window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", resizeRenderer);
+    // catches layout changes that aren't a window resize, like fonts or images loading in
+    const layoutObserver = new ResizeObserver(syncObstacles);
+    layoutObserver.observe(main.current);
 
     return () => {
       //Done when the component closes. Do the opposite.
       clearRenderer(); //Remove all data from Matter.js
-      window.removeEventListener("scroll", updateMouseOffset);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", resizeRenderer);
+      layoutObserver.disconnect();
     };
   }, []);
+
+  // elements move on screen when scrolling, so the mouse and obstacles both need updating
+  const handleScroll = () => {
+    updateMouseOffset();
+    syncObstacles();
+  };
 
   //Initialize everything from Matter.js
   const initializeRenderer = () => {
@@ -117,7 +120,7 @@ export default function FrontPage() {
       ),
     };
     Composite.add(engine.current.world, Object.values(walls.current));
-
+    syncObstacles();
     // mouse is on the body since the canvas sits behind the page and can't get clicks
     mouse.current = Mouse.create(document.body);
     removeBlockingListeners(mouse.current);
@@ -129,6 +132,7 @@ export default function FrontPage() {
     mouseConstraint.current = MouseConstraint.create(engine.current, {
       mouse: mouse.current,
       constraint: { stiffness: 0.2, render: { visible: false } },
+      collisionFilter: { mask: 0x0001 }, // only plushies (default category) can be grabbed
     });
     Composite.add(engine.current.world, mouseConstraint.current);
     // only fires when a plushie is actually grabbed, unlike raw mouse/touch events
@@ -139,6 +143,62 @@ export default function FrontPage() {
     runner.current = Runner.create();
     Runner.run(runner.current, engine.current);
   };
+
+  // every element with data-physics gets an invisible static body matching its spot
+  // on screen, so plushies bounce off it. function instead of const so it's hoisted
+  // for initializeRenderer and the ResizeObserver
+  function syncObstacles() {
+    if (!engine.current || !main.current) return;
+    const world = engine.current.world;
+    const elements = [...main.current.querySelectorAll("[data-physics]")];
+
+    // drop bodies whose element is gone
+    obstacles.current = obstacles.current.filter((o) => {
+      if (elements.includes(o.el)) return true;
+      Composite.remove(world, o.body);
+      return false;
+    });
+
+    for (const el of elements) {
+      const rect = el.getBoundingClientRect();
+      const centre = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+      };
+      const existing = obstacles.current.find((o) => o.el === el);
+
+      // same size means it only moved (scrolling), so just move the body
+      if (existing && existing.w === rect.width && existing.h === rect.height) {
+        Body.setPosition(existing.body, centre);
+        continue;
+      }
+
+      // new element or its size changed, bodies can't be resized so make a new one
+      if (existing) Composite.remove(world, existing.body);
+      const opts = {
+        isStatic: true,
+        friction: 0.3,
+        render: { visible: false },
+        collisionFilter: { category: OBSTACLE_CATEGORY },
+      };
+      const body =
+        el.dataset.physics === "circle"
+          ? Bodies.circle(centre.x, centre.y, rect.width / 2, opts)
+          : Bodies.rectangle(centre.x, centre.y, rect.width, rect.height, {
+              ...opts,
+              chamfer: {
+                radius: el.dataset.radius
+                  ? parseInt(el.dataset.radius, 10)
+                  : 16,
+              }, // matches rounded-2xl on the cards
+            });
+      Composite.add(world, body);
+
+      if (existing)
+        Object.assign(existing, { body, w: rect.width, h: rect.height });
+      else obstacles.current.push({ el, body, w: rect.width, h: rect.height });
+    }
+  }
 
   // Matter's mouse calls preventDefault on wheel and touch events, which would stop
   // the page from scrolling and taps from clicking. Swap those listeners for ones
@@ -203,12 +263,70 @@ export default function FrontPage() {
       y: height / 2,
     });
     Body.setPosition(walls.current.left, { x: -WALL / 2, y: height / 2 });
+    syncObstacles();
+  };
+
+  // I always reuse OLD CODE MWHAHAHAHAHAHA
+  const getPokemonImage = async () => {
+    const speciesRes = await fetch(
+      "https://pokeapi.co/api/v2/pokemon-species?limit=0",
+    );
+    const speciesData = await speciesRes.json();
+    const total = speciesData.count;
+    const randomId = Math.floor(Math.random() * total + 1);
+
+    const pokemonRes = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${randomId}`,
+    );
+    const pokemon = await pokemonRes.json();
+    const shinyChance = Math.floor(Math.random() * 4096 + 1);
+    if (shinyChance === 1) {
+      const shinySpriteUrl = pokemon.sprites.front_shiny;
+      return {
+        path: shinySpriteUrl,
+        name: pokemon.name,
+      };
+    } else {
+      const spriteUrl = pokemon.sprites.front_default;
+      console.log({ path: spriteUrl, name: pokemon.name });
+      return { path: spriteUrl, name: pokemon.name };
+    }
   };
 
   // drop a random plushie in near the top middle of the screen
-  const addPlushie = () => {
-    const plush =
-      POSSIBLE_PLUSHES[Math.floor(Math.random() * POSSIBLE_PLUSHES.length)];
+  const addPlushie = async () => {
+    // weighting is 50% 3 star, 35% 4 star, 15% 5 star
+    // it's magic numbers for the record
+    const weights = [
+      { rarity: 3, weight: 0.5 },
+      {
+        rarity: 4,
+        weight: 0.35,
+      },
+      {
+        rarity: 5,
+        weight: 0.15,
+      },
+    ];
+    const rollOdds = Math.random();
+    let rarityObtained = 3; // 3 by default
+    let count = 0;
+    for (let i = 0; i < weights.length; i++) {
+      const w = weights[i];
+      if (rollOdds <= w.weight + count && rollOdds >= count) {
+        // && is not technically needed since should be impossible
+        rarityObtained = w.rarity;
+        break;
+      }
+      count += w.weight;
+    }
+    const plushesForRarity = POSSIBLE_PLUSHES.filter(
+      (p) => p.rarity === rarityObtained,
+    );
+
+    const plush = plushesForRarity[0]
+      ? plushesForRarity[Math.floor(Math.random() * plushesForRarity.length)]
+      : await getPokemonImage();
     // load the image first so the sprite can be scaled to PLUSH_SIZE whatever its real size is
     const img = new Image();
     img.onload = () => {
@@ -253,6 +371,7 @@ export default function FrontPage() {
     render.current = null;
 
     if (!engine.current) return;
+    obstacles.current = [];
     Composite.clear(engine.current.world);
     Engine.clear(engine.current);
     engine.current = null;
@@ -265,6 +384,7 @@ export default function FrontPage() {
           .section-page's background doesn't hide it (body already has the same bg) */}
       <main
         className={`section-page relative z-10 mx-auto w-full max-w-5xl bg-transparent px-4 sm:px-6 lg:px-8 ${holding ? "cursor-grabbing select-none" : ""}`}
+        ref={main}
       >
         {/* title, pfp, and buttons */}
         <section className="grid grid-cols-1 items-center gap-8 py-10 sm:py-16 md:grid-cols-[1fr_auto] md:gap-12 lg:py-24">
@@ -295,6 +415,8 @@ export default function FrontPage() {
             alt={HERO.name}
             className="order-1 mx-auto size-40 rounded-full border-4 border-primary object-cover shadow-xl shadow-primary/30 sm:size-56 md:order-2 lg:size-72"
             onClick={addPlushie}
+            data-physics="circle"
+            dataset-radius="16"
           />
         </section>
         {/* About me area */}
@@ -315,6 +437,7 @@ export default function FrontPage() {
               <div
                 key={group.category}
                 className="w-9/10 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+                data-physics="rect"
               >
                 <InfoPanel title={group.category} className="h-full">
                   <BadgeList items={group.items} />
