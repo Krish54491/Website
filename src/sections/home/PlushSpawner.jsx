@@ -70,31 +70,25 @@ function PullChain({ onSpawn }) {
 // the text is about 42 long, the round ends add 6 each side, so a 54 long arc
 // (about 58 degrees around the bottom) leaves about 12 of padding past the text
 function RingButton({ onSpawn }) {
-  const [color, setColor] = useState("primary");
-  const handleClicK = () => {
-    setColor((prev) => (prev === "primary" ? "secondary" : "primary"));
-    onSpawn();
-  };
   return (
     <svg
       viewBox="0 0 100 100"
-      className="pointer-events-none absolute inset-0 hidden overflow-visible pointer-coarse:block"
+      className="pointer-events-none absolute inset-0 hidden overflow-visible pointer-coarse:block group"
     >
-      {/* the button */}
       <path
-        d="M 25.1 94.5 A 51 51 0 0 0 74.9 94.5"
-        className={`pointer-events-auto border-border fill-none stroke-${color} stroke-12 [stroke-linecap:round]`}
-        onClick={handleClicK}
+        d="M 22.6 94.8 A 56 56 0 0 0 77.4 94.8"
+        className={`pointer-events-auto border-border fill-none stroke-primary group-active:stroke-secondary stroke-12 [stroke-linecap:round]`}
+        onClick={onSpawn}
       />
       {/* invisible longer arc for the text to sit on, text past the end of its path
           gets cut off, and the button's arc is shorter than the text */}
       <path
         id="spawn-arc"
-        d="M 10.9 82.8 A 51 51 0 0 0 89.1 82.8"
+        d="M 7.1 82.0 A 56 56 0 0 0 92.9 82.0"
         className="fill-none"
       />
       <text
-        className={`fill-${color}-foreground text-[7px] font-semibold [dominant-baseline:middle]`}
+        className={`fill-primary-foreground group-active:fill-secondary-foreground text-[7px] font-semibold [dominant-baseline:middle]`}
       >
         <textPath
           href="#spawn-arc"
