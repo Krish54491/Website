@@ -53,8 +53,8 @@ const shapeCache = new Map();
 // trace the visible pixels of an image into a convex hull scaled to PLUSH_SIZE, plus
 // where the hull's centre sits in the image so the sprite can be lined up with the body.
 // returns null if the image can't be read (e.g. another site that blocks it)
-function getPlushShape(img, path) {
-  if (shapeCache.has(path)) return shapeCache.get(path);
+function getPlushShape(img, path, save = true, scaleProvided = null) {
+  if (shapeCache.has(path) && save) return shapeCache.get(path);
   const width = img.naturalWidth;
   const height = img.naturalHeight;
 
@@ -98,7 +98,7 @@ function getPlushShape(img, path) {
     Math.max(...xs) - Math.min(...xs),
     Math.max(...ys) - Math.min(...ys),
   );
-  const scale = PLUSH_SIZE / visibleSize;
+  const scale = scaleProvided ? scaleProvided : PLUSH_SIZE / visibleSize;
   // body.position ends up at the hull's centre of mass, so the sprite needs to be
   // drawn with that same image pixel on it (offsets are fractions of the full image)
   const centre = Vertices.centre(hull);
@@ -109,7 +109,9 @@ function getPlushShape(img, path) {
     xOffset: centre.x / width,
     yOffset: centre.y / height,
   };
-  shapeCache.set(path, shape);
+  if (save) {
+    shapeCache.set(path, shape);
+  }
   return shape;
 }
 
@@ -127,6 +129,9 @@ export default function FrontPage() {
   const [holding, setHolding] = useState(false); // check if user is holding plush
   const obstacles = useRef([]); // { el, body, w, h }
   const main = useRef();
+  const [clicked, setClicked] = useState(false);
+  const [photo, setPhoto] = useState(HERO.avatar);
+  const profileImg = useRef();
   useEffect(() => {
     initializeRenderer(); //Initialize Matter.js objects
     window.addEventListener("scroll", handleScroll);
@@ -471,6 +476,68 @@ export default function FrontPage() {
     engine.current = null;
   };
 
+  const ProfileHandling = () => {
+    if (!clicked) {
+      // on first click spawn a big plush of krish544 icon
+      const img = new Image();
+      img.onload = () => {
+        if (!engine.current) return;
+        const scale = profileImg.current.width / img.naturalWidth;
+        const shape = getPlushShape(img, HERO.avatar, false, scale);
+        // screen coords like the canvas, img.x would be page coords and the left edge
+        const rect = profileImg.current.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const options = { label: HERO.name, restitution: 0.4, friction: 0.3 };
+        let body;
+        if (shape) {
+          // made at y 0 then moved under the pfp below, once its real height is known
+          body = Bodies.fromVertices(
+            x,
+            0,
+            shape.vertices,
+            {
+              ...options,
+              render: {
+                sprite: {
+                  texture: HERO.avatar,
+                  xScale: shape.scale,
+                  yScale: shape.scale,
+                },
+              },
+            },
+          );
+          // matter guesses the offset from the body's bounds while creating it, which is
+          // wrong when the image has transparent padding, so it's set after
+          body.render.sprite.xOffset = shape.xOffset;
+          body.render.sprite.yOffset = shape.yOffset;
+        } else {
+          // couldn't read the pixels, fall back to a circle the size of the whole image
+          body = Bodies.circle(x, 0, rect.width / 2, {
+            ...options,
+            render: {
+              sprite: { texture: HERO.avatar, xScale: scale, yScale: scale },
+            },
+          });
+        }
+        // drop it in where the rope/button is: top edge right at the bottom of the pfp, so it
+        // doesn't start inside the pfp's obstacle. kept above the floor if the pfp is low on screen
+        const height = body.bounds.max.y - body.bounds.min.y;
+        const top = Math.min(rect.bottom, window.innerHeight - height);
+        Body.setPosition(body, {
+          x,
+          y: body.position.y + (top - body.bounds.min.y),
+        });
+        Composite.add(engine.current.world, body);
+      };
+      img.src = HERO.avatar;
+      setClicked(true);
+      // swap to real photo of me
+      setPhoto("");
+    }
+
+    // on clicks after that idk yet
+  };
+
   return (
     <HomeTransition>
       <div ref={canvas} className="pointer-events-none fixed inset-0 z-0" />
@@ -507,12 +574,13 @@ export default function FrontPage() {
           {/* relative wrapper so the spawn controls can hang off the pfp */}
           <div className="relative order-1 mx-auto md:order-2">
             <img
-              src={HERO.avatar}
+              src={photo}
               alt={HERO.name}
               className="size-40 rounded-full border-4 border-primary object-cover shadow-xl shadow-primary/30 sm:size-56 lg:size-72"
-              onClick={addPlushie}
+              onClick={ProfileHandling}
               data-physics="circle"
               dataset-radius="16"
+              ref={profileImg}
             />
             <PlushSpawner onSpawn={addPlushie} />
           </div>

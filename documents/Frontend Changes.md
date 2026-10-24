@@ -86,7 +86,6 @@
 ## Urgent
 
 - nonpersonalized transition
-- click on profile and it spawns new plush, puts the replaced plush as an object in the background that can be moved using matter.js
 - ring of electricity around profile pic
 - lugia in background of games
 
@@ -108,6 +107,7 @@
 - add all hover and animations
 - make case study cards have some reaction on hover
 - make skill cards have reaction on hover
+- add sound effects for plushies spawning in
 
 ## Optional extras
 
