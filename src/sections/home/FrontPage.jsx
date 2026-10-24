@@ -9,6 +9,7 @@ import { BadgeList } from "../../components/ui/Badge";
 import { ABOUT, HERO, SKILLS } from "../config/homeConfig";
 import { krish_resume, POSSIBLE_PLUSHES } from "../utils/constants";
 import { useRef, useEffect, useState } from "react";
+import PlushSpawner from "./PlushSpawner";
 import {
   Engine,
   Render,
@@ -25,7 +26,7 @@ import {
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
 const PLUSH_SIZE = 50; // size of the biggest side of the visible plushie in px
-const WALL = 200; // wall thickness, thick so fast plushies don't tunnel through
+const WALL = 300; // wall thickness, thick so fast plushies don't tunnel through
 const WALL_LENGTH = 10000; // long enough that resizing only has to move the walls
 // obstacles are their own collision category so the mouse can't grab them
 const OBSTACLE_CATEGORY = 0x0002;
@@ -503,14 +504,18 @@ export default function FrontPage() {
               </CenterPillFillButton>
             </div>
           </div>
-          <img
-            src={HERO.avatar}
-            alt={HERO.name}
-            className="order-1 mx-auto size-40 rounded-full border-4 border-primary object-cover shadow-xl shadow-primary/30 sm:size-56 md:order-2 lg:size-72"
-            onClick={addPlushie}
-            data-physics="circle"
-            dataset-radius="16"
-          />
+          {/* relative wrapper so the spawn controls can hang off the pfp */}
+          <div className="relative order-1 mx-auto md:order-2">
+            <img
+              src={HERO.avatar}
+              alt={HERO.name}
+              className="size-40 rounded-full border-4 border-primary object-cover shadow-xl shadow-primary/30 sm:size-56 lg:size-72"
+              onClick={addPlushie}
+              data-physics="circle"
+              dataset-radius="16"
+            />
+            <PlushSpawner onSpawn={addPlushie} />
+          </div>
         </section>
         {/* About me area */}
         <section id="about" className="py-10 sm:py-14">
