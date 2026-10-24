@@ -23,6 +23,7 @@ import {
   Query,
   Vertices,
 } from "matter-js";
+import MePhoto from "../../assets/home/Me.webp";
 // Blog section("Want to know more here's my blog!") is shelved until there's a backend for it, see blogConfig.ts
 
 const PLUSH_SIZE = 50; // size of the biggest side of the visible plushie in px
@@ -491,21 +492,16 @@ export default function FrontPage() {
         let body;
         if (shape) {
           // made at y 0 then moved under the pfp below, once its real height is known
-          body = Bodies.fromVertices(
-            x,
-            0,
-            shape.vertices,
-            {
-              ...options,
-              render: {
-                sprite: {
-                  texture: HERO.avatar,
-                  xScale: shape.scale,
-                  yScale: shape.scale,
-                },
+          body = Bodies.fromVertices(x, 0, shape.vertices, {
+            ...options,
+            render: {
+              sprite: {
+                texture: HERO.avatar,
+                xScale: shape.scale,
+                yScale: shape.scale,
               },
             },
-          );
+          });
           // matter guesses the offset from the body's bounds while creating it, which is
           // wrong when the image has transparent padding, so it's set after
           body.render.sprite.xOffset = shape.xOffset;
@@ -532,7 +528,7 @@ export default function FrontPage() {
       img.src = HERO.avatar;
       setClicked(true);
       // swap to real photo of me
-      setPhoto("");
+      setPhoto(MePhoto);
     }
 
     // on clicks after that idk yet
