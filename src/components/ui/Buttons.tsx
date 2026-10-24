@@ -29,7 +29,7 @@ export function WhirlpoolConicButton({
 
   if (to) {
     return (
-      <Link to={to} className={classes}>
+      <Link to={to} className={classes} data-physics="rect" data-radius="16">
         {inner}
       </Link>
     );
@@ -39,6 +39,8 @@ export function WhirlpoolConicButton({
       href={href}
       className={classes}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      data-physics="rect"
+      data-radius="16"
     >
       {inner}
     </a>
@@ -62,7 +64,7 @@ export function CenterPillFillButton({
   );
   if (to) {
     return (
-      <Link to={to} className={classes}>
+      <Link to={to} className={classes} data-physics="rect" data-radius="30">
         {inner}
       </Link>
     );
@@ -72,6 +74,8 @@ export function CenterPillFillButton({
       href={href}
       className={classes}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      data-physics="rect"
+      data-radius="24"
     >
       {inner}
     </a>

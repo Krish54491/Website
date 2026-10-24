@@ -95,7 +95,7 @@ function RingButton({ onSpawn }) {
           startOffset="50%"
           className="[text-anchor:middle]"
         >
-          Spawn plush
+          Spawn Plush
         </textPath>
       </text>
     </svg>
