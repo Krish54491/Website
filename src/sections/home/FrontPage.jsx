@@ -130,9 +130,10 @@ export default function FrontPage() {
     initializeRenderer(); //Initialize Matter.js objects
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", resizeRenderer);
-    // catches layout changes that aren't a window resize, like fonts or images loading in
+    // catches layout changes that aren't a window resize, like fonts or images loading in.
+    // watches the whole body since obstacles outside FrontPage (the footer) move too
     const layoutObserver = new ResizeObserver(syncObstacles);
-    layoutObserver.observe(main.current);
+    layoutObserver.observe(document.body);
 
     return () => {
       //Done when the component closes. Do the opposite.
@@ -231,9 +232,11 @@ export default function FrontPage() {
   // on screen, so plushies bounce off it. function instead of const so it's hoisted
   // for initializeRenderer and the ResizeObserver
   function syncObstacles() {
-    if (!engine.current || !main.current) return;
+    if (!engine.current) return;
     const world = engine.current.world;
-    const elements = [...main.current.querySelectorAll("[data-physics]")];
+    // whole page, not just FrontPage, so things like the footer in App.jsx count too.
+    // other pages never read data-physics so it's harmless there
+    const elements = [...document.body.querySelectorAll("[data-physics]")];
 
     // drop bodies whose element is gone
     obstacles.current = obstacles.current.filter((o) => {
@@ -264,16 +267,15 @@ export default function FrontPage() {
         render: { visible: false },
         collisionFilter: { category: OBSTACLE_CATEGORY },
       };
+      // corner radius from data-radius, defaulting to 16 to match rounded-2xl on the cards
+      const radius = el.dataset.radius ? parseInt(el.dataset.radius, 10) : 16;
       const body =
         el.dataset.physics === "circle"
           ? Bodies.circle(centre.x, centre.y, rect.width / 2, opts)
           : Bodies.rectangle(centre.x, centre.y, rect.width, rect.height, {
               ...opts,
-              chamfer: {
-                radius: el.dataset.radius
-                  ? parseInt(el.dataset.radius, 10)
-                  : 16,
-              }, // matches rounded-2xl on the cards
+              // only round the corners when there's a radius, square things skip it
+              ...(radius > 0 && { chamfer: { radius } }),
             });
       Composite.add(world, body);
 
