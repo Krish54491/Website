@@ -23,7 +23,6 @@
     "@simplewebauthn/browser": "^13.2.2",
     "@simplewebauthn/server": "^13.2.2",
     "@supabase/supabase-js": "^2.89.0",
-    "@tsparticles/react": "^3.0.0",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "cookie": "^1.1.1",
@@ -35,9 +34,7 @@
     "react-dom": "^18.3.1",
     "react-modal": "^3.16.3",
     "react-router-dom": "^7.0.1",
-    "react-tsparticles": "^2.12.2",
-    "resend": "^6.32.0",
-    "tsparticles": "^3.7.1"
+    "resend": "^6.32.0"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.17.1",
@@ -59,11 +56,11 @@
   "allowScripts": {
     "esbuild@0.18.20": true,
     "esbuild@0.25.12": true,
-    "esbuild@0.28.1": true,
     "tsparticles@3.9.1": true,
     "react-tsparticles@2.12.2": true,
     "tsparticles-engine@2.12.0": true,
     "@tsparticles/engine@3.9.1": true,
-    "workerd@1.20261001.1": true
+    "esbuild@0.28.2": true,
+    "workerd@1.20261019.1": true
   }
 }

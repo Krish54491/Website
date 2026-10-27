@@ -94,7 +94,7 @@ export const Countdown = () => {
               : minutes + ":" + (seconds < 10 ? `0${seconds}` : seconds)
           }
           onChange={inputChange}
-          className={`text-5xl lg:text-9xl m-5 text-center bg-inherit w-fit`}
+          className={`text-2xl sm:text-3xl md:text-5xl lg:text-9xl m-5 text-center bg-inherit w-fit`}
         ></input>
         <div className="flex flex-row m-2">
           {timerActive ? (
