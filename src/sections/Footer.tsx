@@ -4,7 +4,7 @@ import { socialLinks } from "./utils/constants";
 export default function Footer() {
   return (
     <footer
-      className="mt-10 flex flex-col border-t border-border bg-muted px-6 py-6 text-muted-foreground transition-colors duration-500 md:px-12 md:py-8"
+      className="mt-10 z-10 flex flex-col border-t border-border bg-muted px-6 py-6 text-muted-foreground transition-colors duration-500 md:px-12 md:py-8"
       data-physics="rect"
       data-radius="0"
     >

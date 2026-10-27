@@ -46,7 +46,6 @@
   /* need to add shadow lugia colors for decal */
   --color-shadow-lugia-primary: #5e6194;
   --color-shadow-lugia-secondary: #aab2bf;
-  --color-shadow-lugia-belly: #d7dae1;
 
   /* Purple GameCube colors for dark mode (purple and black) */
   --color-games-dark-background: oklch(0.25 0.02 264.1);
@@ -81,9 +80,8 @@
   --color-games-dark-sidebar-border: oklch(0.95 0.01 238.46 / 15%);
   --color-games-dark-sidebar-ring: oklch(0.54 0.14 286.21);
   /* need to add normal lugia colors for decal */
-  --color-lugia-main: #ffffff;
+  --color-lugia-primary: #ffffff;
   --color-lugia-secondary: #43568f;
-  --color-lugia-belly: #43568f;
 
   /* Tools */
   /* Use custom version of corporate */
