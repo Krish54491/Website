@@ -18,13 +18,23 @@
     {
       "files": ["**/*.{js,jsx,ts,tsx}"],
       "rules": {
-        "no-shadow": "off"
+        "no-shadow": "off",
+        "no-undef": "error",
+        "react/jsx-no-undef": "error",
+        "import/named": "error"
       },
       "env": {
         "es2020": true,
-        "commonjs": true
+        "commonjs": true,
+        "browser": true
       },
       "plugins": ["react", "import"]
+    },
+    {
+      "files": ["functions/**"],
+      "env": {
+        "worker": true
+      }
     }
   ]
 }
