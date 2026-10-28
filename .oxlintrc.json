@@ -26,7 +26,8 @@
       "env": {
         "es2020": true,
         "commonjs": true,
-        "browser": true
+        "browser": true,
+        "node": true
       },
       "plugins": ["react", "import"]
     },

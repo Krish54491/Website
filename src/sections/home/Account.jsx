@@ -44,7 +44,6 @@ export default function Account() {
     setNewPassword("");
     setEmail("");
     setPassword("");
-    setConfirmText("");
   }
 
   async function handleChangeUsername(e) {
