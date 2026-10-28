@@ -23,7 +23,6 @@ Should have a lot more than the default colors of matter.js which seems to be 5,
 export const Confetti = () => {
   const WALL = 300;
   const WALL_LENGTH = 10000;
-
   //Initialize everything from Matter.js
   const engine = useRef();
   const render = useRef();
@@ -54,7 +53,7 @@ export const Confetti = () => {
     // made here instead of in useRef so StrictMode's remount gets a fresh world
     engine.current = Engine.create({
       gravity: {
-        scale: 0.002,
+        scale: 0.0006,
       },
     });
     render.current = Render.create({
@@ -138,10 +137,6 @@ export const Confetti = () => {
     m.element.removeEventListener("touchmove", m.mousemove);
     m.element.removeEventListener("touchstart", m.mousedown);
     m.element.removeEventListener("touchend", m.mouseup);
-
-    m.element.addEventListener("touchmove", m.touchmove, { passive: false });
-    m.element.addEventListener("touchstart", m.touchstart, { passive: false });
-    m.element.addEventListener("touchend", m.touchend, { passive: false });
   };
   const clearRenderer = () => {
     if (mouse.current) {
@@ -197,11 +192,15 @@ export const Confetti = () => {
           );
     Composite.add(engine.current.world, body);
   }
+
+  useEffect(() => {
+    setInterval(addConfetti, 100);
+  });
   return (
     <div
       ref={canvas}
       onClick={addConfetti}
-      className="pointer-events fixed inset-0 z-0"
+      className="pointer-events-none fixed inset-0 z-0 opacity-40"
     />
   );
 };
