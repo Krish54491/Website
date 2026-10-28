@@ -7,6 +7,7 @@ import {
   Body,
   Composite,
   Mouse,
+  Events,
 } from "matter-js";
 
 /*
@@ -35,8 +36,20 @@ export const Confetti = () => {
     window.addEventListener("scroll", updateMouseOffset);
     window.addEventListener("resize", resizeRenderer);
     // catches layout changes that aren't a window resize, like fonts or images loading in.
-    // watches the whole body since obstacles outside FrontPage (the footer) move too
-
+    Events.on(engine.current, "collisionStart", (event) => {
+      event.pairs.forEach(({ bodyA, bodyB }) => {
+        if (bodyA === walls.current.floor || bodyB === walls.current.floor) {
+          if (bodyA.label === "confetti") {
+            // delete bodyB
+            Composite.remove(engine.current.world, bodyA);
+          } else if (bodyB.label === "confetti") {
+            // delete bodyB
+            Composite.remove(engine.current.world, bodyB);
+          }
+          // else don't care
+        }
+      });
+    });
     return () => {
       //Done when the component closes. Do the opposite.
       clearRenderer(); //Remove all data from Matter.js
@@ -179,11 +192,13 @@ export const Confetti = () => {
         fillStyle: getRandHexColor(),
       },
     };
-    const x = window.innerWidth / 2 + (Math.random() - 0.5) * window.innerWidth;
+    const x = window.innerWidth / 2;
     const shape = Math.floor(Math.random() * 3 + 1); // 1 to 3
     const body =
       shape === 3
-        ? Bodies.circle(x, CONFETTI_SIZE, CONFETTI_SIZE / 2, { ...options })
+        ? Bodies.circle(x, CONFETTI_SIZE, CONFETTI_SIZE / 2, {
+            ...options,
+          })
         : Bodies.rectangle(
             x,
             CONFETTI_SIZE,
@@ -191,17 +206,19 @@ export const Confetti = () => {
             CONFETTI_SIZE / shape, // divide by 1 or 2
             { ...options },
           );
-    const angle = Math.floor(Math.random() * 180) * (Math.PI / 180); // 0 to 180 degrees to radians
+    const angle =
+      -90 +
+      (Math.floor(Math.random() * 2) === 1 ? 1 : -1) *
+        Math.floor(Math.random() * 40); // 0 to 180 degrees to radians
     Body.setVelocity(body, {
       x: Math.cos(angle) * 10,
       y: Math.sin(angle) * 10,
     });
     Composite.add(engine.current.world, body);
   }
-
   useEffect(() => {
-    setInterval(addConfetti, 100);
-    return () => clearInterval(addConfetti);
+    const confettiInterval = setInterval(addConfetti, 100);
+    return () => clearInterval(confettiInterval);
   });
   return (
     <div
