@@ -87,7 +87,6 @@
 
 - nonpersonalized transition
 - ring of electricity around profile pic
-- lugia in background of games
 
 ## Needed, but not immediately
 
@@ -118,6 +117,3 @@
   - have some flying tech stack or something else in background of homepage going around it
 
 ## Current unsolved Issues(not new functionality)
-
-- Railway env variables got exposed(not my fault the service itself had a security leak)
-  need to replace them for the services on website

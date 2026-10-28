@@ -58,7 +58,7 @@ export default function ProjectCard({
           <ThemedImage
             light={image}
             alt={name}
-            className="aspect-video w-full transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none"
+            className="aspect-video w-full transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none bg-background"
           />
         </div>
         <div className="flex flex-1 flex-col gap-2 p-5">
@@ -83,7 +83,7 @@ export default function ProjectCard({
         <ThemedImage
           light={image}
           alt={name}
-          className="aspect-video w-full transition-transform duration-500 group-hover:scale-105 sm:aspect-4/3 motion-reduce:transition-none"
+          className="aspect-video w-full transition-transform duration-500 group-hover:scale-105 sm:aspect-4/3 motion-reduce:transition-none bg-background"
         />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-2 px-1 pb-1 sm:px-0 sm:pb-0">
@@ -91,7 +91,9 @@ export default function ProjectCard({
         <h2 className="text-xl font-bold tracking-tight transition-colors duration-200 group-hover:text-primary sm:text-2xl">
           {name}
         </h2>
-        <p className="text-sm text-muted-foreground sm:text-base">{summary}</p>
+        <p className="text-sm text-muted-foreground sm:text-base mr-2">
+          {summary}
+        </p>
         <div className="mt-auto flex flex-col gap-3 pt-3 sm:flex-row sm:items-end sm:justify-between">
           <BadgeList items={techStack} variant="outline" />
           <CaseStudyLink label={linkLabel} />

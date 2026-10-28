@@ -44,7 +44,7 @@ export default function ArchitectureDiagram({
                 >
                   <p className="font-bold">{node.title}</p>
                   {node.description && (
-                    <p className="mt-auto text-xs text-muted-foreground">
+                    <p className=" text-xs text-muted-foreground">
                       {node.description}
                     </p>
                   )}

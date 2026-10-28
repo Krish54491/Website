@@ -42,12 +42,21 @@ export type ProjectPage = {
 // Pages are lazy loaded so each case study is its own small chunk and only downloads when opened
 import PianoWizardsImage from "../../assets/projects/Piano Wizards.png";
 import ChipmunkImage from "../../assets/projects/Chipmunk.jpg";
+import DailiesIRL from "../../assets/other/dailies-irl/Dailies IRL Logo.png";
 export const PROJECT_CARDS: ProjectCard[] = [
   // order is from newest to oldest for now
   {
+    name: "Dailies IRL",
+    summary:
+      "Ever wanted randomized quests in real life? This extension allows you to customize google tasks to give you scheduled random quests!",
+    techStack: ["AppScript", "JavaScript", "Google Cloud Console"],
+    image: DailiesIRL,
+    path: "dailies-irl",
+  },
+  {
     name: "Piano Wizards",
     summary:
-      "Hacklahoma 2026 1st Place Winner - A piano learning game that challenges you to match your opponent's wavelength. Improve your skills through fierce competition and repetition!  ",
+      "Hacklahoma 2026 1st Place Winner - A piano learning game that challenges you to match your opponent's wavelength. Improve your skills through fierce competition and repetition!",
     techStack: ["React", "JavaScript", "Tailwind"],
     image: PianoWizardsImage,
     path: "pianoWizards",
@@ -66,6 +75,7 @@ export const PROJECT_PAGES: Record<
   string,
   () => Promise<{ default: ProjectPage }>
 > = {
+  "dailies-irl": () => import("./projects/dailiesIRL"),
   pianoWizards: () => import("./projects/pianoWizards"),
   chipmunk: () => import("./projects/chipmunk"),
 };
