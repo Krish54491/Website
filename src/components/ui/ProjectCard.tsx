@@ -58,6 +58,7 @@ export default function ProjectCard({
           <ThemedImage
             light={image}
             alt={name}
+            containNonWidescreen
             className="aspect-video w-full transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none bg-background"
           />
         </div>
@@ -83,6 +84,7 @@ export default function ProjectCard({
         <ThemedImage
           light={image}
           alt={name}
+          containNonWidescreen
           className="aspect-video w-full transition-transform duration-500 group-hover:scale-105 sm:aspect-4/3 motion-reduce:transition-none bg-background"
         />
       </div>

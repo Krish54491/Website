@@ -92,6 +92,7 @@ export default function ProjectCaseStudy() {
                 <ThemedImage
                   light={card.image}
                   alt={state.page.name}
+                  containNonWidescreen
                   className="aspect-video w-full rounded-xl"
                 />
               </div>

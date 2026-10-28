@@ -1,6 +1,6 @@
 // image that swaps between a light and dark version based on prefers-color-scheme
 // sources can be plain urls or lazy loaders(() => import("./img.png")) so big lists don't download everything up front
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SyntheticEvent } from "react";
 
 export type ImageSource = string | (() => Promise<{ default: string }>);
 
@@ -17,16 +17,28 @@ export default function ThemedImage({
   fallback,
   alt,
   className = "",
+  containNonWidescreen = false,
 }: {
   light?: ImageSource;
   dark?: ImageSource;
   fallback?: string; // used when neither light nor dark is given
   alt: string;
   className?: string;
+  containNonWidescreen?: boolean; // shrink images that aren't 16:9 so none of it gets cropped
 }) {
   const [urls, setUrls] = useState<{ light?: string; dark?: string } | null>(
     null,
   );
+  const [isWidescreen, setIsWidescreen] = useState(true);
+
+  // checked after load since the real size isn't known until then
+  const checkAspect = (e: SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    if (!naturalHeight) return;
+    setIsWidescreen(Math.abs(naturalWidth / naturalHeight - 16 / 9) < 0.02);
+  };
+  const fit =
+    containNonWidescreen && !isWidescreen ? "object-contain" : "object-cover";
 
   useEffect(() => {
     let cancelled = false;
@@ -59,7 +71,8 @@ export default function ThemedImage({
         alt={alt}
         loading="lazy"
         decoding="async"
-        className={`object-cover ${className}`}
+        onLoad={checkAspect}
+        className={`${fit} ${className}`}
       />
     </picture>
   );
