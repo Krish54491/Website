@@ -55,6 +55,7 @@ export const Confetti = () => {
       gravity: {
         scale: 0.0006,
       },
+      enableSleeping: true,
     });
     render.current = Render.create({
       element: canvas.current,
@@ -190,16 +191,21 @@ export const Confetti = () => {
             CONFETTI_SIZE / shape, // divide by 1 or 2
             { ...options },
           );
+    const angle = Math.floor(Math.random() * 180) * (Math.PI / 180); // 0 to 180 degrees to radians
+    Body.setVelocity(body, {
+      x: Math.cos(angle) * 10,
+      y: Math.sin(angle) * 10,
+    });
     Composite.add(engine.current.world, body);
   }
 
   useEffect(() => {
     setInterval(addConfetti, 100);
+    return () => clearInterval(addConfetti);
   });
   return (
     <div
       ref={canvas}
-      onClick={addConfetti}
       className="pointer-events-none fixed inset-0 z-0 opacity-40"
     />
   );
