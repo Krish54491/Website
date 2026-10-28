@@ -3,7 +3,13 @@ const dailiesIRL: ProjectPage = {
   name: "Dailies IRL",
   role: "Cloud Developer",
   period: "October 2026",
-  techStack: ["JavaScript", "AppScript", "Google Cloud Console"],
+  techStack: [
+    "JavaScript",
+    "Google Apps Script",
+    "Google Cloud Console",
+    "HTML",
+    "CSS",
+  ],
   links: [
     {
       name: "Home Page",

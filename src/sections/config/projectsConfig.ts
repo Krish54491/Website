@@ -49,7 +49,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
     name: "Dailies IRL",
     summary:
       "Ever wanted randomized quests in real life? This extension allows you to customize google tasks to give you scheduled random quests!",
-    techStack: ["AppScript", "JavaScript", "Google Cloud Console"],
+    techStack: ["JavaScript", "Google Apps Script", "Google Cloud Console"],
     image: DailiesIRL,
     path: "dailies-irl",
   },
@@ -57,7 +57,7 @@ export const PROJECT_CARDS: ProjectCard[] = [
     name: "Piano Wizards",
     summary:
       "Hacklahoma 2026 1st Place Winner - A piano learning game that challenges you to match your opponent's wavelength. Improve your skills through fierce competition and repetition!",
-    techStack: ["React", "JavaScript", "Tailwind"],
+    techStack: ["React", "JavaScript", "Tailwind CSS"],
     image: PianoWizardsImage,
     path: "pianoWizards",
   },
