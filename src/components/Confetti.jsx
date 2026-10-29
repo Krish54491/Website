@@ -223,7 +223,7 @@ export const Confetti = () => {
   return (
     <div
       ref={canvas}
-      className="pointer-events-none fixed inset-0 z-0 opacity-40"
+      className="pointer-events-none fixed inset-0 z-10 opacity-40"
     />
   );
 };
