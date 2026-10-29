@@ -192,7 +192,7 @@ export const Confetti = () => {
         fillStyle: getRandHexColor(),
       },
     };
-    const x = window.innerWidth / 2;
+    const x = window.innerWidth / 2 + (Math.random() - 0.5) * window.innerWidth;
     const shape = Math.floor(Math.random() * 3 + 1); // 1 to 3
     const body =
       shape === 3
@@ -209,7 +209,7 @@ export const Confetti = () => {
     const angle =
       -90 +
       (Math.floor(Math.random() * 2) === 1 ? 1 : -1) *
-        Math.floor(Math.random() * 40); // 0 to 180 degrees to radians
+        Math.floor(Math.random() * 90); // 0 to 180 degrees to radians
     Body.setVelocity(body, {
       x: Math.cos(angle) * 10,
       y: Math.sin(angle) * 10,
