@@ -15,7 +15,8 @@ The cards dealt out have a fading in and out outer blue(only on home page, so se
 
 On react modal open it has the card go big in the center then moves to the side to reveal the description and skills. The skills listed are all the same no matter the arcana drawn. The skills shown will be Software, Hardware, and Misc skills one on each card(which skill categories are shown need to be thought a bit more).
 
-Just in case it's not clear to click or hover on it to reveal the card have a unobtrusive hint thats says "Click on a card to reveal it's true form".
+Just in case it's not clear to click or hover on it to reveal the card have a unobtrusive hint thats says "Click on a card to reveal it's true form". Like this
+![alt text](image-12.png)
 
 After all cards are revealed have it give a tarot reading(not a priority will skip for now unless clean formula for tarot reading)
 

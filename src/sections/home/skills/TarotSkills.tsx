@@ -263,7 +263,7 @@ export default function TarotSkills({
                 on lg+ there's empty space right of the row so it moves out there and points at the last card */}
             <motion.div
               style={{ opacity: hintOpacity }}
-              className="self-start max-lg:-mt-2 lg:whitespace-nowrap pl-[calc(50%_-_var(--tarot-w)_/_2_+_0.5rem)] lg:absolute lg:bottom-[calc(100%_+_1.5rem_+_var(--tarot-h)_*_0.15)] lg:left-[calc(50%_+_var(--tarot-w)_*_1.5_+_1.75rem)] lg:pl-0"
+              className="self-end sm:self-center max-lg:-mt-2 lg:whitespace-nowrap pl-[calc(50%-var(--tarot-w)/2+0.5rem)] lg:absolute lg:bottom-[calc(100%+1.5rem+var(--tarot-h)*0.15)] lg:left-[calc(50%+var(--tarot-w)*1.5+1.75rem)] lg:pl-0"
             >
               <HandHint
                 className={`transition-opacity duration-500 motion-reduce:transition-none ${revealed.some(Boolean) ? "opacity-0" : ""}`}
