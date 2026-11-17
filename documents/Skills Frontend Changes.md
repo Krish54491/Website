@@ -43,3 +43,17 @@ type Arcanas = {
   major: boolean; // major arcana true, minor false
 };
 ```
+
+## Tarot Card Research
+
+- Card 1: The Past  
+  these are Past events that still affect you  
+  Past events that are either holding you back or have the potential to help you
+  Basically reflection on the Past and what's still lingering in your thoughts
+- Card 2: The Present  
+  Your current situation and present challenges
+- Card 3: The Future  
+  What direction things are moving in  
+  The outcome of the present situation
+
+Apparently tarot reading represents a specific question, focus, or situation you want more clarity on. Therefore, your cards represent the past, present, and future as it relates to your question. Which means I'll need an LLM or GenAI if I want to give an actual reading
