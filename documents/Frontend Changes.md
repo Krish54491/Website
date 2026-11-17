@@ -116,6 +116,8 @@ Things on the personal homepage:
 
 ## Needed, but not immediately
 
+- add hints for specific actions like pulling the lever, flipping the cards like this
+  ![alt text](image-12.png)
 - make a home page thats for your personal stuff instead
 - Sound effects and sound design(mute button needed)
 - add some corrections to mobile Nav Bar
