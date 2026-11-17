@@ -780,7 +780,7 @@
 /* Tarot skills (home page) */
 :root {
   /* width / height of the tarot art, change this to match the real card images */
-  --tarot-aspect: 0.703187251;
+  --tarot-aspect: 0.7045908184;
 }
 .tarot-table {
   /* 3 cards always fit side by side, and short screens shrink them so the pinned stage never clips.
