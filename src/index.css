@@ -309,6 +309,20 @@
   --animate-smallspin: smallspin 1s linear infinite;
   --animate-yellowGlow: yellowGlow 1s ease-in-out infinite;
   --animate-redGlow: redGlow 1s ease-in-out infinite;
+  --animate-tarotGlow: tarotGlow 2.4s ease-in-out infinite;
+
+  /* outer glow on face-down tarot cards, uses whatever the section's secondary is */
+  @keyframes tarotGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 6px 0
+        color-mix(in oklab, var(--color-secondary) 35%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 22px 6px
+        color-mix(in oklab, var(--color-secondary) 90%, transparent);
+    }
+  }
 
   @keyframes wiggle {
     0%,
@@ -757,4 +771,32 @@
   .section-muted {
     @apply bg-muted;
   }
+}
+
+/* Tarot skills (home page) */
+:root {
+  /* width / height of the tarot art, change this to match the real card images */
+  --tarot-aspect: 0.625;
+}
+.tarot-table {
+  /* 3 cards always fit side by side, and short screens shrink them so the pinned stage never clips.
+     21rem is roughly everything else on the stage: nav, heading, mini deck, hint and gaps */
+  --tarot-w: max(
+    4rem,
+    min(27vw, 11rem, calc((100dvh - 21rem) * var(--tarot-aspect)))
+  );
+  --tarot-h: calc(var(--tarot-w) / var(--tarot-aspect));
+}
+/* react-modal adds the --after-open / --before-close classes itself */
+.tarot-overlay {
+  background-color: transparent;
+  transition:
+    background-color 250ms ease,
+    opacity 200ms ease;
+}
+.tarot-overlay.ReactModal__Overlay--after-open {
+  background-color: rgb(0 0 0 / 0.65);
+}
+.tarot-overlay.ReactModal__Overlay--before-close {
+  opacity: 0;
 }

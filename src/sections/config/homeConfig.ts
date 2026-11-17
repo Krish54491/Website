@@ -11,52 +11,87 @@ export const ABOUT: string[] = [
   `My strongest areas are frontend development with React and Tailwind CSS\n(as you can probably tell), AI/ML with Python, and backend development primarily with Node.js and PostgreSQL! That said, I like being able to jump between different parts of a project and learning whatever I need to build something from start to finish.`,
 ];
 
-export const SKILLS: { category: string; items: string[] }[] = [
+export type SkillGroup = { category: string; items: string[] };
+
+// one entry per dealt tarot card, in the order they're dealt (left to right).
+// the skills depend on the slot, not on which arcana gets drawn
+export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
   {
-    category: "Languages",
-    items: ["Python", "TypeScript", "JavaScript", "SQL", "Java", "Rust", "C++"],
-  },
-  {
-    category: "Frontend",
-    items: [
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "React Router",
-      "Vite",
-      "Dioxus",
+    title: "Software",
+    groups: [
+      {
+        category: "Languages",
+        items: [
+          "Python",
+          "TypeScript",
+          "JavaScript",
+          "SQL",
+          "Java",
+          "Rust",
+          "C++",
+        ],
+      },
+      {
+        category: "Frontend",
+        items: [
+          "React",
+          "Next.js",
+          "Tailwind CSS",
+          "React Router",
+          "Vite",
+          "Dioxus",
+        ],
+      },
+      {
+        category: "Backend",
+        items: [
+          "Node.js",
+          "Express",
+          "FastAPI",
+          "Flask",
+          "PostgreSQL",
+          "Supabase",
+          "Drizzle ORM",
+          "Selenium",
+          "Playwright",
+        ],
+      },
     ],
   },
   {
-    category: "Backend",
-    items: [
-      "Node.js",
-      "Express",
-      "FastAPI",
-      "Flask",
-      "PostgreSQL",
-      "Supabase",
-      "Drizzle ORM",
-      "Selenium",
-      "Playwright",
+    title: "Hardware",
+    groups: [
+      {
+        category: "Hardware",
+        // TODO(Krish): placeholder, replace with the real hardware skills
+        items: ["TODO"],
+      },
     ],
   },
   {
-    category: "Cloud & DevOps",
-    items: [
-      "Cloudflare",
-      "Google Cloud Platform",
-      "Docker",
-      "GitHub Actions",
-      "Git",
-      "Linux",
+    title: "Misc",
+    groups: [
+      {
+        category: "Cloud & DevOps",
+        items: [
+          "Cloudflare",
+          "Google Cloud Platform",
+          "Docker",
+          "GitHub Actions",
+          "Git",
+          "Linux",
+        ],
+      },
+      {
+        category: "AI / ML",
+        items: ["TensorFlow", "MediaPipe", "OpenCV", "Pandas"],
+      },
     ],
-  },
-  {
-    category: "AI / ML",
-    items: ["TensorFlow", "MediaPipe", "OpenCV", "Pandas"],
   },
 ];
+
+// every group in one flat list, used by the "view all skills" fallback
+export const SKILLS: SkillGroup[] = SKILL_CARDS.flatMap((card) => card.groups);
 
 // whatever I'm currently working on or doing
 // placeholder

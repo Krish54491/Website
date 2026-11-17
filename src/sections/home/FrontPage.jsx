@@ -4,9 +4,8 @@ import {
   WhirlpoolConicButton,
   CenterPillFillButton,
 } from "../../components/ui/Buttons";
-import InfoPanel from "../../components/ui/InfoPanel";
-import { BadgeList } from "../../components/ui/Badge";
-import { ABOUT, HERO, SKILLS } from "../config/homeConfig";
+import TarotSkills from "./skills/TarotSkills";
+import { ABOUT, HERO } from "../config/homeConfig";
 import { krish_resume, POSSIBLE_PLUSHES } from "../utils/constants";
 import { useRef, useEffect, useState } from "react";
 import PlushSpawner from "./PlushSpawner";
@@ -590,24 +589,8 @@ export default function FrontPage() {
             ))}
           </div>
         </section>
-        {/* Skills */}
-        <section id="skills" className="py-10 sm:py-14">
-          <SectionHeading title="Skills" />
-          {/* flex-wrap instead of grid so a partial last row gets centered */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-            {SKILLS.map((group) => (
-              <div
-                key={group.category}
-                className="w-9/10 sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
-                data-physics="rect"
-              >
-                <InfoPanel title={group.category} className="h-full">
-                  <BadgeList items={group.items} />
-                </InfoPanel>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Skills: tarot deck that deals out 3 cards on scroll, the cards and deck are plushie obstacles too */}
+        <TarotSkills onMove={syncObstacles} />
         <p className="flex mt-10 justify-center">MORE IS PLANNED STAY TUNED!</p>
       </main>
     </HomeTransition>
