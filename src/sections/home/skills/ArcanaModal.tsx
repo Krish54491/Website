@@ -56,8 +56,8 @@ function ModalBody({
       animate(y, 0, options),
       animate(scale, 1, options),
     ];
-    // hold in the centre for a moment before moving aside
-    const timer = setTimeout(() => setPhase("side"), 550 + 250);
+    // move aside pretty much as soon as it lands in the centre
+    const timer = setTimeout(() => setPhase("side"), 550 + 180);
     return () => {
       clearTimeout(timer);
       controls.forEach((control) => control.stop());
@@ -90,7 +90,11 @@ function ModalBody({
       </button>
       <div className="flex flex-col items-center justify-center gap-5 md:flex-row md:items-start md:gap-8">
         {/* outer div does the slide to the side, inner one the fly in, so the two transforms don't fight */}
-        <motion.div layout={!reduced} className="shrink-0">
+        <motion.div
+          layout={!reduced}
+          transition={{ layout: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
+          className="shrink-0"
+        >
           <motion.div
             ref={cardRef}
             style={{ x, y, scale }}
@@ -104,7 +108,7 @@ function ModalBody({
           <motion.div
             initial={reduced ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.1 }}
+            transition={{ duration: 0.25, delay: 0.05 }}
             className="w-full min-w-0 flex-1 md:pr-8"
           >
             <p className="mb-2 text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">

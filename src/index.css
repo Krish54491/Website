@@ -311,6 +311,10 @@
   --animate-redGlow: redGlow 1s ease-in-out infinite;
   --animate-tarotGlow: tarotGlow 2.4s ease-in-out infinite;
 
+  /* handwriting for the little hint notes (HandHint), system fonts only */
+  --font-hint:
+    "Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS", cursive;
+
   /* outer glow on face-down tarot cards, uses whatever the section's secondary is */
   @keyframes tarotGlow {
     0%,
@@ -776,14 +780,14 @@
 /* Tarot skills (home page) */
 :root {
   /* width / height of the tarot art, change this to match the real card images */
-  --tarot-aspect: 0.625;
+  --tarot-aspect: 0.703187251;
 }
 .tarot-table {
   /* 3 cards always fit side by side, and short screens shrink them so the pinned stage never clips.
-     21rem is roughly everything else on the stage: nav, heading, mini deck, hint and gaps */
+     24rem is roughly everything else on the stage: nav, heading, mini deck, hint and gaps */
   --tarot-w: max(
-    4rem,
-    min(27vw, 11rem, calc((100dvh - 21rem) * var(--tarot-aspect)))
+    3.25rem,
+    min(27vw, 11rem, calc((100dvh - 24rem) * var(--tarot-aspect)))
   );
   --tarot-h: calc(var(--tarot-w) / var(--tarot-aspect));
 }

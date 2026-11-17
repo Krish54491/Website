@@ -18,6 +18,7 @@ import {
   useTransform,
 } from "motion/react";
 import SectionHeading from "../../../components/ui/SectionHeading";
+import HandHint from "../../../components/ui/HandHint";
 import { SKILL_CARDS } from "../../config/homeConfig";
 import { drawArcana, loadArcanaImage } from "../../config/arcanaConfig";
 import TarotCard from "./TarotCard";
@@ -256,10 +257,22 @@ export default function TarotSkills({
               />
             ))}
           </div>
-          <div className="mt-5 flex flex-col items-center gap-x-2 gap-y-1 text-center text-sm text-muted-foreground sm:flex-row">
-            <motion.p style={{ opacity: hintOpacity }}>
-              Click on a card to reveal its true form
-            </motion.p>
+          <div className="relative mt-6 flex w-full flex-col items-center gap-y-2 text-center text-sm text-muted-foreground">
+            {/* fades in once the cards are dealt, and goes away after the first card is flipped.
+                below lg it sits under the row with the arrow starting at the middle card's left edge,
+                on lg+ there's empty space right of the row so it moves out there and points at the last card */}
+            <motion.div
+              style={{ opacity: hintOpacity }}
+              className="self-start max-lg:-mt-2 lg:whitespace-nowrap pl-[calc(50%_-_var(--tarot-w)_/_2_+_0.5rem)] lg:absolute lg:bottom-[calc(100%_+_1.5rem_+_var(--tarot-h)_*_0.15)] lg:left-[calc(50%_+_var(--tarot-w)_*_1.5_+_1.75rem)] lg:pl-0"
+            >
+              <HandHint
+                className={`transition-opacity duration-500 motion-reduce:transition-none ${revealed.some(Boolean) ? "opacity-0" : ""}`}
+              >
+                click on a card to
+                <br />
+                reveal its true form
+              </HandHint>
+            </motion.div>
             <button
               type="button"
               onClick={toggleAll}
@@ -267,7 +280,7 @@ export default function TarotSkills({
               aria-controls={ALL_SKILLS_ID}
               className="cursor-pointer rounded-sm underline underline-offset-4 transition-colors duration-200 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring dark:hover:text-primary"
             >
-              {showAll ? "hide all skills" : "or view all skills"}
+              {showAll ? "hide all skills" : "view all skills"}
             </button>
           </div>
           {/* TODO: tarot reading goes here once all 3 cards are revealed */}
