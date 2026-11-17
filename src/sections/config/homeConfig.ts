@@ -29,6 +29,7 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
           "Java",
           "Rust",
           "C++",
+          "C",
         ],
       },
       {
@@ -52,6 +53,7 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
           "PostgreSQL",
           "Supabase",
           "Drizzle ORM",
+          "WebSockets",
           "Selenium",
           "Playwright",
         ],
@@ -62,9 +64,35 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
     title: "Hardware",
     groups: [
       {
-        category: "Hardware",
-        // TODO(Krish): placeholder, replace with the real hardware skills
-        items: ["TODO"],
+        category: "Embedded",
+        items: [
+          "ARM Cortex-M",
+          "MSP432",
+          "ESP32-S3",
+          "Arduino",
+          "GPIO",
+          "ADC",
+          "PWM",
+          "BLE GATT",
+          "Nonvolatile Storage",
+        ],
+      },
+      {
+        category: "Robotics",
+        items: ["ROS 2 Jazzy"],
+      },
+      {
+        category: "Design & Test",
+        items: [
+          "Verilog",
+          "Digital Logic",
+          "PCB Design",
+          "OrCAD / Allegro",
+          "LTspice",
+          "PSpice",
+          "Oscilloscopes",
+          "Logic Analyzers",
+        ],
       },
     ],
   },
@@ -84,7 +112,7 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
       },
       {
         category: "AI / ML",
-        items: ["TensorFlow", "MediaPipe", "OpenCV", "Pandas"],
+        items: ["TensorFlow", "MediaPipe", "OpenCV", "Pandas", "Computer Vision"],
       },
     ],
   },
