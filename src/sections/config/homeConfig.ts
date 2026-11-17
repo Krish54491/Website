@@ -69,7 +69,7 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
     ],
   },
   {
-    title: "Misc",
+    title: "Other",
     groups: [
       {
         category: "Cloud & DevOps",
