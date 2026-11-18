@@ -20,7 +20,7 @@ import {
 import SectionHeading from "../../../components/ui/SectionHeading";
 import HandHint from "../../../components/ui/HandHint";
 import { SKILL_CARDS } from "../../config/homeConfig";
-import { ARCANA } from "../../config/arcanaConfig";
+import { ARCANA } from "../../config/homeConfig";
 import type { Arcana } from "../../config/types";
 import TarotCard from "./TarotCard";
 import TarotDeck from "./TarotDeck";
