@@ -79,7 +79,7 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
       },
       {
         category: "Robotics",
-        items: ["ROS 2 Jazzy"],
+        items: ["ROS 2 Jazzy", "Move it 2"],
       },
       {
         category: "Design & Test",
@@ -112,7 +112,13 @@ export const SKILL_CARDS: { title: string; groups: SkillGroup[] }[] = [
       },
       {
         category: "AI / ML",
-        items: ["TensorFlow", "MediaPipe", "OpenCV", "Pandas", "Computer Vision"],
+        items: [
+          "TensorFlow",
+          "MediaPipe",
+          "OpenCV",
+          "Pandas",
+          "Computer Vision",
+        ],
       },
     ],
   },

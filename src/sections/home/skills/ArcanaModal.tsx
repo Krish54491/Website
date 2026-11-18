@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ReactModal from "react-modal";
 import { animate, motion, useMotionValue } from "motion/react";
 import { BadgeList } from "../../../components/ui/Badge";
-import type { Arcana } from "../../config/arcanaConfig";
+import type { Arcana } from "../../config/types";
 import type { SkillGroup } from "../../config/homeConfig";
 import { CardFront } from "./TarotCard";
 
@@ -100,7 +100,7 @@ function ModalBody({
             style={{ x, y, scale }}
             className="aspect-(--tarot-aspect) w-[min(60vw,16rem,calc(38dvh*var(--tarot-aspect)))] overflow-hidden rounded-xl shadow-xl md:w-[min(18rem,calc(70dvh*var(--tarot-aspect)))]"
           >
-            <CardFront arcana={arcana} src={front} />
+            <CardFront src={front} />
           </motion.div>
         </motion.div>
 

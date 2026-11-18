@@ -1,6 +1,6 @@
 // Skills section of the home page as a tarot reading:
-// a deck shuffles and deals 3 face-down cards as you scroll, clicking one flips it to a random
-// arcana and opens a modal with that slot's skills (see documents/Skills Frontend Changes.md)
+// once the section scrolls into view a deck shuffles and deals 3 face-down cards, clicking one flips it
+// to a random arcana and opens a modal with that slot's skills (see documents/Skills Frontend Changes.md)
 import {
   useCallback,
   useEffect,
@@ -11,16 +11,17 @@ import {
 import {
   animate,
   motion,
+  useInView,
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
-  useScroll,
   useTransform,
 } from "motion/react";
 import SectionHeading from "../../../components/ui/SectionHeading";
 import HandHint from "../../../components/ui/HandHint";
 import { SKILL_CARDS } from "../../config/homeConfig";
-import { drawArcana, loadArcanaImage } from "../../config/arcanaConfig";
+import { ARCANA } from "../../config/arcanaConfig";
+import type { Arcana } from "../../config/types";
 import TarotCard from "./TarotCard";
 import TarotDeck from "./TarotDeck";
 import ArcanaModal from "./ArcanaModal";
@@ -28,9 +29,19 @@ import SkillsList from "./SkillsList";
 import { DEAL_END, SHUFFLE_END, type TarotGeometry } from "./tarotMotion";
 
 const COUNT = SKILL_CARDS.length;
-const PIN_SCROLL = "120vh"; // how much scrolling the shuffle + deal is spread over while pinned
-const LATCH_AT = 0.98; // once the scroll gets this far the cards stay dealt for good
+const DEAL_SECONDS = 2.4; // the whole shuffle + deal, the phases inside it are in tarotMotion.ts
 const ALL_SKILLS_ID = "all-skills";
+
+// draw `count` different arcana (partial Fisher-Yates so there's never a duplicate)
+function drawArcana(count: number): Arcana[] {
+  const pool = [...ARCANA];
+  const amount = Math.min(count, pool.length);
+  for (let i = 0; i < amount; i++) {
+    const pick = i + Math.floor(Math.random() * (pool.length - i));
+    [pool[i], pool[pick]] = [pool[pick], pool[i]];
+  }
+  return pool.slice(0, amount);
+}
 
 export default function TarotSkills({
   onMove,
@@ -39,7 +50,6 @@ export default function TarotSkills({
 }) {
   const reduced = useReducedMotion() ?? false;
 
-  const track = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const deckBox = useRef<HTMLDivElement>(null);
   const slots = useRef<(HTMLButtonElement | null)[]>([]);
@@ -49,14 +59,11 @@ export default function TarotSkills({
     dy: SKILL_CARDS.map(() => 0),
   });
 
-  // the one value every animation reads from (phases are in tarotMotion.ts).
-  // follows the scroll until the deal latches, after that only a re-deal moves it
+  // the one value every animation reads from (phases are in tarotMotion.ts), animated 0 -> 1 to deal
   const p = useMotionValue(0);
   const tick = useMotionValue(0);
 
   const [dealt, setDealt] = useState(false);
-  const dealtRef = useRef(false); // same as `dealt` but readable inside the scroll listener
-  const stageTopBeforeLatch = useRef<number | null>(null);
   const busy = useRef(false); // re-deal animation running
   const pendingOpen = useRef<number | null>(null); // card waiting for its flip to finish before the modal opens
 
@@ -73,9 +80,6 @@ export default function TarotSkills({
   useEffect(() => {
     onMoveRef.current = onMove;
   });
-
-  // while pinned the stage sticks under the nav and the spacer below it gives the scroll its room
-  const pinned = !dealt && !reduced;
 
   // ---------- geometry ----------
   // cards and deck sit at their final (dealt) spots in the layout, this measures how far back
@@ -109,45 +113,25 @@ export default function TarotSkills({
     return () => observer.disconnect();
   }, [measure]);
 
-  // ---------- scroll ----------
-  const latch = useCallback(() => {
-    if (dealtRef.current) return;
-    dealtRef.current = true;
-    stageTopBeforeLatch.current =
-      stage.current?.getBoundingClientRect().top ?? null;
-    p.set(1);
-    setDealt(true);
-  }, [p]);
-
-  const { scrollYProgress } = useScroll({
-    target: track,
-    offset: ["start 0.2", "end end"],
-  });
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    if (dealtRef.current || reduced) return;
-    p.set(value);
-    if (value >= LATCH_AT) latch();
-  });
-
-  // reduced motion: no pinning or scrubbing, the cards are just there
+  // ---------- deal ----------
+  // plays once, when the top of the stage gets about a third of the way up the screen.
+  // with reduced motion the cards are just there
+  const inView = useInView(stage, { once: true, margin: "0px 0px -35% 0px" });
   useEffect(() => {
-    if (reduced) latch();
-  }, [reduced, latch]);
-
-  // latching removes the spacer and the sticky, which would make the page jump.
-  // scroll by however far the stage moved so it stays put on screen
-  useLayoutEffect(() => {
-    if (!dealt) return;
-    const before = stageTopBeforeLatch.current;
-    stageTopBeforeLatch.current = null;
-    if (before !== null && stage.current && !reduced) {
-      const after = stage.current.getBoundingClientRect().top;
-      if (after !== before)
-        window.scrollBy({ top: after - before, behavior: "instant" });
+    if (reduced) {
+      p.set(1);
+      setDealt(true);
+      return;
     }
-    measure();
-    onMoveRef.current?.();
-  }, [dealt, reduced, measure]);
+    if (!inView) return;
+    const controls = animate(p, 1, { duration: DEAL_SECONDS, ease: "linear" }); // each phase eases itself
+    void controls.then(() => setDealt(true));
+    return () => controls.stop();
+  }, [inView, reduced, p]);
+
+  useEffect(() => {
+    if (dealt) onMoveRef.current?.();
+  }, [dealt]);
 
   // plushies treat the cards and deck as obstacles, keep those in step with the animation
   useMotionValueEvent(p, "change", () => onMoveRef.current?.());
@@ -156,10 +140,11 @@ export default function TarotSkills({
   // fetch the fronts of the drawn cards ahead of time so the flip never shows an empty face
   useEffect(() => {
     let cancelled = false;
-    void Promise.all(draw.map(loadArcanaImage)).then((urls) => {
+    void Promise.all(draw.map((arcana) => arcana.image())).then((modules) => {
       if (cancelled) return;
+      const urls = modules.map((module) => module.default);
       urls.forEach((url) => {
-        if (url) new Image().src = url;
+        new Image().src = url;
       });
       setFronts(urls);
     });
@@ -208,84 +193,74 @@ export default function TarotSkills({
     onMoveRef.current?.();
   };
 
-  const toggleAll = () => {
-    // the list sits below the pinned area, so skip the animation rather than make them scroll through it
-    latch();
-    setShowAll((prev) => !prev);
-  };
+  const toggleAll = () => setShowAll((prev) => !prev);
 
   const hintOpacity = useTransform(p, [DEAL_END, 1], [0, 1]);
   const open = modal !== null && modalOpen ? modal.slot : null;
 
   return (
     <section id="skills" className="tarot-table py-10 sm:py-14">
-      <div ref={track}>
-        <div
-          ref={stage}
-          className={`flex flex-col items-center ${pinned ? "sticky top-16 lg:top-20" : "relative"}`}
-        >
-          <SectionHeading title="Skills" className="w-full pt-2" />
-          <TarotDeck
-            p={p}
-            tick={tick}
-            geometry={geometry}
-            dealt={dealt}
-            onRedeal={() => void redeal()}
-            boxRef={deckBox}
-          />
-          <div className="mt-4 flex justify-center gap-2 sm:mt-6 sm:gap-6">
-            {SKILL_CARDS.map((card, slot) => (
-              <TarotCard
-                key={card.title}
-                index={slot}
-                count={COUNT}
-                p={p}
-                tick={tick}
-                geometry={geometry}
-                arcana={draw[slot]}
-                front={fronts[slot]}
-                title={card.title}
-                revealed={revealed[slot]}
-                dealt={dealt}
-                hidden={open === slot}
-                reduced={reduced}
-                onSelect={() => selectCard(slot)}
-                onFlipped={() => handleFlipped(slot)}
-                slotRef={(el) => {
-                  slots.current[slot] = el;
-                }}
-              />
-            ))}
-          </div>
-          <div className="relative mt-6 flex w-full flex-col items-center gap-y-2 text-center text-sm text-muted-foreground">
-            {/* fades in once the cards are dealt, and goes away after the first card is flipped.
+      <div ref={stage} className="relative flex flex-col items-center">
+        <SectionHeading title="Skills" className="w-full pt-2" />
+        <TarotDeck
+          p={p}
+          tick={tick}
+          geometry={geometry}
+          dealt={dealt}
+          onRedeal={() => void redeal()}
+          boxRef={deckBox}
+        />
+        <div className="mt-4 flex justify-center gap-2 sm:mt-6 sm:gap-6">
+          {SKILL_CARDS.map((card, slot) => (
+            <TarotCard
+              key={card.title}
+              index={slot}
+              count={COUNT}
+              p={p}
+              tick={tick}
+              geometry={geometry}
+              arcana={draw[slot]}
+              front={fronts[slot]}
+              title={card.title}
+              revealed={revealed[slot]}
+              dealt={dealt}
+              hidden={open === slot}
+              reduced={reduced}
+              onSelect={() => selectCard(slot)}
+              onFlipped={() => handleFlipped(slot)}
+              slotRef={(el) => {
+                slots.current[slot] = el;
+              }}
+            />
+          ))}
+        </div>
+        <div className="relative mt-6 flex w-full flex-col items-center gap-y-2 text-center text-sm text-muted-foreground">
+          {/* fades in once the cards are dealt, and goes away after the first card is flipped.
                 below lg it sits under the row with the arrow starting at the middle card's left edge,
                 on lg+ there's empty space right of the row so it moves out there and points at the last card */}
-            <motion.div
-              style={{ opacity: hintOpacity }}
-              className="self-end sm:self-center max-lg:-mt-2 lg:whitespace-nowrap pl-[calc(50%-var(--tarot-w)/2+0.5rem)] lg:absolute lg:bottom-[calc(100%+1.5rem+var(--tarot-h)*0.15)] lg:left-[calc(50%+var(--tarot-w)*1.5+1.75rem)] lg:pl-0"
+          <motion.div
+            style={{ opacity: hintOpacity }}
+            className="self-end sm:self-center max-lg:-mt-2 lg:whitespace-nowrap pl-[calc(50%-var(--tarot-w)/2+0.5rem)] lg:absolute lg:bottom-[calc(100%+1.5rem+var(--tarot-h)*0.15)] lg:left-[calc(50%+var(--tarot-w)*1.5+1.75rem)] lg:pl-0"
+          >
+            <HandHint
+              className={`transition-opacity duration-500 motion-reduce:transition-none ${revealed.some(Boolean) ? "opacity-0" : ""}`}
             >
-              <HandHint
-                className={`transition-opacity duration-500 motion-reduce:transition-none ${revealed.some(Boolean) ? "opacity-0" : ""}`}
-              >
-                click on a card to
-                <br />
-                reveal its true form
-              </HandHint>
-            </motion.div>
-            <button
-              type="button"
-              onClick={toggleAll}
-              aria-expanded={showAll}
-              aria-controls={ALL_SKILLS_ID}
-              className="cursor-pointer rounded-sm underline underline-offset-4 transition-colors duration-200 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring dark:hover:text-primary"
-            >
-              {showAll ? "hide all skills" : "view all skills"}
-            </button>
-          </div>
-          {/* TODO: tarot reading goes here once all 3 cards are revealed */}
+              click on a card to
+              <br />
+              reveal its true form
+            </HandHint>
+          </motion.div>
+          <button
+            type="button"
+            onClick={toggleAll}
+            aria-expanded={showAll}
+            aria-controls={ALL_SKILLS_ID}
+            className="cursor-pointer rounded-sm underline underline-offset-4 transition-colors duration-200 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring dark:hover:text-primary"
+          >
+            {showAll ? "hide all skills" : "view all skills"}
+          </button>
         </div>
-        {pinned && <div aria-hidden="true" style={{ height: PIN_SCROLL }} />}
+        {/* TODO: tarot reading goes here once all 3 cards are revealed */}
       </div>
 
       {showAll && (

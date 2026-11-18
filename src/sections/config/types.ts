@@ -10,3 +10,12 @@ export type Card = {
   darkThumbnail?: ImageLoader; // only making optional for testing
   mobile?: boolean; // default to true
 };
+
+// a tarot card for the home page skills section, which one gets drawn is random and only for flavor
+export type Arcana = {
+  image: ImageLoader; // front of the card, the name and number are printed on the art
+  name: string;
+  numeral: string;
+  description: string;
+  major: boolean; // major arcana true, minor false
+};

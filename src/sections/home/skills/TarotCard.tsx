@@ -1,55 +1,37 @@
 // one dealt tarot card: face down with a glow until clicked, then it flips to show its arcana
 import type { RefObject } from "react";
 import { motion, useTransform, type MotionValue } from "motion/react";
-import { CARD_BACK, type Arcana } from "../../config/arcanaConfig";
-import { clamp01, dealProgress, dealWindow, type TarotGeometry } from "./tarotMotion";
+import cardBack from "../../../assets/home/tarot/back.webp";
+import type { Arcana } from "../../config/types";
+import {
+  clamp01,
+  dealProgress,
+  dealWindow,
+  type TarotGeometry,
+} from "./tarotMotion";
 
-// back side, shared by every card and the deck. drawn with css until back.webp exists
+// back side, shared by every card and the deck
 export function CardBack() {
-  if (CARD_BACK) {
-    return (
-      <img
-        src={CARD_BACK}
-        alt=""
-        draggable={false}
-        className="size-full object-cover"
-      />
-    );
-  }
   return (
-    <span className="flex size-full items-center justify-center border-2 border-secondary-foreground/40 bg-secondary bg-[repeating-linear-gradient(45deg,transparent_0_6px,rgb(255_255_255/0.1)_6px_12px)]">
-      <span className="aspect-square w-1/3 rotate-45 border-2 border-secondary-foreground/60" />
-    </span>
+    <img
+      src={cardBack}
+      alt=""
+      draggable={false}
+      className="size-full object-cover"
+    />
   );
 }
 
-// front side. the real art has the name and number printed on it, the fallback writes them out
-export function CardFront({ arcana, src }: { arcana: Arcana; src?: string }) {
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt=""
-        draggable={false}
-        className="size-full object-cover"
-      />
-    );
-  }
+// front side, `src` is undefined for the moment the image is still loading
+export function CardFront({ src }: { src?: string }) {
+  if (!src) return <span className="block size-full bg-muted" />;
   return (
-    // cqw = % of the card's own width, so the text scales with the card
-    <span className="@container block size-full bg-card text-card-foreground">
-      <span className="flex size-full flex-col items-center justify-between border-2 border-primary p-[8cqw] text-center">
-        <span className="text-[13cqw] font-bold text-primary">
-          {arcana.numeral}
-        </span>
-        <span className="text-[11cqw] leading-tight font-semibold">
-          {arcana.name}
-        </span>
-        <span className="text-[13cqw] font-bold text-primary">
-          {arcana.numeral}
-        </span>
-      </span>
-    </span>
+    <img
+      src={src}
+      alt=""
+      draggable={false}
+      className="size-full object-cover"
+    />
   );
 }
 
@@ -147,7 +129,7 @@ export default function TarotCard({
           <CardBack />
         </span>
         <span className={`${faceClasses} rotate-y-180 shadow-lg`}>
-          <CardFront arcana={arcana} src={front} />
+          <CardFront src={front} />
         </span>
       </motion.span>
     </motion.button>

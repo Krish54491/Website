@@ -1,22 +1,8 @@
-// tarot cards for the home page skills section
-// the arcana drawn is random and only for flavor, which skills a card shows depends on its slot (see SKILL_CARDS in homeConfig)
-//
-// images live in src/assets/home/tarot:
-//   back.webp            shared back side of every card
-//   arcana/<image>.webp  front of each arcana, <image> is the `image` field below
-// anything missing falls back to a plain drawn card so the section still works without the art
-
-export type Arcana = {
-  image: string; // file name in assets/home/tarot/arcana without the extension
-  name: string;
-  numeral: string; // only shown on the fallback card and read by screen readers, the art has it printed on
-  description: string;
-  major: boolean; // major arcana true, minor false
-};
+import type { Arcana } from "./types";
 
 export const ARCANA: Arcana[] = [
   {
-    image: "fool",
+    image: () => import("../../assets/home/tarot/arcana/fool.webp"),
     name: "The Fool",
     numeral: "0",
     description:
@@ -24,7 +10,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "magician",
+    image: () => import("../../assets/home/tarot/arcana/magician.webp"),
     name: "The Magician",
     numeral: "I",
     description:
@@ -32,7 +18,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "priestess",
+    image: () => import("../../assets/home/tarot/arcana/priestess.webp"),
     name: "The High Priestess",
     numeral: "II",
     description:
@@ -40,7 +26,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "empress",
+    image: () => import("../../assets/home/tarot/arcana/empress.webp"),
     name: "The Empress",
     numeral: "III",
     description:
@@ -48,7 +34,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "emperor",
+    image: () => import("../../assets/home/tarot/arcana/emperor.webp"),
     name: "The Emperor",
     numeral: "IV",
     description:
@@ -56,7 +42,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "hierophant",
+    image: () => import("../../assets/home/tarot/arcana/hierophant.webp"),
     name: "The Hierophant",
     numeral: "V",
     description:
@@ -64,7 +50,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "lovers",
+    image: () => import("../../assets/home/tarot/arcana/lovers.webp"),
     name: "The Lovers",
     numeral: "VI",
     description:
@@ -72,7 +58,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "chariot",
+    image: () => import("../../assets/home/tarot/arcana/chariot.webp"),
     name: "The Chariot",
     numeral: "VII",
     description:
@@ -80,7 +66,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "justice",
+    image: () => import("../../assets/home/tarot/arcana/justice.webp"),
     name: "Justice",
     numeral: "VIII",
     description:
@@ -88,7 +74,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "hermit",
+    image: () => import("../../assets/home/tarot/arcana/hermit.webp"),
     name: "The Hermit",
     numeral: "IX",
     description:
@@ -96,7 +82,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "fortune",
+    image: () => import("../../assets/home/tarot/arcana/fortune.webp"),
     name: "Wheel of Fortune",
     numeral: "X",
     description:
@@ -104,7 +90,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "strength",
+    image: () => import("../../assets/home/tarot/arcana/strength.webp"),
     name: "Strength",
     numeral: "XI",
     description:
@@ -112,7 +98,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "hanged",
+    image: () => import("../../assets/home/tarot/arcana/hanged.webp"),
     name: "The Hanged Man",
     numeral: "XII",
     description:
@@ -120,7 +106,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "death",
+    image: () => import("../../assets/home/tarot/arcana/death.webp"),
     name: "Death",
     numeral: "XIII",
     description:
@@ -128,7 +114,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "temperance",
+    image: () => import("../../assets/home/tarot/arcana/temperance.webp"),
     name: "Temperance",
     numeral: "XIV",
     description:
@@ -136,7 +122,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "devil",
+    image: () => import("../../assets/home/tarot/arcana/devil.webp"),
     name: "The Devil",
     numeral: "XV",
     description:
@@ -144,7 +130,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "tower",
+    image: () => import("../../assets/home/tarot/arcana/tower.webp"),
     name: "The Tower",
     numeral: "XVI",
     description:
@@ -152,7 +138,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "star",
+    image: () => import("../../assets/home/tarot/arcana/star.webp"),
     name: "The Star",
     numeral: "XVII",
     description:
@@ -160,7 +146,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "moon",
+    image: () => import("../../assets/home/tarot/arcana/moon.webp"),
     name: "The Moon",
     numeral: "XVIII",
     description:
@@ -168,7 +154,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "sun",
+    image: () => import("../../assets/home/tarot/arcana/sun.webp"),
     name: "The Sun",
     numeral: "XIX",
     description:
@@ -176,7 +162,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "judgement",
+    image: () => import("../../assets/home/tarot/arcana/judgement.webp"),
     name: "Judgement",
     numeral: "XX",
     description:
@@ -184,7 +170,7 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
   {
-    image: "world",
+    image: () => import("../../assets/home/tarot/arcana/world.webp"),
     name: "The World",
     numeral: "XXI",
     description:
@@ -192,40 +178,3 @@ export const ARCANA: Arcana[] = [
     major: true,
   },
 ];
-
-// glob instead of plain imports so a missing image doesn't break the build
-const backs = import.meta.glob<string>("../../assets/home/tarot/back.webp", {
-  eager: true,
-  import: "default",
-});
-export const CARD_BACK: string | undefined = Object.values(backs)[0];
-
-// fronts are only fetched once a card is actually drawn
-const fronts = import.meta.glob<string>(
-  "../../assets/home/tarot/arcana/*.webp",
-  { import: "default" },
-);
-
-// resolves to undefined when there's no image for that arcana (yet)
-export async function loadArcanaImage(
-  arcana: Arcana,
-): Promise<string | undefined> {
-  const load = fronts[`../../assets/home/tarot/arcana/${arcana.image}.webp`];
-  if (!load) return undefined;
-  try {
-    return await load();
-  } catch {
-    return undefined;
-  }
-}
-
-// draw `count` different arcana (partial Fisher-Yates so there's never a duplicate)
-export function drawArcana(count: number): Arcana[] {
-  const pool = [...ARCANA];
-  const amount = Math.min(count, pool.length);
-  for (let i = 0; i < amount; i++) {
-    const pick = i + Math.floor(Math.random() * (pool.length - i));
-    [pool[i], pool[pick]] = [pool[pick], pool[i]];
-  }
-  return pool.slice(0, amount);
-}

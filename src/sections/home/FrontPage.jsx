@@ -589,7 +589,7 @@ export default function FrontPage() {
             ))}
           </div>
         </section>
-        {/* Skills: tarot deck that deals out 3 cards on scroll, the cards and deck are plushie obstacles too */}
+        {/* Skills: tarot deck that deals out 3 cards once it scrolls into view, the cards and deck are plushie obstacles too */}
         <TarotSkills onMove={syncObstacles} />
         <p className="flex mt-10 justify-center">MORE IS PLANNED STAY TUNED!</p>
       </main>
