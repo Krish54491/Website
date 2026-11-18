@@ -1,65 +1,45 @@
 // controls that hang off the pfp for spawning plushies:
-// mouse gets a pull chain, touch gets a button the pfp's ring stretches into
-import { useRef, useState } from "react";
+// mouse gets a pull cord, touch gets a button the pfp's ring stretches into
+import { useState } from "react";
+import HandHint from "../../components/ui/HandHint";
+import PullCord, { PULL_CORD_LENGTH } from "../../components/ui/PullCord";
 
-const MAX_PULL = 80; // px the handle can be pulled down
-const SPAWN_EVERY = 300; // ms between plushies while pulled down
+const MIN_PULL = 2; // px, a short pull that never got far enough to spawn mid-pull still spawns one on release
+const SPAWN_EVERY = 300; // ms between plushies while the cord is held all the way down
 
 export default function PlushSpawner({ onSpawn }) {
+  const [pulledOnce, setPulledOnce] = useState(false); // hides the hint after the first pull
+
+  const handlePull = () => {
+    onSpawn();
+    setPulledOnce(true);
+  };
+
   return (
     <>
-      <PullChain onSpawn={onSpawn} />
+      <PullCord
+        onPull={handlePull}
+        label="Spawn plush"
+        minPull={MIN_PULL}
+        repeatEvery={SPAWN_EVERY}
+        className="absolute top-full left-1/2 hidden -translate-x-1/2 pointer-fine:block"
+      >
+        {/* sits just left of the bead with the arrow curling up to it (the right side runs off
+            narrow screens), gone after the first pull */}
+        <div
+          className="pointer-events-none absolute right-[calc(50%+0.75rem)]"
+          style={{ top: PULL_CORD_LENGTH + 8 }}
+        >
+          <HandHint
+            arrow="up-right"
+            className={`whitespace-nowrap transition-opacity duration-500 motion-reduce:transition-none ${pulledOnce ? "opacity-0" : ""}`}
+          >
+            pull me!
+          </HandHint>
+        </div>
+      </PullCord>
       <RingButton onSpawn={onSpawn} />
     </>
-  );
-}
-
-function PullChain({ onSpawn }) {
-  const [pull, setPull] = useState(0);
-  const startY = useRef(null);
-  const spawnTimer = useRef(null);
-
-  const handlePointerDown = (event) => {
-    // keeps getting move/up events even if the cursor slides off the handle
-    event.currentTarget.setPointerCapture(event.pointerId);
-    startY.current = event.clientY;
-  };
-  const handlePointerMove = (event) => {
-    if (startY.current === null) return;
-    const amount = Math.min(
-      Math.max(event.clientY - startY.current, 0),
-      MAX_PULL,
-    );
-    setPull(amount);
-    // pulled all the way down, keep spawning until released
-    if (amount === MAX_PULL && !spawnTimer.current)
-      spawnTimer.current = setInterval(onSpawn, SPAWN_EVERY);
-  };
-  const handleRelease = () => {
-    startY.current = null;
-    setPull(0);
-    clearInterval(spawnTimer.current);
-    spawnTimer.current = null;
-  };
-
-  return (
-    <div className="absolute top-full left-1/2 hidden -translate-x-1/2 flex-col items-center pointer-fine:flex">
-      {/* chain, pull is the only runtime value so it's passed in as a css variable */}
-      <div
-        className="h-[calc(1.5rem+var(--pull))] w-1 bg-[repeating-linear-gradient(to_bottom,var(--color-primary)_0_6px,transparent_6px_10px)] transition-[height] duration-200"
-        style={{ "--pull": `${pull}px` }}
-      />
-      {/* handle, a hollow semicircle, the chain hangs from the middle of its flat top line */}
-      <div
-        className="h-5 w-10 cursor-grab touch-none rounded-b-full border-4 border-primary select-none active:cursor-grabbing"
-        // stops matter's mouse (on body) from grabbing plushies while pulling
-        onMouseDown={(event) => event.stopPropagation()}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handleRelease}
-        onPointerCancel={handleRelease}
-      />
-    </div>
   );
 }
 
