@@ -373,7 +373,8 @@ export const TIMELINE: TimelinePin[] = [
     type: "job",
     name: "Frontend Developer",
     organization: "Comet Aviation",
-    timeStart: "2025-08",
+    timeStart: "2026-08",
+    timeEnd: "2026-10",
     location: "Richardson, TX",
     skills: ["React", "TypeScript", "Cloudflare"],
     highlights: [

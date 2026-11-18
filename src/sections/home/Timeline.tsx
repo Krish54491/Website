@@ -159,7 +159,7 @@ export default function Timeline({
   return (
     // overflow-x-clip so bubbles starting off to the right don't make the page scroll sideways
     <section id="timeline" className="overflow-x-clip py-10 sm:py-14">
-      <SectionHeading eyebrow="Timeline" title="Experience & Education" />
+      <SectionHeading title="Experience & Education" />
       {/* legend for the pins */}
       <ul className="mb-8 flex flex-wrap gap-4 text-sm text-muted-foreground">
         {Object.values(PIN_STYLES).map((style) => (
