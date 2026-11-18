@@ -422,7 +422,8 @@ export default function PullCord({
           fill="none"
           strokeLinecap="round"
           strokeWidth={2.5}
-          className="stroke-primary"
+          // kokonut's colors: its "on" look in light mode, its "off" look in dark mode
+          className="stroke-zinc-400 dark:stroke-zinc-600"
         />
         {/* A wider invisible copy of the cord, so it's easy to grab. */}
         <path
@@ -443,7 +444,7 @@ export default function PullCord({
           <circle fill="transparent" r={22} cy={12} />
           {focused && (
             <rect
-              className="fill-none stroke-ring"
+              className="fill-none stroke-zinc-400"
               x={-11}
               y={-3}
               width={22}
@@ -452,8 +453,11 @@ export default function PullCord({
               strokeWidth={2}
             />
           )}
+          {/* secondary while hovered or pulled, the border (same color as the resting fill) keeps
+              its outline visible then */}
           <rect
-            className="fill-primary transition-[fill] duration-200 group-hover:fill-secondary"
+            className={`dark:stroke-zinc-800 transition-[fill] duration-200 group-hover:fill-secondary stroke-zinc-300 ${grabbing ? "fill-secondary" : "fill-zinc-800 dark:fill-zinc-300"}`}
+            strokeWidth={2}
             x={-7}
             y={1}
             width={14}
