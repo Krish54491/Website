@@ -5,7 +5,8 @@ import {
   CenterPillFillButton,
 } from "../../components/ui/Buttons";
 import TarotSkills from "./skills/TarotSkills";
-import { ABOUT, HERO } from "../config/homeConfig";
+import Timeline from "./Timeline";
+import { ABOUT, HERO, TIMELINE } from "../config/homeConfig";
 import { krish_resume, POSSIBLE_PLUSHES } from "../utils/constants";
 import { useRef, useEffect, useState } from "react";
 import PlushSpawner from "./PlushSpawner";
@@ -591,6 +592,8 @@ export default function FrontPage() {
         </section>
         {/* Skills: tarot deck that deals out 3 cards once it scrolls into view, the cards and deck are plushie obstacles too */}
         <TarotSkills onMove={syncObstacles} />
+        {/* Work history, education, and projects as one timeline, the bubbles are plushie obstacles too */}
+        <Timeline pins={TIMELINE} onMove={syncObstacles} />
         <p className="flex mt-10 justify-center">MORE IS PLANNED STAY TUNED!</p>
       </main>
     </HomeTransition>

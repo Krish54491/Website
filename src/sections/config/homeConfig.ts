@@ -309,6 +309,97 @@ export const ARCANA: Arcana[] = [
   },
 ];
 
+// one stop on the home page timeline (work history, education, and some projects together)
+export type TimelinePin = {
+  type: "project" | "education" | "job"; // picks the pin icon/color
+  name: string; // job title, degree, or project name
+  organization?: string; // company, school, or event, shown under the name
+  timeStart: string; // "YYYY-MM", the timeline is sorted by this
+  timeEnd?: string; // "YYYY-MM", leave out if still going with no clear end date (shows "Present")
+  location?: string; // where it was, not needed if remote
+  skills: string[]; // skills associated
+  // bullet points about the job or project, projects have none unless worked on with a team for a long time
+  // (not a hackathon), education doesn't need any either
+  highlights?: string[];
+  image?: string; // imported image url, only for education 99% of the time
+  link?: string; // "/projects/<slug>" for a case study or a full https url, shows as a small arrow by the name
+};
+
+// order doesn't matter here, the timeline sorts by timeStart (oldest first)
+export const TIMELINE: TimelinePin[] = [
+  {
+    type: "education",
+    name: "B.S. Computer Engineering",
+    organization: "The University of Texas at Dallas",
+    timeStart: "2024-08",
+    timeEnd: "2027-12",
+    location: "Richardson, TX",
+    skills: [
+      "Data Structures & Algorithms",
+      "Computer Architecture",
+      "Digital Circuits",
+      "Embedded Systems",
+      "Artificial Intelligence",
+    ],
+  },
+  {
+    type: "project",
+    name: "Personal Portfolio",
+    organization: "krish544.com",
+    timeStart: "2024-11",
+    skills: [
+      "React",
+      "TypeScript",
+      "Cloudflare",
+      "Supabase",
+      "Drizzle ORM",
+      "GitHub Actions",
+    ],
+  },
+  {
+    type: "job",
+    name: "Software Engineering Intern",
+    organization: "Care Impact",
+    timeStart: "2025-06",
+    timeEnd: "2025-08",
+    location: "Leander, TX",
+    skills: ["Python", "Selenium", "PostgreSQL"],
+    highlights: [
+      "Designed and deployed a Python-based pipeline using Selenium to automate retrieval of patient medical records from a client portal, supporting device recommendation workflows.",
+      "Automated migration of 5,000+ patient records into Care Impact's databases, replacing manual data-entry, saving $10,000+ in costs by creating a reusable data pipeline.",
+    ],
+  },
+  {
+    type: "job",
+    name: "Frontend Developer",
+    organization: "Comet Aviation",
+    timeStart: "2025-08",
+    location: "Richardson, TX",
+    skills: ["React", "TypeScript", "Cloudflare"],
+    highlights: [
+      "Developed and maintained Comet Aviation's web platform using React and TypeScript, building responsive components and event-management functionality for the organization's public-facing website.",
+      "Managed the development lifecycle with non-technical club leadership, translating requirements into technical specifications and delivering documented, production-ready features deployed through Cloudflare.",
+    ],
+  },
+  {
+    type: "project",
+    name: "Piano Wizards",
+    organization: "Hacklahoma 2026 · 1st Place",
+    timeStart: "2026-02",
+    timeEnd: "2026-02",
+    skills: ["React", "JavaScript", "WebSockets"],
+    link: "/projects/pianoWizards",
+  },
+  {
+    type: "project",
+    name: "Hand Gesture Recognition Platform",
+    timeStart: "2026-05",
+    timeEnd: "2026-09",
+    skills: ["Python", "MediaPipe", "PostgreSQL", "Rust", "Dioxus", "FastAPI"],
+    link: "https://github.com/Krish54491/Hand-Recognizer",
+  },
+];
+
 // whatever I'm currently working on or doing, PERSONAL
 // placeholder
 // export const CURRENTLY_WORKING : {
