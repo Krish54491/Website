@@ -12,10 +12,12 @@ Finished items get moved to [Completed Frontend Changes.md](Completed%20Frontend
 - On inital load of Home page animation of Jolteon getting zapped and turning into plush jolteon
 - transition is a 5 star pull animation(probably going to be wuthering waves or genshin impact's) that ends with pulling jolteon plush splash art before clearing for the actual page
 - Frontpage should have (in order, the Header/Summary on top is done)
-  - About Me(might make into a bento instead)
+  - About Me(might make into a bento instead)  
+    also have the words higlights and just more stuff going on like https://www.franckpoingt.dev/about
   - Skills(use skills rework)
   - Projects(Link and display last 4 added projects)
   - Work history
+  - Education
   - Some of my Writings, the blog: "Want to know more? here's my blog!" -> Link/index of Blog(like https://blog.maximeheckel.com) probably for later down the line when I actually start writing
   - Contact me Area(not just the footer)
     end of page will look like this ![alt text](image-11.png)
@@ -30,7 +32,43 @@ Finished items get moved to [Completed Frontend Changes.md](Completed%20Frontend
 
 - Account setup doesn't need much changes, but needs TOS to be a react modal and after logging in/registering account needs to send back to page user was at before needing to sign in/register
 
+### Homepage Section: Projects
+
+### Homepage Section: Blogs(currently empty \\\_(..)\_/)
+
+### Homepage Section: Work history and Education(projects)
+
+Instead of having them separated have it as one timeline thats has education related having a different pin than job related. The order is obviously time based starting from 2024, maybe we have project listed as well, but the projects don't get extra information since they already have enough focus.
+![timeline without pins](image-13.png)
+![timeline with pins](image-14.png)
+more like image-14, but with bullet points and skills badge list
+
+- each thing on the timeline will have an object like:
+
+```ts
+Type TimelinePin = {
+  type: string; // project, education, or job
+  name: string;
+  timeStart: string; // month and year
+  timeEnd?: string // month and year, empty if still going and no clear end date
+  location?: string; // where it was, not needed if remote
+  skills: string[]; // skills associated
+  highlights?:string[];
+  /* bullet points about the job or project, project will have none unless it was worked on with a team and for a long duration(not a hackathon). education also doesn't need any*/
+  image?: string; // image associated with it, only for education 99% of the time, unless it was a project I want to share an image for
+}
+
+```
+
+- Timeline objects come in from side on scroll, images should be preloaded
+- on mobile all text bubbles are on one side with the time duration (jan 2020 - may 2023) on the other, time duration text closer to right edge
+- Timeline order is based on what timeStart is first, if it makes implementation easier I might just add the dates in numbers to the object.
+
 ## Personal HomePage
+
+### Rule: never use GENAI for Personal Homepage
+
+thats just not personal at that point, obviously I can ask for help or component, but no agentic coding let alone vibe coding.
 
 - Life achievements are like half my mantra
   ![alt text](image-10.png)

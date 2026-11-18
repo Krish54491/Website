@@ -106,7 +106,7 @@ export default function TarotCard({
       data-physics="rect"
       data-radius="8"
       style={{ x, y, rotate, opacity }}
-      className="group relative aspect-(--tarot-aspect) w-(--tarot-w) shrink-0 cursor-pointer rounded-lg perspective-[800px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:cursor-default"
+      className="group relative aspect-(--tarot-aspect) w-(--tarot-w) shrink-0 cursor-pointer rounded-lg perspective-midrange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring disabled:cursor-default"
     >
       <motion.span
         initial={false}
