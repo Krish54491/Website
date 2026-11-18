@@ -311,7 +311,7 @@ export const ARCANA: Arcana[] = [
 
 // one stop on the home page timeline (work history, education, and some projects together)
 export type TimelinePin = {
-  type: "project" | "education" | "job"; // picks the pin icon/color
+  type: "project" | "education" | "job" | "club"; // picks the pin icon/color
   name: string; // job title, degree, or project name
   organization?: string; // company, school, or event, shown under the name
   timeStart: string; // "YYYY-MM", the timeline is sorted by this

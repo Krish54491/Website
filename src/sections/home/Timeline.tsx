@@ -81,6 +81,29 @@ const PIN_STYLES: Record<
       </Icon>
     ),
   },
+  club: {
+    label: "Club",
+    className: "bg-foreground text-background",
+    icon: (
+      <Icon>
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </Icon>
+    ),
+  },
+};
+
+// the "more to come" pin at the end, not a TimelinePin type since it never comes from the config
+const MORE_STYLE = {
+  label: "More to come",
+  className: "bg-home-timeline-done text-foreground",
+  icon: (
+    <Icon>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </Icon>
+  ),
 };
 
 // md and up the bubbles alternate sides, below that they're all on the left
@@ -135,6 +158,83 @@ function PinLink({ link, name }: { link: string; name: string }) {
   );
 }
 
+// one row of the timeline: bubble, pin on the line, and the date, shared by the real pins and the "more to come" end
+function TimelineRow({
+  index,
+  first,
+  last,
+  isDesktop,
+  reduced,
+  onMove,
+  pin,
+  date,
+  children,
+}: {
+  index: number;
+  first: boolean;
+  last: boolean;
+  isDesktop: boolean;
+  reduced: boolean;
+  onMove?: () => void;
+  pin: { label: string; className: string; icon: ReactNode };
+  date?: ReactNode;
+  children?: ReactNode; // bubble contents
+}) {
+  // odd rows flip to the right of the line on desktop
+  const flipped = isDesktop && index % 2 === 1;
+  return (
+    <li className="grid grid-cols-[1fr_auto_5.5rem] md:grid-cols-[1fr_auto_1fr]">
+      {/* bubble: always column 1 on mobile, alternates on desktop */}
+      <div
+        className={`row-start-1 ${flipped ? "col-start-3 pl-4" : "col-start-1 pr-4"} ${last ? "hidden" : "pb-10"}`}
+      >
+        <motion.div
+          data-physics
+          initial={
+            reduced ? false : { opacity: 0, x: flipped ? SLIDE : -SLIDE }
+          }
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "0px 0px -15% 0px" }}
+          transition={{ type: "spring", stiffness: 70, damping: 16 }}
+          onUpdate={() => onMove?.()}
+          onAnimationComplete={() => onMove?.()}
+          className="relative rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-md sm:p-5"
+        >
+          {/* little pointer toward the line, a rotated square with only the outer 2 borders */}
+          <span
+            aria-hidden="true"
+            className={`absolute top-5 size-3 rotate-45 border-border bg-card ${flipped ? "-left-1.75 border-b border-l" : "-right-1.75 border-t border-r"}`}
+          />
+          {children}
+        </motion.div>
+      </div>
+
+      {/* the line runs through every row's middle column, so it's one continuous line */}
+      <div className="relative col-start-2 row-start-1 flex justify-center px-1">
+        <span
+          aria-hidden="true"
+          className={`absolute left-1/2 w-0.5 -translate-x-1/2 bg-border ${first ? "top-5" : "top-0"} ${last ? "h-5" : "bottom-0"}`}
+        />
+        <span
+          title={pin.label}
+          className={`relative mt-1 flex size-9 items-center justify-center rounded-full shadow-md ring-4 ring-background sm:size-10 ${pin.className}`}
+        >
+          {pin.icon}
+        </span>
+      </div>
+
+      {/* dates: stacked on mobile against the right edge, one line next to the pin on desktop */}
+      {date && (
+        <p
+          className={`row-start-1 mt-3 text-xs font-semibold text-muted-foreground sm:text-sm ${flipped ? "col-start-1 pr-4 text-right" : "col-start-3 pl-1 text-center md:pl-4 md:text-left"}`}
+        >
+          {date}
+        </p>
+      )}
+    </li>
+  );
+}
+
 export default function Timeline({
   pins,
   onMove,
@@ -148,6 +248,11 @@ export default function Timeline({
   const sorted = [...pins].sort((a, b) =>
     a.timeStart.localeCompare(b.timeStart),
   );
+  // legend only lists the types that are actually on the timeline
+  const usedTypes = (Object.keys(PIN_STYLES) as TimelinePin["type"][]).filter(
+    (type) => pins.some((pin) => pin.type === type),
+  );
+  const rowProps = { isDesktop, reduced, onMove };
 
   // load the images ahead of time so they don't pop in mid slide
   useEffect(() => {
@@ -162,116 +267,76 @@ export default function Timeline({
       <SectionHeading title="Experience & Education" />
       {/* legend for the pins */}
       <ul className="mb-8 flex flex-wrap gap-4 text-sm text-muted-foreground">
-        {Object.values(PIN_STYLES).map((style) => (
-          <li key={style.label} className="flex items-center gap-2">
-            <span
-              className={`flex size-6 items-center justify-center rounded-full [&_svg]:size-3.5 ${style.className}`}
-            >
-              {style.icon}
-            </span>
-            {style.label}
-          </li>
-        ))}
+        {usedTypes.map((type) => {
+          const style = PIN_STYLES[type];
+          return (
+            <li key={type} className="flex items-center gap-2">
+              <span
+                className={`flex size-6 items-center justify-center rounded-full [&_svg]:size-3.5 ${style.className}`}
+              >
+                {style.icon}
+              </span>
+              {style.label}
+            </li>
+          );
+        })}
       </ul>
 
       <ol>
         {sorted.map((pin, i) => {
-          const style = PIN_STYLES[pin.type];
-          // odd rows flip to the right of the line on desktop
-          const flipped = isDesktop && i % 2 === 1;
           const start = formatMonth(pin.timeStart);
           const end = pin.timeEnd ? formatMonth(pin.timeEnd) : "Present";
-          const last = i === sorted.length - 1;
-
           return (
-            <li
+            <TimelineRow
               key={`${pin.name}-${pin.timeStart}`}
-              className="grid grid-cols-[1fr_auto_5.5rem] md:grid-cols-[1fr_auto_1fr]"
+              index={i}
+              first={i === 0}
+              last={false} // the "more to come" row is always last
+              pin={PIN_STYLES[pin.type]}
+              date={
+                <>
+                  <span className="block md:inline">{start} </span>
+                  {pin.timeEnd !== pin.timeStart && (
+                    <span className="block md:inline">– {end}</span>
+                  )}
+                </>
+              }
+              {...rowProps}
             >
-              {/* bubble: always column 1 on mobile, alternates on desktop */}
-              <div
-                className={`row-start-1 ${flipped ? "col-start-3 pl-4" : "col-start-1 pr-4"} ${last ? "" : "pb-10"}`}
-              >
-                <motion.div
-                  data-physics
-                  initial={
-                    reduced
-                      ? false
-                      : { opacity: 0, x: flipped ? SLIDE : -SLIDE }
-                  }
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "0px 0px -15% 0px" }}
-                  transition={{ type: "spring", stiffness: 70, damping: 16 }}
-                  onUpdate={() => onMove?.()}
-                  onAnimationComplete={() => onMove?.()}
-                  className="relative rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-md sm:p-5"
-                >
-                  {/* little pointer toward the line, a rotated square with only the outer 2 borders */}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute top-5 size-3 rotate-45 border-border bg-card ${flipped ? "-left-1.75 border-b border-l" : "-right-1.75 border-t border-r"}`}
-                  />
-                  <div className="flex items-start gap-2">
-                    <h3 className="text-base font-bold sm:text-lg">
-                      {pin.name}
-                    </h3>
-                    {pin.link && <PinLink link={pin.link} name={pin.name} />}
-                  </div>
-                  {(pin.organization || pin.location) && (
-                    <p className="text-sm font-medium text-muted-foreground">
-                      {[pin.organization, pin.location]
-                        .filter(Boolean)
-                        .join(" · ")}
-                    </p>
-                  )}
-                  {pin.image && (
-                    <img
-                      src={pin.image}
-                      alt={pin.name}
-                      className="mt-3 w-full rounded-xl object-cover"
-                    />
-                  )}
-                  {pin.highlights && pin.highlights.length > 0 && (
-                    <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground">
-                      {pin.highlights.map((highlight) => (
-                        <li key={highlight}>{highlight}</li>
-                      ))}
-                    </ul>
-                  )}
-                  <BadgeList
-                    items={pin.skills}
-                    variant="outline"
-                    className="mt-4"
-                  />
-                </motion.div>
+              <div className="flex items-start gap-2">
+                <h3 className="text-base font-bold sm:text-lg">{pin.name}</h3>
+                {pin.link && <PinLink link={pin.link} name={pin.name} />}
               </div>
-
-              {/* the line runs through every row's middle column, so it's one continuous line */}
-              <div className="relative col-start-2 row-start-1 flex justify-center px-1">
-                <span
-                  aria-hidden="true"
-                  className={`absolute left-1/2 w-0.5 -translate-x-1/2 bg-border ${i === 0 ? "top-5" : "top-0"} ${last ? "h-5" : "bottom-0"}`}
+              {(pin.organization || pin.location) && (
+                <p className="text-sm font-medium text-muted-foreground">
+                  {[pin.organization, pin.location].filter(Boolean).join(" · ")}
+                </p>
+              )}
+              {pin.image && (
+                <img
+                  src={pin.image}
+                  alt={pin.name}
+                  className="mt-3 w-full rounded-xl object-cover"
                 />
-                <span
-                  title={style.label}
-                  className={`relative mt-1 flex size-9 items-center justify-center rounded-full shadow-md ring-4 ring-background sm:size-10 ${style.className}`}
-                >
-                  {style.icon}
-                </span>
-              </div>
-
-              {/* dates: stacked on mobile against the right edge, one line next to the pin on desktop */}
-              <p
-                className={`row-start-1 mt-3 text-xs font-semibold text-muted-foreground sm:text-sm ${flipped ? "col-start-1 pr-4 text-right" : "col-start-3 pl-1 text-center md:pl-4 md:text-left"}`}
-              >
-                <span className="block md:inline">{start} </span>
-                {pin.timeEnd !== pin.timeStart && (
-                  <span className="block md:inline">– {end}</span>
-                )}
-              </p>
-            </li>
+              )}
+              {pin.highlights && pin.highlights.length > 0 && (
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground">
+                  {pin.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              )}
+              <BadgeList items={pin.skills} variant="chip" className="mt-3" />
+            </TimelineRow>
           );
         })}
+        <TimelineRow
+          index={sorted.length}
+          first={sorted.length === 0}
+          last
+          pin={MORE_STYLE}
+          {...rowProps}
+        ></TimelineRow>
       </ol>
     </section>
   );

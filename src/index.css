@@ -227,6 +227,9 @@
   --color-home-dark-sidebar-accent-foreground: oklch(0.96 0.01 90);
   --color-home-dark-sidebar-border: oklch(0.34 0.035 300);
   --color-home-dark-sidebar-ring: #ffe5a3;
+
+  /*Custom colors for home*/
+  --color-home-timeline-done: #77bf85;
   /* Other Projects(Projects either made with a team or for another person) 
   Mostly Ghibli
   */

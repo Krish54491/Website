@@ -63,6 +63,7 @@ Type TimelinePin = {
 - Timeline objects come in from side on scroll, images should be preloaded
 - on mobile all text bubbles are on one side with the time duration (jan 2020 - may 2023) on the other, time duration text closer to right edge
 - Timeline order is based on what timeStart is first, if it makes implementation easier I might just add the dates in numbers to the object.
+- lets make the skills list like https://chanhdang.com/en#projects ![alt text](image-15.png)
 
 ## Personal HomePage
 
