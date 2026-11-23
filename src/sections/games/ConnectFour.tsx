@@ -12,7 +12,7 @@ actual connect four has 6 rows and 7 columns
 // columns have data values of an Array of the tiles and a boolean filled so that players can't use that tile
 // tiles have what color they are(this is also if their empty)
 // top tile is 0, bottom is max length
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const rows = 7; // amount of rows per column
 const cols = 6;
@@ -29,12 +29,12 @@ const Tile = ({
 
   return (
     <button
-      className={`border-2  border-input  p-2 lg:p-8 text-2xl md:text-4xl rounded-full w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
+      className={`p-2 lg:p-8 text-2xl md:text-4xl rounded-full w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
         value
           ? value === 2
-            ? "bg-red-700"
-            : "bg-amber-400"
-          : "bg-accent hover:animate-scale"
+            ? "bg-red-700 border-red-400 border-4"
+            : "bg-amber-400 border-amber-600 border-4"
+          : "bg-accent hover:animate-scale border-2 border-input"
       }`}
       onClick={placeInColumn} // basically place in column
     ></button>
@@ -89,10 +89,14 @@ const Board = ({
 export default function ConnectFour() {
   const [turn, setTurn] = useState(0); // yellow goes first because I like it yellow=0, red=1 for turn order only(just so it takes only one bit)
   const [gameOver, setGameOver] = useState(false); // game is autostarted for now
+  const [colFull, setColFull] = useState(Array(cols).fill(false)); // array size of columns to track if they're full for faster processing
   const [tiles, setTiles] = useState(
     Array.from({ length: rows }, () => Array(cols).fill(0)),
   ); // val = 0 means empty, 1 means yellow, 2 means red
   const checkColumn: (colID: number) => number = (colID: number) => {
+    if (colFull[colID]) {
+      return -1;
+    }
     for (let i = tiles[colID].length; i >= 0; i--) {
       if (tiles[colID][i] === 0) {
         setTurn((prev) => {
@@ -101,15 +105,96 @@ export default function ConnectFour() {
         return i; // returns first tile that is at the bottom
       }
     }
+    setColFull((prev) => {
+      let newColFull = prev.slice();
+      newColFull[colID] = true;
+      return newColFull;
+    });
     return -1;
   };
   const placeInColumn = (colID: number) => {
+    if (gameOver) return; // if the game is over what the hell are you placing
     const lowestRow = checkColumn(colID);
     if (lowestRow === -1) {
       return; // don't place anything, no room
     }
-    tiles[colID][lowestRow] = turn === 0 ? 1 : 2; // replace tile
+    setTiles((prev) => {
+      let newTiles = prev.slice();
+      newTiles[colID][lowestRow] = turn === 0 ? 1 : 2;
+      return newTiles;
+    }); // replace tile
   };
+  useEffect(() => {
+    if (gameOver) {
+      return;
+    }
+    const winCheck = checkWinner();
+    if (winCheck === "red") {
+      // check who wins
+      setGameOver(true);
+    } else if (winCheck === "yellow") {
+      setGameOver(true);
+    } else if (winCheck === "tie") {
+      // how tf
+      setGameOver(true);
+    }
+  }, [gameOver, turn]);
+  function checkWinner(): string {
+    // function that ends game
+    // win conditons for  4... bruh it's litterally the name
+    // check diagonal, horizontial, vertical
+    // check if all full columns are full for tie
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        if (tiles[i][j] === 0) {
+          continue;
+        }
+        if (i < rows - 3) {
+          if (
+            tiles[i][j] === tiles[i + 1][j] &&
+            tiles[i + 2][j] === tiles[i + 1][j] &&
+            tiles[i + 2][j] === tiles[i + 3][j]
+          ) {
+            // checks all horizontial
+            return tiles[i][j] === 1 ? "yellow" : "red";
+          }
+        }
+        if (j < cols - 3) {
+          if (
+            tiles[i][j + 1] === tiles[i][j] &&
+            tiles[i][j + 2] === tiles[i][j + 1] &&
+            tiles[i][j + 2] === tiles[i][j + 3]
+          ) {
+            // checks all vertical
+            return tiles[i][j] === 1 ? "yellow" : "red";
+          }
+        }
+        if (i < rows - 3 && j < cols - 3) {
+          if (
+            tiles[i + 1][j + 1] === tiles[i][j] &&
+            tiles[i + 2][j + 2] === tiles[i + 1][j + 1] &&
+            tiles[i + 2][j + 2] === tiles[i + 3][j + 3]
+          ) {
+            // checks all up diagonal /
+            return tiles[i][j] === 1 ? "yellow" : "red";
+          }
+        }
+        if (i >= 3 && j < cols - 3) {
+          if (
+            tiles[i - 1][j + 1] === tiles[i][j] &&
+            tiles[i - 2][j + 2] === tiles[i - 1][j + 1] &&
+            tiles[i - 2][j + 2] === tiles[i - 3][j + 3]
+          ) {
+            // checks all down diagonal /
+            return tiles[i][j] === 1 ? "yellow" : "red";
+          }
+        }
+      }
+    }
+    // O(n^2)
+    return "";
+  }
+  console.log(checkWinner());
   return (
     <div className="flex justify-center">
       <div className="mt-10 h-fit border-2 w-fit bg-primary/10">
@@ -120,3 +205,6 @@ export default function ConnectFour() {
     </div>
   );
 }
+// what's left is winning conditions, check if someone won
+//
+// making it pretty
