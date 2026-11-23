@@ -45,6 +45,5 @@ export const games: Card[] = [
     darkThumbnail: () =>
       import("../../assets/tools/thumbnails/Placeholder Image.png"),
   },
-  // TO-DO add connect four to this
   // TO-DO change thumbnails and add light mode ones
 ];

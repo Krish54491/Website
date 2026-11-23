@@ -24,9 +24,6 @@ const Tile = ({
   value: number;
   placeInColumn: () => void;
 }) => {
-  // TO-DO
-  // have to later make it change color on being filled, but that can be done easily with value and css color changes
-
   return (
     <button
       className={`p-2 lg:p-8 text-2xl md:text-4xl rounded-full w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
@@ -192,12 +189,18 @@ export default function ConnectFour() {
       }
     }
     // O(n^2)
+    let counter = 0;
+    colFull.forEach((check) => {
+      if (check) counter++;
+    });
+    if (counter === colFull.length) {
+      return "tie";
+    }
     return "";
   }
-  console.log(checkWinner());
   return (
     <div className="flex justify-center">
-      <div className="mt-10 h-fit border-2 w-fit bg-primary/10">
+      <div className="mt-10 h-fit border-2 w-fit bg-primary/10 p-1">
         <div className="flex flex-row justify-center gap-1">
           <Board tiles={tiles} placeInColumn={placeInColumn} />
         </div>
@@ -205,6 +208,20 @@ export default function ConnectFour() {
     </div>
   );
 }
-// what's left is winning conditions, check if someone won
-//
-// making it pretty
+// TO-DO
+// making it pretty:
+/* making it pretty entails adding an animation for when it gets placed(drops down into slot), 
+adding an indictator of where you're placing(on hover shows where you're placing),
+maybe adding texture to border of discs(like ridges),
+animation for clearing board,
+use confetti when announcing winner(premade use that)
+*/
+// adding restart button
+/* clears board 
+setGameOver(false)
+setTurn(0)
+setColFull empty again
+*/
+// showing who won: just make a const useState and display on completion
+// show who's turn it is(text color should be the color of the disc playing)
+// this is all grunt work
