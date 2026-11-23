@@ -9,15 +9,20 @@ actual connect four has 6 rows and 7 columns
 */
 // this type of setup lets us find which is the highest row free in the column
 
+// columns have data values of an Array of the tiles and a boolean filled so that players can't use that tile
+// tiles have what color they are(this is also if their empty)
+// bottom tile is 0 top is max length
 import { useState } from "react";
 
-type Color = "yellow" | "red" | "";
+const rows = 6; // amount of rows per column
+const cols = 7;
+
 const Tile = ({
   value,
-  checkColumn,
+  placeInColumn,
 }: {
-  value: Color;
-  checkColumn: () => void;
+  value: number;
+  placeInColumn: () => void;
 }) => {
   // TO-DO
   // have to later make it change color on being filled, but that can be done easily with value and css color changes
@@ -25,34 +30,86 @@ const Tile = ({
   return (
     <button
       className={`border-2  border-input  p-2 lg:p-8 text-2xl md:text-4xl rounded-full w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
-        value ? (value == "red" ? "bg-red-700" : "bg-amber-400") : "bg-accent"
+        value ? (value == 2 ? "bg-red-700" : "bg-amber-400") : "bg-accent"
       }`}
-      onClick={checkColumn} // basically place in column
+      onClick={placeInColumn} // basically place in column
     >
       {value ?? "⠀"}
     </button>
   );
 };
-const Column = ({ columnID }: { columnID: number }) => {
-  const rows = 6; // amount of rows per column
-  let col = [];
-  for (let i = 0; i < rows; i++) {
-    col.push(<Tile value="" checkColumn={() => {}} key={columnID + i} />);
-  }
-  return <div className="flex flex-col gap-1">{col}</div>;
+const Column = ({
+  columnID,
+  colTiles,
+  placeInColumn,
+}: {
+  columnID: number;
+  colTiles: number[];
+  placeInColumn: (colID: number) => void;
+}) => {
+  return (
+    <div className="flex flex-col gap-1">
+      {colTiles.map((val, i) => {
+        return (
+          <Tile
+            value={val}
+            key={i + "" + columnID}
+            placeInColumn={placeInColumn(i)}
+          />
+        );
+      })}
+    </div>
+  );
 };
+const Board = ({
+  tiles,
+  placeInColumn,
+}: {
+  tiles: number[][];
+  placeInColumn: (colID: number) => void;
+}) => {
+  return (
+    <>
+      {tiles.map((colTiles, i) => {
+        return (
+          <Column
+            colTiles={colTiles}
+            columnID={i}
+            placeInColumn={placeInColumn}
+          />
+        );
+      })}
+    </>
+  );
+};
+
 export default function ConnectFour() {
-  const [turn, setTurn] = useState("yellow"); // yellow goes first because I like it
-  let board = [];
-  const cols = 7;
-  for (let i = 0; i < cols; i++) {
-    board.push(<Column columnID={i} />);
-  }
-  function checkColumn() {}
+  const [turn, setTurn] = useState(0); // yellow goes first because I like it yellow=0, red=1 for turn order only(just so it takes only one bit)
+  const [gameOver, setGameOver] = useState(false); // game is autostarted for now
+  const [tiles, setTiles] = useState(
+    Array.from({ length: rows }, () => Array(cols).fill(0)),
+  ); // val = 0 means empty, 1 means yellow, 2 means red
+  const checkColumn: (colID: number) => number = (colID: number) => {
+    for (let i = 0; i < tiles[colID].length; i++) {
+      if (tiles[colID][i] == 0) {
+        return i; // returns first tile that is at the bottom
+      }
+    }
+    return -1;
+  };
+  const placeInColumn = (colID: number) => {
+    const lowestRow = checkColumn(colID);
+    if (lowestRow == -1) {
+      return; // don't place anything, no room
+    }
+    tiles[colID][lowestRow] = turn == 0 ? 1 : 2; // replace tile
+  };
   return (
     <div className="flex justify-center">
       <div className="mt-10 h-fit border-2 w-fit bg-primary/10">
-        <div className="flex flex-row justify-center gap-1">{board}</div>
+        <div className="flex flex-row justify-center gap-1">
+          <Board tiles={tiles} />
+        </div>
       </div>
     </div>
   );
