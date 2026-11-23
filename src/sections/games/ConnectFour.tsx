@@ -54,7 +54,7 @@ const Column = ({
           <Tile
             value={val}
             key={i + "" + columnID}
-            placeInColumn={placeInColumn(i)}
+            placeInColumn={() => placeInColumn(columnID)}
           />
         );
       })}
@@ -73,6 +73,7 @@ const Board = ({
       {tiles.map((colTiles, i) => {
         return (
           <Column
+            key={i}
             colTiles={colTiles}
             columnID={i}
             placeInColumn={placeInColumn}
@@ -108,7 +109,7 @@ export default function ConnectFour() {
     <div className="flex justify-center">
       <div className="mt-10 h-fit border-2 w-fit bg-primary/10">
         <div className="flex flex-row justify-center gap-1">
-          <Board tiles={tiles} />
+          <Board tiles={tiles} placeInColumn={placeInColumn} />
         </div>
       </div>
     </div>
