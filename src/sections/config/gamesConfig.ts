@@ -37,4 +37,14 @@ export const games: Card[] = [
       import("../../assets/games/thumbnails/Sideways Sam.png"),
     mobile: true,
   },
+  {
+    id: "connectfour",
+    name: "Connect Four",
+    description: "Connect four in row to win!",
+    path: "/connectfour",
+    darkThumbnail: () =>
+      import("../../assets/tools/thumbnails/Placeholder Image.png"),
+  },
+  // TO-DO add connect four to this
+  // TO-DO change thumbnails and add light mode ones
 ];

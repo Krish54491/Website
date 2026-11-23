@@ -32,6 +32,7 @@ import NotFound from "./sections/home/NotFound.jsx";
 import DailiesHome from "./sections/other/dailies-irl/DailiesHome.jsx";
 import DailiesPrivacyPolicy from "./sections/other/dailies-irl/DailiesPrivacyPolicy.jsx";
 import DailiesTOS from "./sections/other/dailies-irl/DailiesTos.jsx";
+import ConnectFour from "./sections/games/ConnectFour.tsx";
 function App() {
   const { pathname } = useLocation();
   useLayoutEffect(() => {
@@ -71,6 +72,7 @@ function App() {
             element={<DailiesPrivacyPolicy />}
           />
           <Route path="/dailies-irl/tos" element={<DailiesTOS />} />
+          <Route path="connectfour" element={<ConnectFour />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         {/* Comments */}
