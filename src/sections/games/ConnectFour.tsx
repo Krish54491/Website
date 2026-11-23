@@ -99,6 +99,13 @@ export default function ConnectFour() {
         setTurn((prev) => {
           return prev === 0 ? 1 : 0;
         });
+        if (i === 0) {
+          setColFull((prev) => {
+            let newColFull = prev.slice();
+            newColFull[colID] = true;
+            return newColFull;
+          });
+        }
         return i; // returns first tile that is at the bottom
       }
     }
