@@ -332,7 +332,7 @@ export default function ConnectFour() {
       setTiles(Array.from({ length: rows }, () => Array(cols).fill(0)));
       setGameOver(false);
       setTurn(0);
-      setColFull(Array(cols).fill(false));
+      setColFull(Array(rows).fill(false));
       setWinner("");
       setWinningTiles([]);
       setClearing(false);
