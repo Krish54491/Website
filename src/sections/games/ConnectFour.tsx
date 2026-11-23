@@ -11,11 +11,11 @@ actual connect four has 6 rows and 7 columns
 
 // columns have data values of an Array of the tiles and a boolean filled so that players can't use that tile
 // tiles have what color they are(this is also if their empty)
-// bottom tile is 0 top is max length
+// top tile is 0, bottom is max length
 import { useState } from "react";
 
-const rows = 6; // amount of rows per column
-const cols = 7;
+const rows = 7; // amount of rows per column
+const cols = 6;
 
 const Tile = ({
   value,
@@ -30,12 +30,14 @@ const Tile = ({
   return (
     <button
       className={`border-2  border-input  p-2 lg:p-8 text-2xl md:text-4xl rounded-full w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 text-center ${
-        value ? (value == 2 ? "bg-red-700" : "bg-amber-400") : "bg-accent"
+        value
+          ? value === 2
+            ? "bg-red-700"
+            : "bg-amber-400"
+          : "bg-accent hover:animate-scale"
       }`}
       onClick={placeInColumn} // basically place in column
-    >
-      {value ?? "⠀"}
-    </button>
+    ></button>
   );
 };
 const Column = ({
@@ -91,8 +93,11 @@ export default function ConnectFour() {
     Array.from({ length: rows }, () => Array(cols).fill(0)),
   ); // val = 0 means empty, 1 means yellow, 2 means red
   const checkColumn: (colID: number) => number = (colID: number) => {
-    for (let i = 0; i < tiles[colID].length; i++) {
-      if (tiles[colID][i] == 0) {
+    for (let i = tiles[colID].length; i >= 0; i--) {
+      if (tiles[colID][i] === 0) {
+        setTurn((prev) => {
+          return prev === 0 ? 1 : 0;
+        });
         return i; // returns first tile that is at the bottom
       }
     }
@@ -100,10 +105,10 @@ export default function ConnectFour() {
   };
   const placeInColumn = (colID: number) => {
     const lowestRow = checkColumn(colID);
-    if (lowestRow == -1) {
+    if (lowestRow === -1) {
       return; // don't place anything, no room
     }
-    tiles[colID][lowestRow] = turn == 0 ? 1 : 2; // replace tile
+    tiles[colID][lowestRow] = turn === 0 ? 1 : 2; // replace tile
   };
   return (
     <div className="flex justify-center">
