@@ -56,9 +56,7 @@ const Tile = ({
   let look;
   if (value) {
     // filled, don't use turn in here or every disc re-runs its drop each turn
-    look = `border-4 ${
-      value === 2 ? "bg-red-700" : "bg-amber-400"
-    } ${
+    look = `border-4 ${value === 2 ? "bg-red-700" : "bg-amber-400"} ${
       winning
         ? "border-black dark:border-white"
         : value === 2
@@ -178,7 +176,7 @@ const Board = ({
 export default function ConnectFour() {
   const [turn, setTurn] = useState(0); // yellow goes first because I like it yellow=0, red=1 for turn order only(just so it takes only one bit)
   const [gameOver, setGameOver] = useState(false); // game is autostarted for now
-  const [colFull, setColFull] = useState(Array(cols).fill(false)); // array size of columns to track if they're full for faster processing
+  const [colFull, setColFull] = useState(Array(rows).fill(false)); // array size of columns to track if they're full for faster processing
   const [tiles, setTiles] = useState(
     Array.from({ length: rows }, () => Array(cols).fill(0)),
   ); // val = 0 means empty, 1 means yellow, 2 means red
@@ -258,7 +256,12 @@ export default function ConnectFour() {
             tiles[i + 2][j] === tiles[i + 3][j]
           ) {
             // checks all horizontial
-            setWinningTiles([[i, j], [i + 1, j], [i + 2, j], [i + 3, j]]);
+            setWinningTiles([
+              [i, j],
+              [i + 1, j],
+              [i + 2, j],
+              [i + 3, j],
+            ]);
             return tiles[i][j] === 1 ? "yellow" : "red";
           }
         }
@@ -269,7 +272,12 @@ export default function ConnectFour() {
             tiles[i][j + 2] === tiles[i][j + 3]
           ) {
             // checks all vertical
-            setWinningTiles([[i, j], [i, j + 1], [i, j + 2], [i, j + 3]]);
+            setWinningTiles([
+              [i, j],
+              [i, j + 1],
+              [i, j + 2],
+              [i, j + 3],
+            ]);
             return tiles[i][j] === 1 ? "yellow" : "red";
           }
         }
@@ -364,8 +372,9 @@ export default function ConnectFour() {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center lg:items-start justify-center gap-2 m-3">
-        <p className="text-2xl font-bold">{status}</p>
+      {/* fixed width so the board doesn't shift when the status text changes length */}
+      <div className="flex flex-col items-center lg:items-start justify-center gap-2 m-3 w-56">
+        <p className="text-2xl font-bold whitespace-nowrap">{status}</p>
         <button
           onClick={restart}
           className="bg-primary text-primary-foreground p-2 rounded-md hover:bg-accent hover:text-accent-foreground"
